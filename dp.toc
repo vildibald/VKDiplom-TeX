@@ -1,0 +1,16 @@
+\select@language {slovak}
+\contentsline {chapter}{\numberline {1}De Boorov algoritmus a n\'avrh zr\'ychlenia}{6}
+\contentsline {section}{\numberline {1.1}Polyn\'omy}{6}
+\contentsline {section}{\numberline {1.2}Splajny}{7}
+\contentsline {section}{\numberline {1.3}LU dekompoz\IeC {\'\i }cia}{11}
+\contentsline {section}{\numberline {1.4}De Boorova interpol\'acia}{12}
+\contentsline {section}{\numberline {1.5}Po\v c\IeC {\'\i }tanie deriv\'aci\IeC {\'\i } redukovanou s\'ustavou}{14}
+\contentsline {chapter}{\numberline {2}Zr\'ychlenie}{19}
+\contentsline {section}{\numberline {2.1}Po\v cty oper\'acii}{19}
+\contentsline {subsection}{\numberline {2.1.1}Po\v cty pre pln\'y algoritmus}{20}
+\contentsline {subsection}{\numberline {2.1.2}Po\v cty pre redukovan\'y algoritmus}{21}
+\contentsline {subsection}{\numberline {2.1.3}Zhrnutie}{23}
+\contentsline {section}{\numberline {2.2}Zr\'ychlenie v praxi}{23}
+\contentsline {chapter}{\numberline {3}Implement\'acia a u\v z\IeC {\'\i }vate\v lsk\'a pr\IeC {\'\i }ru\v cka}{26}
+\contentsline {subsection}{\numberline {3.0.1}Vizualiz\'acia}{28}
+\contentsline {subsection}{\numberline {3.0.2}V\'ykonnostn\'y tester}{30}

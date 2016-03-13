@@ -1,0 +1,1685 @@
+% !TEX encoding = System
+
+%%\documentclass[thesismargins, thesislinespacing, twoside, draft, upjsfrontpage]{rnthesis}
+\documentclass{rnthesis}
+\usepackage[slovak]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[cp1250]{inputenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{rnt-pic}
+\usepackage{rnt-thm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{hyphenat}
+
+\hyphenation{funk-cií}
+
+\lstset{language=[Sharp]C,
+showspaces=false,
+showtabs=false,
+breaklines=true,
+%basicstyle=\tiny,
+basicstyle=\fontsize{9}{13}\selectfont\ttfamily,
+numbersep=5pt,
+tabsize=2,
+showstringspaces=false,
+breakatwhitespace=true,
+escapeinside={(*@}{@*)},
+commentstyle=\color{greencomments},
+keywordstyle=\color{bluekeywords}\bfseries,
+stringstyle=\color{redstrings},
+%basicstyle=\ttfamily
+morecomment=[l]{//},
+morecomment=[s]{/*}{*/},
+morekeywords={ abstract, event, new, struct,
+as, explicit, null, switch,
+base, extern, object, this,
+bool, false, operator, throw,
+break, finally, out, true,
+byte, fixed, override, try,
+case, float, params, typeof,
+catch, for, private, uint,
+char, foreach, protected, ulong,
+checked, goto, public, unchecked,
+class, if, readonly, unsafe,
+const, implicit, ref, ushort,
+continue, in, return, using,
+decimal, int, sbyte, virtual,
+default, interface, sealed, volatile,
+delegate, internal, short, void,
+do, is, sizeof, while,
+double, lock, stackalloc,
+else, long, static,
+enum, namespace, string, partial, get, set, var},
+}
+%\usepackage{xcolor}
+
+%\lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{blue!80!black}}
+%----------------------------------------------------------------------------------------
+\newcommand{\real}{$\mathbb{R}$}
+\newcommand{\uinteger}{$\mathbb{N}$} 
+\newcommand{\integer}{$\mathbb{Z}$}
+\newcommand{\mcomma}{\mbox{,}}
+\newcommand{\FEL}{\frac{1}{2}}
+\newcommand*{\mathcolor}{}
+\def\mathcolor#1#{\mathcoloraux{#1}}
+\newcommand*{\mathcoloraux}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+
+\def\TP#1{\mathit{#1}}
+\def\FN#1{\text{#1}}
+\def\uv#1{„{#1}“}
+\definecolor{basis1}{rgb}{0.64,0.29,0.64}
+\definecolor{basis2}{rgb}{0,0.64,0.91}
+\definecolor{basis3}{rgb}{0.13,0.69,0.3}
+\definecolor{basis4}{rgb}{0.93,0.11,0.14}
+\definecolor{basis1a}{rgb}{0.90,0.6,0.90}
+\definecolor{basis2a}{rgb}{0.2,0.80,1}
+\definecolor{basis3a}{rgb}{0.3,0.9,0.5}
+\definecolor{basis4a}{rgb}{1,0.7,0.7}
+
+%\definecolor{dkgreen}{rgb}{0,0.6,0}
+%\definecolor{gray}{rgb}{0.5,0.5,0.5}
+%\definecolor{mauve}{rgb}{0.64,0.08,0.08}
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+%----------------------------------------------------------------------------------------
+\catcode`@=11
+\def\xmatrix#1#2{\null\,\vcenter{\normalbaselines\m@th
+    \ialign{\hfil$##$\hfil&&\hskip#1\hfil$##$\hfil\crcr
+      \mathstrut\crcr\noalign{\kern-\baselineskip}
+      #2\crcr\mathstrut\crcr\noalign{\kern-\baselineskip}}}\,}
+\catcode`@=12
+
+\title{Algoritmizácia, paralelizácia a implementácia splajn modelov}
+\author{Bc. Viliam Kaèala}
+\typprace{Diplomová}
+\rok{2016}
+\miesto{Košice}
+\podakovanie{
+ Rád by som poïakoval vedúcemu závereènej
+ práce doc. RNDr. Csabovi Törökovi, CSc.
+ za cenné pripomienky, odborné vedenie a obetavos poèas
+ tvorby práce. Taktie by som sa rád poïakoval 
+ RNDr. Lukášovi Miòovi za cenné rady a odbornú
+ pomoc poèas tvorby aplikaènej èasti tejto práce.
+} 
+\veduci{doc. RNDr. Csaba Török, CSc..}
+\konzultant{RNDr. Lukáš Miòo}
+\pracovisko{Ústav informatiky}
+
+\abstract{
+Splines are important part of computer graphics.
+It is a mathematical model of the curve, which is for the "best connection" of any finite set of points.
+The term "best connection" in this case means smooth, easily calculable mathematical curve with minimal curvature.
+Use of splines in graphics varies from large variety of CAD applications, statistics or in data analysing.
+Splines exist in many forms, whether in the form of curves in the plane, a variety of three-dimensional bodies, etc. ..
+This work aims to analyze, implement and compare different procedures for counting and generating splines including new algorithm for cubic clamped interpolation in two-dimensional space, ie in plane.
+}
+
+\abstrakt{
+Splajny sú dôleitá súèas poèítaèovej grafiky.
+Jedná sa o matematickı model krivky, ktorá slúi na èo „najlepšie spojenie“ koneènej mnoiny bodov. 
+Termín „najlepšie spojenie“ v našom prípade znamená hladká, matematicky ¾ahko vyjadrite¾ná krivka s èo najmenším zakrivením.
+Vyuitie splajnov v grafike je ve¾mi široké od rôznych CAD aplikácií, v štatistike, alebo v analıze dát.
+Splajny existujú v mnohıch formách, èi u vo forme krivky v rovine, rôznych trojrozmernıch telies, atï..
+Táto práca si dáva za cie¾ analyzova, implementova a porovna rôzne postupy pri poèítaní a generovaní splajnov vèítane nového algoritmu pre kubickú clamped interpoláciu v dvojrozmernom priestore, teda v rovine.
+}
+
+\bibliographystyle{alpha}
+
+\begin{document}
+%\lstset{style=sharpc}
+%\lstset{frame=tb,
+%  language=[Sharp]C,
+%  aboveskip=3mm,
+%  belowskip=3mm,
+%  showstringspaces=false,
+%  columns=flexible,
+%  basicstyle={\small\ttfamily},
+%  numbers=none,
+%  numberstyle=\tiny\color{gray},
+%  keywordstyle=\color{blue},
+%  commentstyle=\color{dkgreen},
+% stringstyle=\color{mauve},
+%  breaklines=true,
+%  breakatwhitespace=true
+%  tabsize=3
+%}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+%==================================================================================================================================================================================
+\chapter*{Úvod}
+
+Témou našej bakalárskej práce sú splajn krivky, kde naším cie¾om je preskúma nové poznatky o splajnoch, na ktorıch istı èas pracuje vedúci tejto práce doc. RNDr. Csaba Török, CSc.
+Vısledkom tejto práce je okrem návrhu tejto novej metódy aj porovnanie so známymi metódami a implementácia aplikácie na vizuálne porovnávanie jednotlivıch metód.
+Technológia v ktorej budeme tieto poznatky implementova je Microsoft Silverlight. Jedná o ve¾mi schopnı nástroj na tvorbu webovıch aplikácii s plnou podporou hardvérovej akcelerácie uívate¾ského prostredia.
+Vıhodou tohto frameworku je, kede beí na platforme Microsoft .NET, monos jednoduchej portácie na desktopovú prípadne mobilnú aplikáciu.
+
+Štruktúra práce je následovná.
+\begin{itemize}
+\item{\textbf{Úvod}}
+
+V úvode si vysvetlíme technológiu Silverlight a základy práce grafiky.
+\item{\textbf{Splajn krivky}}
+
+V tejto stati si povieme základnú definíciu splajnu ako reálnu funkciu reálnej premennej a následne prejdeme k podrobnım rozborom konkrétnych kriviek a síce B-splajnov,globálnych B-splajnov, Hermitovskıch splajnov a clamped splajnov.
+\item{\textbf{Novı postup generovania clamped splajnov}}
+
+V tejto kapitole rozoberieme novo vyvinutı postup konštrukcie clamped splajnov.
+\item{\textbf{Implementácia}}
+
+Podrobnosti implementácie splajnov v MS Silverlight.
+\end{itemize}
+
+%a úvod tejto práce si blišie predstavíme technológiu Microsoft Silverlight, prièom ïalších kapitolách si vysvetlíme fungovanie a implementovanie B-splajnov, globálnych B-splajnov, Hermitovıch splajnov, clamped a naturálnych splajnov a nakoniec si %rozoberieme novı postup generovania clamped splajnov. 
+
+%V neskorších statiach si prejdeme rôzne bene pouívané postupy pri interpolácii alebo aproximácii kriviek a nakoniec prejeme k novo vyvinutému spôsobu.
+
+\section*{Preh¾ad súèasného stavu}
+
+Teória splajnov je ve¾mi rozsiahla. 
+Okrem klasickıch vısledkov budeme vychádza aj z vısledkov vıskumu vedúceho tejto práce doc. Töröka. 
+Tejto problematike sa však venujú aj iní, napríklad Nikolaj Demjanovic Dikusar z Ústavu jadrového vıskumu v Dubne. 
+Splajnami sa celkovo zaoberajú napr. David Solomon, alebo Carl de Boor z University of Wisconsin-Madison.
+
+%\begin{lstlisting}
+% int length = knots.Length;
+% Point bla;
+%            double max = knots[length-1];
+%            double min = knots[0];
+% \end{lstlisting}
+
+%==================================================================================================================================================================================
+\part{Návrh riešenia}
+
+\chapter{Splajn krivky}
+
+V tejto stati si povieme základnú definíciu splajnu ako reálnu funkciu reálnej premennej a následne prejdeme k podrobnım rozborom konkrétnych kriviek a síce B-splajnov,globálnych B-splajnov, Hermitovskıch splajnov a clamped splajnov. 
+V ïalšej kapitole rozoberieme novı postup konštrukcie globálnych B-splajnov pomocou clamped splajnov.
+
+
+\subsection{Ilustraènı príklad}
+Predtım, ako si povieme presnú definícu, si názorne ukáme èo je splajn, ako vyzerá a z èoho sa skladá.
+%\newpage
+
+\obrazok{cspline.png}{0.5}{Uniformnı globálny B-splajn stupòa 3}
+
+Ako vidie z obrázka, globálny B-splajn je urèenı pomocou bodov v rovine (zelenou farbou), ktoré nám dávajú (jednoznaèné) vyjadrenie krivky. 
+Všimnime si, e tieto body prechádzajú krivkou, jedná sa teda o interpolaènú krivku. 
+Podrobnejšie detaily zatia¾ vynecháme, budeme sa im toti venova v následujúcich statiach, kde si presnejšie definujeme niektoré druhy splajnov, konkrétne Hermitovské splajne, Clamped splajny a samozrejme B-splajny.
+
+\subsection{Formálna definícia splajnov}
+
+Ne zaèneme pracova s jednotlivımi krivkami zaveïme všeobecnı pojem, z ktorého budeme odvádza jednotlivé splajny.
+
+\begin{df}
+Nech $n$, $k$ sú prirodzené èísla, $V = \langle v_0$, $v_1$, ...,$v_{k-1}\rangle$ a $C = \langle c_0$, $c_1$, ...,$c_{k-1}\rangle$ sú $k$-tice reálnych èísel. Nech $C_0$, ...,$C_{k-1}$ sú tice, ktorıch prvky sú z $k$-tice $C$. Nech platí:
+\begin{itemize}
+\item
+$n \ge 3$,
+\item
+$k \ge 1$,
+\item 
+Postupnos $V$ je rastúca.
+\item
+Pre kadé $i$ z $\{1,2, \hdots,k-1\}$ je $P_i^{C_i}$ polynóm stupòa $n$ na intervale $[v_{i-1}, v_i]$.
+\end{itemize}
+%\newpage
+%\colorbox{yellow}{Spline}
+Definujme funkciu $\text{Spline}_{V,C}$ z intervalu $[v_0, v_{k-1}]$ do $\mathbb{R}$ vzahom:
+%$$\text{Spline}(x) = P_1(x), v_0 \le x < v_1\mbox{,}$$
+%$$\text{Spline}(x) = P_2(x), v_1 \le x < v_2\mbox{,}$$
+%$$\vdots$$
+%$$\text{Spline}(x) = P_k(x), v_{k-1} \le x \le v_k\mbox{,}$$
+%\begin{equation}
+\begin{equation}
+\text{Spline}_{V,C}(x) = \begin{cases}
+ P_1^{C_1}(x) & \text{pre } v_0 \le x < v_1 \text{,}\\
+ P_2^{C_2}(x) & \text{pre } v_1 \le x < v_2 \text{,}\\
+ \vdots\\
+ P_{k-1}^{C_{k-1}}(x) & \text{pre } v_{k-2} \le x \le v_{k-1} \text{.}
+\end{cases}
+\end{equation}
+prièom existuje $j$ z $\{0, \hdots,n - 1\}$ také, e pre kadé $i$ z $\{1, \hdots,k - 1\}$ platí 
+$P_i^{C_i (j)}(v_i) = P_{i+1}^{C_i (j)}(v_i)$, kde $P_i^{C_i (j)}$ je $j$-ta derivácia polynomu $P_i^{C_i}$
+\end{df}
+
+\begin{oznac}
+Funkciu $\text{Spline}_{V,C}$ z predchádzajúcej definície budeme nazıva \pojem{splajn}.
+\end{oznac}
+
+\begin{oznac}
+Hodnotu $n$ z predchádzajúcej definície budeme nazıva \pojem{stupeò splajnu}.
+\end{oznac}
+
+\begin{oznac}
+Hodnoty $v_0$, $v_1$,...,$v_{k-1}$ z predchádzajúcej definície budeme nazıva \pojem{uzly splajnu}, alebo skrátene \pojem{uzly}.
+\end{oznac}
+
+\begin{oznac}
+Hodnoty $c_0$, $c_1$,...,$c_{k-1}$ z predchádzajúcej definície budeme nazıva \pojem{kontrolné body}.
+\end{oznac}
+
+\begin{oznac}
+Ak hodnoty $v_0$, $v_1$,...,$v_{k-1}$ sú uzly tak pre kadé $i$ z $\{0,...,k-2\}$ budeme interval $[v_i,v_{i+1}]$  nazıva \pojem{segment splajnu}, alebo skrátene \pojem{segment}.
+\end{oznac}
+
+Z tejto definície vyplıva, e splajn je polynomická funkcia zloená z nieko¾kıch polynómov. 
+Pravda, tieto polynómy nemôu by ¾ubovo¾né, ale mali by spåòa urèité vlastnosti, teda (napríklad) rovnos derivácii do urèitého rádu.
+Nutno doda, e sa jedná o všeobecnú definíciu.  
+Pri konštrukcii jednotlivıch segmentov splajnu teda potrebujeme ako vstupné parametre rastúcu postupnos uzlov $V$ a a postupnos $C$ tzv. \pojem{kontrolnıch bodov} (pri aproximaènıch krivkách), resp. \pojem{funkènıch hodnôt} (pri interpolaènıch krivkách), teda postupnos èísel, ktoré spolu s uzlami predstavujú body v rovine, prièom $v_i$ predstavuje súradnicu na osi $x$ a príslušnı kontrolnı bod (resp. funkèná hodnota) $c_i$ predstavuje súradnicu na osi $y$, pre kadé $i$ z $\{0, ..., k-1\}$. 
+Tieto bodu sú vo väèšine typov splajnov parametre pre polynómy $P_i$.  
+%Kontrolné body si presnejšie definujeme neskôr.
+
+\pozn{
+V Computed Aided Graphics systémoch (skrátene CAD) sa pouívajú tzv. \pojem{parametrické splajny}, kde vstupnı atribút $x$ a funkèná hodnota $y$ závisia od nejakého reálneho parametra, prièom vısledná krivka nemusí predstavova funkciu, struène povedané v krivke je viac bodov \uv{nad sebou}. 
+My však budeme pracova so splajnami, ktoré nie sú parametrické, tedia s takımi ktoré sú vdy funkciami.
+}
+
+\subsection{Delenie splajnov}
+
+Teraz si zavedieme nieko¾ko pojmov, ktoré definujú vlastnosti splajnov.
+
+\begin{df}
+Funkciu $\text{Spline}_{V,C}$ nazveme \pojem{uniformná}, 
+ak pre kadé $i$ a $j$ z $\{1,2, \hdots,k-1\}$ a dvojice podintervalov $[v_{i-1}, v_i]$ a $[v_{j-1}, v_j]$ intervalu $[v_0, v_{k-1}]$ z definície funkcie Spline platí, e d\'lka intervalu $[v_{i-1}, v_i]$ je rovná d\'lke intervalu $[v_{j-1}, v_j]$. \newline
+Inak funkciu Spline na intervale $[v_0, v_{k-1}]$ nazveme \pojem{neuniformná}.
+\end{df} 
+
+%Túto definíciu môeme ekvivalentne preformulova na:
+
+%\df{
+%Funkciu Spline na intervale $[a, b]$ nazveme \pojem{uniformná}, 
+%ak 
+%}
+
+Základné delenie splajnov moeme definova na \pojem{aproximaèné} krivky a \pojem{interpolaèné} krivky. 
+Interpolaèné krivky sú také krivky, ktoré prechádzajú cez všetky body, ktorımi sú definované. 
+To je prípad Hermitovskıch splajnov, naturálnych splajnov, clamped splajnov a globálnych B-splajnov. 
+V prípade aproximaènıch kriviek toto neplatí a funkcia nemusí prechádza bodmi, ktorımi je definovaná, napríklad v prípade B-splajnov.
+
+Zaveïme si teda aj formálne definície:
+
+\begin{df}
+Nech $V = (v_0$, $v_1$, ...,$v_{k-1})$ sú uzly a $C = (c_0$, $c_1$, ...,$c_{k-1})$ sú kontrolné body.
+Funkciu $\text{Spline}_{V,C}$ nazveme \pojem{interpolaèná} ak pre kadé $i$ z $\{0, \hdots, k-1\}$ platí $\text{Spline}_{V,C}(v_i) = c_i$.
+Inak funkciu $\text{Spline}_{V,C}$ nazveme \pojem{aproximaèná}.
+\end{df}
+
+\begin{oznac}
+V prípade interpolaènıch splajnov budeme kontrolné body nazıva \pojem{funkèné hodnoty v uzloch}, alebo skrátene len \pojem{funkèné hodnoty}.
+\end{oznac}
+
+Ïalej sa splajny delia na \pojem{lokálne} a \pojem{globálne}. Rozdiel spoèíva v správaní sa krivky pri zmene jedného parametra, èi u uzla, alebo kontrolného bodu.
+Pri lokálnych splajnoch sa pri zmene jedného parametra zmení len èas krivky, zatia¾ èo v prípade globálnych splajnov dôjde k zmene celej krivky.
+
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{B-splajny (Bázové splajny)}
+
+Tento typ krivky bol definovanı v štyridsiatych rokoch dvadsiateho storoèia, avšak vıraznejšej pozornosti sa im dostalo a v sedemdesiatych rokoch [1]. 
+V súèasnosti je zauívanı skrátenı názov \pojem{B-Splajn}. 
+Najviac sa tımto krivkám podobajú \pojem{Bézierove krivky}, presnejšie povedané Bézierove krivky sú špeciálnym prípadom B-splajnov. 
+B-splajny však majú vıhodu v tom, e poèet riadiacich bodov nie je závislı od stupòa polynómu. 
+Jedná sa o aproximaènú krivku, teda neprechádza svojimi kontrolnımi bodmi. 
+Neskôr si ukáeme aj interpolaènı variant zvanı globálny B-splajn.
+%Ako sme povedali v \textbf{Kapitole 2} splajn je definovanı ako postupnos spojitıch polynomickıch %funkcií na nejakıch intervaloch. 
+%Samozrejme to platí aj v prípade B-splajnov, kde tieto polynómy nazıvame \pojem{bázové funkcie}
+
+V následujúcej stati si postupne zostrojíme B-splajn, prièom najprv zaèneme konštrukciou bázovıch funkcií pre jednotlivé segmenty krivky, a nakoniec z nich získame chcenú krivku. 
+
+\subsection{Bell funkcie}
+
+%Bell (zvonové) funkcie sú polynomické funkcie ktoré pouijeme na generovanie priestoru funkcií nad nejakım int
+Ako sme si povedali, splajn sa skladá zo segmentov, prièom kadı z nich je polynomická funkcia. 
+Tieto polynómy sú (nielen u B-splajnov) tvorené súètom súèinov kontrolnıch bodov a takzvanıch bázovıch funkcií. 
+V prípade B-splajnu sa tieto funkcie nazıvajú aj \pojem{bell}  (\pojem{zvonové}) funkcie.
+Definujme si teda bázovú funkciu B-splajnu.
+%Ak chceme zostroji B-splajn stupòa $n$ tak potrebujeme $n+1$ bázovıch funkcií. Na zkonštruovanie bell funkcie si zadefinujme takzvanú bázovú funkciu.  
+
+\begin{df}
+Nech $n$,$k$ a $p$ sú prirodzené èísla, prièom $p \le n+1$, $k>=n+2$ a $v_0$, $v_1$, ..., $v_{k-1})$ sú reálne èísla také, e pre kadé $i$ z $\{1, 2, ..., k-1\}$ platí $v_{i-1} < v_i$. Nech $j$ je prirodzené èíslo také, e $0 \le j \le k-5$
+Definujme funkciu $\text{Bs}_{v_j,...,v_{j+n+1}}^{n,p}$ z intervalu $[v_{j+n}, v_{j+n+1}]$ do \real vzahom 
+\begin{equation}
+\text{Bs}_{v_j,...,v_{j+n+1}}^{n,p}(x) = (x - v_j)^n - \sum_{k=j+1}^{j+p}(x - v_k)^n \cdot \prod_{m=j+1, m\neq k}^{n+1}\frac{v_j - v_m}{v_k - v_m}
+\end{equation}
+%je rastúca postupnos reálnych èísel
+\end{df}
+
+\begin{oznac}
+Funkciu $\text{Bs}_{v_j,...,v_{j+n+1}}^{n,p}$ budeme všeobecne oznaèova pojmom \pojem{bázová funkcia}, alebo aj \pojem{bell funkcia}.
+\end{oznac}
+
+Parameter $n$ znamená stupeò polynomickej funkcie $\text{Bs}_{v_0,...,v_{n+1}}^{n,p}$, dokonca sa jedná sa o stupeò celého splajnu. 
+Pre jeden segment B-splajnu stupòa $n$ potrebujeme $n+1$ bázovıch funkcií, ktoré sa budú líši parametrom $p$ a vstupnımi uzlami. Tieto funkcie sú lineárne nezávislé a teda generujú nejakı priestor funkcií (preto názov \pojem{bázovı splajn}). Vynásobením tıchto funkcií $n+1$ kontrolnımi bodmi dostaneme konkrétnu lineárnu kombináciu  (teda vstupnımi súradnicami na osi $y$, prièom hodnoty $v_0$, $v_1$, ...,$v_{2n+1}$ -- uzly predstavujú súradnice na osi $x$), teda jeden polynóm, ktorı tvorí práve jeden segment B-splajnu. 
+
+Teda na jeden segment B-splajnu potrebujeme vedie stupeò bázovıch funkcií $n$ (ten bude pre celı splajn rovnakı), $2n + 2$ uzlov -- súradníc na osi $x$ a $n+1$ kontrolnıch bodov -- súradníc na osi $y$. 
+Dôvod preèo potrebujeme $2n + 2$ uzlov je jednoduchı.
+Keïe pre jeden segment potrebujeme $n + 1$ bell funkcií a kadá potrebuje $n + 2$ uzlov, prièom pre prvú bell funkciu vezmeme uzly $v_0$, ..., $v_{(n+1)+0} = v_{n+1}$, pre druhú vezmeme uzly $v_1$, ..., $v_{(n+1)+1} = v_{n+2}$, a nakoniec pre $(n+1)$. funkciu vezmeme uzly $v_n$, ..., $v_{(n+1)+n} = v_{2n+1}$. 
+Teda pre jeden segment potrebujeme uzly $v_0$ a $v_{2n+1}$. Uzly indexujeme od èísla 0,\newline preto dohromady máme $2n + 2$ uzlov.
+Ak kontrolné body oznaèíme $c_0$, $c_1$, ..., $c_n+1$, tak na plátne (èi u v Silverlight-e, alebo obecne) budú body znázornené dvojicami $\langle v_1, c_0 \rangle$, $\langle v_2, c_1 \rangle$, ..., $\langle v_n+2, c_n+1 \rangle$. 
+Samotná krivka bude vykreslená na intervale $[v_n, v_{n+1}]$.
+V prípade uzlov $v_0$, $v_{n+2}$, $v_{n+3}$, ..., $v_{2n+1}$ nezáleí na hodnote kontrolnıch bodov, ich hodnoty urèujú hodnotu derivácie splajnu v bodoch $v_n$ a $v_{n+1}$. To je dôleité pri následnom napájaní ïalších segmentov.
+
+V následujúcom príklade si ukáeme zostrojenie bázovıch funkcií pre B-splajn stupòa 3 s desiatimi uzlami a teda s tromi segmentami. Kontrolné body teraz nepotrebujeme, kede zostrojíme iba bázové funkcie. V ïalšej stati si ukáeme, e vıslednı splajn bude lineárna kombinácia kontrolnıch bodov a bázovıch funkcií. 
+
+\begin{pr} \label{pr:bspline_basis}
+
+Nech $n = 3$ je stupeò splajnu a $\langle v_0, v_1, \hdots, v_9\rangle  = (0, 1, \hdots 9)$ sú uzly. Na jeden segment B-splajnu teda potrebujeme 4 bázové funkcie a 8 uzlov. 
+Kede máme 10 uzlov tak poèet segmentov v tomto príklade bude 3, prièom pre konštrukciu bázovıch funkcií pre prvı segment pouijeme uzly $0$, $1$, ..., $7$, pre druhı segment uzly $1$, $2$, ..., $8$ a pre poslednı segment pouijeme uzly $2$, $3$, ..., $9$.
+%\newpage
+Pozrime sa na ilustraènı obrázok vısledku a nišie si ho vysvetlíme.
+\obrazok{bspline_basis_woAux.png}{0.6475}{Bázové funkcie trojsegmentového B-splajnu stupòa 3}
+Na obrázku máme grafy dvanástich bázovıch funkcií pre tri segmenty B-splajnu. Grafy tıchto funkcií majú následujúci zápis, prièom si ich kvôli preh¾adnosti zapíšeme farebne pod¾a jednotlivıch segmentov:
+\begin{itemize}
+\item{1. segment}
+\begin{itemize}
+\item
+$\mathcolor{basis1}{\text{Bs}_{0,1,2,3,4}^{3,1}}$
+\item
+$\mathcolor{basis2}{\text{Bs}_{1,2,3,4,5}^{3,2}}$
+\item
+$\mathcolor{basis3}{\text{Bs}_{2,3,4,5,6}^{3,3}}$
+\item
+$\mathcolor{basis4}{\text{Bs}_{3,4,5,6,7}^{3,4}}$
+\end{itemize}
+\item{2. segment}
+\begin{itemize}
+\item
+$\mathcolor{basis1}{\text{Bs}_{1,2,3,4,5}^{3,1}}$
+\item
+$\mathcolor{basis2}{\text{Bs}_{2,3,4,5,6}^{3,2}}$
+\item
+$\mathcolor{basis3}{\text{Bs}_{3,4,5,6,7}^{3,3}}$
+\item
+$\mathcolor{basis4}{\text{Bs}_{4,5,6,7,8}^{3,4}}$
+\end{itemize}
+\item{3. segment}
+\begin{itemize}
+\item
+$\mathcolor{basis1}{\text{Bs}_{2,3,4,5,6}^{3,1}}$
+\item
+$\mathcolor{basis2}{\text{Bs}_{3,4,5,6,7}^{3,2}}$
+\item
+$\mathcolor{basis3}{\text{Bs}_{4,5,6,7,8}^{3,3}}$
+\item
+$\mathcolor{basis4}{\text{Bs}_{5,6,7,8,9}^{3,4}}$
+\end{itemize}
+\end{itemize}
+
+Všimnime si, e grafy funkcií tej istej farby sú, a na posunutı definiènı obor, identické aj keï majú rôzny zápis. 
+Je to spôsobené tım, e v príklade uvaujeme uniformnı splajn, v prípade neuniformného splajnu by tieto funkcie mali rozlièné grafy. 
+% zobrat dve funkcie rovnakej farby a ukazat na priklade
+\end{pr}
+
+V tejto stati sme si definovali bell funkcie, ktoré sú základnım konštrukènım prvkom pri generovaní B-splajnu. V následujúcej stati si ukáeme samotnú konštrukciu B-splajnu. 
+
+
+\subsection{B-splajn}
+
+Definovali sme si teda funkciu z ktorej vieme vygenerova B-splajn, ale stále netušíme ako na to.  
+V tejto stati si povieme ako skonštruova bázovı splajn stupòa $n$ všeobecne. % a následne si ukáeme konštrukciu na konkrétnom príklade.
+
+\paragraph{Zostrojenie B-splajnu}
+Nech $n$ je prirodzené èíslo a nech sú dané reálne èísla $v_0$, ..., $v_k$ -- uzly a $c_0$, ..., $c_m$ -- kontrolné body, prièom $k$ a $m$ sú prirodzené èísla také, e platí:
+\begin{itemize} 
+\item $k > n + 1$ 
+\item $m > n$
+\end{itemize} 
+% $s = \min\{k-2n, m-n\}$
+Našou úlohou je zostroji B-splajn stupòa $n$ na intervale $[v_0, v_k]$. Konštrukcia krivky bude prebieha po statiach v $s = \min\{k-1-2n, m-n\}$ krokoch, 
+prièom v prvom kroku pouijeme uzly $v_0$, ..., $v_{n+1}$ a kontrolné body $c_0$, ..., $c_{n}$. 
+Vïaka podmienkam máme zaruèené, e aspoò jeden segment môeme zkonštruova.
+V prípade druhého segmentu pouijeme uzly $v_1$, ..., $v_{n+2}$ a kontrolné body $c_1$, ..., $c_{n+1}$ atï. a kım nevyèerpáme buï uzly, alebo kontrolné body.
+%, a do $s$-tého segmentu, prièom pouijeme uzly $v_s$, ..., $v_{n+2}$ a kontrolné body $v_1$, ..., $v_{n+1}
+ 
+Ako sme povedali v predchádzajúcej stati, rovnicu vıslednej krivky získame vynásobením $n+1$ bell funkcií a $n+1$ kontrolnıch bodov.
+Oznaème $P_1$, ..., $P_{s}$ polynomické funkcie, ktoré tvoria jednotlivé segmenty B-Splajnu. Ich rovnice pre kadé $i$ z $\{1, ..., s\}$ vyzerajú takto:
+\begin{equation} \label{eq:bsplineSegments}
+P_i(x) = \sum_{j=0}^{n}(c_{i+j-1} \cdot \text{Bs}_{v_{i+j-1},...,v_{i+j+n}}^{n,j+1}(x))\mbox{.}
+\end{equation}
+
+Môeme teda pristúpi k formálnej definícii B-splajnu.
+
+
+\begin{df}
+Nech $n$ je stupeò splajnu, $k$, $m$, $s$ a $o$ sú prirodzené èísla, $V = \langle v_0, v_1, \hdots,v_{k-1} \rangle$ sú uzly a $C = \langle c_0, c_1, \hdots,c_{m} \rangle$ sú kontrolné body. Nech platí:
+\begin{itemize}
+\item
+$n \ge 3$,
+\item
+$k \ge n + 2$,
+\item
+$m \ge n + 1$,
+\item 
+$s = \min\{k-1-2n, m-n\}$
+\item 
+$o = \min\{k-1-n, m+1\}$
+\end{itemize}
+Definujme funkciu $\text{BSpline}_{V,C}$ z intervalu $[v_n, v_o]$ do $\mathbb{R}$ vzahom:
+\begin{equation}
+\text{BSpline}_{V,C}(x) = \begin{cases}
+ \sum_{j=0}^{n}(c_{j} \cdot \text{Bs}_{v_{j},...,v_{j+n+1}}^{n,j+1}(x)) & \text{pre } v_0 \le x < v_1 \text{,}\\
+ \sum_{j=0}^{n}(c_{1+j} \cdot \text{Bs}_{v_{1+j},...,v_{j+n+2}}^{n,j+1}(x))& \text{pre } v_1 \le x < v_2 \text{,}\\
+ \vdots\\
+ \sum_{j=0}^{n}(c_{s-1+j} \cdot \text{Bs}_{v_{s-1+j},...,v_{i+j+n+s}}^{n,j+1}(x)) & \text{pre } v_{o-1} \le x \le v_{o} \text{.}
+\end{cases}
+\end{equation}
+\end{df}
+
+V následujúcom príklade si vygenerujeme B-splajn pomocu bázovıch funkcií z príkladu \ref{pr:bspline_basis}
+
+\begin{pr}
+
+Uvaujme uzly a bázové funkcie z príkladu \ref{pr:bspline_basis}, teda uzly $V=\langle 0, \hdots, 9\rangle$ a bázové funkcie:
+\begin{itemize}
+\item{1. segment}
+\begin{itemize}
+\item
+$\mathcolor{basis1a}{\text{Bs}_{0,1,2,3,4}^{3,1}}$
+\item
+$\mathcolor{basis2a}{\text{Bs}_{1,2,3,4,5}^{3,2}}$
+\item
+$\mathcolor{basis3a}{\text{Bs}_{2,3,4,5,6}^{3,3}}$
+\item
+$\mathcolor{basis4a}{\text{Bs}_{3,4,5,6,7}^{3,4}}$
+\end{itemize}
+\item{2. segment}
+\begin{itemize}
+\item
+$\mathcolor{basis1a}{\text{Bs}_{1,2,3,4,5}^{3,1}}$
+\item
+$\mathcolor{basis2a}{\text{Bs}_{2,3,4,5,6}^{3,2}}$
+\item
+$\mathcolor{basis3a}{\text{Bs}_{3,4,5,6,7}^{3,3}}$
+\item
+$\mathcolor{basis4a}{\text{Bs}_{4,5,6,7,8}^{3,4}}$
+\end{itemize}
+\item{3. segment}
+\begin{itemize}
+\item
+$\mathcolor{basis1a}{\text{Bs}_{2,3,4,5,6}^{3,1}}$
+\item
+$\mathcolor{basis2a}{\text{Bs}_{3,4,5,6,7}^{3,2}}$
+\item
+$\mathcolor{basis3a}{\text{Bs}_{4,5,6,7,8}^{3,3}}$
+\item
+$\mathcolor{basis4a}{\text{Bs}_{5,6,7,8,9}^{3,4}}$
+\end{itemize}
+\end{itemize}
+
+Nech $\langle c_0, c_1, c_2, c_3, c_4 v_5\rangle  = \langle -\frac{1}{3}, \frac{1}{5}, \frac{1}{4}, -\frac{1}{4}, \frac{1}{3}, -\frac{3}{4}\rangle$ sú kontrolné body. 
+Rovnice pre jednotlivé segmenty $P_1$, $P_2$ a $P_3$ budú pod¾a rovnice \ref{eq:bsplineSegments} vyzera takto:
+
+\begin{align*} 
+P_1(x) = \sum_{j=0}^{3}(c_{0+j} \cdot \text{Bs}_{v_{0+j},...,v_{0+j+3+1}}^{3,j+1}(x))\mbox{,} \\ 
+P_2(x) = \sum_{j=0}^{3}(c_{1+j} \cdot \text{Bs}_{v_{1+j},...,v_{1+j+3+1}}^{3,j+1}(x))\mbox{,} \\
+P_3(x) = \sum_{j=0}^{3}(c_{2+j} \cdot \text{Bs}_{v_{2+j},...,v_{2+j+3+1}}^{3,j+1}(x))\mbox{.}
+\end{align*}
+
+Po rozpísaní súm a dosadení hodnôt dostávame:
+
+\begin{align*}
+\begin{split}
+P_1(x) = -\frac{1}{3} \cdot \mathcolor{basis1a}{\text{Bs}_{0,1,2,3,4}^{3,1}}(x)\\
++ \frac{1}{5} \cdot \mathcolor{basis2a}{\text{Bs}_{1,2,3,4,5}^{3,2}}(x)\\
++ \frac{1}{4} \cdot \mathcolor{basis3a}{\text{Bs}_{2,3,4,5,6}^{3,3}}(x)\\
+- \frac{1}{4} \cdot \mathcolor{basis4a}{\text{Bs}_{3,4,5,6,7}^{3,4}}(x)\mbox{,} 
+\end{split} \\
+\begin{split}
+P_2(x) = \frac{1}{5} \cdot \mathcolor{basis1a}{\text{Bs}_{1,2,3,4,5}^{3,1}}(x)\\
++ \frac{1}{4} \cdot \mathcolor{basis2a}{\text{Bs}_{2,3,4,5,6}^{3,2}}(x)\\
+- \frac{1}{4} \cdot \mathcolor{basis3a}{\text{Bs}_{3,4,5,6,7}^{3,3}}(x)\\
++ \frac{1}{3} \cdot \mathcolor{basis4a}{\text{Bs}_{4,5,6,7,8}^{3,4}}(x)\mbox{,} 
+\end{split} \\
+\begin{split}
+P_3(x) = \frac{1}{4} \cdot \mathcolor{basis1a}{\text{Bs}_{2,3,4,5,6}^{3,1}}(x)\\
+- \frac{1}{4} \cdot \mathcolor{basis2a}{\text{Bs}_{3,4,5,6,7}^{3,2}}(x)\\
++ \frac{1}{3} \cdot \mathcolor{basis3a}{\text{Bs}_{4,5,6,7,8}^{3,3}}(x)\\
+- \frac{4}{4} \cdot \mathcolor{basis4a}{\text{Bs}_{5,6,7,8,9}^{3,4}}(x)\mbox{,} 
+\end{split}
+\end{align*}
+\newpage
+\obrazok{bspline_woAux.png}{0.7}{Trojsegmentovı B-splajn stupòa 3 (èervenou a modrou), v pozadí bázové funkcie}
+\end{pr}
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Globálny B-splajn}
+
+B-splajn je aproximaèná krivka, teda funkèná hodnota splajnu v nejakom uzle sa nerovná hodnote príslušného kontrolného bodu. 
+Pre pouívate¾ov však nie je pohodlné, ak vykres¾ovaná krivka struène povedané \uv{lieta kadia¾-tadia¾}. 
+Existuje však postup, ako pomocou zadanıch bodov, prièom ich $x$-ové súradnice predstavujú uzly a $y$-súradnice predstavujú funkèné hodnoty B-splajnu, jednoznaène vypoèíta kontrolné body B-splajnu a takto zkonštruova celú krivku. 
+%V tejto stati si predstavíme bene pouívanı postup, prièom v ïalšej kapitole novo vyvinutı postup, èo je myšlienka tejto práce.
+
+\begin{pozn}
+Globálny B-splajn je moné samozrejme zkonštruova aj z B-splajnov vyšších stupòov, pre potreby tejto práce budeme uvaova iba splajny 3. stupòa. 
+\end{pozn}
+
+\obrazok{apr_int.png}{1}{Interpolaèné krivky sú aj na prvı poh¾ad intuitívnejšie ne aproximaèné}
+
+Vstupné atribúty globálneho B-splajnu sú odlišné od \uv{obyèajného} B-splajnu. 
+Na jeho konštrukciu potrebujeme $k$ uzlov, prièom $k \ge 2$ a rovnakı poèet funkènıch hodnôt iadaného B-splajnu krivky v tıchto uzloch. 
+Ïalej potrebujeme hodnoty prvıch derivácií v prvom a poslednom uzle.
+
+\subsection{Pomocné uzly}
+
+Globálny B-splajn je síce interpolaèná a globálna krivka, avšak stále sa jedná iba o modifikovanı aproximaènı a lokálny B-splajn stupòa 3.
+Keïe je to interpolaèná krivka, tak musí zaèína v prvom zadanom uzle a konèi v poslednom uzle. My ale vieme, e B-splajn krivka stupòa $n$ sa zaèína vykres¾ova a od $n$. uzla (nezabúdajme, e uzly indexujeme od èísla 0). 
+Preto ak chceme aby B-splajn krivka bola vykreslená nad všetkımi zadanımi uzlami potrebujeme vypoèíta $2n$ pomocnıch uzlov, t.j. uzlov, nad ktorımi B-splajn krivka nie je vykreslená. V našej práci budeme pouíva následujúci spôsob. 
+%Keïe globálny B-splajn je zkonštruovanı z B-splajnu stupòa 3, tak potrebujeme šes pomocnıch uzlov.
+%\newline\newline
+%\begin{df}{Vıpoèet pomocnıch uzlov}:
+%\paragraph{Vıpoèet pomocnıch uzlov}:
+\begin{df} \label{df:pom_uzly}
+Nech $n \ge 3$ je stupeò splajnu a $k \ge 2$ je prirodzené èíslo a $v_0$, ..., $v_{k-1}$ sú uzly. Oznaème $h = \frac{(u_{k-1} - u_0)}{(k-1)}$. % priemernú dåku intervalov $[v_0, v_1]$ a $[v_{k-2}, v_{k-1}]$.
+Nech $u_0$, ..., $u_{k+5}$ sú reálne èísla také, e pre kadé $i$ z $\{0, \hdots, k+2n-1\}$ platí:
+\begin{equation} \label{eq:pom_uzly}
+u_i = \begin{cases}
+ v_0 - (n - i) \cdot h & \text{ak } i \le n - 1 \text{,}\\
+ v_{i-n} & \text{ak } n \le i \le k-1+n \text{,}\\
+ v_{k-1} + (i-n-k+1) \cdot h & \text{inak.}
+\end{cases}
+\end{equation}
+Potom $(k+2n-1)$-ticu $\langle u_0, \hdots, u_{k+2n-1}\rangle$ budeme nazıva \pojem{pomocné uzly}.
+\end{df}
+ 
+Pre potreby tejto práce je však vhodnejšie pomocné uzly definova ako funkciu, $k$ premennıch, ktorej vstupom budú uzly a vıstupom pomocné uzly.
+Zaveïme si preto aj alternatívnu definíciu. 
+ 
+\begin{df}
+Nech $n \ge 3$ a $k \ge 2$ sú prirodzené èísla a $v_0$, ..., $v_{k-1}$ sú uzly. Oznaème $h = \frac{(u_{k-1} - u_0)}{(k-1)}$.
+Definujme funkciu $\text{SKnots}_{n,k}$ z $\mathbb{R}^{k}$ do $\mathbb{R}^{k+2n}$ vzahom:
+\begin{equation}
+\begin{split}
+\text{SKnots}_{n,k}(v_0, \hdots, v_{k-1}) = \langle &v_0 - n \cdot h, v_0 - (n - 1) \cdot h,\\ 
+ &v_0 - (n-2), \hdots, v_0 - (n - (n - 1))\cdot h, \\
+ &v_0, v_1, \hdots, v_{k-1}, \\
+ &v_{k-1} + 1 \cdot h, v_{k-1} + 2 \cdot h, \hdots, v_{k-1} + n \cdot h\rangle
+\end{split}
+\end{equation}
+\end{df}
+
+\begin{pozn}
+Hodnoty $u_0$, ..., $u_{k+2n-1}$ teda predstavujú uzly, pomocou ktorıch u môeme zostroji B-splajn tak, 
+aby krivka zaèínala v bode $u_2 = v_0$ a konèila v bode $u_{k+2} = v_{k-1}$.
+\end{pozn}
+
+%\begin{pozn}
+%Keïe my budeme pri zostrojovaní globálnych B-splajnov uvaova len stupeò 3, tak  $\text{SKnots}_{3,k}$
+%\end{pozn}
+%\begin{oznac}
+%Nech $k$ je z \uinteger, $k \ge 2$ a $v_0$, ..., $v_{k-1}$ sú uzly globálneho B-splajnu.
+%Potom hodnoty $u_0$, ..., $u_{k+5}$, ktoré vzniknú z hodnôt $v_0$, ..., $v_{k-1}$ pod¾a vzahu \ref{eq:pom_uzly} budeme oznaèova \pojem{pomocné uzly}.
+%\end{oznac}
+V následujúcom príklade si ukáeme generovanie pomocnıch uzlov, prièom v následujúcej stati si ukáeme vıpoèet kontrolnıch bodov B-splajnu zo zadanıch funkènıch hodnôt globálneho B-splajnu a prvıch derivácií v prvom a poslednom uzle.
+
+\begin{pr} \label{pr:gbspline}
+Nech $\langle v_0, v_1, v_2\rangle  = \langle 2, \frac{15}{4}, 5\rangle$ sú uzly. 
+Polome èíslo $h$ a $\langle u_0, u_1, ..., u_7, u_8\rangle$ tak, e platí (pod¾a \ref{df:pom_uzly}):
+\begin{itemize}
+\item 
+$h = \frac{(5-2)}{2} = \frac{3}{2}$
+\item
+Pre kadé $i$ z $\{0, 1, \hdots, 8\}$ platí:
+$$u_i = \begin{cases}
+ v_0 - (3 - i) \cdot \frac{3}{2} & \text{ak } i \le 2 \text{,}\\
+ v_{i-3} & \text{ak } 3 \le i \le 5 \text{,}\\
+ v_{2} + (i-3-3+1) \cdot \frac{3}{2} & \text{inak.} 
+\end{cases}$$
+\end{itemize}  
+Teda pomocné uzly budú ma hodnoty $\langle -\frac{5}{2}, -1, \frac{1}{2}, 2, \frac{15}{4}, 5, \frac{13}{2}, 8, \frac{19}{2} \rangle$.
+\end{pr}
+
+\subsection{Generovanie kontrolnıch bodov B-splajnu}
+
+V prípade lokálneho B-splajnu sme na jeho konštrukciu potrebovali na vstupe tzv. kontrolné body (hodnoty na osi $y$). 
+Keïe globálny B-splajn je interpolaèná krivka, tak zadané hodnoty na osi $y$ musia by funkènımi hodnotami globálneho B-splajnu v príslušnom uzle, inak povedané, krivka musí prechádza tımito bodmi. 
+%Globálny B-splajn je stále iba modifikovanı aproximaènı a lokálny B-splajn stupòa 3, e
+Existuje však spôsob ako pomocou známych funkènıch hodnôt B-splajnu v uzloch získa hodnoty kontrolnıch bodov a jednoznaène zostroji B-splajn krivku.
+%\newline\newline
+%\textbf{Vıpoèet kontrolnıch bodov B-splajnu}:
+
+\begin{df} \label{df:pom_kontr}
+Nech $k$ je z \uinteger, $k \ge 2$ a hodnoty $V = \langle v_0, \hdots, v_{k-1} \rangle$ sú vstupné uzly, hodnoty $\langle c_0, \hdots, c_{k-1}\rangle$ sú kontrolné body, èíslo $d_{\text{left}}$ je hodnota derivácie v bode $u_0$ a  èíslo $d_\text{right}$ je hodnota derivácie v bode $u_{k-1}$. 
+Nech $(k+6)$-tica $\langle u_0, \hdots, u_{k+5} \rangle = \text{SKnots}_{3,k}(V)$ predstavuje pomocné uzly. 
+Oznaème prvú deriváciu funkcie $\text{Bs}_{v_a}^{b,c}$ ako $\text{Bd}_{v_a}^{b,c}$ pre ¾ubovo¾né $a$,$b$,$c$ prirodzené.  
+Ïalej definujme maticu $\mathbf{L}$ vzahom:
+
+\vspace{12pt}
+$\mathbf{L} =$
+\vspace{4pt}
+\begingroup\makeatletter\def\f@size{3}\check@mathfonts
+\begin{equation} \label{eq:gb_matrix}
+\def\quad{\hskip1ex\relax}
+  \left(
+\xmatrix{2.5pt}{
+\text{Bs}_{u_0}^{3,1}(v_{0}) & \text{Bs}_{u_1}^{3,2}(v_{0}) & \text{Bs}_{u_2}^{3,3}(v_{0}) & \text{Bs}_{u_3}^{3,4}(v_{0})& 0 & \hdots & 0 & 0 & 0 & 0 \cr
+0 & \text{Bs}_{u_1}^{3,1}(v_{1}) & \text{Bs}_{u_2}^{3,2}(v_{1}) & \text{Bs}_{u_3}^{3,3}(v_{1}) & \text{Bs}_{u_4}^{3,4}(v_{1}) & \hdots & 0 & 0 & 0 & 0\cr
+0 & 0 & \text{Bs}_{u_2}^{3,1}(v_{2}) & \text{Bs}_{u_3}^{3,2}(v_{2}) & \text{Bs}_{u_4}^{3,3}(v_{2}) & \hdots & 0 & 0 & 0 & 0\cr
+0 & 0 & 0 & \text{Bs}_{u_3}^{3,1}(v_{3}) & \text{Bs}_{u_4}^{3,2}(v_{3}) & \hdots & 0 & 0 & 0 & 0\cr
+0 & 0 & 0 & 0 & \text{Bs}_{u_4}^{3,1}(v_{4}) & \hdots & 0 & 0 & 0 & 0\cr
+\vdots & \vdots & \vdots  & \vdots & \vdots & \ddots & \vdots &\vdots & \vdots &\vdots\cr
+0 & 0 & 0 & 0 & 0 & \hdots & \text{Bs}_{u_{k-3}}^{3,1}(v_{k-2}) & \text{Bs}_{u_{k-2}}^{3,2}(v_{k-2}) & \text{Bs}_{u_{k-1}}^{3,3}(v_{k-2}) & \text{Bs}_{u_k}^{3,4}(v_{k-2})\cr
+0 & 0 & 0 & 0 & 0 & \hdots & 0 & \text{Bs}_{u_{k-2}}^{3,1}(v_{k-1}) & \text{Bs}_{u_{k-1}}^{3,2}(v_{k-1}) & \text{Bs}_{u_k}^{3,3}(v_{k-1})\cr
+\text{Bd}_{u_0}^{3,1}(v_{0}) & \text{Bd}_{u_1}^{3,2}(v_{0}) & \text{Bd}_{u_2}^{3,3}(v_{0}) & \text{Bd}_{u_3}^{3,4}(v_{0})& 0 & \hdots & 0 & 0 & 0 & 0 \cr
+0 & 0 & 0 & 0 & 0 & \hdots & 0 & \text{Bd}_{u_{k-2}}^{3,1}(v_{k-1}) & \text{Bd}_{u_{k-1}}^{3,2}(v_{k-1}) & \text{Bd}_{u_k}^{3,3}(v_{k-1})\cr
+}\right)
+\end{equation}
+\endgroup
+Nech vektor $(b_0, \hdots, b_{k+1})$ je riešením následujúcej sústavy rovníc: 
+
+\begin{equation} \label{eq:gb-spline_controlPoints}
+\mathbf{L} \cdot
+\begin{pmatrix}
+b_0\\
+b_1\\
+\vdots \\
+b_{k+1}\\
+\end{pmatrix}
+=
+\begin{pmatrix} 
+c_0\\
+c_1\\
+c_2\\
+c_3\\
+c_4\\
+\vdots \\
+c_{k-2}\\
+c_{k-1}\\
+d_{\text{left}}\\
+d_{\text{right}}\\
+\end{pmatrix}
+\end{equation}
+%\newline
+Potom $k+1$-ticu $\langle b_0, \hdots,b_{k+1}$ potom nazveme \pojem{pomocné kontrolné body globálneho B-splajnu}, laebo skrátene  \pojem{pomocné kontrolné body}.
+\end{df}
+
+Podobne ako pri pomocnıch uzloch, aj tu si zavedieme alternatívnu definíciu v podobe funkcie.
+
+\begin{df}
+Nech $k$ je z \uinteger, $k \ge 2$ a hodnoty $V = \langle v_0, \hdots, v_{k-1} \rangle$ sú vstupné uzly, hodnoty $\langle c_0, \hdots, c_{k-1}\rangle$ sú kontrolné body, èíslo $d_{\text{left}}$ je hodnota derivácie v bode $u_0$ a  èíslo $d_\text{right}$ je hodnota derivácie v bode $u_{k-1}$. 
+Nech $(k+6)$-tica $U = \langle u_0, \hdots, u_{k+5} \rangle = \text{SKnots}_{3,k}(V)$ predstavuje pomocné uzly. 
+Oznaème prvú deriváciu funkcie $\text{Bs}_{v_a}^{b,c}$ ako $\text{Bd}_{v_a}^{b,c}$ pre ¾ubovo¾né $a$,$b$,$c$ prirodzené.  
+Polome $\mathbf{L}$ z rovnice \ref{eq:gb_matrix}.
+Definujme funkciu $\text{SCPoints}_{V,U}^{k}$ z $\mathbb{R}^{k+2}$ do $\mathbb{R}^{k+2}$ vzahom:
+
+\begin{equation} \label{eq:gb-spline_controlPoints2}
+\text{SCPoints}_{V,U}^{k}(c_0, \hdots, c_{k-1}, d_{\text{left}}, d_{\text{right}}) = 
+\mathbf{L}^{-1} \cdot
+\begin{pmatrix}
+c_0\\
+c_1\\
+c_2\\
+c_3\\
+c_4\\
+\vdots \\
+c_{k-2}\\
+c_{k-1}\\
+d_{\text{left}}\\
+d_{\text{right}}\\
+\end{pmatrix}
+\end{equation}
+\end{df}
+
+Teda ak máme zadané uzly $v_0$, ..., $v_{k-1}$, hodnoty $c_0$, ..., $c_{k-1}$, derivácie $d_{\text{left}}$ a $d_{\text{right}}$, 
+tak pomocou vzahov \ref{eq:pom_uzly} a \ref{eq:gb-spline_controlPoints} získame uzly $u_0$, ..., $u_{k+5}$ a kontrolné body $b_0$, ..., $b_{k+1}$ také, e z nich zostrojenı B-splajn stupòa 3 bude prechádza všetkımi bodmi so súradnicami $\langle u_0, b_0 \rangle$ a $\langle u_{k-1}, b_{k-1} \rangle$. Tımto spôsobom zostrojenú B-splajn krivku budeme nazıva globálny B-splajn. 
+Pre lepšiu predstavu si to ukáme na ilustraènom príklade.
+
+\begin{pr}
+Uvaujme uzly $V = \langle 2, \frac{15}{4}, 5\rangle$ a pomocné uzly $U = \langle -\frac{5}{2}, -1, \frac{1}{2}, \linebreak 2, \frac{15}{4}, 5, \frac{13}{2}, 8, \frac{19}{2} \rangle$ (z príkladu \ref{pr:gbspline}), funkèné hodnoty $C = \langle -\frac{1}{2}, \frac{11}{10}, \frac{3}{4} \rangle$ a dvojicu prvıch derivícii v uzloch $v_0$ a $v_2$ $\langle d_{\text{left}}, d_{\text{right}}\rangle = \langle -2, \frac{4}{5}\rangle$.
+Oznaème prvú deriváciu funkcie $\text{Bs}_{v_a}^{b,c}$ ako $\text{Bd}_{v_a}^{b,c}$ pre ¾ubovo¾né $a$,$b$,$c$ prirodzené.  
+Polome maticu $\mathbf{L}$ vzahom:
+
+$$\mathbf{L} =
+\begin{pmatrix}
+\text{Bs}_{u_0}^{3,1}(v_{0}) & \text{Bs}_{u_1}^{3,2}(v_{0}) & \text{Bs}_{u_2}^{3,3}(v_{0}) & \text{Bs}_{u_3}^{3,4}(v_{0})& 0  \\
+0 & \text{Bs}_{u_1}^{3,1}(v_{1}) & \text{Bs}_{u_2}^{3,2}(v_{1}) & \text{Bs}_{u_3}^{3,3}(v_{1}) & \text{Bs}_{u_4}^{3,4}(v_{1}) \\
+0 & 0 & \text{Bs}_{u_2}^{3,1}(v_{2}) & \text{Bs}_{u_3}^{3,2}(v_{2}) & \text{Bs}_{u_4}^{3,3}(v_{2}) \\
+\text{Bd}_{u_0}^{3,1}(v_{0}) & \text{Bd}_{u_1}^{3,2}(v_{0}) & \text{Bd}_{u_2}^{3,3}(v_{0}) & \text{Bd}_{u_3}^{3,4}(v_{0})& 0 \\
+0 & 0 & \text{Bd}_{u_{k-2}}^{3,1}(v_{k-1}) & \text{Bd}_{u_{k-1}}^{3,2}(v_{k-1}) & \text{Bd}_{u_k}^{3,3}(v_{k-1})\\
+\end{pmatrix}
+$$
+Po dosadení a vypoèítaní bázovıch funckíí, prièom pre preh¾adnos sú získané hodnoty zaokrúhlené na dve desatinné miesta (a zapísané v tvare zlomkov) dostávavame:
+
+$$\mathbf{L} =
+\begin{pmatrix}
+\frac{134}{25} & \frac{1093}{100} & \frac{57}{20} & 0 & 0  \\
+0 & \frac{39}{20} & \frac{61}{5} & \frac{217}{50} & 0 \\
+0 & 0 & \frac{169}{50} & \frac{1309}{100} & \frac{271}{100} \\
+-\frac{919}{100} & \frac{11}{20} & \frac{571}{100} & 0 & 0 \\
+0 & 0 & -\frac{27}{4} & \frac{41}{50} & \frac{13}{2}\\
+\end{pmatrix}
+$$
+Pozornému oku iste neuniklo, e hodnoty funckií $\text{Bs}_{a}^{3,4}(b)$ a $\text{Bd}_{a}^{3,4}(b)$, kde $a$ je pomocnı uzol a $b$ je uzol sú v tomto príklade  
+rovné nule. Hodnoty tıchto funckcií sa toti vdy pohybujú vo ve¾mi malom okolí èísla 0, take po zaokrúhlení na dve desatinné miesta majú túto hodnotu.
+Nech vektor $(b_0, b_1, b_2, b_3, b_4)$ je riešením následujúcej sústavy rovníc: 
+\begin{equation} \label{eq:gb-spline_controlPoints}
+\mathbf{L} \cdot
+\begin{pmatrix}
+b_0\\
+b_1\\
+b_2\\
+b_3\\
+b_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+c_0\\
+c_1\\
+c_2\\
+d_{\text{left}}\\
+d_{\text{right}}\\
+\end{pmatrix}
+\end{equation}
+Teda po dosadení máme:
+\begin{equation} \label{eq:gb-spline_controlPoints}
+\mathbf{L} \cdot
+\begin{pmatrix}
+b_0\\
+b_1\\
+b_2\\
+b_3\\
+b_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\frac{1}{2}\\
+\frac{11}{10}\\
+\frac{3}{4}\\
+-2\\
+\frac{4}{5}\\
+\end{pmatrix}
+\end{equation}
+Prvky vektora $(b_0, b_1, b_2, b_3, b_4)$ , ktorı predstavuje kontrolné body pre B-splajn bude teda ma hodnoty (zaokrúhlené na dve desatinné miesta): 
+$$\left(\frac{29}{100}, -\frac{11}{50}, \frac{7}{50}, -\frac{3}{100}, \frac{27}{100}\right)$$
+So získanımi (pomocnımi) uzlami $U$ a prvkami vektora $(b_0, b_1, b_2, b_3, b_4)$ ako kontrolnımi bodmi môeme zostroji B-splajn stupòa 3 tak, aby krivka prechádzala zadanımi funkènımi hodnotami $C$.
+\end{pr}
+
+Na koniec teda môeme pristúpi k formálnej definíci globálneho B-splajnu.
+
+\begin{df}
+Nech $k$ je prirodzené èíslo, $V = \langle v_0, v_1, \hdots,v_{k-1} \rangle$ sú uzly, $C = \langle c_0, c_1, \hdots,c_{k-1} \rangle$ sú kontrolné body a $D = \langle d_{\text{left}}, d_{\text{right}}$ sú prvé derivácie v bodoch $v_0$ a $v_{k-1}$. 
+Nech platí:
+\begin{itemize}
+\item
+$k \ge 2$,
+\item 
+$k$-tica $V$ je rastúca.
+\end{itemize}
+Definujme funkciu $\text{GBSpline}_{V,C,D}^{k}$ z intervalu $[v_0, v_{k-1}]$ do $\mathbb{R}$ vzahom:
+\begin{equation}
+\text{GBSpline}_{V,C,D}^{k}(x) = \text{BSpline}_{\text{SKnots}_{3,k}(V),\text{SCPoints}_{V,\text{SKnots}_{3,k}(C,D)}^{k}}(x)
+\end{equation}
+\end{df}  
+%Táto krivka aj keï je zkonštruovaná ako B-splajn, èo je aproximaèná a lokálna krivka, tak z poh¾adu uívate¾a sa jedná o interpolaènú krivku, pretoe.
+
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Hermitove splajny}
+
+Narozdiel od B-splajnu predstavuje Hermitov splajn interpolaènú krivku. 
+Hermitova krivka sa (pochopite¾ne) skladá zo segmentov, kde kadı z nich je definovanı dvomi bodmi a ich prvımi deriváciami,
+ktoré zabezpeèia spojitos kriviek v jednotlivıch segmentov. 
+
+\subsection{Bázové funkcie}
+
+Podobne ako pri B-splajne aj tu sú potrebné bázové funkcie z ktorıch vygenerujeme krivku. 
+Tieto funkcie sú znaène jednoduchšie ne v prípade B-splajnu. 
+V tomto prípade budeme potrebova dvojicu funkcií. 
+
+\begin{df}
+Nech $a$ a $b$ sú reálne èísla. Definujme funkciu $\text{Hs}_{a,b}$ z intervalu $[a, b]$ do \real vzahom
+$$\text{Hs}_{a,b}(x) = (1 - \frac{2 \cdot (x - a)}{a-b}) \cdot \frac{(x-a)^2}{(a-b)^2} \mbox{.}$$
+\end{df}
+
+\begin{df}
+Nech $a$ a $b$ sú reálne èísla. Definujme funkciu $\text{Hds}_{a,b}$ z intervalu $[a, b]$ do \real vzahom
+$$\text{Hds}_{a,b}(x) = \frac{(x - b)^2 \cdot (x - a)}{(b - a)^2} \mbox{.}$$
+\end{df}
+
+\begin{pozn}
+Môeme si všimnú, e bázové funkcie sú polynómy tretieho stupòa. Teda všetky hermitovské krivky budú práve stupòa 3.
+\end{pozn}
+
+Podobne ako v predchádzajúcich statiach aj tu si urobíme ilustraènı príklad pre bázové funkcie dvojsegmentového uniformného Hermitovho splajnu.
+
+\begin{pr} \label{pr:hermite_basis}
+Nech $\langle v_0, v_1, v_2\rangle = \langle 1, 2, 3\rangle$ sú uzly. Keï Na jeden segment Hermitovho splajnu potrebujeme 4 bázové funkcie a 2 uzly. 
+Kede máme 3 uzly tak poèet segmentov v tomto príklade bude 2, prièom pre konštrukciu bázovıch funkcií pre prvı segment pouijeme uzly $v_0 = 1$ a $v_1 = 2$ a pre zostrojenie druhého segmentu pouijeme uzly $v_1 = 2$ a $v_2 = 3$.
+%\newpage
+Pozrime sa na ilustraènı obrázok vısledku a nišie si ho vysvetlíme.
+\obrazok{hermite_basis.png}{0.7}{Bázové funkcie pre dvojsegmentovú uniformnú Hermitovu krivku}
+\newpage
+Na obrázku máme grafy ôsmych bázovıch funkcií pre dva segmenty Hermitovho splajnu. Grafy tıchto funkcií majú následujúci zápis, prièom si ich kvôli preh¾adnosti zapíšeme farebne pod¾a jednotlivıch segmentov:
+\begin{itemize}
+\item{1. segment}
+\begin{itemize}
+\item
+$\mathcolor{blue}{\text{Hs}_{1,2}}$
+\item
+$\mathcolor{red}{\text{Hs}_{2,1}}$
+\item
+$\mathcolor{green}{\text{Hds}_{1,2}}$
+\item
+$\mathcolor{cyan}{\text{Hds}_{2,1}}$
+\end{itemize}
+\item{2. segment}
+\begin{itemize}
+\item
+$\mathcolor{blue}{\text{Hs}_{2,3}}$
+\item
+$\mathcolor{red}{\text{Hs}_{3,2}}$
+\item
+$\mathcolor{green}{\text{Hds}_{2,3}}$
+\item
+$\mathcolor{cyan}{\text{Hds}_{3,2}}$
+\end{itemize}
+\end{itemize}
+
+Keïe uvaujeme uniformnı splajn, funkcií tej istej farby sú, a na posunutı definiènı obor, identické , v prípade neuniformného splajnu by bázové funkcie v rôznych segmentoch mali rozlièné grafy. 
+
+\end{pr}
+
+V tejto stati sme si definovali dvojicu funkcií, ktoré budú generova priestor funkcií nad jednım segmentom Hermitovského splajnu. Vıslednú funkciu dostaneme ako lineárnu kombináciu dvoch kontrolnıch bodov a dvoch prvıch derivácii v prísluènıch uzloch so štyrmi bázovımi fukciami. V následujúcej stati si ukáeme samotnú konštrukciu Hermitovskej krivky a jej formálnu definíciu. 
+
+\subsection{Hermitova krivka}
+
+Zostrojenie Hermitovho splajnu je znaène jednoduchšie ne zostrojenie B-splajnu.
+Na jeden segment nám staèia dva uzly, ïalej funkèné hodnoty splajnu v tıchto uzloch (teda kontrolné body) a ich prvé derivácie.
+
+\paragraph{Konštrukcia Hermitovho splajnu}
+
+Nech sú dané reálne èísla $v_0$, ..., $v_{k-1}$ -- uzly, $c_0$, ..., $c_{k-1}$ -- funkèné hodnoty iadanej krivky v uzloch, 
+a $d_0$, ..., $d_{k-1}$ -- hodnoty derivácii splajnu v uzloch, prièom $k$ je prirodzené èíslo, také e $k \ge 2$.
+
+Našou úlohou je zostroji Hermitov splajn stupòa intervale $[v_0, v_{k-1}]$. Konštrukcia krivky bude prebieha po èastiach v $k$ krokoch, 
+prièom v prvom kroku pouijeme uzly $v_0$ a $v_1$, funkèné hodnoty $c_0$ a $c_1$ a derivácie $d_0$ a $d_1$. 
+Vïaka podmienke $k \ge 2$ máme zaruèené, e aspoò jeden segment môeme zkonštruova.
+V prípade druhého segmentu pouijeme uzly uzly $v_1$ a $v_2$, funkèné hodnoty $c_1$ a $c_2$ a derivácie $d_1$ a $d_2$ atï..
+%, a do $s$-tého segmentu, prièom pouijeme uzly $v_s$, ..., $v_{n+2}$ a kontrolné body $v_1$, ..., $v_{n+1}
+ 
+Rovnicu vıslednej krivky získame vynásobením dvoch funkènıch hodnôt a dvoch derivácií s bázovımi funkciami.
+Oznaème $P_1$, ..., $P_{k-1}$ polynomické funkcie, ktoré tvoria jednotlivé segmenty Hermitovho splajnu. Ich rovnice vyzerajú takto:
+%\begin{multline}
+\begin{equation} \label{eq:hermite_segments}
+\begin{split}
+P_i(x) = c_{i-1} \cdot \text{Hs}_{v_{i-1},v_i}(x) + c_i \cdot \text{Hs}_{v_i,v_{i-1}}(x)\\
+ + d_{i-1} \cdot \text{Hds}_{v_{i-1},v_i}(x) + d_i \cdot \text{Hds}_{v_i,v_{i-1}}(x) \mbox{.}
+\end{split}\end{equation}
+
+%%\end{multline}
+%\newline\newline
+
+Môeme pristúpi k formálnej definícii Hermitovho splajnu.
+
+\begin{df} \label{df:hermite}
+Nech $k$ je prirodzené èíslo, $k \ge 2$, $V = \langle v_0, v_1, \hdots, v_{k-1}\rangle$ sú uzly, $C = \langle c_0, c_1, ...,c_{k-1}\rangle$ sú funkèné hodnoty a $D = \langle d_0, d_1, ...,d_{k-1}\rangle$ sú prvé derivácie v uzloch.
+Definujme funkciu $\text{HSpline}_{V,C,D}^{k}$ z intervalu $[v_0, v_{k-1}]$ do $\mathbb{R}$ vzahom:
+\begingroup\makeatletter\def\f@size{9.5}\check@mathfonts
+\begin{equation}
+\text{HSpline}_{V,C,D}^{k}(x) = \begin{cases}
+\begin{split}
+ c_0 \cdot \text{Hs}_{v_0,v_1}(x) + c_1 \cdot \text{Hs}_{v_1,v_0}(x)\\ 
+ + d_0 \cdot \text{Hds}_{v_0,v_1}(x) + d_1 \cdot \text{Hds}_{v_1,v_0}(x) \end{split}& \text{pre } v_0 \le x < v_1 \text{,}\\
+ \begin{split}
+ c_1 \cdot \text{Hs}_{v_1,v_2}(x) + c_2 \cdot \text{Hs}_{v_2,v_1}(x)\\
+  + d_1 \cdot \text{Hds}_{v_1,v_2}(x) + d_2 \cdot \text{Hds}_{v_2,v_1}(x) \end{split}& \text{pre } v_1 \le x < v_2 \text{,}\\
+ \vdots\\
+ \begin{split}
+ c_{k-2} \cdot \text{Hs}_{v_{k-2},v_{k-1}}(x) + c_{k-1} \cdot \text{Hs}_{v_{k-1},v_{k-2}}(x)\\
+  + d_{k-2} \cdot \text{Hds}_{v_{k-2},v_{k-1}}(x) + d_{k-1} \cdot \text{Hds}_{v_{k-1},v_{k-2}}(x)\end{split}& \text{pre } v_{k-2} \le x \le v_{k-1} \text{.}
+\end{cases}
+\end{equation}
+\endgroup
+\end{df}
+
+\begin{pr}
+Uvaujme uzly a bázové funkcie z príkladu \ref{pr:hermite_basis}, teda uzly $V=\langle 1, 2, 2\rangle$ a bázové funkcie:
+\begin{itemize}
+\item{1. segment}
+\begin{itemize}
+\item
+$\mathcolor{blue}{\text{Hs}_{1,2}}$
+\item
+$\mathcolor{red}{\text{Hs}_{2,1}}$
+\item
+$\mathcolor{green}{\text{Hds}_{1,2}}$
+\item
+$\mathcolor{cyan}{\text{Hds}_{2,1}}$
+\end{itemize}
+\item{2. segment}
+\begin{itemize}
+\item
+$\mathcolor{blue}{\text{Hs}_{2,3}}$
+\item
+$\mathcolor{red}{\text{Hs}_{3,2}}$
+\item
+$\mathcolor{green}{\text{Hds}_{2,3}}$
+\item
+$\mathcolor{cyan}{\text{Hds}_{3,2}}$
+\end{itemize}
+\end{itemize}
+
+Nech $\langle c_0, c_1, c_2\rangle = \langle -\frac{1}{10}, 1, \frac{11}{10}\rangle$ sú funkèné hodnoty iadaného splajnu v uzloch $u_0$, $u_1$ a $u_2$ a  $\langle d_0, d_1, d_2\rangle = \langle -2, 1, 0\rangle$ sú funkèné hodnoty iadaného splajnu v uzloch $u_0$, $u_1$ a $u_2$. 
+Rovnice pre jednotlivé segmenty $P_1$ a $P_2$ budú pod¾a rovnice \ref{eq:hermite_segments} vyzera takto:
+
+\begin{align*} 
+\begin{split}
+P_1(x) = c_{0} \cdot \text{Hs}_{v_0,v_1}(x) + c_i \cdot \text{Hs}_{v_1,v_0}(x)\\
+ + d_0 \cdot \text{Hds}_{v_0,v_1}(x) + d_1 \cdot \text{Hds}_{v_1,v_0}(x) \mbox{,}
+\end{split} \\ 
+\begin{split}
+P_2(x) = c_{1} \cdot \text{Hs}_{v_1,v_2}(x) + c_2 \cdot \text{Hs}_{v_2,v_1}(x)\\
+ + d_1 \cdot \text{Hds}_{v_1,v_2}(x) + d_2 \cdot \text{Hds}_{v_2,v_1}(x) \mbox{.}
+\end{split}  
+\end{align*}
+
+Po dosadení hodnôt dostávame:
+
+\begin{align*} 
+\begin{split}
+P_1(x) = -\frac{1}{10} \cdot \text{Hs}_{1,2}(x) + \text{Hs}_{2,1}(x)\\
+ - 2 \cdot \text{Hds}_{1,2}(x) + \text{Hds}_{2,1}(x) \mbox{,}
+\end{split} \\ 
+\begin{split}
+P_2(x) = \text{Hs}_{2,3}(x) + \frac{11}{10} \cdot \text{Hs}_{3,2}(x)\\
+ + \text{Hds}_{v_1,v_2}(x) \mbox{.}
+\end{split}  
+\end{align*}
+
+\obrazok{hermite_wBasis.png}{0.7}{Krivka v kadom segmente (modrou alebo èervenou) je lineárna kombinácia bázovıch funkcií, ruové úseèky znázoròujú smer derivácii v uzloch }
+\end{pr}
+
+\begin{pozn} \label{pozn:hermite_c1}
+V prípade Hermitovskıch kriviek máme síce zadané prvé derivácie v uzloch, èo zabezpeèí spojitos jednotlivıch segmentov, ale nemáme zaruèené rovnosti druhıch derivácíí segmentov v uzloch, inımi slovami nemáme zaruèenú aj hladkos krivky v okolí uzlov.
+Jedná sa o takzvanı splajn \pojem{triedy C1}, narozdiel od B-splajnov, pri ktorıch sa druhé derivácie segmentov v uzloch rovnajú.
+V následujúcej kapitole prejdeme ku clamped splajnom, ktoré tento problém riešia.
+\end{pozn}
+
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Clamped splajny}
+
+Clamped splajn (vnorenı splajn) je interpolaèná a globálna krivka. Vychádza z Hermitovskıch splajnov s tım, e na rozdiel od nich nezadávame prvé derivácie pre kadı uzol, ale len pre prvı a poslednı uzol. Zbytok derivácii sa dodatoène dopoèíta pomocou sústavy lineárnych rovníc. Z takto získanıch derivácii vypoèítame Hermitovskı splajn. Zaujímavosou je, e ak budeme bra do úvahy len uniformné splajny, tak e vısledná krivka je totoná z globálnym B-splajnom.
+
+Existuje aj variant zvanı \pojem{naturálny splajn} v ktorom navyše predpokladáme, e druhé derivácie v uzloch $u_0$ a $u_{k-1}$ 
+sú rovné èíslu 0. 
+\paragraph{Konštrukcia clamped splajnu (1)}
+%\begin{df} \label{df:clamped1}
+%
+Nech $k$ je z \uinteger, $k \ge 2$, $V = \langle v_0, \hdots, v_{k-1}\rangle$ sú vstupné uzly, hodnoty $C = \langle c_0, \hdots, c_{k-1}\rangle$ sú funkèné hodnoty iadaného clamped splajnu v uzloch, èíslo $d_0$ je hodnota derivácie v bode $u_0$ a  èíslo $d_{k-1}$ je hodnota derivácie v bode $v_{k-1}$. Polome èíslo $h$ vzahom:
+\begin{equation} \label{eq:clampedDiff}
+h = \frac{\sum\limits_{i=1}^{k-1} (v_{i} - v_{i-1})}{k}
+\end{equation}
+
+Oznaème maticu $\mathbf{L}$ vzahom:
+\begin{equation} \label{eq:c1_matrix}
+\mathbf{L} = 
+\begin{pmatrix}
+4 & 1 & 0 & \hdots & 0 & 0\\
+1 & 4 & 1 & \hdots & 0 & 0\\
+0 & 1 & 4 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & 4 & 1\\
+0 & 0 & 0 & \hdots & 1 & 4\\
+\end{pmatrix}
+\end{equation}
+
+Nech vektor $(d_1, \hdots, d_{k-2})$ je riešením následujúcej sústavy rovníc:
+
+\begingroup
+\renewcommand*{\arraystretch}{1.4}
+\begin{equation} \label{eq:c1_der}
+\mathbf{L}
+\cdot
+\begin{pmatrix}
+d_1\\
+d_2\\
+d_3\\
+\vdots \\
+d_{k-3}\\
+d_{k-2}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{3\cdot (c_2 - c_0)}{h} - d_0\\
+\frac{3\cdot (c_3 - c_1)}{h}\\
+\frac{3\cdot (c_4 - c_2)}{h}\\
+\vdots \\
+\frac{3\cdot (c_{k-2} - c_{k-4})}{h}\\
+\frac{3\cdot (c_{k-1} - c_{k-3})}{h} - d_{k-1}\\
+\end{pmatrix}
+\end{equation}
+\endgroup
+
+Hodnoty $d_0$, $d_1$, ...,$d_{k-1}$ predstavujú prvé derivácie hermitovského splajnu v uzloch $v_0$, $v_1$, ...,$v_{k-1}$.
+Na základe zadanıch uzlov, funkènıch hodnôt splajnu v uzloch, dvoch derivácií a následne získanıch derivácií v uzloch tak vieme vygenerova Hermitovu krivku.
+%\end{df}
+
+\begin{pozn}
+Všimnime si, e sústava rovníc je trojdiagonálna. To znamená e ak máme $k$ rovníc, tak ju vieme rieši v èase $O(k)$ narozdiel od sústavy rovníc v prípade globálneho B-splajnu, ktorú vieme rieši len v èase $O(k^3)$. 
+Vıpoèet clamped splajnov je teda vırazne rıchlejší, ne vıpoèet globálneho B-splajnu.
+\end{pozn}
+
+Formálne zapísanı postup bude ma teda takúto podobu.
+
+\begin{df}
+Nech $k$ je z \uinteger, $k \ge 2$, $V = \langle v_0, \hdots, v_{k-1}\rangle$ sú vstupné uzly, hodnoty $C = \langle c_0, \hdots, c_{k-1}\rangle$ sú funkèné hodnoty, èíslo $d_0$ je hodnota derivácie v bode $u_0$ a  èíslo $d_{k-1}$ je hodnota derivácie v bode $v_{k-1}$. Polome èíslo $h$ vzahom:
+\begin{equation*}
+h = \frac{\sum\limits_{i=1}^{k-1} (v_{i} - v_{i-1})}{k}
+\end{equation*}
+Nech vektor $(d_1, \hdots, d_{k-2})^T$ je riešením sústavy rovníc \ref{eq:c1_der}.
+Definujme funkciu $\text{CDer}_{V}^{k}$ z $\mathbb{R}^{k+2}$ do $\mathbb{R}^{k}$ vzahom:
+\begin{equation}
+\text{CDer}_{V}^{k}(c_0, \hdots, c_{k-1}, d_0, d_{k-1}) = \langle d_0, d_1, \hdots, d_{k-2}, d_{k-1} \rangle
+\end{equation}  
+\end{df}
+
+\begin{df} \label{df:clamped1}
+Nech $k$ je prirodzené èíslo, $k \ge 2$, $V = \langle v_0, v_1, \hdots, v_{k-1}\rangle$ sú uzly, $C = \langle c_0, c_1, ...,c_{k-1}\rangle$ sú funkèné hodnoty a $D = \langle d_0, d_{k-1}\rangle$ sú prvé derivácie v uzloch $v_0$ a $v_{k-1}$.
+Definujme funkciu $\text{CSpline}_{V,C,d_0,d_{k-1}}$ z intervalu $[v_0, v_{k-1}]$ do $\mathbb{R}$ vzahom:
+\begin{equation}
+\text{CSpline}_{V,C,d_0,d_{k-1}}^{k}(x) = \text{HSpline}_{V,C,\text{CDer}_{V}^{k}(C,d_0,d_{k-1})}^{k}(x)
+\end{equation}
+\end{df}
+%==================================================================================================================================================================================
+
+\chapter{Novı postup generovania clamped splajnov}
+
+Ako som spomínal na zaèiatku èlánku, cie¾om práce je preskúma a implementova inı spôsob generovania globálneho B-splajnu pouitím Hermitovskıch splajnov s ktorım pracuje doc. Török. 
+Postup je podobnı ako pri konštruovaní clamped splajnov, teda pre zadané uzly, funkèné hodnoty a dve derivácie vypoèíta derivácie v kadom uzle a vypoèíta Hermitovskú krivku. 
+Rozdiel oproti predchádzajúcemu postupu spoèíva v rozdielnom postupe pri generovaní derivácií. Podobne ako pri clamped splajnoch, uniformné krivky konštruované tımto postupom sú identické s globálnym B-splajnom.
+
+Pred tım ne zaèneme s konštrukciou krivky si definujme pomocnú funkciu, ktorú pouijeme pri h¾adaní prvıch derivácií v uzloch.
+
+\section{Zostrojenie}
+
+\begin{df}
+Definujme funkciu $\text{CDN}_{h}$ z $\mathbb{R}^4$ do $\mathbb{R}$ vzahom
+\begin{equation}
+\text{CDN}_{h}(u_{\text{left}},u_{\text{right}},d_{\text{left}},d_{\text{right}}) = \frac{\frac{3\cdot (u_{\text{right}} - u_{\text{left}})}{h}-d_{\text{left}}-d_{\text{right}}}{4}
+\end{equation}
+\end{df}
+
+\paragraph{Konštrukcia clamped splajnu}
+
+Nech $k$ je z \uinteger, $k \ge 2$ a hodnoty $u_0$, ..., $u_{k-1}$ sú vstupné uzly, hodnoty $y_0$, ..., $y_{k-1}$ sú funkèné hodnoty iadaného clamped splajnu v uzloch, èíslo $d_0$ je hodnota derivácie v bode $u_0$ a èíslo $d_{k-1}$ je hodnota derivácie v bode $u_{k-1}$. 
+
+Oznaème reálne èíslo $h$ vzahom:
+$$h = \frac{\sum\limits_{i=1}^{k-1} (u_{i} - u_{i-1})}{k}$$
+
+Konštrukcia clamped splajnu touto metódou sa líši pod¾a parametra $k$, teda pod¾a poètu zadanıch uzlov a funkènıch hodnôt.
+Rozlíšme jednotlivé prípady:
+
+\begin{itemize}
+\item{Nech $k = 2$.}
+
+V tom prípade zostrojíme Hermitovskı splajn pod¾a \ref{df:hermite}
+\item{Nech $k = 3$.}
+
+Potom hodnota $d_1 = \text{CDN}_{h}(u_0,u_2,d_0,d_2)$ je derivácia v uzle $u_1$ a teda môeme zostroji Hermitovskı splajn pod¾a postupu \ref{df:hermite}.
+\item{Nech $k = 4$.}
+
+Potom hodnota $d_2 = (d_0 + 3\cdot u_0 - 3 \cdot u_2 - 12 \cdot u_1 + 12 \cdot u_3)/15$ je derivácia v uzle $u_2$ a hodnota $d_1 = \text{CDN}_{h}(u_0,u_2,d_0,d_2)$ je derivácia v uzle $u_1$ a teda môeme zostroji Hermitovskı splajn pod¾a \ref{df:hermite}.
+\item{Nech $k \ge 5$}.
+
+Definujme premenné $J$, $K$, $L$ a $M$ vzahmi:
+\begin{itemize}
+\item
+$L =  \begin{cases}
+  \frac{15}{2} & \text{ak } k \text{ je párne,}\\
+ 7 & \text{inak.}\\ 
+\end{cases}$
+\item
+$M = \begin{cases}
+  \frac{3}{2} + (k-5)/2 & \text{ak } k \text{ je párne,}\\
+  1 + (k-5)/2 & \text{inak.}\\ 
+\end{cases}$
+\item
+$K = \begin{cases}
+  k-2 & \text{ak } k \text{ je párne,}\\
+  k-3 & \text{inak.}\\ 
+\end{cases}$
+
+Hodnota $K$ je index posledného párneho uzla, ktorı zároveò nie je poslednı.
+\item
+$J = \begin{cases}
+  k-3 & \text{ak } k \text{ je párne,}\\
+  k-2 & \text{inak.}\\ 
+\end{cases}$
+
+Hodnota $J$ je index posledného nepárneho uzla, ktorı zároveò nie je poslednı.
+\end{itemize}
+
+Pri zostrojení clamped splajnu v predchádzajúcej kapitole sme vypoèítali prvé derivácie v uzloch pomocou sústavy rovníc. Podobnı prístup pouijeme aj v tomto prípade s tım rozdielom, e tu vypoèítame hodnoty len párnych derivácií (nezabudnime, e indexujeme od 0), t.j. hodnoty
+$d_2, d_4, ..., d_{K}$ a zvyšné dopoèítame pomocou funkcie $\text{CDN}_{h}$.
+
+Definujme maticu $\mathbf{A}$ vzahom:
+
+$$
+\mathbf{A} = 
+\begin{pmatrix}
+7 & -\FEL & 0 & \hdots & 0 & 0\\
+-\FEL & 7 & -\FEL & \hdots & 0 & 0\\
+0 & -\FEL & 7 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & 7 & -\FEL \\
+0 & 0 & 0 & \hdots & -\FEL & L\\
+\end{pmatrix}  
+$$
+
+Nech vektor $(d_2, d_4, d_6, \hdots, d_{K})$ je riešením následujúcej sústavy rovníc:
+\begingroup
+\renewcommand*{\arraystretch}{1.4}
+\begin{equation}
+\mathbf{A}
+\cdot
+\begin{pmatrix}
+d_2\\
+d_4\\
+d_6\\
+\vdots \\
+d_{K-2}\\
+d_{K}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{3\cdot (y_0 - y_4) - 12 \cdot (y_1 - y_3)}{2 \cdot h}\\
+\frac{3\cdot (y_2 - y_6) - 12 \cdot (y_3 - y_5)}{2 \cdot h}\\
+\frac{3\cdot (y_4 - y_8) - 12 \cdot (y_5 - y_7)}{2 \cdot h}\\
+\vdots \\
+\frac{3\cdot (y_{2(M-3)} - y_{(2(M-3)+4)}) - 12 \cdot (y_{(2(M-3)+1)} - y_{(2(M-3)+3)})}{2 \cdot h}\\
+\frac{3\cdot (y_{2(M-2)} - y_{(2(M-2)+4)}) - 12 \cdot (y_{(2(M-2)+1)} - y_{(2(M-2)+3)})}{2 \cdot h}\\
+\end{pmatrix}
+\end{equation}
+\endgroup
+Ostáva ešte dopoèíta hodnoty derivácií $d_1$, $d_3$, $d_5$,..., $d_J$. Nech pre kadé $i$ z $\{1,3,5,\hdots,J\}$ platí:
+$$d_i = \text{CDN}_{h}(u_{i-1},u_{i+1},d_{i-1},d_{i+1})\mbox{.}$$ 
+
+Hodnoty $d_0$, $d_1$, ...,$d_{k-1}$ predstavujú prvé derivácie hermitovského splajnu v uzloch $u_0$, $u_1$, ...,$u_{k-1}$.
+Na základe zadanıch uzlov, funkènıch hodnôt splajnu v uzloch, dvoch derivácií a následne získanıch derivácií v uzloch tak vieme vygenerova Hermitovskú krivku na základe postupu \ref{df:hermite}.
+\end{itemize}
+Ako vidie, rozdiel oproti predchádzajúcemu spôsobu spoèíva v rozdielnom poèítaní derivácíí, kedy stále máme trojdiagonálnu sústavu rovníc, ale zredukovanú na poloviènú ve¾kos, získali sme tım teda mierne zrıchlenie. 
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%==================================================================================================================================================================================
+\part{Implementácia}
+
+V tejto èasti, ako u názov napovedá prejdeme k implementácii navrhnutıch postupov.
+Najprv si ale povieme nieèo o technológii, v ktorej je práca implementovaná a v následujúcej kapitole si priblíime detialy implementovania aplikácie.
+
+\chapter{Microsoft Silverlight}
+
+Microsoft Silverlight (ïalej len Silverlight) je bezplatnı nástroj na tvorbu webovıch aplikácií spustite¾nıch vo webovom prehliadaèi.
+V súèastnosti je k dispozícii vo verzii 5, prièom prvá verzia bola vydaná v roku 2007 ako konkurencia k technológii Adobe Flash. 
+Samotnı vıvoj aplikácii môe prebieha v ¾ubovo¾nom interpretovanom programovacom jazyku beiacom pod virtuálnym strojom Common Language Runtime, najèastejšie pouívané (a oficiálne podporované) sú však programovacie jazyky C\# a Visual Basic. 
+V našom prípade sme siahli po jazyku C\#.
+
+\begin{center}
+\includegraphics[scale=0.2]{silverlight.jpg}
+\end{center}
+
+Silverlight je kompatibilnı s väèšinou modernıch webovıch prehliadaèov a operaènıch systémov vèítane Microsoft Windows, Apple OS X a vïaka technológii Mono -- open-source implementácii platformy .NET, je moné Silverlight aplikácie pouíva aj na väèšine Linuxovıch distribúcií. 
+Framework je moné poui aj na vıvoj off-line aplikácií v operaènom systéme Windows Phone, Windows 8 a Windows RT. 
+%Podporuje aj streamovanie zvuku a videa.
+
+Oficiálne vıvojové prostredie (skrátene IDE) je Microsoft Visual Studio, ktoré existuje vo viacerıch variantách. 
+Najpouívanejší je variant Express, ktorı je dostupnı zdarma avšak prichádza s mnohımi obmedzeniami (napríklad nepodpora prídavnıch modulov) a nie je vhodnı na tvorbu rozsiahlych projektov. 
+Pri vıvoji aplikaènej èasti tejto práce bol pouitı plnohodnotnı variant Professional.
+
+\section{Architektúra}
+
+V tejto stati si si ukáeme základ architektúry Silverlight-u. Ten sa skladá z dvoch hlavnıch súèastí, \pojem{Core presentation framework}, \pojem{.NET Framework for Silverlight}. Ich funkcie si v krátkosti zhrnieme.
+
+\paragraph{Core presentation framework}
+
+Obsahuje komponenty a sluby pre uívate¾ské rozhranie, nástroje pre vektorovú grafiku, animácie a podobne. 
+Taktie obsahuje jazyk \pojem{Extensible Application Markup Language} (skrát. \pojem{XAML}) na definovanie grafického pouívate¾ského rozhrania.
+Úèel jazyka XAML si vysvetlíme neskôr.
+  
+\paragraph{.NET Framework for Silverlight}
+
+Jedná sa o podmnoinu .NET Framework zabezpeèujúca fyzickı beh aplikácie na poèítaèi. 
+Obsahuje nástroje na správu pamäte (garbage collection), rôzne kninice a v neposlednom rade kompilátory .NET kompatibilnıch jazykov, ako napr. Visual Basic, C\#, JavaScript do CLR kódu a následne do strojového kódu.
+
+\obrazok{silArch.png}{0.5}{Architektúra Silverlight[5]}
+\subsection{XAML}
+ 
+Extensible Application Markup Language (XAML) je deklaratívny jazyk, ktorého úèel a syntax sú podobné jazykom XML a HTML.
+Úèelom XAML v Silverlight je deklarova prvky grafického pouívate¾ského rozharnia (GUI) aplikácie, ktoré sa zobrazia vo webovom prehliadaèi. 
+Samotná logika aplikácie je naprogramovaná v nejakom CLR jazyku, v našom prípade v jazyku C\#.
+
+Ukáka XAML kódu:
+
+\begin{lstlisting}
+<UserControl x:Class="MySilverlight.Page"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  >
+	<!--Prvky rozhrania našej aplikácie-->
+	<Canvas Background="White" Height="600" Width="800">
+ 		<!--Prvky rozhrania v rámci Canvas-->
+ 	</Canvas>   
+</UserControl> 
+\end{lstlisting}
+
+
+%==================================================================================================================================================================================
+\section{Grafika v Silverlight}
+
+Silverlight prichádza s pomerne pokroèilımi nástrojmi na tvorbu dvojrozmernej grafiky, prièom pouitím vhodnıch doplnkov je moné tvori aj grafiku v troch rozmeroch. 
+V tejto kapitole si struène rozoberieme monosti a nástroje, ktoré nám Silverlight ponúka. Podrobné detaily implementácie si predstavíme v kapitole 3.
+
+%Základnı komponent je \pojem{Panel}. Táto abstraktná trieda definuje našu \uv{pracovnú plochu} do ktorej vkladáme všetky prvky uívate¾ského rozhrania.
+
+Na zobrazenie ¾ubovo¾nıch objektov v rovine slúi komponent zvanı \pojem{Canvas} (plátno). 
+Ten má mnoho parametrov na prispôsobenie vizuálnej stránky a správania sa plátna, vèítane objektov ktoré obsahuje. 
+Nás však teraz budú zaujíma dva parametre: \pojem{Width} (ïalej len \pojem{šírka}) a \pojem{Height} (ïalej len \pojem{vıška}). 
+Tieto parametre, ako to vyplıva z ich názvu, slúia na nastavenie rozmerov plátna v pixeloch obrazovky poèítaèa. 
+
+\begin{pozn}
+Canvas má ïalší ve¾mi dôleitı parameter, a to je \pojem{Children} (deti).
+Jedná sa o kolekciu referencií na všetky objekty, ktoré sú vykreslené na plátne.
+\end{pozn}
+
+\subsection{Transformácia súradníc}
+
+Kadı objekt na plátne má svoju pozíciu urèenú v ortogonálnej súradnicovej sústave, kde poèiatoènı bod sa nachádza v \uv{¾avom-hornom} rohu plátna, jedná sa teda o ¾avotoèivú sústavu. 
+Túto súradnicovú sústavu budeme oznaèova pojmom \pojem{PlotArea}. 
+Pre uívate¾ov je však znaène pohodlnejšie pouíva súradnicovú sústavu na ktorú su roky zvyknutí, a síce ortogonálnu súradnicovú sústavu takú, kde poèiatoènı bod leí v prieseèníku uhloprieèok obdånikového plátna. 
+Túto súradnicovú sústavu budeme oznaèova pojmom \pojem{WorldArea}. Teda uívate¾ské vstupy, podobne aj vıstupy programu transformováva je potrebné prepoèítava medzi dvoma súradnicovımi sústavami.
+
+Take vieme, e Canvas v Silverlight-e pouíva ortogonálnu sústavu. Hranice plátna sú urèené dvomi bodmi, ktoré oznaèujú poèiatoènı bod v \uv{¾avom-hornom} rohu plátna a maximálny bod v \uv{pravom-dolnom} rohu plátna.
+
+Väèšinou platí, e poèiatoènı bod má hodnotu $\langle 0, 0\rangle$ a maximálny bod má hodnotu $\langle w, h\rangle$, kde $w$ a $h$ sú kladné èísla. Èísla $w$ a $h$ teda urèujú ve¾kos plátna v pixeloch, pravda iba vtedy ak poèiatoènı pod má hodnotu $\langle 0, 0 \rangle$.
+
+Oznaème si konštanty, ktoré urèujú hranice plátna v ortogonálnej a v karteziánskej sústave.
+
+\begin{itemize}
+\item
+Súradnicu na osi $x$ poèiatoèného bodu plátna v PlotArea oznaèíme $\text{pax}_{\text{min}}$.
+\item
+Súradnicu na osi $y$ poèiatoèného bodu plátna v PlotArea oznaèíme $\text{pay}_{\text{min}}$.
+\item
+Súradnicu na osi $x$ maximálneho bodu plátna v PlotArea oznaèíme $\text{pax}_{\text{max}}$.
+\item
+Súradnicu na osi $y$ maximálneho bodu plátna v PlotArea oznaèíme $\text{pax}_{\text{max}}$.
+\item
+Najmenšiu súradnicu na osi $x$ plátna vo WorldArea oznaèíme $\text{wax}_{\text{min}}$.
+\item
+Najmenšiu súradnicu na osi $y$ plátna v WorldArea oznaèíme $\text{way}_{\text{min}}$.
+\item
+Najväèšiu súradnicu na osi $x$ plátna v WorldArea oznaèíme $\text{wax}_{\text{max}}$.
+\item
+Najväèšiu súradnicu na osi $x$ plátna v WorldArea oznaèíme $\text{way}_{\text{max}}$.
+\end{itemize}
+Usporiadaná dvojica $\langle \text{pax}_{\text{min}}, \text{pay}_{\text{min}} \rangle$ teda predstavuje hodnotu poèiatoèného bodu v PlotArea sústave. Ako bolo spomenuté, tento bod má vaèšinou hodnotu $\langle 0, 0\rangle$.
+
+\subsubsection{Transformaèné vzahy}
+
+Teraz si zaveïme vzahy pre transformáciu súradníc medzi dvoma súradnicovımi sústavami plátna.
+
+\paragraph{Transformácia z WorldArea do PlotArea} 
+
+Nech $x$ a $y$ sú ¾ubovo¾né reálne èísla a usporiadaná dvojica $\langle x, y\rangle$ je bod vo WorldArea sústave. Ak $u$ a $v$ sú reálne èísla také, e platí: 
+%\begin{itemize}
+%\item
+\begin{equation}
+u = \text{pax}_{\text{min}} + \frac{(x - \text{wax}_{\text{min}}) \cdot (\text{pax}_{\text{max}} - \text{pax}_{\text{min}})}{\text{wax}_{\text{max}} - \text{wax}_{\text{min}}}\mbox{,}
+\end{equation}
+\begin{equation}
+v = \text{pay}_{\text{max}} - \frac{(y - \text{way}_{\text{min}}) \cdot (\text{pay}_{\text{max}} - \text{pay}_{\text{min}})}{\text{way}_{\text{max}} - \text{pay}_{\text{min}}}\mbox{,}
+\end{equation}
+%\end{itemize}
+tak usporiadaná dvojica $\langle u, v\rangle$ predstavuje súradnice bodu $\langle x, y\rangle$ v PlotArea sústave.
+
+\paragraph{Transformácia z PlotArea do WorldArea} 
+
+Nech $u$ a $v$ sú ¾ubovo¾né reálne èísla a usporiadaná dvojica $\langle u, v\rangle$ je bod v PlotArea sústave. Ak $x$ a $y$ sú reálne èísla také, e platí: 
+\begin{equation}
+x = \text{wax}_{\text{min}} + \frac{(u - \text{pax}_{\text{min}}) \cdot (\text{wax}_{\text{max}} - \text{wax}_{\text{min}})}{\text{pax}_{\text{max}}-\text{pax}_{\text{min}}}\mbox{,}
+\end{equation}
+\begin{equation}
+y = \text{way}_{\text{min}} - \frac{(v - \text{pay}_{\text{max}}) \cdot (\text{way}_{\text{max}} - \text{way}_{\text{min}})}{\text{pay}_{\text{max}}-\text{pay}_{\text{min}}}\mbox{,}
+\end{equation}
+tak usporiadaná dvojica $\langle x, y \rangle$ predstavuje súradnice bodu $\langle u, v\rangle$ vo WorldArea sústave.
+\newline\newline
+Pre lepšiu predstavu uvedieme ilustraènı obrázok.
+
+\obrazok{pawa.png}{0.6}{Bod (èervenou) a jeho súradnice vo WorldArea (èiernou) a v PlotArea (sivou)}
+Na obrázku máme príklad plátna s poèiatoènım bodom $\langle 0, 0 \rangle$ a maximálnym bodom $\langle 640, 360 \rangle$, 
+prièom súradnice oboch bodov sú v PlotArea súradnicovej sústave. Teda $\text{pax}_{\text{min}} = 0$, $\text{pay}_{\text{min}} = 0$, $\text{pax}_{\text{max}} = 640$ a $\text{pay}_{\text{max}} = 360$. Hranice plátna vo WorldArea sústave sú v tomto prípade $\text{wax}_{\text{min}} = -15$, $\text{way}_{\text{min}} = -10$, $\text{wax}_{\text{max}} = 15$ a $\text{way}_{\text{max}} = 10$. 
+Uívate¾om zadanı bod (na obrázku èervenou) s WorldArea súradnicami $\langle 7\mbox{,}97, 5 \rangle$ teda bude ma po transformácii v plátne súradnice $\langle 490, 90 \rangle$.
+
+\chapter{Vıvoj aplikácie}
+
+V tejto kapitole si pomerne podrobne predstavíme implementaènú èas práce a síce webovú aplikáciu vyvinutú vo frameworku Silverlight.
+Prejdeme si implementovanie všetkıch postupov pri zostrojovaní splajnov v prvej èasti práce.
+ 
+\section{Vytvorenie aplikácie}
+
+Ako bolo spomemuté v minulej kapitole, grafické uívate¾ské rozhranie (GUI) je zadeklarované v jazyku XAML, prièom logika programu je naprogramovaná v jednom z CLR jazykov. 
+Vytvorme ukákovú aplikáciu s názvom \pojem{AhojSvet}, ktorá nám vypíše reazec \uv{\textit{Ahoj svet!}}. 
+
+Zdrojové kódy sa implicitne nachádzajú v dvoch súboroch. Jeden sa nazıvva MainPage.xaml a obsahuje deklaráciu GUI v XAML. 
+Druhı súbor -- MainPage.xaml.cs obsahuje logiku programu, v tomto prípade, v jazyku C\#. 
+Pozrime sa na obrázok našej aplikácie a nišie si ukáeme, ako sme k takému vısledku dospeli.
+
+\obrazok{helloWorld.png}{1}{Triviálna aplikácia AhojSvet}
+\newpage
+Deklarácia GUI v súbore MainPage.xaml vyzerá takto.
+
+\begin{lstlisting}
+<!-- Deklarácia aplikácie, ako inštancie triedy UserControl -->
+<UserControl 
+x:Class="AhojSvet.MainPage"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+mc:Ignorable="d"
+>
+	<!-- Deklarácia plátna (Canvas) s názvom OrangeCanvas -->
+    <Canvas x:Name="OrangeCanvas" 
+    		   <!-- Nastavenie pozadia na oranovú 
+    		        a rozmerov plátna v pixeloch-->
+    		   Background="Orange" Width="200" Height="100">
+    	    
+    	   <!-- Deklarácia textového po¾a -->
+        <TextBox Height="23"  
+        		   TextWrapping="Wrap"
+        		   <!-- Nastavenie zobrazovaného textu --> 
+        		   Text="Ahoj svet!"
+        		   <!-- Poloha v plátne vzh¾adom na poèiatoènı bod <0,0> -->
+        		   Canvas.Left="42" Canvas.Top="36" 
+        		   Width="120"/>
+    
+    <!-- Všetko medzi deklaráciou plátna 
+         a následujúcim riadkom je v plátne-->
+    </Canvas>
+    
+</UserControl>
+\end{lstlisting}
+Pridruenı súbor MainPage.xaml.cs bude obsahova tento kód.
+\begin{lstlisting}
+using System.Windows.Controls;
+ 
+namespace AhojSvet
+{
+	// Celá naša aplikácia je rozšírením triedy UserControl
+    public partial class MainPage : UserControl
+    {
+        public MainPage()
+        {
+        	   // Táto metóda inicializuje všetky objekty deklarované v XAML
+            InitializeComponent();
+        }
+    }
+}
+\end{lstlisting}
+Zdrojovı kód v C\# toho pravda ve¾a neobsahuje, keïe sme našej aplikácii nenaprogramovali iadnu funkcionalitu.
+\section{Definície splajnov ako dátovıch typov}
+Keïe jazyk C\# je objektovo orientovanı a Silverlight tento princíp dodruje, je potrebné aby sme zvolili vhodnú dátovú štruktúru v ktorej si budeme uklada referencie na zostrojené splajny. 
+
+\subsection{Spline}
+
+Ako v prvej èasti práce aj tu si zaveïme všeobecnú triedu \textit{Spline}, ktorej atribúty budú spoloèné pre všetky ostatné splajny, s tım, e tieto budú dedi práve od triedy \textit{Spline}.
+
+\begin{lstlisting}
+
+public abstract class Spline
+{
+	public List<Ellipse> DragEllipses { get; set; }
+	public List<Line> LinesOfSpline { get; set; }
+	public List<double> ControlPoints { get; set; }
+	public List<double> Knots { get; set; }
+   
+	...     
+}
+\end{lstlisting}
+Prejdime si jednotlivé atribúty, ktoré budú spoloèné pre všetky typy splajnov:
+\begin{itemize}
+\item{\textit{Knots}}
+Uzly splajnu.
+\item{\textit{ControlPoints}}
+Kontrolné body splajnu.
+\item{\textit{LinesOfSpline}}
+Obsahuje samotnú krivku tvorenú úseèkami.
+\item{\textit{DragEllipses}}
+Predstavuje vizuálnu reprezentáciu uzlov a kontrolnıch bodov na plátne.
+\end{itemize}
+
+\begin{pozn}
+Modifikátor \textit{abstract} znamená, e táto trieda je abstraktná, teda nie je moné vytvára inštancie tejto triedy, iba inštancie dcérskych tried, v našom prípade tried \textit{BSpline},
+\textit{GlobalBSpline}, atï..
+\end{pozn}
+
+\subsection{BSpline}
+
+Trieda \textit{BSpline} bude reprezentova B-splajn a bude dedi od triedy \textit{Spline}, prièom navyše obsahuje len stupeò splajnu.
+\begin{lstlisting}
+public class GlobalBSpline : BSpline
+{
+	public int Degree { get; set; }
+   
+	...	// konštruktory 
+}
+\end{lstlisting}
+
+\subsection{GlobalBSpline}
+
+Trieda \textit{GlobalBSpline} bude reprezentova globálny B-splajn a bude dedi od triedy \textit{BSpline}.
+
+Keïe dedíme od triedy \textit{BSpline}, tak \textit{GlobalBSpline} obsahuje všetky jej atribúty prièom navyše obsahuje:
+
+\begin{itemize}
+\item{\textit{FunctionValues}}
+Uívate¾om zadané funkèné hodnoty B-splajnu.
+\item{\textit{LeftDerivation}}
+Prvá derivácia v uzle $u_0$.%, v C\# interpretácii teda v uzle $\mathit{Knots}[0]$.
+\item{\textit{LeftDerivationEllipse}}
+Predstavuje vizuálnu reprezentáciu atribútu \textit{LeftDerivation}.
+\item{\textit{RightDerivationEllipse}}
+Predstavuje vizuálnu reprezentáciu atribútu \textit{RightDerivation}.
+\end{itemize}
+Implementácia vyzerá následovne:
+\begin{lstlisting}	
+public class GlobalBSpline : BSpline
+{
+	public List<double> FunctionValues { get; set; }
+	public double LeftDerivation { get; set; }
+	public double RightDerivation { get; set; }
+	public Ellipse LeftDerivationEllipse { get; set; }
+	public Ellipse RightDerivationEllipse { get; set; }
+   
+	...    // konštruktory 
+}
+\end{lstlisting}
+
+\subsection{HermiteSpline}
+
+Trieda \textit{HermiteSpline} bude reprezentova Hermitov splajn a bude dedi od triedy \textit{Spline}, prièom navyše obsahuje tieto atribúty:
+\begin{itemize}
+\item{\textit{Derivations}}
+Uívate¾om zadané prvé derivácie v uzloch.
+\item{\textit{DerivationEllipses}}
+Vizuálna podoba derivácii na plátne Canvas.
+\end{itemize}
+Implementácia vyzerá následovne:
+\begin{lstlisting}
+public class HermiteSpline : Spline
+{
+	public List<double> Derivations {get; set; }
+	public List<Ellipse> DerivationEllipses {get; set; }
+   
+	...  // konštruktory  
+}
+\end{lstlisting}
+
+\subsection{ClampedSpline}
+
+Nakoniec trieda \textit{ClampedSpline} bude reprezentova Hermitov splajn a bude dedi od triedy \textit{Spline}, prièom navyše obsahuje tieto atribúty:
+\begin{itemize}
+\item{\textit{Derivations}}
+Uívate¾om zadané prvé derivácie v uzloch.
+\item{\textit{LeftDerivationEllipse}}
+Vizuálna podoba prvej derivácie v prvom uzle na plátne Canvas.
+\item{\textit{RightDerivationEllipse}}
+Vizuálna podoba prvej derivácie v poslednom uzle na plátne Canvas.
+\end{itemize}
+Implementácia vyzerá následovne:
+\begin{lstlisting}
+public class ClampedSpline : Spline
+{
+	public List<double> Derivations { get; set; }
+	public Ellipse LeftDerivationEllipse { get; set; }
+	public Ellipse RightDerivationEllipse { get; set; }
+   
+	...  // konštruktory  
+}
+\end{lstlisting}
+
+\section{Generovanie a vykreslenie splajnov}
+
+Dátové štruktúry pre splajny máme definované, ale stále metódy, ktoré nám z uívate¾om zadanıch hodnôt vypoèítajú a vykreslia iadanú krivku.
+
+\obrazok{gbspline_input.png}{0.7}{Zadávací panel pre clamped splajn.}
+Na obrázku vyššie vidíme zadávací panel pre clamped splajn. Na základe zadanıch hodnôt v textovıch poliach sa po stlaèení tlaèidla \textit{Draw} zavolá metóda, ktorá vypoèíta a vykreslí clamped splajn, prièom nám vráti referenciu na objekt triedy
+\textit{ClampedSpline}, s ktorımi môeme manipulova, meni hodnoty riadacich bodov, derivácie a podobne. 
+
+V následujúcom texte si ukáeme vygenerovanie clamped novou metódou splajnu krok po kroku. Vykreslenie inıch kriviek prebieha analogickım spôsobom, postupy sa líšia pri poèítaní bázovıch funkcií, alebo pri poèítaní derivácií a podobne.
+
+\paragraph{Vykreslenie clamped splajnu}
+
+Po tom èo uívate¾ zadá vstup, ako na obrázku vyššie, je zavolaná metóda \pojem{InteractiveClampedSpline} ktorej úlohou je vykresli uívate¾sky interaktívnu clamped krivku. Jej struèná a skrátená, implementácia vyzerá takto:
+
+\begin{lstlisting}
+public ClampedSpline InteractiveClampedSpline(double[] knots, double[] controlPoints, double leftDerivation, double rightDerivation){
+ 	...
+}
+\end{lstlisting}
+Metóda \pojem{InteractiveClampedSpline} dostane na vstup pole zadanıch uzlov (atribút \pojem{knots}), pole zadanıch funkènıch hodnôt iadaného splajnu v uzloch (atribút \pojem{controlPoints}) a prvé derivácie v prvom a poslednom uzle (atribúty \pojem{leftDerivation} a \pojem{rightDerivation}).
+V tele metódy následuje deklarovanie novej inštancie triedy \pojem{ClampedSplajn}.
+\begin{lstlisting}
+var clampedSpline = new ClampedSpline();
+\end{lstlisting}
+
+\paragraph{Vykreslenie uzlov a kontrolnıch bodov}
+
+Ne zaèneme s konštrukciou krivky, najprv vykreslíme samotné body, ktorımi je splajn definovanı. 
+Tieto budú vykreslené v podobe malıch elíps v Silverlight-e reprezentovanıch triedou \pojem{Ellipse}.
+Potrebujeme to¾ko elíps, ko¾ko máme uzlov (a kontrolnıch bodov), teda ich uloíme ako zoznam (\pojem{List}).
+\begin{lstlisting}
+var ellipses = new List<Ellipse>(knots.Length);
+\end{lstlisting}
+Taktie si zadeklarujeme elipsy, ktoré budú reprezentova zadané derivácie.
+\begin{lstlisting}
+Ellipse leftDerEll, rightDerEll;
+\end{lstlisting}
+Ako u vieme, Canvas pracuje so súradnicovou sústavou, ktorú sme oznaèili PlotArea. Všetky uívate¾om zadané vstupy sú ale v \pojem{prirodzenej} súradnicovej sústave, ktorú sme oznaèili pojmom WorldArea.
+Zadeklarujme si pomocné premenné \pojem{pax} a \pojem{pay}, ktorıch hodnoty budú predstavova hodnoty uzlov a kontrolnıch bodov v PlotArea sústave.
+\begin{lstlisting}
+double pax, pay;
+\end{lstlisting}
+Následne pre kadı uzol a kontrolnı bod vypoèítame jeho PlotArea súradnice, vytvoríme novú elipsu s tımitu súradnicami a pridáme ju do zoznamu elíps \pojem{ellipses}.
+\begin{lstlisting}
+for (int i = 0; i < knots.Length; i++)
+{
+	// vypoèítanie x-ovej súradnice
+	pax = TransformCoordinates.WorldAreaToPlotAreaX(knots[i], _plotArea, _worldArea);
+	// vypoèítanie y-ovej súradnice
+	pay = TransformCoordinates.WorldAreaToPlotAreaY(controlPoints[i], _plotArea, _worldArea);	
+	// vytvorenie novej elipsy so zelenou farbou a pridanie do nášho zoznamu
+	ellipses.Add(DrawEllipse(pax, pay, COLOR_GREEN));
+}
+\end{lstlisting}
+\begin{pozn}
+Metóda \pojem{DrawEllipse} vykreslí do Canvas, novú elipsu a vráti jej referenciu.
+\end{pozn}
+Najprv potrebujeme vypoèíta elipsy pre derivácie.
+Vypoèítajme súradnice elipsy pre deriváciu v bode $\mathit{knots}[0]$, v prípade druhej elipsy je postup analogickı.
+Súradnice pe tieto elipsy nemáme uívate¾om zadané, preto ich vypoèítame tak, aby smernica spojnice medzi súradnicami elipsy a bodom $\langle \mathit{knots}[0], \mathit{controlPoints}[0] \rangle$ mala hodnotu \pojem{leftDerivation}.\newline
+$x$-ová súradnica \pojem{leftDerEll} môe ma ¾ubovo¾nú hodnotu. My sme si zvolili $\mathit{knots}[0] - 0.15$.
+\begin{lstlisting}
+var wax = knots.[0] - DERIVATIVE_AUX_KNOT_DISTANCE; // DERIVATIVE_AUX_KNOT_DISTANCE = 0.15
+\end{lstlisting}
+Keïe h¾adaná spojnicu $s$ môeme zapísa v tvare lineárnej funkcie $s(x) = (x - x_0) \cdot k + y_0$, kde $\langle x_0, y_0 \rangle$
+je známy bod spojnice $s$ (v našom prípade $\langle \mathit{knots}[0], \mathit{controlPoints}[0] \rangle$), $k$ je smernica spojnice (v našom prípade hodnota \pojem{leftDerivation}),
+tak h¾adaná súradnica bude ma následujúcu hodnotu:
+\begin{lstlisting}
+var way = (wax - knots[0]) * leftDerivation + controlPoints[0];
+\end{lstlisting}
+Následuje vyrátanie a vykreslenie elipsy \pojem{leftDerEll}.
+\begin{lstlisting}
+	pax = TransformCoordinates.WorldAreaToPlotAreaX(wax, _plotArea, _worldArea);
+	pay = TransformCoordinates.WorldAreaToPlotAreaY(pax, _plotArea, _worldArea);
+	leftDerEll = _auxiliaryEngine.DrawEllipse(pax - W_DIV_2, pay - H_DIV_2, COLOR_GREY);
+\end{lstlisting}
+
+\begin{pozn}
+Tento prístup vizualizácie derivácie má dôvod pri interaktivite krivky.
+Aby uívate¾ mohol interaktívne meni hodnotu derivácie v uzle staèí aby kurzorom myši \uv{ahal} za elipsu, prièom zo zmeny jej súradníc sa vyráta nová hodnota smernice spojnice medzi súradnicami ahanej elipsy a bodom $\langle \mathit{knots}[0],  \mathit{controlPoints}[0] \rangle$, prièom táto smernica pedstavuje novú hodnotu prvej derivácie v danom uzle. Následne tak budeme poèas doby za ktorú uívate¾ ahá elipsu celú prekreslova nieko¾ko desiatok krát za sekundu, èím vznikne dojem interaktivity.
+\end{pozn}
+\newpage
+Pre lepšiu predstavu sa pozrime na ilustraènı obrázok.
+\obrazok{csplineCP.png}{1}{Zelené elipsy predstavujú uzly a funkèné hodnoty splajnu v Canvas, sivá predstavuje deriváciu.} 
+\begin{lstlisting}
+	pax = TransformCoordinates.WorldAreaToPlotAreaX(wax, _plotArea, _worldArea);
+	pay = TransformCoordinates.WorldAreaToPlotAreaY(pax, _plotArea, _worldArea);
+	leftDerEll = _auxiliaryEngine.DrawEllipse(pax - W_DIV_2, pay - H_DIV_2, COLOR_GREY);
+\end{lstlisting}
+Uzly, kontrolné body a derivácie u máme vizualizované, na rade je vypoèítanie samotnej krivky.
+Najprv vyrátame prvé derivácie pre zvyšné uzly pod¾a postupu v stati 2.1 a potom vykreslíme krivku.
+\begin{lstlisting}	
+double[] derivations = ClampedDerivations(knots);		
+\end{lstlisting}
+Postup v stati stati 2.1 rozlišoval prípade pre dvojsegmentové (3 uzly), trojsegmentové (4 uzly), päsegmentové (5 uzlov) a $k-1$-segmentové splajny ($k$ uzlov).
+Implementáciu tohto postupu v metóde \pojem(ClampedDerivations) preskoèíme, tá nám je známa zo stati 2.1.
+
+Ostáva nám u iba vykreslenie krivky. Vieme, e clamped splajn je modifikovanı Hermitov splajn. Silverlight nemá vstavané funkcie na vykreslenie Hermitovej krivky, preto si musíme pomôc sami.
+Algoritmus vykreslenia krivky môeme zhrnú takto. Nech interval $[a, b]$ je interval, nad ktorım má by vykreslená krivka. Polome kladnú konštantu $r$ blízku èislu 0 (napr. $d = 0.01$) a premenné $x = a$, $y$, $x_p = a$, $y_p$. 
+Potom:
+\begin{enumerate}
+\item Vypoèítaj funkènú hodnotu splajnu v bode $x_p$ a priraï ju do $y_p$. 
+\item Zvıš hodnotu $x$ o hodnotu $d$.
+\item Ak $x \le b$ prejdi na krok 4, inak prejdi na krok 7. 
+\item Vypoèítaj funkènú hodnotu splajnu v bode $x$ a priraï ju do $y$.
+\item Vykresli úseèku $\langle x_p, y_p \rangle\langle x, y \rangle$
+\item Prejdi na krok 3.
+\item Vypoèítaj funkènú hodnotu splajnu v bode $b$ a priraï ju do $y$.
+\item Vykresli úseèku $\langle x_p, y_p \rangle\langle b, y \rangle$
+\end{enumerate}
+V prípade Clamped splajnu implementácia bude vyzera následovne.
+\begin{lstlisting}
+var curve = DrawHermiteCurve(knots, controlPoints, derivations);
+\end{lstlisting}
+Metóda \pojem{DrawHermiteCurve} vykreslí Hermitovu krivku ako kolekciu úseèiek pod¾a vyššie uvedeného algoritmu prièom sa budú vypoèítava funkèné hodnoty funkcie
+${HSpline}_{\mathit{knots},\mathit{controlPoints},\mathit{derivations}}^{knots.Length}(x)$.
+Celı postup vykres¾ovania sa dá s úpravami aplikova na všetky nami pouívané splajny. 
+
+\part{Záver}
+
+Ciele tejto práce sme spolu so školite¾om splnili, novı postup sa ukázal funkènı a rıchlejší ako predchádzajúce spôsoby. V súèasnosti je webová aplikácia takmer hotová, implementovali sme všetky postupy z tejto práce prièom sa dolaïujú rôzne detaily a vylepšuje ovládanie uívate¾ského rozhrania. Predpokladáme, e finálna verzia by mala by hotová v priebehu mája 2014. 
+
+\obrazok{apka.png}{0.4}{Ukáka z aplikácie}
+
+%
+%\bibliography{dp} %berie sa z dp.bib
+
+%\renewcommand{\bibname}{Zoznam pou?itej literat?ry}
+\begin{thebibliography}{9}
+\bibitem{1}  David Salomon, Curves and Surfaces for Computer Graphics, Springer, 2006
+\bibitem{2}  M. MacDonald, Pro Silverlight 5 in C\#, press, 2012
+\bibitem{3}  http://www.brnt.eu/phd/node11.html
+\bibitem{4}  http://msdn.microsoft.com/en-us/library/bb404713\%28v=vs.95\%29.aspx
+\bibitem{5}  http://blogs.msdn.com/blogfiles/tims/WindowsLiveWriter/\newline ExploringtheCoreCLRInsideSilverlight\_EF3C
+\end{thebibliography}
+%
+\end{document}

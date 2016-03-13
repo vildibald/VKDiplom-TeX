@@ -1,0 +1,569 @@
+% !TEX encoding = System
+
+%%\documentclass[thesismargins, thesislinespacing, twoside, draft, upjsfrontpage]{rnthesis}
+\documentclass{rnthesis}
+\usepackage[slovak]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[cp1250]{inputenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{rnt-pic}
+\usepackage{rnt-thm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{hyphenat}
+\usepackage{multirow}
+\usepackage{graphicx}
+
+\hyphenation{funk-cií}
+
+\lstset{language=[Sharp]C,
+showspaces=false,
+showtabs=false,
+breaklines=true,
+%basicstyle=\tiny,
+basicstyle=\fontsize{9}{13}\selectfont\ttfamily,
+numbersep=5pt,
+tabsize=2,
+showstringspaces=false,
+breakatwhitespace=true,
+escapeinside={(*@}{@*)},
+commentstyle=\color{greencomments},
+keywordstyle=\color{bluekeywords}\bfseries,
+stringstyle=\color{redstrings},
+%basicstyle=\ttfamily
+morecomment=[l]{//},
+morecomment=[s]{/*}{*/},
+morekeywords={ abstract, event, new, struct,
+as, explicit, null, switch,
+base, extern, object, this,
+bool, false, operator, throw,
+break, finally, out, true,
+byte, fixed, override, try,
+case, float, params, typeof,
+catch, for, private, uint,
+char, foreach, protected, ulong,
+checked, goto, public, unchecked,
+class, if, readonly, unsafe,
+const, implicit, ref, ushort,
+continue, in, return, using,
+decimal, int, sbyte, virtual,
+default, interface, sealed, volatile,
+delegate, internal, short, void,
+do, is, sizeof, while,
+double, lock, stackalloc,
+else, long, static,
+enum, namespace, string, partial, get, set, var},
+}
+%\usepackage{xcolor}
+
+%\lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{blue!80!black}}
+%----------------------------------------------------------------------------------------
+\newcommand{\real}{$\mathbb{R}$}
+\newcommand{\uinteger}{$\mathbb{N} \cup \{0\}$} 
+\newcommand{\nat}{$\mathbb{N} \cup \{0\}$} 
+\newcommand{\integer}{$\mathbb{Z}$}
+\newcommand{\mcomma}{\mbox{,}}
+\newcommand{\FEL}{\frac{1}{2}}
+\newcommand*{\mathcolor}{}
+\def\mathcolor#1#{\mathcoloraux{#1}}
+\newcommand*{\mathcoloraux}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+\def\pd#1#2{\frac{\partial #1}{\partial #2}}
+\def\pdd#1#2#3{\frac{\partial #1}{\partial #2\partial#3}}
+
+\def\TP#1{\mathit{#1}}
+\def\FN#1{\text{#1}}
+\def\uv#1{„{#1}“}
+\definecolor{basis1}{rgb}{0.64,0.29,0.64}
+\definecolor{basis2}{rgb}{0,0.64,0.91}
+\definecolor{basis3}{rgb}{0.13,0.69,0.3}
+\definecolor{basis4}{rgb}{0.93,0.11,0.14}
+\definecolor{basis1a}{rgb}{0.90,0.6,0.90}
+\definecolor{basis2a}{rgb}{0.2,0.80,1}
+\definecolor{basis3a}{rgb}{0.3,0.9,0.5}
+\definecolor{basis4a}{rgb}{1,0.7,0.7}
+
+%\definecolor{dkgreen}{rgb}{0,0.6,0}
+%\definecolor{gray}{rgb}{0.5,0.5,0.5}
+%\definecolor{mauve}{rgb}{0.64,0.08,0.08}
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+%----------------------------------------------------------------------------------------
+\catcode`@=11
+\def\xmatrix#1#2{\null\,\vcenter{\normalbaselines\m@th
+    \ialign{\hfil$##$\hfil&&\hskip#1\hfil$##$\hfil\crcr
+      \mathstrut\crcr\noalign{\kern-\baselineskip}
+      #2\crcr\mathstrut\crcr\noalign{\kern-\baselineskip}}}\,}
+\catcode`@=12
+
+\title{Algoritmizácia, paralelizácia a implementácia splajn modelov}
+%\subtitle{Algoritmizácia, paralelizácia a implementácia splajn modelov}
+\author{Bc. Viliam Kaèala}
+\typprace{Analıza a návrh riešenia}
+\rok{2015}
+\miesto{Košice}
+%\podakovanie{
+% Rád by som poïakoval vedúcemu závereènej
+% práce doc. RNDr. Csabovi Törökovi, CSc.
+% za cenné pripomienky, odborné vedenie a obetavos poèas
+% tvorby práce. Taktie by som sa rád poïakoval 
+% RNDr. Lukášovi Miòovi za cenné rady a odbornú
+% pomoc poèas tvorby aplikaènej èasti tejto práce.
+%} 
+\veduci{doc. RNDr. Csaba Török, CSc..}
+\konzultant{RNDr. Lukáš Miòo}
+\pracovisko{Ústav informatiky}
+
+\abstract{
+	Splines are important part of computer graphics.
+	It is a mathematical model of the surface, which is for the "best connection" of any finite set of points.
+	The term "best connection" in this case means smooth, easily calculable mathematical surface with minimal curvature.
+	Use of splines in graphics varies from large variety of CAD applications, statistics or in data analysing.
+	Splines exist in many forms, whether in the form of curves in the plane, a variety of three-dimensional bodies, etc. ..
+	This work aims to desig, analyze and implement new algorithm for counting and generating splines bicubic clamped interpolation in three-dimensional space.
+}
+
+\abstrakt{
+	Splajny sú dôleitá súèas poèítaèovej grafiky.
+	Jedná sa o matematickı model plochy, ktorá slúi na èo „najlepšie spojenie“ koneènej mnoiny bodov. 
+	Termín „najlepšie spojenie“ v našom prípade znamená hladká, matematicky ¾ahko vyjadrite¾ná plocha s èo najmenším zakrivením.
+	Vyuitie splajnov v grafike je ve¾mi široké od rôznych CAD aplikácií, v štatistike, alebo v analıze dát.
+	Splajny existujú v mnohıch formách, èi u vo forme krivky v rovine, rôznych trojrozmernıch telies, atï..
+	Táto práca si dáva za cie¾ navrhnú, analyzova a implementova novı algoritmus pre bikubickú interpoláciu v trojrozmernom priestore.
+}
+
+\bibliographystyle{alpha}
+
+\begin{document}
+%\lstset{style=sharpc}
+%\lstset{frame=tb,
+%  language=[Sharp]C,
+%  aboveskip=3mm,
+%  belowskip=3mm,
+%  showstringspaces=false,
+%  columns=flexible,
+%  basicstyle={\small\ttfamily},
+%  numbers=none,
+%  numberstyle=\tiny\color{gray},
+%  keywordstyle=\color{blue},
+%  commentstyle=\color{dkgreen},
+% stringstyle=\color{mauve},
+%  breaklines=true,
+%  breakatwhitespace=true
+%  tabsize=3
+%}
+
+\maketitle
+%\newpage
+%\tableofcontents
+%\newpage
+%==================================================================================================================================================================================
+\section*{Úvod}
+
+Témou mojej diplomovej práce sú priestorové splajn povrchy, kde naším cie¾om je preskúma nové poznatky o splajnoch, na ktorıch istı èas pracuje vedúci tejto práce doc. RNDr. Csaba Török, CSc.
+Vısledkom tejto práce je okrem návrhu tejto novej metódy vıpoètu aj porovnanie so známymi metódami a implementácia aplikácie na vizuálne porovnávanie jednotlivıch metód.
+Technológia v ktorej budeme tieto poznatky implementova je Microsoft Silverlight. Jedná o ve¾mi schopnı nástroj na tvorbu webovıch aplikácii s plnou podporou hardvérovej akcelerácie uívate¾ského prostredia.
+Vıhodou tohto frameworku je, kede beí na platforme Microsoft .NET, monos jednoduchej portácie na desktopovú prípadne mobilnú aplikáciu. Štruktúra práce je nasledovná.
+\begin{itemize}
+\item{\textbf{Splajn}}
+Definícia pojmu splajn.
+
+%V úvode si vysvetlíme technológiu Silverlight a základy práce grafiky.
+\item{\textbf{De Boorova interpolácia}}
+V tejto èasti si vysvetlíme bikubickú splajn interpoláciu pod¾a Carla de Boora. 
+
+\item{\textbf{Novı postup generovania bikubickıch splajnov}}
+Ukáka modifikovaného postupu pre kubické splajny a jeho rozšírenie pre bikubické splajny.
+
+\item{\textbf{Zrıchlenie}}
+Oèakávané zrıchlenie vıpoètov novım algoritmom.
+
+
+\item{\textbf{Implementácia}}
+
+Podrobnosti implementácie v MS Silverlight.
+\end{itemize}
+Formálne tézy diplomovej práce sú:
+
+\begin{itemize}
+
+	\item
+	Analıza modelov interpolaènıch splajn-povrchov a podpory paralelného programovania. .NET Framework
+	\item
+	Algoritmizácia, paralelizáciaa vizualizácia splajn-povrchov.
+	\item
+	Implementácia paralelnıch algoritmov vybranıch modelov splajn-povrchov pomocou viacvláknovıch API pre multiprocesorové systémy a ich porovnanie.
+\end{itemize}
+
+\section*{Splajn}
+
+V našej práci pracujeme s hermitovskımi splajnami, ktoré sú štandardne triedy $C^1$, teda splajnami, ktorıch prvé derivácie v uzloch sa rovnajú. V našej práci však budeme uvaova hermitovské splajny triedy $C^2$, teda splajny pri ktorıch sa v uzloch rovnajú navyše aj derivácie druhého rádu.
+
+\obrazok{mexHatWKnots.png}{0.7}{Funkcia $sin(\sqrt{x^2+y^2})$ aproximovaná bikubickım splajnom.}
+Formálnejšie si popíšme základné pojmy s ktorımi budem v tomto èlánku pracova. 
+
+\oznac{
+	Postupnos $(a_0, a_1, \dots)$ nazveme \pojem{rovnomernou} ak pre ¾ubovo¾né $i$,$j$ z $\{0, 1, \dots\}$ platí $a_{j+1} - a_j = a_{i+1} - a_i$.
+}
+
+\oznac{
+Nech $f: \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ je nejaká funkcia a $I$,$J$ sú z \uinteger. Ïalej nech $(u_0, \dots,u_{I+1})$ a $(v_0, \dots,v_{J+1})$ sú dve rovnomerné usporiadané koneèné postupnosti reálnych èísel. Oznaème:
+\begin{itemize}
+	\item
+	Dvojice $(u_i, v_j)$ nazveme \pojem{uzly}.
+	\item
+	Uzly $(u_0, v_0)$, $(u_{I+1}, v_0)$, $(u_0, v_{J+1})$ a $(u_{I+1}, v_{J+1})$ nazveme \pojem{rohové uzly}.
+	\item
+	$z_{i,j} = f(u_i, v_j)$.
+	\item
+	$dx_{i,j} = \pd{f(u_i, v_j)}{x}$.
+	\item
+	$dy_{i,j} = \pd{f(u_i, v_j)}{y}$.
+	\item
+	$dxy_{i,j} = \pdd{f(u_i, v_j)}{x}{y}$.
+	\item
+	$\Delta x = u_i - u_{i-1}$ a $\Delta y = v_j - v_{j-1}$ pre ¾ubovo¾né $i \in  \{1, \dots, I+1\}$, resp. $j \in  \{1, \dots, J+1\}$.
+\end{itemize}
+}
+
+Úlohou je na základe vstupnıch uzlov nájs \pojem{hladkú}, po èastiach definovanú funkciu $F: [u_0, u_{I+1}] \times [v_0, v_{J+1}] \to \mathbb{R}$ z so spojitımi deriváciami prvého a druhého rádu takú, e pre kadé $i \in  {0, \dots, I+1}$ a $j \in  {0, \dots, J+1}$ platí $F(u_i, v_j) = z_{i,j}$. Funkcia $F$ predstavuje splajn, prièom jej jednotlivé èasti nazveme segmenty. 
+Teraz si môeme splajn zadefinova formálne.
+
+\begin{df}
+	Nech $I$ a $J$ sú prirodzené èísla, $\mathbf{u} = (u_0, \dots,u_{I+1})$ a $\mathbf{v} = (v_0, \dots,v_{J+1})$ sú reálne èísla.
+	\begin{itemize}
+		\item
+		$I \ge 0$ a $J \ge 0$,
+		\item 
+		Postupnosti $\mathbf{u}$ a $\mathbf{v}$ sú rovnomerne rastúce.
+		\item
+		Nech pre kadé $i$ z $\{0, \dots, I\}$ a $j$ z $\{0, \dots, J\}$ je $S_{i,j}$ bikubická polynomická funkcia z  2-rozmerného intervalu $[u_{i}, u_{i+1}] \times [v_{j}, v_{j+1}]$ do \real.
+	\end{itemize}
+	%\newpage
+	%\colorbox{yellow}{Spline}
+	Definujme funkciu $S_{U,V}$ z 2-rozmerného intervalu $[u_{0}, u_{I+1}] \times [v_{0}, v_{J+1}]$ do $\mathbb{R}$ vzahom:
+	%$$\text{Spline}(x) = P_1(x), v_0 \le x < v_1\mbox{,}$$
+	%$$\text{Spline}(x) = P_2(x), v_1 \le x < v_2\mbox{,}$$
+	%$$\vdots$$
+	%$$\text{Spline}(x) = P_k(x), v_{k-1} \le x \le v_k\mbox{,}$$
+	%\begin{equation}
+	\begin{equation}
+	S_{\mathbf{u},\mathbf{v}}(x,y) = \begin{cases}
+	S_{0,0}(x,y) & \text{pre } (x, y) \in [u_{0}, u_{1}] \times [v_{0}, v_{1}] \text{,}\\
+	S_{0,1}(x,y) & \text{pre } (x, y) \in [u_{0}, u_{1}] \times [v_{1}, v_{2}] \text{,}\\
+	\vdots\\
+	S_{0,J}(x,y) & \text{pre } (x, y) \in [u_{0}, u_{1}] \times [v_{J}, v_{J+1}] \text{,}\\
+	S_{1,0}(x,y) & \text{pre } (x, y) \in [u_{1}, u_{2}] \times [v_{0}, v_{1}] \text{,}\\
+	\vdots\\
+	S_{1,J}(x,y) & \text{pre } (x, y) \in [u_{1}, u_{2}] \times [v_{J}, v_{J+1}] \text{,}\\
+	\vdots\\
+	S_{I,0}(x,y) & \text{pre } (x, y) \in [u_{I}, u_{I+1}] \times [v_{0}, v_{1}] \text{,}\\
+	\vdots\\
+	S_{I,J}(x,y) & \text{pre } (x, y) \in [u_{I}, u_{I+1}] \times [v_{J}, v_{J+1}] \text{,}
+	\end{cases}
+	\end{equation}
+	prièom všetky susedné segmenty $S_{i,j}$ majú derivácie prvého a druhého rádu v uzloch navzájom rovné.
+\end{df}
+
+\obrazok{fseg.png}{0.5}{\label{pic:fseg}Ukáka uzlov pre štvorsegmentovı splajn.}
+
+Ak $i$ je z  $\{0, \dots, I\}$ a $j$ je z $\{0, \dots, J\}$, tak štvorice uzlov $(u_i, v_j)$, $(u_i, v_{j+1})$, $(u_{i+1}, v_j)$ a $(u_{i+1}, v_{j+1}$ tvoria obdånikovı úsek nad ktorım sa nachádza splajnovı segment. Kadı segment $S_{i,j}$ je bikubická funkcia z $[u_i, u_{i+1}] \times [v_j, v_{j+1}]$ do $\mathbb{R}$. Vısledná funkcia $F$ teda vznikne zjednotením segmentov $S_{i,j}$. Na vygenerovanie kadého segmentu potrebujeme štyri uzly, a pre kadı uzol príslušne hodnoty $z$, $dx$, $dy$ a $dxy$. Tieto hodnoty vieme získa buï priamo z interpolovanej funkcie $f$, alebo ich vypoèíta inım spôsobom.
+
+
+
+\section*{De Boorova interpolácia}
+
+Nech sú dané dané hodnoty $(u_0$, ...,$u_{I+1})$ a $(v_0$, ...,$v_{J+1})$, kde $I$,$J$ sú z \uinteger, prièom chceme interpolova funkciu $S$ na $[u_0, u_I] \times [v_0, v_J]$. Vıslednı splajn bude tvorenı $(I+1) \cdot (J+1)$ segmentami. Ako bolo spomenuté, kadı segment potrebuje štyri uzly a hodnoty $z$, $dx$, $dy$ a $dxy$. Pri de Boorovej interpolácii nám treba pozna tieto hodnoty:
+\begin{itemize}
+	\item
+	$z_{i,j}$ pre $i \in \{0, \dots, I+1\}$, $j \in \{0, \dots, J+1\}$.
+	\item
+	$dx_{i,j}$ pre $i \in \{0, I+1\}$, $j \in \{0, \dots, J+1\}$.
+	\item
+	$dy_{i,j}$ pre $i \in \{0, \dots, I+1\}$, $j \in \{0, J+1\}$.
+	\item
+	$dxy_{i,j}$ pre $i \in \{0, I+1\}$, $j \in \{0, J+1\}$.
+\end{itemize}
+
+Na príklade uzlov z obrázka \ref{pic:fseg} potrebujeme pozna hodnoty takto:
+\begin{itemize}
+	\item
+	$z_{0,2}$, $z_{1,2}$, $z_{2,2}$,\newline
+	$z_{0,1}$, $z_{1,1}$, $z_{2,1}$,\newline
+	$z_{0,0}$, $z_{1,0}$, $z_{2,0}$,\newline  
+	\item
+	$dx_{0,2}$, \phantom{$dx_{1,2}$}, $dx_{2,2}$,\newline
+	$dx_{0,1}$, \phantom{$dx_{1,1}$}, $dx_{2,1}$,\newline
+	$dx_{0,0}$, \phantom{$dx_{1,0}$}, $dx_{2,0}$,\newline 
+	\item
+	$dy_{0,2}$, $dy_{1,2}$, $dy_{2,2}$,\newline
+	\phantom{$dy_{0,1}$}, \phantom{$dy_{1,1}$}, \phantom{$dy_{2,1}$}\newline
+	$dy_{0,0}$, $dy_{1,0}$, $dy_{2,0}$,\newline
+	\item
+	$dxy_{0,2}$, \phantom{$dxy_{1,2}$}, $dxy_{2,2}$,\newline
+	\phantom{$dxy_{0,1}$}, \phantom{$dxy_{1,1}$}, \phantom{$dxy_{2,1}$},\newline
+	$dxy_{0,0}$, \phantom{$dxy_{1,0}$}, $dxy_{2,0}$,\newline  
+\end{itemize}
+
+Zvyšné hodnoty $z$, $dx$, $dy$ a $dxy$ vieme jednoznaène vypoèíta pomocou $2(I+1) + J + 6$ lineárnych sústav s celkovo $3(I+1)(J+1) + I + J + 2$ rovnicami:
+Nišie uvádzame modelové rovnice, pomocou ktorıch sú zostrojené tieto sústavy lineárnych rovníc.
+\newline
+Pre $j \in \{0, \dots, J+1\}$
+\begin{multline} \label{eq:deboor1}
+dx_{i+1,j} + 4dx_{i,j} + dx_{i+1,j}
+= \frac{3}{\Delta x}(z_{i+1,j} - z_{i-1,j}) \text{, }\\ i \in \{1, \dots, I\}
+\end{multline}
+Pre $j \in \{0, J+1\}$
+\begin{multline} \label{eq:deboor2}
+dxy_{i+1,j} + 4dxy_{i,j} + dxy_{i+1,j}
+= \frac{3}{\Delta x}(dy_{i+1,j} - dy_{i-1,j}) \text{, }\\ i \in \{1, \dots, I\}
+\end{multline}
+Pre $i \in \{0, \dots, I+1\}$
+\begin{multline} \label{eq:deboor3}
+dy_{i,j+1} + 4dy_{i,j} + dy_{i,j-1}
+= \frac{3}{\Delta y}(z_{i,j+1} - z_{i,j-1}) \text{, }\\ j \in \{1, \dots, J\}
+\end{multline}
+Pre $i \in \{0, \dots, I+1\}$
+\begin{multline} \label{eq:deboor4}
+dxy_{i,j+1} + 4dxy_{i,j} + dxy_{i,j-1}
+= \frac{3}{\Delta y}(dx_{i,j+1} - dx_{i,j-1}) \text{, }\\ i \in \{1, \dots, J\}
+\end{multline}
+\newline
+Kadá z tıchto sústav má takıto maticovı tvar:
+
+\begin{equation} \label{eq:deboorM}
+\begin{pmatrix}
+4 & 1 & 0 & \hdots & 0 & 0\\
+1 & 4 & 1 & \hdots & 0 & 0\\
+0 & 1 & 4 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & 4 & 1\\
+0 & 0 & 0 & \hdots & 1 & 4\\
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+D_{1}\\
+D_{2}\\
+D_{3}\\
+\vdots \\
+D_{N-1}\\
+D_{N}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{3}{\Delta}(Y_{2} - Y_{0}) - D_0\\
+\frac{3}{\Delta}(Y_{3} - Y_{1})\\
+\frac{3}{\Delta}(Y_{4} - Y_{2})\\
+\vdots \\
+\frac{3}{\Delta}(Y_{N} - Y_{N-2})\\
+\frac{3}{\Delta}(Y_{N+1} - Y_{N-4}) - D_{N+1}\\
+\end{pmatrix} \text{,}
+\end{equation}
+kde pod¾a toho o ktorú z modelovıch rovníc sa jedná, hodnoty N, D a Y zadávame následovne. Nech $k$ z ${1, \dots, K-1}$:
+\begin{itemize}
+	\item
+	$N = I$, $\Delta = \Delta x$,  $D_k = dx_{k,j}$ a $Y_k = z_{k,j}$, pre rovnicu \ref{eq:deboor1}.
+	\item
+	$N = I$, $\Delta = \Delta x$,  $D_k = dxy_{k,j}$ a $Y_k = dy_{k,j}$, pre rovnicu \ref{eq:deboor2}.
+	\item
+	$N = J$, $\Delta = \Delta y$,  $D_k = dy_{i,k}$ a $Y_k = z_{i,k}$, pre rovnicu \ref{eq:deboor3}.
+	\item
+	$N = J$, $\Delta = \Delta y$,  $D_k = dxy_{i,k}$ a $Y_k = dx_{i,k}$, pre rovnicu \ref{eq:deboor3}.
+\end{itemize}
+
+Tento splajn jednoznaène interpoluje funkciu $S$.
+
+\pozn{
+De Boorova interpolácia vo všeobecnosti nepredpokladá len rovnomerne rastúce postupnosti $(u_0$, ...,$u_I)$ a $(v_0$, ...,$v_J)$. Náš postup v ïalšej èasti èlánku ale funguje len s takımito postupnosami. Preto sme v tejto èasti popísali len špeciálny prípad interpolácie pre takto urèené uzly.
+}
+
+\section*{Novı postup generovania bikubickıch splajnov}
+
+V rámci svojej bakalárskej práce som popisoval tento postup pre kubické splajnové kriovky triedy C2, teda splajny, kde interpolovaná funkcia $f$ je typu $\mathbb{R} \to \mathbb{R}$. Jednım z cie¾om tejto práce je postup zovšeobecni pre bikubické splajny, teda pre splajny, kde interpolovaná funkcia $f$ je typu $\mathbb{R} \times \mathbb{R} \to \mathbb{R}$.
+
+Nišie popíšeme redukovanı systém pod¾a doc. Töröka pouívanı pre kubické splajny. Neznáme $D_0$, ..., $D_{K+1}$ sú h¾adané hodnoty prvıch derivácií a $Y_0$, ..., $Y_{K+1}$, v prípade kubického splajnu, predstavujú funkèné hodnoty interpolovanej funkcie $f$ v uzloch $u_0$ a $u_{K+1}$.
+ 
+\begin{multline} \label{eq:reducedL}
+\begin{pmatrix}
+-14 & 1 & 0 & \hdots & 0 & 0\\
+1 & -14 & 1 & \hdots & 0 & 0\\
+0 & 1 & -14 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & -14 & 1 \\
+0 & 0 & 0 & \hdots & 1 & \mu\\
+\end{pmatrix} 
+\cdot
+\begin{pmatrix}
+D_2\\
+D_4\\
+D_6\\
+\vdots \\
+D_{v-2}\\
+D_{v}\\
+\end{pmatrix}
+=\\
+\begin{pmatrix}
+\frac{3}{\Delta }(Y_4 - Y_0) - \frac{12}{\Delta }(Y_3 - Y_1) - D_0\\
+\frac{3}{\Delta }(Y_6 - Y_2) - \frac{12}{\Delta }(Y_5 - Y_3)\\
+\frac{3}{\Delta }(Y_8 - Y_4) - \frac{12}{\Delta }(Y_7 - Y_5)\\
+\vdots \\
+\frac{3}{\Delta }(Y_\nu - Y_{\nu-4}) - \frac{12}{\Delta }(Y_{\nu-1} - Y_{\nu-3})\\
+\frac{3}{\Delta }(Y_{\nu+\tau} - Y_{\nu-2}) - \frac{12}{\Delta }(Y_{\nu+1} - Y_{\nu-1} - \theta D_{K+1})\\
+\end{pmatrix}\text{,}
+\end{multline}
+
+kde 
+\begin{gather} \label{eq:reducedOddD}
+\begin{aligned}
+%\begin{split}
+\mu &= -15\text{, }\tau = 0\text{, }\theta = -4\text{, a }\nu = K \text{,}&\text{ak }K\text{ je párne,}\\
+\mu &= -14\text{, }\tau = 2\text{, }\theta = 1\text{, a }\nu = K - 1 \text{,}&\text{ak }K\text{ je nepárne,}
+%\end{split}
+\end{aligned}
+\end{gather}
+Hodnoty $D_k$ pre nepárne $k$ vypoèítame takto:
+\begin{multline} \label{eq:reducedR}
+D_k = \frac{1}{4}\left(\frac{3}{\Delta}(Y_{k+1} - Y_{k-1}) - D_{k-1} - D_{k+1}\right)\text{, } k \in \{1, 3, \dots, \nu + \tau - 1\}
+\end{multline}
+
+Pri kubickıch splajnoch teda potrebujume vypoèíta len prvé derivácie $D_0$, ..., $D_{K+1}$ v uzloch $u_0$, ..., $u_{K+1}$. 
+Pri bikubickıch povrchoch máme na základe de Boora 4 typy sústav, kde postupne rátame parciálne derivácie $\partial x$ a $\partial y$, prièom dvomi typmi z tıchto sústav vypoèítame parciálne derivácie $\partial xy$. 
+
+\section*{Zrıchlenie}
+
+Ako pri de Boorovi tak aj pri našom spôsobe generovania derivácií dostávame nieko¾ko systémov trojdiagonálnych lineárnych rovníc. Štandardnı spôsob riešenia takıchto rovníc
+
+\begin{equation}
+\begin{pmatrix}
+b & 1 & 0 & \hdots & 0 & 0\\
+1 & b & 1 & \hdots & 0 & 0\\
+0 & 1 & b & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & b & 1 \\
+0 & 0 & 0 & \hdots & 1 & b\\
+\end{pmatrix} 
+\cdot
+\begin{pmatrix}
+d_1\\
+d_2\\
+d_3\\
+\vdots \\
+d_{K-1}\\
+d_{K}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+r1 - d_0\\
+r2\\
+r3\\
+\vdots \\
+r_{K-1}\\
+r_K - d_{K+1}\\
+\end{pmatrix}\text{,}
+\end{equation}
+
+spoèíva v $LU$ dekompozícii $A\mathbf{d} = L\underbrace{U\mathbf{d}}_{\mathbf{y}} = \mathbf{r}$:
+
+\begin{equation}
+A = 
+\begin{pmatrix}
+1 & 0 & 0 & \hdots & 0 & 0\\
+\lambda_2 & 1 & 0 & \hdots & 0 & 0\\
+0 & \lambda_3 & 1 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & 1 & 0 \\
+0 & 0 & 0 & \hdots & \lambda_{K} & 1\\
+\end{pmatrix} \text{,}
+\begin{pmatrix}
+\upsilon_1 & 1 & 0 & \hdots & 0 & 0\\
+0 & \upsilon_1 & 1 & \hdots & 0 & 0\\
+0 & 0 & \upsilon_2 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & \upsilon_{K-1} & 0 \\
+0 & 0 & 0 & \hdots & 0 & \upsilon_K\\
+\end{pmatrix}\text{,}
+\end{equation}
+\newline
+Pre $k$ z $\{2, \dots, K\}$ sú hodnoty $\upsilon_k$ a $\lambda_k$ urèené takto:
+
+\begin{equation} \label{eq:LU}
+\upsilon_k = b \text{,} \left\{ \lambda_k = \frac{1}{\upsilon_{k-1}}, \upsilon = b - \lambda_k\right\} \text{,} k \in \{2, \dots, K\}\text{.}
+\end{equation}
+
+Pre priamy a spätnı chod máme
+\begin{equation} \label{eq:FwLy}
+\text{Priamy: } L\mathbf{y} = \mathbf{r} \text{, } y_1 = r_1 \text{, } \left\{ y_k = r_k - \lambda_k\right\} \text{, } k \in \{2, \dots, K\}\text{,}
+\end{equation}
+\begin{equation} \label{eq:BwUd}
+\text{Spätnı: } U\mathbf{d} = \mathbf{y} \text{, } d_K = \frac{y_k}{u_k} \text{, } \left\{ d_k = \frac{1}{u_k}(y_k - d_{k+1})\right\} \text{,} k \in \{K-1, \dots, 1\}\text{.}
+\end{equation}
+
+LU dekompozíciou sa rieši ako de Boorova sústava (\ref{eq:deboorM}), tak aj naša redukovaná (\ref{eq:reducedL}).
+
+Porovnajme si poèet operácií násobenia pri oboch postupoch. Podotıkam, e toto konkrétne porovnanie sa teraz tıka len pri kubickıch splajnoch. LU dekompozícia a spätnı prechod obsahujú operáciu delenia, ktorá je v tabu¾ke nišie oznaèená $\gamma$. Symbol $\gamma$ udáva, e jedna operácia delenia má cenu práve $\gamma$ násobení. Reálna hodnota závisí od procesora, prièom bıva rovná pribline 3.
+
+Môeme vidie, e vıpoèet neznámych redukovanım algoritmom je rıchlejší ne de Boorov.
+Zrıchlenie je $\frac{4+4\gamma}{5+2\gamma} \approx 1{,}45$, prièom hodnoty $d_k$, pre nepárne $k$ (\ref{eq:reducedOddD}) môu by poèítané paralelne.
+
+\begin{table}[h] 
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{llllllll}
+			& (\ref{eq:LU})  & (\ref{eq:deboorM}), (\ref{eq:reducedL}) & (\ref{eq:FwLy}) & (\ref{eq:BwUd}) & (\ref{eq:reducedR})  &  &  \\ \hline
+			\multicolumn{1}{|l|}{{\bf Spôsob}} & \multicolumn{1}{l|}{{\bf LU}} & \multicolumn{1}{l|}{{\bf Matica}} & \multicolumn{1}{l|}{{\bf LU priamy}} & \multicolumn{1}{l|}{{\bf LU spätnı}} & \multicolumn{1}{l|}{{\bf Zbytok}} & \multicolumn{1}{l|}{{\bf Celkovo}} & \multicolumn{1}{l|}{{\bf Zrıchlenie}} \\ \hline
+			de Boor & $\gamma (K-1)$ & $1+K$ & $K-1$ & $\gamma K$ &  & $2(1+\gamma)K-\gamma$ & \\
+			Redukovanı & $\gamma \left(\frac{K}{2}-1\right)$ & $2+2\frac{K}{2}$ & $\frac{K}{2}-1$ & $\gamma \frac{K}{2}$ & $1+2\frac{K}{2}$ & $\left(\frac{5}{2}+\gamma\right) K+2-\gamma$ & $\frac{4+4\gamma}{5+2\gamma}$ 
+		\end{tabular}
+	}
+	\caption{Poèet násobení s zrıchlenie pre K párne}
+\end{table}
+
+
+\section*{Implementácia}
+
+Naším cie¾om je vytvorenie webovej aplikácie na báze Microsoft Silverlight(ïalej len Silverlight). Silverlight je bezplatnı nástroj na tvorbu webovıch aplikácií spustite¾nıch priamo vo webovom prehliadaèi. 
+Samotnı vıvoj aplikácii môe prebieha v ¾ubovo¾nom programovacom jazyku beiacom pod virtuálnym strojom Common Language Runtime. 
+V našom prípade sme siahli po jazyku C\#. 
+
+\begin{center}
+	\includegraphics[scale=0.2]{silverlight.jpg}
+\end{center}
+
+Silverlight je kompatibilnı s väèšinou modernıch webovıch prehliadaèov a operaènıch systémov vèítane Microsoft Windows, Apple OS X a vïaka technológii Moonlight -- open-source implementácii Silverlight-u aj na väèšine Linuxovıch distribúcií.
+Framework je moné poui aj na vıvoj off-line aplikácií v operaènıch systémoch Windows Phone, Windows 8 a Windows RT. 
+
+\pozn{
+	Naša aplikácia pouíva technológie, ktoré nie sú s Moonlight kompatibilné. V súèasnej dobe teda podporujeme iba MS Windows a Apple OS X.
+	Prípadná portácia na GNU/Linux by musela by vo forme offline desktopovej aplikácie.
+}
+
+Silverlight ponúka hardvérovo akcelerované API podporujúce tvorbu 3D grafickıch aplikácií a hier. V dobe písania èlánku je grafickı engine a funkènı návrh uívate¾ského rozhrania hotovı. Pracujem teraz na samotnej funkcionalite, ako je vizuálne odlíšenie rozdielov medzi splajnami, benchmarku generovania splajnov a rôznych dodatoènıch funkcionalít. 
+
+\obrazok{apka.png}{0.7}{Ukáka z aplikácie}
+
+\section*{Záver}
+
+Ciele tejto práce sme splnili zatia¾ na cca 30\%, prièom doteraz som sa hlavne venoval implementaènej èasti. Poèas letnıch prázdnin sa hodlám pusti do hlavného cie¾a, èím je rozšírenie nového postupu z kriviek na splajnové plochy. Pri kubickıch krivkách sa novı postup ukázal funkènı a rıchlejší ako predchádzajúci spôsoby. V súèasnosti je webová aplikácia takmer hotová, prièom sa  z tejto práce, prièom sa dolaïujú rôzne detaily a vylepšuje sa ovládanie uívate¾ského rozhrania. Predpokladáme, e finálna verzia by mala by hotová v priebehu júla 2015. 
+
+
+
+%
+%\bibliography{dp} %berie sa z dp.bib
+
+%\renewcommand{\bibname}{Zoznam pou?itej literat?ry}
+\begin{thebibliography}{9}
+\bibitem{1}  David Salomon, Curves and Surfaces for Computer Graphics, Springer, 2006
+\bibitem{2}  I. Szabó, L. Miòo, C. Török. Biquarticpolynomials in bicubicspline construction, PF UPJŠ, 2014 
+\bibitem{3}  L. Miòo: Parametrické modelovanie dát komplexnej štruktúry, PF UPJŠ, 2014
+\bibitem{4}  C. de Boor:Bicubicspline interpolation, Journal of Mathematics and Physics, 41(3),1962, 212-218.
+\bibitem{5}  J. Albahari, B.Albahari: C\# 5.0 in a Nutshell, O'Reilly, 2012
+\end{thebibliography}
+%
+\end{document}

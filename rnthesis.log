@@ -1,0 +1,14 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdftex 2014.5.18)  18 MAY 2014 10:53
+entering extended mode
+**D:/LS2014/bakalarka_tex/rnthesis.cls
+(D:/LS2014/bakalarka_tex/rnthesis.cls
+! Undefined control sequence.
+l.2 \NeedsTeXFormat
+                   {LaTeX2e}[1995/12/01]
+? 
+! Emergency stop.
+l.2 \NeedsTeXFormat
+                   {LaTeX2e}[1995/12/01]
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!

@@ -1,0 +1,1072 @@
+% !TEX encoding = System
+
+%%\documentclass[thesismargins, thesislinespacing, twoside, draft, upjsfrontpage]{rnthesis}
+\documentclass{rnthesis}
+\usepackage[slovak]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[cp1250]{inputenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{rnt-pic}
+\usepackage{rnt-thm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{hyphenat}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{nameref}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{arydshln}
+\usepackage{tabularx}
+
+\newcolumntype{x}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{tikz}
+
+\newcommand\diag[4]{%
+	\multicolumn{1}{p{#2}|}{\hskip-\tabcolsep
+		$\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,inner sep=#1]
+			\path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+			\node[minimum width={#2+2\tabcolsep-\pgflinewidth},
+			minimum  height=\baselineskip+\extrarowheight-\pgflinewidth] (box) {};
+			\draw[line cap=round] (box.north west) -- (box.south east);
+			\node[anchor=south west] at (box.south west) {#3};
+			\node[anchor=north east] at (box.north east) {#4};
+			\end{tikzpicture}}$\hskip-\tabcolsep}}
+
+
+\hyphenation{funk-cií}
+
+\RequirePackage{ifpdf}
+
+\ifpdf
+\RequirePackage[pdftex]{graphicx}
+\DeclareGraphicsRule{*}{eps}{*}{}
+\else
+\RequirePackage[xdvi]{graphicx}
+\fi
+
+\lstset{language=[Sharp]C,
+showspaces=false,
+showtabs=false,
+breaklines=true,
+%basicstyle=\tiny,
+basicstyle=\fontsize{9}{13}\selectfont\ttfamily,
+numbersep=5pt,
+tabsize=2,
+showstringspaces=false,
+breakatwhitespace=true,
+escapeinside={(*@}{@*)},
+commentstyle=\color{commentsColor},
+keywordstyle=\color{keywordsColor}\bfseries,
+stringstyle=\color{stringsColor},
+%basicstyle=\ttfamily
+morecomment=[l]{//},
+morecomment=[s]{/*}{*/},
+morekeywords={abstract, event, new, struct,
+as, explicit, null, switch,
+base, extern, object, this,
+bool, false, operator, throw,
+break, finally, out, true,
+byte, fixed, override, try,
+case, float, params, typeof,
+catch, for, private, uint,
+char, foreach, protected, ulong,
+checked, goto, public, unchecked,
+class, if, readonly, unsafe,
+const, implicit, ref, ushort,
+continue, in, return, using,
+decimal, int, sbyte, virtual,
+default, interface, sealed, volatile,
+delegate, internal, short, void,
+do, is, sizeof, while,
+double, lock, stackalloc,
+else, long, static,
+enum, namespace, string, partial, get, set, var},
+}
+
+\lstset{language=C++,
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	%basicstyle=\tiny,
+	basicstyle=\fontsize{9}{13}\selectfont\ttfamily,
+	numbersep=5pt,
+	tabsize=2,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	escapeinside={(*@}{@*)},
+	commentstyle=\color{commentsColor},
+	keywordstyle=\color{keywordsColor}\bfseries,
+	stringstyle=\color{stringsColor},
+	%basicstyle=\ttfamily
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morekeywords=
+	{
+		alignas,alignof,and,and\_eq,asm,auto,
+		bitand,bitor,bool,break,
+		case,catch,char,char16\_t,char32\_t,
+		class,compl,concept,const,constexpr,
+		const\_cast,continue,
+		decltype,default,delete,do,double,d^ynamyc\_cast,
+		else,enum,explicit,export,extern,
+		false,float,for,friend,
+		goto,
+		if,inline,int,
+		long,
+		mutable,
+		namespace,new,noexcept,not,not\_eq,nullptr,
+		operator,or,or\_eq,
+		private,protected,public,
+		register,reinterpret\_cast,requires,return,
+		short,signed,sizeof,static,static\_assert,
+		static\_cast,struct,switch,
+		template,this,thread\_local,throw,true,try,
+		typedef,typeid,typename,
+		union,unsigned,
+		virtual,void,volatile,
+		wchar\_t,while,
+		xor,xor\_eq
+	},
+}
+%\usepackage{xcolor}
+
+%\lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{blue!80!black}}
+%----------------------------------------------------------------------------------------
+\newcommand{\cpp}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\bf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\bf +}}
+\newcommand{\real}{$\mathbb{R}$}
+\newcommand{\uinteger}{$\mathbb{N} \cup \{0\}$} 
+\newcommand{\nat}{$\mathbb{N} \cup \{0\}$} 
+\newcommand{\integer}{$\mathbb{Z}$}
+\newcommand{\mcomma}{\mbox{,}}
+\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}
+\newcommand{\FEL}{\frac{1}{2}}
+\newcommand*{\mathcolor}{}
+
+%\newcolumntype{?}{!{\vrule width 1pt}}
+\newcolumntype{?}[1]{!{\vrule width #1pt}}
+\def\mathcolor#1#{\mathcoloraux{#1}}
+\newcommand*{\mathcoloraux}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+\def\pd#1#2{\frac{\partial #1}{\partial #2}}
+\def\pdd#1#2#3{\frac{\partial #1}{\partial #2\partial#3}}
+
+\def\TP#1{\mathit{#1}}
+\def\FN#1{\text{#1}}
+\def\uv#1{„{#1}“}
+\definecolor{basis1}{rgb}{0.64,0.29,0.64}
+\definecolor{basis2}{rgb}{0,0.64,0.91}
+\definecolor{basis3}{rgb}{0.13,0.69,0.3}
+\definecolor{basis4}{rgb}{0.93,0.11,0.14}
+\definecolor{basis1a}{rgb}{0.90,0.6,0.90}
+\definecolor{basis2a}{rgb}{0.2,0.80,1}
+\definecolor{basis3a}{rgb}{0.3,0.9,0.5}
+\definecolor{basis4a}{rgb}{1,0.7,0.7}
+
+
+%\definecolor{dkgreen}{rgb}{0,0.6,0}
+%\definecolor{gray}{rgb}{0.5,0.5,0.5}
+%\definecolor{mauve}{rgb}{0.64,0.08,0.08}
+
+\definecolor{keywordsColor}{rgb}{0.25,0,0.5}
+\definecolor{commentsColor}{rgb}{0,0.5,0}
+\definecolor{stringsColor}{rgb}{0.64,0.375,0.25}
+%----------------------------------------------------------------------------------------
+\catcode`@=11
+\def\xmatrix#1#2{\null\,\vcenter{\normalbaselines\m@th
+    \ialign{\hfil$##$\hfil&&\hskip#1\hfil$##$\hfil\crcr
+      \mathstrut\crcr\noalign{\kern-\baselineskip}
+      #2\crcr\mathstrut\crcr\noalign{\kern-\baselineskip}}}\,}
+\catcode`@=12
+
+\title{Zrıchlenie vıpoètu splajn povrchov}
+%\subtitle{Algoritmizácia, paralelizácia a implementácia splajn modelov}
+\author{Bc. Viliam Kaèala}
+\typprace{Diplomová práca}
+\rok{2016}
+\miesto{Košice}
+\podakovanie{
+ Rád by som poïakoval vedúcemu závereènej
+ práce doc. RNDr. Csabovi Törökovi, CSc.
+ za cenné pripomienky, odborné vedenie a obetavos poèas
+ tvorby práce. Taktie by som sa rád poïakoval 
+ RNDr. Lukášovi Miòovi za cenné rady a odbornú
+ pomoc poèas tvorby aplikaènej èasti tejto práce.
+} 
+\veduci{doc. RNDr. Csaba Török, CSc.}
+\konzultant{RNDr. Lukáš Miòo}
+\pracovisko{Ústav informatiky}
+
+\abstract{
+	Splines are important part of computer graphics.
+	It is a mathematical model of the surface, which is for the "best connection" of any finite set of points.
+	The term "best connection" in this case means smooth, easily calculable mathematical surface with minimal curvature.
+	Use of splines in graphics varies from large variety of CAD applications, statistics or in data analysing.
+	Splines exist in many forms, whether in the form of curves in the plane, a variety of three-dimensional bodies, etc. ..
+	This work aims to desig, analyze and implement new algorithm for counting and generating splines bicubic clamped interpolation in three-dimensional space.
+}
+
+\abstrakt{
+	Splajny sú dôleitá súèas poèítaèovej grafiky.
+	Jedná sa o matematickı model plochy, ktorá slúi na èo „najlepšie spojenie“ koneènej mnoiny bodov. 
+	Termín „najlepšie spojenie“ v našom prípade znamená hladká, matematicky ¾ahko vyjadrite¾ná plocha s èo najmenším zakrivením.
+	Vyuitie splajnov v grafike je ve¾mi široké od rôznych CAD aplikácií, v štatistike, alebo v analıze dát.
+	Splajny existujú v mnohıch formách, èi u vo forme krivky v rovine, rôznych trojrozmernıch telies, atï..
+	Táto práca si dáva za cie¾ navrhnú, analyzova a implementova novı algoritmus pre bikubickú interpoláciu v trojrozmernom priestore.
+}
+
+\bibliographystyle{alpha}
+
+\begin{document}
+%\lstset{style=sharpc}
+%\lstset{frame=tb,
+%  language=[Sharp]C,
+%  aboveskip=3mm,
+%  belowskip=3mm,
+%  showstringspaces=false,
+%  columns=flexible,
+%  basicstyle={\small\ttfamily},
+%  numbers=none,
+%  numberstyle=\tiny\color{gray},
+%  keywordstyle=\color{blue},
+%  commentstyle=\color{dkgreen},
+% stringstyle=\color{mauve},
+%  breaklines=true,
+%  breakatwhitespace=true
+%  tabsize=3
+%}
+
+\maketitle
+%\newpage
+%\tableofcontents
+%\newpage
+%==================================================================================================================================================================================
+\part*{Úvod}
+
+Témou mojej diplomovej práce sú priestorové splajn povrchy, kde naším cie¾om je preskúma nové poznatky o splajnoch, na ktorıch istı èas pracuje vedúci tejto práce doc. RNDr. Csaba Török, CSc.
+Vısledkom tejto práce je návrh novej metódy vıpoètu, jej porovnanie s de Boorovym postupom z ktorého vychádzame a implementácia aplikácií na vizuálne a vıkonnostne porovnávanie oboch metód.
+Technológia v ktorej tieto poznatky implementujeme je Microsoft Silverlight. Jedná sa o ve¾mi schopnı nástroj na tvorbu webovıch aplikácii s plnou podporou hardvérovej akcelerácie uívate¾ského prostredia a monosou tvorby rıchlej trojrozmernej grafiky. Na vıkonnostné porovnanie máme implementovanú samostatnú aplikáciu. Vıhodou tohto frameworku je, kede beí na platforme Microsoft .NET, monos jednoduchej portácie na desktopovú prípadne mobilnú aplikáciu. Na vıkonnostné porovnanie nášho algoritmu s existujúcim však implementujeme samostatnú aplikáciu nad \cpp.
+
+Štruktúra práce je nasledovná.
+\begin{itemize}
+\item{\textbf{De Boorov algoritmus a návrh zrıchlenia}}
+\begin{itemize}
+	\item{\textbf{Splajn plochy}}\newline
+	Definícia pojmu splajn.
+	\item{\textbf{De Boorova interpolácia}}\newline
+	V tejto èasti si vysvetlíme bikubickú splajn interpoláciu pod¾a Carla de Boora. 	
+	\item{\textbf{Poèítanie derivácií redukovanou sústavou}}\newline
+	Ukáka modifikovaného postupu pre kubické splajny a jeho rozšírenie pre bikubické splajny.	
+	\item{\textbf{Zrıchlenie}}\newline
+	Oèakávané zrıchlenie vıpoètov novım algoritmom.
+\end{itemize}
+\item{\textbf{Implementácia}}\newline
+Podrobnosti implementácie v MS Silverlight a \cpp. Namerané vısledky.
+%\begin{itemize}
+%\end{itemize}
+%\item{\textbf{Pouívate¾ská príruèka}}\newline
+%\begin{itemize}
+%\end{itemize}
+\item{\textbf{Záver}}\newline
+\end{itemize}
+
+Formálne tézy diplomovej práce sú:
+
+\begin{itemize}
+	\item
+	Analıza modelov interpolaènıch splajnov.
+	\item
+	Redukovanı algoritmus vıpoètu koeficientov splajn povrchov.
+	\item
+	Testovanie faktorov vplıvajúcich na rıchlos vıpoètu splajn koeficientov
+	\begin{itemize}
+		\item
+		Klasickı a Hermitov splajn
+		\item
+		De Boorov a redukovanı algoritmus
+		\item
+		Vplyv latencie a priepustnosti procesorovıch inštrukcií a vyrovnávacích pamätí.  
+	\end{itemize}
+\end{itemize}
+
+\part{De Boorov algoritmus a návrh zrıchlenia}
+
+\chapter{Splajn plochy}
+
+V našej práci pracujeme s hermitovskımi splajnami, ktoré sú štandardne triedy $C^1$, teda splajnami, ktorıch prvé derivácie v uzloch sa rovnajú. 
+Pre naše potreby budeme uvaova hermitovské splajnyz triedy $C^2$, teda tie pri ktorıch v uzloch máme zaruèenú rovnos aj derivácií druhého rádu. Všeobecne sa splajny triedy $C^2$ nazıvajú \pojem{naturálne splajny}\cite{her_nat}.
+ 
+
+\obrazok{mexHatWKnots.png}{0.7}{Funkcia $sin(\sqrt{x^2+y^2})$ aproximovaná bikubickım splajnom.}
+Formálnejšie si popíšme základné pojmy s ktorımi budem v tomto èlánku pracova. 
+
+\oznac{
+	Postupnos $(a_0, a_1, \dots)$ nazveme \pojem{rovnomernou} ak pre ¾ubovo¾né $i$,$j$ z $\{0, 1, \dots\}$ platí $a_{j+1} - a_j = a_{i+1} - a_i$.
+}
+
+\oznac{
+Nech $f: \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ je nejaká funkcia a $I$,$J$ sú z \uinteger. Ïalej nech $(u_0, \dots,u_{I-1})$ a $(v_0, \dots,v_{J-1})$ sú dve rovnomerné, usporiadané koneèné postupnosti reálnych èísel. Oznaème:
+\begin{itemize}
+	\item
+	Dvojice $(u_i, v_j)$ nazveme \pojem{uzly}.
+	\item
+	Uzly $(u_0, v_0)$, $(u_{I-1}, v_0)$, $(u_0, v_{J-1})$ a $(u_{I-1}, v_{J-1})$ nazveme \pojem{rohové uzly}.
+	\item
+	$z_{i,j} = f(u_i, v_j)$.
+	\item
+	$d^x_{i,j} = \pd{f(u_i, v_j)}{x}$.
+	\item
+	$d^y_{i,j} = \pd{f(u_i, v_j)}{y}$.
+	\item
+	$d^{xy}_{i,j} = \pdd{f(u_i, v_j)}{x}{y}$.
+	\item
+	$h_x = u_i - u_{i-1}$ a $h_y = v_j - v_{j-1}$ pre ¾ubovo¾né $i \in  \{1, \dots, I-1\}$, resp. $j \in  \{1, \dots, J-1\}$.
+\end{itemize}
+}
+
+Úlohou je na základe vstupnıch uzlov nájs \pojem{hladkú}, po èastiach definovanú funkciu $S: [u_0, u_{I+1}] \times [v_0, v_{J+1}] \to \mathbb{R}$ z so spojitımi deriváciami prvého a druhého rádu takú, e pre kadé $i \in  {0, \dots, I-1}$ a $j \in  {0, \dots, J-1}$ platí $S(u_i, v_j) = z_{i,j}$. Funkcia $S$ predstavuje splajn, prièom jednotlivé èasti nazveme \pojem{segmenty}. 
+Teraz si môeme splajn zadefinova formálne.
+
+\begin{df}
+	Nech $I$ a $J$ sú prirodzené èísla, $\mathbf{u} = (u_0, \dots,u_{I-1})$ a $\mathbf{v} = (v_0, \dots,v_{J-1})$ sú reálne èísla.
+	\begin{itemize}
+		\item
+		$I \ge 0$ a $J \ge 0$,
+		\item 
+		Postupnosti $\mathbf{u}$ a $\mathbf{v}$ sú rovnomerne rastúce.
+		\item
+		Nech pre kadé $i$ z $\{0, \dots, I-1\}$ a $j$ z $\{0, \dots, J-1\}$ je $S_{i,j}$ bikubická polynomická funkcia z 2-rozmerného intervalu $[u_{i}, u_{i+1}] \times [v_{j}, v_{j+1}]$ do \real.
+	\end{itemize}
+	%\newpage
+	%\colorbox{yellow}{Spline}
+	Definujme funkciu $S_{U,V}$ z 2-rozmerného intervalu $[u_{0}, u_{I-1}] \times [v_{0}, v_{J-1}]$ do $\mathbb{R}$ vzahom:
+	%$$\text{Spline}(x) = P_1(x), v_0 \le x < v_1\mbox{,}$$
+	%$$\text{Spline}(x) = P_2(x), v_1 \le x < v_2\mbox{,}$$
+	%$$\vdots$$
+	%$$\text{Spline}(x) = P_k(x), v_{k-1} \le x \le v_k\mbox{,}$$
+	%\begin{equation}
+	\begin{equation}
+	S_{\mathbf{u},\mathbf{v}}(x,y) = \begin{cases}
+	S_{0,0}(x,y) & \text{pre } (x, y) \in [u_{0}, u_{1}] \times [v_{0}, v_{1}] \text{,}\\
+	S_{0,1}(x,y) & \text{pre } (x, y) \in [u_{0}, u_{1}] \times [v_{1}, v_{2}] \text{,}\\
+	\vdots\\
+	S_{0,J-1}(x,y) & \text{pre } (x, y) \in [u_{0}, u_{1}] \times [v_{J-2}, v_{J-1}] \text{,}\\
+	S_{1,0}(x,y) & \text{pre } (x, y) \in [u_{1}, u_{2}] \times [v_{0}, v_{1}] \text{,}\\
+	\vdots\\
+	S_{1,J-1}(x,y) & \text{pre } (x, y) \in [u_{1}, u_{2}] \times [v_{J21}, v_{J-1}] \text{,}\\
+	\vdots\\
+	S_{I-1,0}(x,y) & \text{pre } (x, y) \in [u_{I-2}, u_{I-1}] \times [v_{0}, v_{1}] \text{,}\\
+	\vdots\\
+	S_{I-1,J-1}(x,y) & \text{pre } (x, y) \in [u_{I-2}, u_{I-1}] \times [v_{J-2}, v_{J-1}] \text{,}
+	\end{cases}
+	\end{equation}
+	prièom všetky susedné segmenty $S_{i,j}$ majú derivácie prvého a druhého rádu v uzloch navzájom rovné.
+\end{df}
+
+\obrazok{fseg.png}{0.5}{\label{pic:fseg}Ukáka uzlov pre štvorsegmentovı splajn.}
+
+Ak $i$ je z  $\{0, \dots, I-2\}$ a $j$ je z $\{0, \dots, J-2\}$, tak štvorice uzlov $(u_i, v_j)$, $(u_i, v_{j+1})$, $(u_{i+1}, v_j)$ a $(u_{i+1}, v_{j+1}$ tvoria obdånikovı úsek nad ktorım sa nachádza splajnovı segment. Kadı segment $S_{i,j}$ je bikubická funkcia z $[u_i, u_{i+1}] \times [v_j, v_{j+1}]$ do $\mathbb{R}$. Vısledná funkcia $S$ teda vznikne zjednotením segmentov $S_{i,j}$. Na vypoèítanie kadého segmentu potrebujeme štyri uzly, a pre kadı uzol príslušne hodnoty $z$, $d^x$, $d^y$ a $d^{xy}$. Tieto hodnoty vieme získa buï priamo z interpolovanej funkcie $f$, alebo ich vypoèíta inım spôsobom, napríklad De Boorovou interpoláciou. 
+
+\chapter{LU dekompozícia}
+
+Základ oboch postupoch tkvie v opakovanom poèítaní systémov trojdiagonálnych lineárnych rovníc. Jeden so spôsobov riešenia rovníc tvaru
+\begin{equation}\label{eq:lu}
+\begin{pmatrix}
+b & 1 & 0 & \hdots & 0 & 0\\
+1 & b & 1 & \hdots & 0 & 0\\
+0 & 1 & b & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & b & 1 \\
+0 & 0 & 0 & \hdots & 1 & b\\
+\end{pmatrix} 
+\cdot
+\begin{pmatrix}
+d_1\\
+d_2\\
+d_3\\
+\vdots \\
+d_{K-2}\\
+d_{K-1}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+r_0 - d_0\\
+r_1\\
+r_2\\
+\vdots \\
+r_{K-2}\\
+r_{K-1} - d_{K-1}\\
+\end{pmatrix}\text{,}
+\end{equation}
+spoèíva v $LU$ dekompozícii $A\mathbf{d} = L\underbrace{U\mathbf{d}}_{\mathbf{y}} = \mathbf{r}$:
+%spytat sa docenta: preco LU a b
+\begin{equation}
+A = 
+\begin{pmatrix}
+1 & 0 & 0 & \hdots & 0 & 0\\
+\lambda_2 & 1 & 0 & \hdots & 0 & 0\\
+0 & \lambda_3 & 1 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & 1 & 0 \\
+0 & 0 & 0 & \hdots & \lambda_{K} & 1\\
+\end{pmatrix} \text{,}
+\begin{pmatrix}
+\upsilon_1 & 1 & 0 & \hdots & 0 & 0\\
+0 & \upsilon_1 & 1 & \hdots & 0 & 0\\
+0 & 0 & \upsilon_2 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & \upsilon_{K-1} & 0 \\
+0 & 0 & 0 & \hdots & 0 & \upsilon_K\\
+\end{pmatrix}\text{,}
+\end{equation}
+Pre $k$ z $\{2, \dots, K\}$ sú hodnoty $\upsilon_k$ a $\lambda_k$ urèené takto:
+
+\begin{equation} \label{eq:LU}
+\upsilon_k = b \text{,} \left\{ \lambda_k = \frac{1}{\upsilon_{k-1}}, \upsilon = b - \lambda_k\right\} \text{,} k \in \{2, \dots, K\}\text{.}
+\end{equation}
+Pre priamy a spätnı chod máme
+\begin{equation} \label{eq:FwLy}
+\text{Priamy: } L\mathbf{y} = \mathbf{r} \text{, } y_1 = r_1 \text{, } \left\{ y_k = r_k - \lambda_k\right\} \text{, } k \in \{2, \dots, K\}\text{,}
+\end{equation}
+\begin{equation} \label{eq:BwUd}
+\text{Spätnı: } U\mathbf{d} = \mathbf{y} \text{, } d_K = \frac{y_k}{u_k} \text{, } \left\{ d_k = \frac{1}{u_k}(y_k - d_{k+1})\right\} \text{,} k \in \{K-1, \dots, 1\}\text{.}
+\end{equation}
+LU dekompozíciou sa rieši ako de Boorova sústava (\ref{eq:deboorM}), tak aj naša redukovaná (\ref{eq:redM}).
+
+\chapter{De Boorova interpolácia}
+
+Nech sú dané hodnoty $(u_0$, ...,$u_{I-1})$ a $(v_0$, ...,$v_{J-1})$, kde $I$,$J$ sú z \uinteger, prièom chceme interpolova funkciu $f$ na $[u_0, u_{I-1}] \times [v_0, v_{J-1}]$. Vıslednı splajn bude tvorenı $(I-1) \cdot (J-1)$ segmentami. Ako bolo spomenuté, kadı segment splajnu potrebuje štyri uzly a hodnoty $z$, $d^x$, $d^y$ a $d^{xy}$, ktoré potrebujeme získa z funkcie $f$. Získanie derivácií priamo z $f$ môe by v praxi na poèítaèi nákladné najmä v prípade, keï pracujeme so symbolicky zapísanou funkciou vo forme textového reazca, ktorú je potrebné interpretova. 
+
+Algoritmus nájdenı Carlom de Boorom umoòuje s malou odchılkou odhadnú hodnoty derivácií v uzloch na základe tıchto vstupnıch hodnôt, ktoré potrebujeme získa vyhodnotením funkcie $f$:
+\begin{itemize}\label{eq:deboor_input}
+	\item
+	$z_{i,j} = f(u_i,v_i)$ pre $i \in \{0, \dots, I-1\}$, $j \in \{0, \dots, J-1\}$.
+	\item
+	$d^x_{i,j}$ pre $i \in \{0, I-1\}$, $j \in \{0, \dots, J-1\}$.
+	\item
+	$d^y_{i,j}$ pre $i \in \{0, \dots, I-1\}$, $j \in \{0, J-1\}$.
+	\item
+	$d^{xy}_{i,j}$ pre $i \in \{0, I-1\}$, $j \in \{0, J-1\}$.
+\end{itemize}
+\pr{
+Na príklade uzlov z obrázka \ref{pic:fseg} potrebujeme pozna hodnoty následovne:
+\begin{itemize}
+	\item
+	$z_{0,2}$, $z_{1,2}$, $z_{2,2}$,\newline
+	$z_{0,1}$, $z_{1,1}$, $z_{2,1}$,\newline
+	$z_{0,0}$, $z_{1,0}$, $z_{2,0}$,\newline  
+	\item
+	$d^x_{0,2}$, \phantom{$d^x_{1,2}$}, $d^x_{2,2}$,\newline
+	$d^x_{0,1}$, \phantom{$d^x_{1,1}$}, $d^x_{2,1}$,\newline
+	$d^x_{0,0}$, \phantom{$d^x_{1,0}$}, $d^x_{2,0}$,\newline 
+	\item
+	$d^y_{0,2}$, $d^y_{1,2}$, $d^y_{2,2}$,\newline
+	\phantom{$d^y_{0,1}$}, \phantom{$d^y_{1,1}$}, \phantom{$d^y_{2,1}$},\newline
+	$d^y_{0,0}$, $d^y_{1,0}$, $d^y_{2,0}$,\newline
+	\item
+	$d^{xy}_{0,2}$, \phantom{$d^{xy}_{1,2}$}, $d^{xy}_{2,2}$,\newline
+	\phantom{$d^{xy}_{0,1}$}, \phantom{$d^{xy}_{1,1}$}, \phantom{$d^{xy}_{2,1}$},\newline
+	$d^{xy}_{0,0}$, \phantom{$d^{xy}_{1,0}$}, $d^{xy}_{2,0}$,\newline  
+\end{itemize}
+}
+Zvyšné derivácie $d^x$, $d^y$ a $d^{xy}$ vieme jednoznaène vypoèíta pomocou $2(I) + J + 5$ lineárnych sústav s celkovo $3IJ + I + J + 2$ rovnicami:
+Nišie uvádzame modelové rovnice, pomocou ktorıch sú zostrojené tieto sústavy lineárnych rovníc.
+\newline\newline
+Pre $j \in \{0, \dots, J-1\}$, teda pre kadı ståpec $j$ vypoèítame parciálne derivácie $d^x$
+\begin{equation}\label{eq:deboor1}
+\begin{split}
+d^x_{i+1,j} + 4d^x_{i,j} + d^x_{i-1,j}
+= \frac{3}{h_x}(z_{i+1,j} - z_{i-1,j}) \text{, }\\ i \in \{1, \dots, I-2\}
+\end{split}
+\end{equation}
+Pre $j \in \{0, J-1\}$, teda pre prvı a poslednı ståpec vypoèítame parciálne derivácie $d^{x,y}$
+\begin{equation}\label{eq:deboor2}
+\begin{split}
+d^{xy}_{i+1,j} + 4d^{xy}_{i,j} + d^{xy}_{i-1,j}
+= \frac{3}{h_x}(d^y_{i+1,j} - d^y_{i-1,j}) \text{, }\\ i \in \{1, \dots, I-2\}
+\end{split}
+\end{equation}
+Pre $i \in \{0, \dots, I-1\}$, teda pre kadı riadok $i$ vypoèítame parciálne derivácie $d^y$
+\begin{equation}\label{eq:deboor3}
+\begin{split}
+d^y_{i,j+1} + 4d^y_{i,j} + d^y_{i,j-1}
+= \frac{3}{h_y}(z_{i,j+1} - z_{i,j-1}) \text{, }\\ j \in \{1, \dots, J-2\}
+\end{split}
+\end{equation}
+Pre $i \in \{0, \dots, I-1\}$, teda pre kadı riadok $j$ dopoèítame parciálne derivácie $d^{x,y}$
+\begin{equation}\label{eq:deboor4}
+\begin{split}
+d^{xy}_{i,j+1} + 4d^{xy}_{i,j} + d^{xy}_{i,j-1}
+= \frac{3}{h_y}(d^x_{i,j+1} - d^x_{i,j-1}) \text{, }\\ j \in \{1, \dots, J-2\}
+\end{split}
+\end{equation}
+\newline
+Kadá z tıchto sústav má takıto maticovı tvar:
+
+\begin{equation} \label{eq:deboorM}
+\begin{pmatrix}
+4 & 1 & 0 & \hdots & 0 & 0\\
+1 & 4 & 1 & \hdots & 0 & 0\\
+0 & 1 & 4 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & 4 & 1\\
+0 & 0 & 0 & \hdots & 1 & 4\\
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+D_{1}\\
+D_{2}\\
+D_{3}\\
+\vdots \\
+D_{N-3}\\
+D_{N-2}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{3}{\Delta}(Y_{2} - Y_{0}) - D_0\\
+\frac{3}{\Delta}(Y_{3} - Y_{1})\\
+\frac{3}{\Delta}(Y_{4} - Y_{2})\\
+\vdots \\
+\frac{3}{\Delta}(Y_{N-2} - Y_{N-4})\\
+\frac{3}{\Delta}(Y_{N-1} - Y_{N-3}) - D_{N-1}\\
+\end{pmatrix} \text{,}
+\end{equation}
+kde pod¾a toho o ktorú z modelovıch rovníc sa jedná, hodnoty N, D a Y zadávame následovne. Nech $k$ z ${1, \dots, K-1}$:
+\begin{itemize}
+	\item
+	$N = I$, $h= h_x$,  $D_k = d^x_{k,j}$ a $Y_k = z_{k,j}$, pre rovnicu \ref{eq:deboor1}.
+	\item
+	$N = I$, $h= h_x$,  $D_k = d^{xy}_{k,j}$ a $Y_k = d^y_{k,j}$, pre rovnicu \ref{eq:deboor2}.
+	\item
+	$N = J$, $h= h_y$,  $D_k = d^y_{i,k}$ a $Y_k = z_{i,k}$, pre rovnicu \ref{eq:deboor3}.
+	\item
+	$N = J$, $h= h_y$,  $D_k = d^{xy}_{i,k}$ a $Y_k = d^x_{i,k}$, pre rovnicu \ref{eq:deboor3}.
+\end{itemize}
+
+Po vypoèítaní všetkıch derivácií môeme funkciu jednoznaène interpolova splajnom.
+
+\pozn{
+V aplikácií na vizualizáciu pouívame práve Hermitove splajny.
+}
+%TO_CSABA: Preco hermitove?
+
+\pozn{
+De Boorova interpolácia vo všeobecnosti nepredpokladá len rovnomerne rastúce postupnosti uzlov $(u_0$, ...,$u_I)$ a $(v_0$, ...,$v_J)$. Náš postup v ïalšej èasti èlánku ale funguje len s takımito postupnosami. Preto sme v tejto èasti popísali len špeciálny prípad interpolácie pre takto urèené uzly.
+}
+
+\chapter{Poèítanie derivácií redukovanou sústavou}
+
+V rámci svojej bakalárskej práce som popisoval novı postup pre kubické splajnové krivky triedy C2, teda splajny, kde interpolovaná funkcia $f$ je typu $\mathbb{R} \to \mathbb{R}$. Cie¾om tejto práce je postup zovšeobecni pre bikubické splajny, teda pre splajny, kde interpolovaná funkcia $f$ je typu $\mathbb{R} \times \mathbb{R} \to \mathbb{R}$.
+
+\begin{oznac}
+ Teraz popíšeme tento rozšírenı algoritmus, ktorı pracovne oznaèíme ako \pojem{redukovanı algoritmus}. 
+ Ïalej budeme pôvodnı de Boorov postup, oznaèova pojmom \pojem{plnı algoritmus}.
+\end{oznac}
+
+Vstupné hodnoty sú identické ako pri pôvodnom algoritme. Máme dané $(u_0$, ...,$u_{I-1})$ a $(v_0$, ...,$v_{J-1})$, kde $I$,$J$ sú z \uinteger, prièom chceme interpolova funkciu $f$ na $[u_0, u_{I-1}] \times [v_0, v_{J-1}]$. 
+Pre pripomenutie potrebujeme z funkcie $f$ priamo získa tieto hodnoty.
+\begin{itemize}
+	\item
+	$z_{i,j} = f(u_i,v_i)$, pre $i \in \{0, \dots, I-1\}$, $j \in \{0, \dots, J-1\}$.
+	\item
+	$d^x_{i,j}$ pre $i \in \{0, I-1\}$, $j \in \{0, \dots, J-1\}$.
+	\item
+	$d^y_{i,j}$ pre $i \in \{0, \dots, I-1\}$, $j \in \{0, J-1\}$.
+	\item
+	$d^{xy}_{i,j}$ pre $i \in \{0, I-1\}$, $j \in \{0, J-1\}$.
+\end{itemize}  
+Zvyšné derivácie $d^x$, $d^y$ a $d^{xy}$ vieme jednoznaène vypoèíta pomocou $2(I) + J + 5$ lineárnych sústav s celkovo $3IJ + I + J + 2$ rovnicami:
+Nišie uvádzame modelové rovnice, pomocou ktorıch sú zostrojené tieto sústavy lineárnych rovníc. Oznaème $I_l$ a $J_l$ indexy po ktoré budeme iterova. Platí:
+
+\begin{itemize}
+	\item
+	$I_l = \begin{cases}
+	I - 2 & \text{ak } I \text{ je nepárne,}\\
+	I - 3 & \text{ak } I \text{ je párne,}
+	\end{cases}$
+	\item
+	$J_l = \begin{cases}
+	J - 2 & \text{ak } J \text{ je nepárne,}\\
+	J - 3 & \text{ak } J \text{ je párne,}
+	\end{cases}$
+\end{itemize} 
+Pre $j \in \{0, \dots, J-1\}$, teda pre kadı ståpec $j$ vypoèítame parciálne derivácie $d^x$
+\begin{equation}\label{eq:red1}
+\begin{split}
+d^x_{i+2,j} - 14d^x_{i,j} + d^x_{i-2,j}
+= \frac{3}{h_x}(z_{i+2,j} - z_{i-2,j}) - \frac{12}{h_x}(z_{i+1,j} - z_{i-1,j}) \text{, }\\ i \in \{2,4 \dots, I_l\}
+\end{split}
+\end{equation}
+Rovnica je podobná ako plnom algoritme \ref{eq:deboor1}.Všimnime si, e sústavu rovníc teraz budujeme len pre párne indexy $i$, teda vyriešením tejto sústavy
+získame iba polovicu iadanıch hodnôt $d^x$. 
+Pre $i \in \{1,3 \dots, I_l\}$ a $j \in \{0, \dots, J-1\}$ zvyšné derivácie $d^x$ vypoèítame ako
+\begin{equation}\label{eq:redr1}
+d^x_{i,j} = \frac{3}{4h_x}(z_{i+1,j} - z_{i-1,j}) - \frac{1}{4}(d^x_{i+1,j} - d^x_{i-1,j})
+\end{equation}
+Pre $i \in \{0, \dots, I-1\}$, teda pre kadı riadok $i$ analogicky vypoèítame parciálne derivácie $d^y$
+\begin{equation}\label{eq:red2}
+\begin{split}
+d^y_{i,j+2} - 14d^x_{i,j} + d^x_{i,j-2}
+= \frac{3}{h_y}(z_{i,j+2} - z_{i,j+2}) - \frac{12}{h_y}(z_{i,j+1} - z_{i,j-1}) \text{, }\\ i \in \{2,4 \dots, I_l\}
+\end{split}
+\end{equation}
+Následne analogicky pre $i \in \{1,2, \dots, I-1\}$ a $j \in \{1,3, \dots, J_l\}$ zvyšné derivácie $d^y$ vypoèítame ako
+\begin{equation}\label{eq:redr2}
+d^y_{i,j} = \frac{3}{4h_y}(z_{i,j+1} - z_{i,j-1}) - \frac{1}{4}(d^y_{i,j+1} - d^y_{i,j-1}
+\end{equation}
+Pre $j \in \{0, J-1\}$, teda pre prvı a poslednı ståpec vypoèítame parciálne derivácie $d^{x,y}$ rovnako ako pri plnom algoritme.
+\begin{equation}\label{eq:red3a}
+\begin{split}
+d^{xy}_{i+1,j} + 4d^{xy}_{i,j} + d^{xy}_{i-1,j}
+= \frac{3}{h_x}(d^y_{i+1,j} - d^y_{i-1,j}) \text{, }\\ i \in \{1, \dots, I-2\}
+\end{split}
+\end{equation}
+Pre $i \in \{0, I-1\}$, teda pre prvı a poslednı riadok analogicky vypoèítame parciálne derivácie $d^{x,y}$
+\begin{equation}\label{eq:red3b}
+\begin{split}
+d^{xy}_{i,j+1} + 4d^{xy}_{i,j} + d^{xy}_{i,j-1}
+= \frac{3}{h_y}(d^x_{i,j-1} - d^x_{i-1,j}) \text{, }\\ j \in \{1, \dots, J-2\}
+\end{split}
+\end{equation}
+Pre $i \in \{2,4, \dots, I_l\}$, teda pre kadı ståpec $i$ dopoèítame parciálne derivácie $d^{x,y}$
+\begin{equation}\label{eq:red4}
+\begin{split}
+&d^{xy}_{i,j+2} + 4d^{xy}_{i,j} + d^{xy}_{i,j-2} =\\
+&\frac{1}{7}(d^{xy}_{i-2,j+2} - d^{xy}_{i-2,j-2}) - 2d^{xy}_{i-2,j}\\
+&+\frac{3}{7h_x}(d^y_{i-2,j+2} - d^y_{i-2,j-2}) + \frac{3}{7h_y}(-d^x_{i-2,j+2} - d^x_{i-2,j-2})\\
+&+\frac{9}{7h_x}(d^y_{i,j+2} - d^y_{i,j-2}) + \frac{9}{7h_x h_y}(-z_{i-2,j+2} + z_{i-2,j-2})\\
+&+\frac{12}{7h_x}(-d^y_{i-1,j+2} - d^y_{i-1,j-2}) + \frac{12}{7h_y}(d^x_{i-2,j+1} - d^x_{i-2,j-1})\\
+&+\frac{3}{7h_y}(d^x_{i,j+2} - d^x_{i,j-2}) + \frac{27}{7h_x h_y}(-z_{i,j+2} + z_{i,j-2})\\
+&+\frac{36}{7h_x h_y}(z_{i-1,j+2} - z_{i-1,j-2} + z_{i-2,j+1} - z_{i-,j-1})\\
+&-\frac{6}{h_x}d^y_{i-2,j} + \frac{144}{7h_x h_y}(-z_{i-1,j+1} + z_{i-1,j-1})
++\frac{24}{h_x}d^y_{i-1,j}
+\text{, }\\ & j \in \{4,6 \dots, J_l-2\}
+\end{split}
+\end{equation}
+Následne vypoèítame zvyšné derivácie $d^{x,y}$.
+Pre $i \in \{1,3, \dots, I_l\}$ a $j \in \{1,3, \dots, J_l\}$ platí
+\begin{equation}\label{eq:redr4a}
+\begin{split}
+d^{xy}_{i,j} &= \frac{1}{16}(d^{xy}_{i+1,j+1} + d^{xy}_{i+1,j-1} + d^{xy}_{i-1,j+1} + d^{xy}_{i-1,j-1})\\
+&-\frac{3}{16h_y}(d^{x}_{i+1,j+1} - d^{x}_{i+1,j-1} + d^{x}_{i-1,j+1} - d^{x}_{i-1,j-1})\\
+&-\frac{3}{16h_x}(d^{y}_{i+1,j+1} + d^{y}_{i+1,j-1} - d^{y}_{i-1,j+1} - d^{y}_{i-1,j-1})\\
+&+\frac{9}{16h_x h_y}(z_{i+1,j+1} - z_{i+1,j-1} - z_{i-1,j+1} + z_{i-1,j-1})\text{. }
+\end{split}
+\end{equation}
+Pre $i \in \{1,3, \dots, I_l+1\}$ a $j \in \{2,4, \dots, J_l\}$
+\begin{equation}\label{eq:redr4b}
+d^{xy}_{i,j} = \frac{3}{4h_y}(d^x_{i,j+1} - zd^x_{i,j-1}) - \frac{1}{4}(d^{xy}_{i,j+1} - d^{xy}_{i,j-1}
+\end{equation}
+a pre $i \in \{2,4, \dots, I_l\}$ a $j \in \{1,3, \dots, J_l+1\}$
+\begin{equation}\label{eq:redr4c}
+d^{xy}_{i,j} = \frac{3}{4h_y}(d^x_{i,j+1} - zd^x_{i,j-1}) - \frac{1}{4}(d^{xy}_{i,j+1} - d^{xy}_{i,j-1}
+\end{equation}
+
+\oznac{
+	\begin{itemize}
+	\item
+	Rovnice \ref{eq:redr1}, \ref{eq:redr2} budeme súhrne oznaèova pojmom \pojem{resty}.
+	\item
+	Rovnice \ref{eq:redr4a}, \ref{eq:redr4b}, \ref{eq:redr4c} budeme súhrne oznaèova pojmom \pojem{zmiešané resty}.
+	\end{itemize}
+}
+Modelové sústavy rovníc \ref{eq:red1} a \ref{eq:red2} majú takıto maticovı tvar:
+\begin{multline} \label{eq:redM}
+\begin{pmatrix}
+-14 & 1 & 0 & \hdots & 0 & 0\\
+1 & -14 & 1 & \hdots & 0 & 0\\
+0 & 1 & -14 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & \hdots & -14 & 1 \\
+0 & 0 & 0 & \hdots & 1 & \mu\\
+\end{pmatrix} 
+\cdot
+\begin{pmatrix}
+D_2\\
+D_4\\
+D_6\\
+\vdots \\
+D_{v-2}\\
+D_{v}\\
+\end{pmatrix}
+=\\
+\begin{pmatrix}
+\frac{3}{h}(Y_4 - Y_0) - \frac{12}{h}(Y_3 - Y_1) - D_0\\
+\frac{3}{h}(Y_6 - Y_2) - \frac{12}{h}(Y_5 - Y_3)\\
+\frac{3}{h}(Y_8 - Y_4) - \frac{12}{h}(Y_7 - Y_5)\\
+\vdots \\
+\frac{3}{h}(Y_\nu - Y_{\nu-4}) - \frac{12}{h}(Y_{\nu-3} - Y_{\nu-5})\\
+\frac{3}{h}(Y_{\nu+\tau} - Y_{\nu-2}) - \frac{12}{h}(Y_{\nu-1} - Y_{\nu-3} - \theta D_{K+1})\\
+\end{pmatrix}\text{,}
+\end{multline}
+kde 
+\begin{gather} \label{eq:reducedOddD}
+\begin{aligned}
+%\begin{split}
+\mu &= -15\text{, }\tau = 0\text{, }\theta = -4\text{, a }\nu = N \text{,}&\text{ak }K\text{ je párne,}\\
+\mu &= -14\text{, }\tau = 2\text{, }\theta = 1\text{, a }\nu = N - 1 \text{,}&\text{ak }N\text{ je nepárne,}
+%\end{split}
+\end{aligned}
+\end{gather}
+a pod¾a toho o ktorú z modelovıch rovníc sa jedná, hodnoty N, D a Y zadávame následovne. Nech $k$ z ${1, \dots, K-1}$:
+\begin{itemize}
+	\item
+	$N = I$, $h= h_x$,  $D_k = d^x_{k,j}$ a $Y_k = z_{k,j}$, pre rovnicu \ref{eq:red1}..
+	\item
+	$N = J$, $h= h_y$,  $D_k = d^y_{i,k}$ a $Y_k = z_{i,k}$, pre rovnicu \ref{eq:red2}.
+\end{itemize}
+Analogicky vieme zostroji maticovı tvar aj pre modelovú sústavu pre derivácie $d^{xy}$ \ref{eq:red4}.
+\begin{oznac}
+~\\
+\begin{itemize}
+\item
+Parciálne derivácie $d^x$ a $d^y$ poèítané rovnicami \ref{eq:redr1} a \ref{eq:redr2} budeme nazıva \pojem{zbytkové derivácie}.
+\item
+Zmiešané parciálne derivácie $d^xy$ poèítané rovnicami \ref{eq:redr4a}, \ref{eq:redr4b} a \ref{eq:redr4c} budeme nazıva \pojem{zmiešané zbytkové derivácie}.	
+\end{itemize}	
+\end{oznac}
+%Hodnoty $D_k$ pre nepárne $k$ vypoèítame takto:
+%\begin{multline} \label{eq:reducedR}
+%D_k = \frac{1}{4}\left(\frac{3}{\Delta}(Y_{k+1} - Y_{k-1}) - D_{k-1} - D_{k+1}\right)\text{, } k \in \{1, 3, \dots, \nu + \tau - 1\}
+%\end{multline}
+%
+%Pri kubickıch splajnoch teda potrebujume vypoèíta len prvé derivácie $D_0$, ..., $D_{K+1}$ v uzloch $u_0$, ..., $u_{K+1}$. 
+%Pri bikubickıch povrchoch máme na základe de Boora 4 typy sústav, kde postupne rátame parciálne derivácie $\partial x$ a $\partial y$, prièom dvomi typmi z tıchto sústav vypoèítame parciálne derivácie $\partial xy$. 
+
+\part{Zrıchlenie}\label{spdup}
+
+Èasová zloitos oboch algoritmov je rovnaká a síce $O(IJ)$. Redukovanı algoritmus je však teoreticky, a aj prakticky (\ref{real_speedup}) rıchlejší, navyše s menšími pamäovımi nárokmi.
+Keïe porovnávame asymptoticky rovnako rıchle algoritmy, musíme bra do úvahy vplyv \uv{nízkoúrovòovıch} operácií, 
+konkrétne rıchlosti vıpoètu sèítania, násobenia, delenia a na koniec aj samotnı vplyv pamäovıch operácií èítania a zapisovania. 
+V tejto kapitole si spoèítame poèty tıchto operácií.
+
+Na modernıch procesoroch v prípade matematickıch operácií s plávajúcou desatinnou èiarkou platí, e sèítanie a násobenie sú rovnako rıchle, prièom delenie je asi desanásobne pomalšie. Pamäové operácie sú pritom v závislosti od konkrétneho typu operaènej pamäte je desanásobne a stonásobne pomalšie ako sèítanie, resp. násobenie.\footnote{V praxi sa aj vıpoèty rádovo miliónov uzlov èasto zmestia do vyrovnávacej pamäte procesora (\pojem{cache}). V tom prípade sú pamäové operácie len $1\times$-$10\times$ pomalšie ako sèítanie.}  
+
+\chapter{Poèty operácii}
+
+Spoèítajme poèet elementárnych matematickı operácií sèítania, násobenia a delenia pre oba algoritmy. To budeme poèíta tak, e si zadefinujeme \uv{procedúry} ktoré predstavujú jednotlivé èasti algoritmu. Potom z nich zostavíme pseudokód pre oba algoritmy.
+Najprv polome procedúry predstavujúce LU dekompozíciu spoloèné pre oba postupy.
+\begin{itemize}
+	\item
+	Procedúra \textit{InicalizujLU} inicializuje hodnoty $r_0$, \dots, $r_{K-1}$ a $b$ z LU dekompozície \ref{eq:LU} pod¾a \ref{eq:deboorM} v prípade plného algoritmu, respektíve pod¾a \ref{eq:redM} v prípade redukovaného algoritmu.
+	\item
+	Procedúra \textit{VyriešLU} vypoèíta sústavu rovníc na základe hodnôt pravej strany poskytnutımi \textit{InicalizujLU}.    
+\end{itemize}
+
+\subsection{Poèty pre plnı algoritmus}
+
+Poèty základnıch aritmetickıch a pamäovıch operácií pre vyššie uvedené procedúry môeme zhrnú do tabu¾ky, prièom uvaujeme poèty v našej ukákovej implementácii \cite{5}. S implementáciou sa budeme zaobera v èasti \ref{part:impl}.
+Riadky tabu¾ky predstavujú jednotlivé procedúry a 
+ståpce udávajú poèet vykonanıch operácii, pre základné matematické operácie, kde $K$ je poèet neznámych.
+\begin{center}\label{lu_operations}
+	\begin{tabular}{l|cccc}
+		\diag{.1em}{4cm}{Procedúra}{Operácia}
+		& Sèítanie & Násobenie & Delenie & Èítanie/Zápis \\
+		\hline
+		\textit{InicalizujLU}
+		& $K-2$ & $K$ & $0$ & $3K$\\
+		\textit{VyriešLU}
+		& $3K-2$ & $5K-2$ & $K$ & $8K-3$\\
+	\end{tabular}
+\end{center}
+
+Uvaujme procedúry predstavujúce implementáciu plného algoritmu:
+\begin{itemize}
+\item
+Procedúra \textit{VypoèítajDx} vypoèíta parciálne derivácie $d^x$ pomocou procedúry \textit{VyriešLU}. Vstupné hodnoty vezmeme z \ref{eq:deboor1}. Jedno volanie \textit{VyriešLU} vypoèíta derivácie $d^x$ pre jeden ståpec. Teda procedúra musí poèíta LU pre kadı ståpec, ktorıch je $J$. 
+\item
+Procedúra \textit{VypoèítajDxy} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry \textit{VyriešLU}. Vstupné hodnoty vezmeme z \ref{eq:deboor2}. Jedno volanie \textit{VyriešLU} vypoèíta derivácie $d^{xy}$ pre jeden ståpec. Procedúra musí poèíta LU pre prvı a poslednı ståpec.
+\item
+Procedúra \textit{VypoèítajDy} vypoèíta parciálne derivácie $d^y$ pomocou procedúry \textit{VyriešLU}. Vstupné hodnoty vezmeme z \ref{eq:deboor3}. Jedno volanie \textit{VyriešLU} vypoèíta derivácie $d^y$ pre jeden riadok. Teda procedúra musí poèíta LU pre kadı riadok, ktorıch je $I$.
+\item
+Procedúra \textit{VypoèítajDyx} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry \textit{VyriešLU}. Vstupné hodnoty vezmeme z \ref{eq:deboor4}. Jedno volanie \textit{VyriešLU} vypoèíta derivácie $d^{xy}$ pre jeden riadok. Teda procedúra musí poèíta LU pre kadı riadok, ktorıch je $I$.
+\item
+Procedúra \textit{VypoèítajPlnı} vypoèíta na základe vstupnıch hodnôt pre de Boorovu interpoláciu \ref{eq:deboor_input} zavolaním procedúr \textit{VypoèítajDx}, \textit{VypoèítajDxy}, \textit{VypoèítajDy} a \textit{VypoèítajDyx}.    
+\end{itemize}
+Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na osi $x$ tak pre plnı algoritmus dostaneme poèty   
+
+\begin{center}\label{full_operations}	
+	\begin{tabularx}{\textwidth}{l|XXXX}
+		\diag{.1em}{4cm}{Procedúra}{Operácia}
+		& Sèítanie & Násobenie & Delenie & Èítanie/Zápis \\
+		\hline
+		\textit{VypoèítajDx}
+		& $4IJ$ & $6IJ-2J$ & $IJ$ & $13IJ-J$\\
+		\textit{VypoèítajDxy}
+		& $8I$ & $12I-2$ & $2I$ & $26I-1$\\
+		\textit{VypoèítajDy}
+		& $4IJ$ & $6IJ-2I$ & $IJ$ & $13IJ-I$\\
+		\textit{VypoèítajDyx}
+		& $4IJ$ & $6IJ-2I$ & $IJ$ & $13IJ-I$\\
+		\hdashline
+		\textbf{\textit{VypoèítajPlnı}}
+		& $12IJ+8I$ & $18IJ+8I\newline-2J-4$ & $3IJ+2I$ & $39IJ+23I\newline-J-2$\\
+	\end{tabularx}
+\end{center}
+
+Na zaèiatku kapitoly sme zvolili predpoklad, e pri èíselnıch typoch s pohyblivou èiarkou sú operácie sèítania a násobenia rovnako rıchle,
+prièom operácia delenia je oproti nim pomalšia. Uvaujme hodnotu $\gamma$ udávajúcu ko¾kokrát je delenie pomalšie ako sèítanie (násobenie). Celkovı poèet aritmetickıch operácií je teda súèet poètu sèítaní, násobení a delení z predchádzajúcej tabu¾ky, prièom poèet delení vynásobime hodnotou $\gamma$. Po úpravách teda dostávame  
+
+\begin{equation} \label{sum_full_operations}
+3\gamma IJ+3\gamma I+30IJ+16I-2J-4
+\end{equation}
+
+Keïe ešte pre vplyv pamäovıch operácií nemám dostatoène objasnenı, nebudem ho teraz podrobne rozobera.
+Pri praktickom testovaní sa ukázalo, e cena pamäovej operácie je vïaka takzvanému cachovaniu na väèšine testovanıch poèítaèov
+pribline rovnaká ako cena sèítania.   
+ 
+\subsection{Poèty pre redukovanı algoritmus}
+
+Redukovanı spôsob na poèítanie derivácií vyuíva inı tvar trojdiagonálej sústavy rovníc. Zmeòme poèty operácií procedúr \textit{VyriešLU} a \textit{InicalizujLU}. 
+Ïalej polome dve nové pomocné procedúry \textit{InicalizujZmiešLU}, ktorá inicializuje hodnoty $r_0$, \dots, $r_{K-1}$ a $b$ z LU dekompozície \ref{eq:LU} pre zmiešané derivácie $d^{xy}$ a k nej príslušnú \textit{VyriešZmiešLU}.
+
+\begin{center}\label{cross_lu_operations}
+	\begin{tabular}{l|cccc}
+		\diag{.1em}{4cm}{Procedúra}{Operácia}
+		& Sèítanie & Násobenie & Delenie & Èítanie/Zápis \\
+		\hline
+		\textit{InicalizujLU}
+		& $3K+2$ & $2K+1$ & $0$ & $5K$\\
+		\textit{VyriešLU}
+		& $6K$ & $7K-1$ & $K$ & $15K-3$\\
+		\textit{InicalizujZmiešLU}
+		& $31K+2$ & $17K+1$ & $0$ & $33K$\\
+		\textit{VyriešZmiešLU}
+		& $34K$ & $22K-1$ & $K$ & $43K-3$\\
+	\end{tabular}
+\end{center}
+
+Analogicky polome procedúry predstavujúce implementáciu redukovaného algoritmu:
+\begin{itemize}
+	\item
+	Procedúra \textit{VypoèítajDx} vypoèíta parciálne derivácie $d^x$ pomocou procedúry \textit{VyriešLU}. Vstupné hodnoty vezmeme z \ref{eq:red1}. Jedno volanie \textit{VyriešLU} vypoèíta derivácie na párnych riadkoch $d^x$ pre jeden ståpec. Teda procedúra musí poèíta LU pre kadı ståpec, ktorıch je $J$. 
+	\item
+	Procedúra \textit{VypoèítajDxResty} vypoèíta zvyšné parciálne derivácie $d^x$ pod¾a \ref{eq:redr1}.
+	\item
+	Procedúra \textit{VypoèítajDy} vypoèíta parciálne derivácie $d^y$ pomocou procedúry \textit{VyriešLU}. Vstupné hodnoty vezmeme z \ref{eq:red2}. Jedno volanie \textit{VyriešLU} vypoèíta derivácie na párnych ståpcoch $d^y$ pre jeden riadok. Teda procedúra musí poèíta LU pre kadı riadok, ktorıch je $I$.
+	\item
+	Procedúra \textit{VypoèítajDyResty} vypoèíta zvyšné parciálne derivácie $d^y$ pod¾a \ref{eq:redr2}.
+	\item
+	Procedúra \textit{VypoèítajDxy} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry \textit{VyriešLU}. Vstupné hodnoty vezmeme z \ref{eq:red3a} a \ref{eq:red3b}. Jedno volanie \textit{VyriešLU} vypoèíta na párnych riadkoch(ståpcoch) derivácie $d^{xy}$ pre jeden ståpec(riadok). Procedúra musí poèíta LU pre prvı a poslednı ståpec a pre prvı a poslednı riadok.
+	\item
+	Procedúra \textit{VypoèítajDyx} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry \textit{VyriešLU}. Vstupné hodnoty vezmeme z \ref{eq:red4}, prièom na ich inicializovanie do LU dekompozície pouijeme procedúru \textit{InicalizujZmiešLU}. Jedno volanie \textit{VyriešLU} vypoèíta na párnych ståpcoch $d^{xy}$ pre jeden riadok. Procedúra musí poèíta LU pre kadı párny riadok, ktorıch je $I$.
+	\item
+	Procedúra \textit{VypoèítajDyxResty} vypoèíta èas zvyšnıch parciálne derivácie $d^{xy}$ pod¾a \ref{eq:redr4a}, \ref{eq:redr4b} a \ref{eq:redr4c}.
+	\item
+	Procedúra \textit{VypoèítajRedukovanı} vypoèíta na základe vstupnıch hodnôt pre de Boorovu interpoláciu \ref{eq:deboor_input} postupnım vykonaním predchádzajúcich siedmich procedúr.    
+\end{itemize}
+
+Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na osi $x$ tak pre plnı algoritmus dostaneme poèty   
+
+\begin{center}\label{red_operations}	
+	\begin{tabularx}{\textwidth}{l|XXXX}
+		\diag{.1em}{4cm}{Procedúra}{Operácia}
+		& Sèítanie & Násobenie & Delenie & Èítanie/Zápis \\
+		\hline
+		\textit{VypoèítajDx}
+		& $\rfrac{9}{2}IJ$ & $\rfrac{9}{2}IJ-J$ & $\rfrac{1}{2}IJ$ & $6IJ-J$\\\hdashline
+		\textit{VypoèítajDxResty}
+		& $\rfrac{3}{2}IJ$ & $IJ$ & $0$ & $\rfrac{5}{2}IJ$\\\hdashline
+		\textit{VypoèítajDy}
+		& $\rfrac{9}{2}IJ$ & $\rfrac{9}{2}IJ-I$ & $\rfrac{1}{2}IJ$ & $6IJ-I$\\\hdashline
+		\textit{VypoèítajDyResty}
+		& $\rfrac{3}{2}IJ$ & $IJ$ & $0$ & $\rfrac{5}{2}IJ$\\\hdashline
+		\textit{VypoèítajDxy}
+		& $8I+8J$ & $12I+12J\newline-4$ & $2I+2J$ & $26I+26J\newline-4$\\\hdashline
+		\textit{VypoèítajDyx}
+		& $\rfrac{51}{4}IJ$ & $\rfrac{29}{4}IJ\newline-\rfrac{1}{2}I$ & $\rfrac{1}{4}IJ$ & $\rfrac{63}{4}IJ-\rfrac{3}{2}I$\\\hdashline
+		\textit{VypoèítajDyxResty}
+		& $\rfrac{17}{4}IJ$ & $\rfrac{7}{4}IJ$ & $0$ & $\rfrac{23}{4}IJ$\\\hdashline
+		\textbf{\textit{VypoèítajRedukovanı}}
+		& $\rfrac{87}{4}IJ\newline+8I+8J$ & $\rfrac{65}{4}IJ+\newline\rfrac{21}{2}I+\newline11J-4$ & $\rfrac{5}{4}IJ+\newline2I+2J$ & $\rfrac{111}{4}IJ+\newline\rfrac{47}{2}I +\newline25J-4$\\
+	\end{tabularx}
+\end{center}
+
+Podobne ako predchádzajúcej podsekcii si zhròme celkovı poèet operácií.
+
+\begin{equation} \label{sum_red_operations}
+\rfrac{5}{4}\gamma IJ+2\gamma I + 2\gamma J +38IJ-\rfrac{5}{2}I+19J-4
+\end{equation}
+
+Ak chceme urèi zrıchlenie redukovaného algoritmu staèí vydeli \ref{sum_full_operations} a \ref{sum_red_operations} èím dostaneme
+
+\begin{equation} \label{full_red_ratio}
+\frac{
+3\gamma IJ+3\gamma I+30IJ+16I-2J-4
+}{
+\rfrac{5}{4}\gamma IJ+2\gamma I + 2\gamma J +38IJ-\rfrac{5}{2}I+19J-4\text{.}
+}
+\end{equation}
+
+\begin{df}
+Vıraz \ref{full_red_ratio} nazveme \pojem{pomer rıchlostí}. 
+\end{df}
+\pr{ \label{ratio10}
+Ak budeme predpoklada $\gamma = 10$, to jest operácia delenia je desanásobne pomalšia ako operácia sèítania tak a budeme uvaova maticu uzlov s poètom $I\times J = 1000\times1000$ tak pomer rıchlostí bude $1{,}187$.	
+}
+
+\chapter{Zrıchlenie v praxi}
+
+V kapitole \nameref{spdup} sme urèili teoretické zrıchlenie poèítania uzlov, dosiahnute¾né zredukovaním ve¾kosti trojdiagonálnych sústav. 
+V tejto èasti si ukáeme reálne vısledky dosiahnuté v ukákovej implementácii. 
+
+Ako bolo spomenuté, testovacia aplikácia bola implementovaná v jazyku \cpp. 
+Program obsahuje testy pre sekvenèné aj paralelné poèítanie derivácií pre oba predmetné algoritmy.
+Pouitı prekladaè bol Intel \cpp Compiler v 64 bitovej verzii nastavenı na generovanie agresívne optimalizovaného binárneho kódu (-O2), prièom paralelnı kód bol implementovanı pomocou rozhrania OpenMP.    
+
+Testy boli vykonané na troch rôznych poèítaèovıch zostavách, všetky so systémom Windows 10. 
+Testovacie stroje obsahujú moderné viacvláknové procesory so vzájomne odlišnımi architektúrami a hlavne spôsobmi vykonávania paralelizovanıch procesov.
+Ståpce 2-4 v tabu¾ke predstavujú èasy trvania testov základnıch aritmetickıch operácií. 
+
+Ståpce 5 a 6 predstavujú èasy behov sekvenènıch implementácií de Boorovho a redukovaného algoritmu, prièom ståpec 7 ukazuje pomer tıchto èasov.
+Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií. Všetky uvedené èasové údaje sú v milisekundách.    
+
+\begin{center}\label{real_speedup}
+	\begin{tabular}{l?{2}ccc|ccc|ccr}
+		& \multicolumn{3}{c|}{Operácia} & \multicolumn{3}{c|}{Sekvenène} & \multicolumn{3}{c}{Paralelne}  \\
+		CPU
+		& $+$ & $\cdot$ & $/$ & Plnı & Red & F : R & Plnı & Red & F : R  \\
+		\hline
+		Core i5 4400
+		& 121 & 121 & 1087 & 128 & 101 & 1,27 & 55 & 56 & 0.98  \\
+		Core i3 2350M
+		& 325 & 297 & 3151 & 252 & 202 & 1,25 & 142 & 145 & 0,98  \\
+		FX-6300
+		& 133 & 136 & 529 & 180 & 146 & 1,23 & 78 & 79 & 0,99  \\
+	\end{tabular}
+\end{center}
+
+Na kadom z troch testovacích strojov sú rıchlosti sèítania a násobenia 64 bitovıch èísel s plávajúcou desatinnou èiarkou totoné. V prípade násobenia, respektíve sèítania a delenia vychádza pomer na procesoroch Intel Core i5 a i3 pribline 9. Sekvenèná verzia redukovaného algoritmu je o 25\% rıchlejšia ako pôvodnı de Boorov postup èo súhlasí s odhadnutım zlepšením na konci kapitoly \nameref{spdup} v príklade \ref{ratio10}. Tam nám vyšlo 19\% zrıchlenie, kde zbytok prisudzujem vplyvu pamäovıch operácií, ktoré sme vtedy nebrali do úvahy.
+
+V prípade procesora AMD FX si môeme všimnú anomáliu, kde novı algoritmus je vırazne rıchlejší ne by mal by pod¾a dosiahnutého pomeru rıchlosti násobenia a delenia. 
+Moja terajšia hypotéza k tomuto javu je zaloená na pozorovaní, e AMD FX procesory majú vırazne pomalší pamäovı subsystém vèítane systému rıchlych vyrovnávacích pamätí\cite{z netu} (tzv. \textit{cache}).
+Pamäové operácie sú teda na AMD FX procesore vırazne drahšie ako na Intel Core. 
+Redukovanı algoritmus má menšie priestorové nároky èo znamená menej pouitıch pamäovıch operácií. 
+Teda na procesore AMD FX má síce zníenie poètu delení menší vplyv na efektivitu redukovaného algoritmu, ale to mohlo by \uv{vyváené} práve zníením poètu, na tomto CPU pomalıch, pamäovıch operácií.
+
+Ïalej si môeme všimnú malé škálovanie vıkonu paralelizovaného algoritmu. Prvou zmıš¾anou príèinou môe by fakt, e v plnom algoritme všetky parciálne derivácie pod¾a nejakej premennej vypoèítame trojdiagonálnymi sústavami naraz v jednom cykle. V redukovanom ale cez trojdiagonálne sústavy vyrátame len polovicu deriváciu, prièom zvyšok dopoèítame práve restami. Toto rozdelenie vıpoètu na dve subprocedúry teoreticky môe implikova vysokú réiu plánovaèa vlákien (tzv. \pojem{thread scheduler}). Táto príèina sa po prepracovaní implementácie ukázala bezpredmetná. Ïalšou príèinou môe by fakt, testovanie prebieha na príliš malom poète uzlov (rádovo státisíce a milióny uzlov). Toto sa chystám prešetri v priebehu februára.    
+\footnote{Túto hypotézu vplyvu cache je potrebné ešte podrobnejšie otestova, k èomu sa dostanem pravdepodobne v priebehu februára.} 
+
+\part{Dodatok}\label{part:impl}
+\chapter{Implementácia a uívate¾ská príruèka}
+Naším cie¾om je vytvorenie aplikácií na vizuálne a vıkonnostné porovnávanie splajnov, ktorıch uzly sú poèítané De Boorovim a naším algoritmom. 
+Pôvodne sme vizuálnu èas implementovali v Microsoft Silverlight, èo je bezplatnı nástroj na tvorbu webovıch aplikácií spustite¾nıch priamo vo webovom prehliadaèi. 
+Samotnı vıvoj aplikácii môe prebieha v ¾ubovo¾nom programovacom jazyku beiacom pod virtuálnym strojom Common Language Runtime. 
+V našom prípade sme siahli po jazyku C\#.
+
+\begin{center}
+	\includegraphics[scale=0.2]{silverlight.jpg}
+\end{center}
+
+Silverlight je kompatibilnı s väèšinou modernıch webovıch prehliadaèov a operaènıch systémov vèítane Microsoft Windows, Apple OS X a vïaka technológii Moonlight -- open-source implementácii Silverlight-u aj na väèšine Linuxovıch distribúcií.
+Framework je moné poui aj na vıvoj off-line aplikácií v operaènıch systémoch Windows Phone, Windows 8 a Windows RT. 
+
+\pozn{
+	Naša aplikácia pouíva technológie, ktoré nie sú s Moonlight kompatibilné. V súèasnej dobe teda podporujeme iba MS Windows a Apple OS X.
+	Prípadná portácia na GNU/Linux by musela by vo forme off-line desktopovej aplikácie.
+}
+
+\obrazok{apka_spl.png}{0.307}{Ukáka z aplikácie.}
+
+Pretoe CLR znemoòuje korektne porovnáva procesorovı èas a pamäové nároky implementovanıch algoritmov, rozhodli sme sa vıkonnostnı tester oddeli do samostatnej aplikácie implementovanej v natívnom jazyku, konkrétne v jazyku \cpp. 
+
+\obrazok{bench.png}{0.407}{Vıkonnostnı tester.}
+
+
+   
+
+
+\section{Vizualizácia}
+V tejto kapitole si ukáeme struènı návod na pouívanie a testovanie implementovanıch aplikácií. Zaènime aplikáciou na grafickú vizualizáciu.
+\obrazok{apka.png}{0.307}{Aplikácia po spustení.}
+
+Okno aplikácie sa skladá z troch hlavnıch èastí, ktoré si trocha netradiène prejdeme zdola nahor.
+%\begin{figure}%[!htb]
+%	
+%	 \centering
+%		\includegraphics[scale=0.4]{apka_spod.png}
+%	\par
+%	\centering{\parbox{13cm}{\sl \caption{Panel zadávania splajnu.}}
+%\end{figure}
+\obrazok{apka_spod.png}{0.4}{Panel zadávania splajnu.\label{apka_spod}} 
+Na obrázku \ref{apka_spod} vidíme panel, pomocou ktorého môeme na ¾ubovo¾nom intervale a s ¾ubovo¾nım poètom uzlov (v rozumnıch medziach) interpolova zapísanú funkciu dvoch premennıch $x$ a $y$.
+Popíšme si jednotlivé ovládacie prvky. Textové polia oznaèené \textit{U min}, \textit{U max} a \textit{U knots} (\textit{V min}, \textit{V max} a \textit{V knots}) znaèia interval a poèty uzlov na osi $x$ (osi $y$).
+Do spodného textového políèka oznaèené \textit{Expression} môeme napísa takmer ¾ubovo¾nú matematickú funkciu premennıch $x$ a $y$ ktorú si eláme vykresli. 
+Vysúvate¾nı zoznam oznaèenı \textit{Function type} umoòuje zvoli typ interpolácie. Na vıber máme ponúknuté tri monosti akım spôsobom si eláme interpretova matematickı vıraz v políèku \textit{Expression}.
+\begin{itemize}
+	\item
+	\textit{Direct function} vypoèíta funkèné hodnoty potrebné pre grafickú vizualizáciu priamo z funkcie.
+	\item 
+	\textit{Bicubic} vypoèíta z funkcie iba funkèné hodnoty v uzloch.
+	Zvyšné potrebné body sú získané interpolaènım bikubickım splajnom. 
+	\item 
+	\textit{Biquartic} funguje analogicky ako predchádzajúca poloka. 
+	Pouije sa ale bikvartickı splajn.
+\end{itemize}
+Vysúvate¾nı zoznam oznaèenı \textit{Knots generator} nám, v prípade vıberu vykreslenia funkcie splajnom, umoòuje zvoli plnı (\textit{De Boor}) alebo redukovanı (\textit{Reduced de Boor}) algoritmus.
+Tlaèítko \textit{Subtract} umoní vykresli rozdiel medzi aktuálne zadanımi hodnotami a nejakou u vykreslenou funkciou. 
+Pomocou posuvníka oznaèenı \textit{Auto color} môeme namiesto automaticky vybranej farby vykresli novú plochu vlastnou farbou.
+Nakoniec v pravej èasti okna sa nachádzajú tlaèidlá \textit{Clear} a \textit{Draw}, prièom prvé odstráni všetky vykreslené funkcie a druhé nám vypoèíta a zobrazí funkciu pod¾a aktuálne zadanıch hodnôt. 
+
+
+\obrazok{apka_stred.png}{0.4}{Hlavné zobrazovacie okná.\label{apka_stred}} 
+Na obrázku \ref{apka_stred} vidíme dominantnú èas aplikácie a síce zobrazovanie funkciovıch plôch. Obrazovka je rozdelená na tri èasti, kde v najväèšia èast implicitne zobrazuje interpretovanú funkciu a zvyšné dve zobrazujú prvú, respektíve druhú zmiešanú deriváciu funkcie.
+V ¾avej èasti okna môeme nájs posuvník na škálovanie osi $z$. Na spodnej a pravej strane hlavnej èasti okna sú tlaèidlá reprezentované modrou horizontálnou, respektíve zelenou vertikálnou šípkou. Pri ich draní myšou je moné rotova obrazom v danej osi.
+
+
+\obrazok{apka_vrch.png}{0.4}{Lišta nástrojov.\label{apka_vrch}}
+Poloka \textit{Settings} umonuje prispôsobi grafické vykres¾ovanie splajnov. Tieto nastavenia je vhodné upravi najmä pri starších poèítaèoch na dosiahnutie optimálnej plynulosti vykres¾ovania.
+V strednej èasti panela máme k dispozícii vysúvate¾nı zoznam vykres¾ovanıch plôch, ktorım ich môeme zvırazòova. V pravej èasti nájdeme tri tlaèidlá, ktoré vycentrujú zobrazovanie splajnu, 
+prípadne jeho prvej alebo druhej zmiešanej derivácie.
+
+\section{Vıkonnostnı tester}
+Teraz si popíšme druhú implementovanú aplikáciu zameranú nie na vykres¾ovanie, ale na ukáku èi skutoène je redukovanı algoritmus rıchlejší.  
+\obrazok{bench.png}{0.407}{Vıkonnostnı tester.\label{bench}}
+\obrazok{bench_surface.png}{0.407}{Zadanie údajov pre testovanie.\label{bench_surface}}
+\obrazok{bench_surface_results.png}{0.407}{Vısledky testu.\label{bench_surface_results}}
+Na obrázku \ref{bench} môeme vidie úvodné okno aplikácie, ktoré obsahuje sedem poloiek. Ich vıznam si teraz vyjasníme.
+ \begin{itemize}
+ 	\item[1.]
+ 	\textit{Multiplication  vs division benchmar} spustí nieko¾ko variant testovania pomerov rıchlosti operácií sèítania, násobenia a delenia.
+ 	\item[2.] 
+ 	\textit{Spline curve benchmark} pomerá èasy vıpoètov derivácií pre krivkovı splajn interpolujúci preddefinovanú funkciu plnım a redukovanım algoritmom. Pred spustením aplikácie vyaduje postupne zadanie dvoj údajov. Prvı udáva poèet opakovaní testu pre kadı algoritmus. Vıslednı pomer vznikne vydelením aritmetickıch priemerov nameranıch èasov pre kadı algoritmus. Èím je zadané èíslo väèšie, tım je meranie menej náchylné na odchılky. Odporúèa sa zada dvojcifernú hodnotu a potvrdi klávesou \textbf{Enter}. Druhé zadané èíslo znamená poèet uzlov splajnu. Odporúèa sa zada rádovo $10^5$ a $10^6$ uzlov.
+ 	Menší poèet dokáe väèšina modernıch poèítaèov vypoèíta príliš rıchlo aby ten èas dokázala aplikácia rozumne zmera.  
+ 	\item[3.]
+ 	\textit{Spline surface benchmark} analogicky ako predchádzajúci test testuje pomer èasov vıpoètu plného a redukovaného algoritmu pre plochy. Druhı zadanı údaj tentoraz znamená poèet uzlov pre jeden rozmer. Celkovı poèet uzlov je teda štvorec zadanej hodnoty. Pre väèšinu poèítaèov sa odporúèa zada rádovo $10^2$ a $10^3$ uzlov.
+ 	\item[4.]
+	\textit{Spline surface benchmark (in parallel)} paralelná verzia testu pre plochy vyuívajúca na vıpoèet jednej matice uzlov všetky dostupné logické procesory.
+ 	\item[B.]
+ 	\textit{Disable/enable buffering} prepne medzi naivnou a optimalizovanou variantou algoritmu pre poèítanie LU dekompozície v testoch 2 a 3. Test 4 toto nastavenie neovplyvòuje z dôvodu znaènıch pamäovıch nárokov naivnej verzie LU dekompozície.
+ 	\item[Q.]
+ 	\textit{End program} ako názov napovedá, pri stlaèení tlaèidla \textbf{Q} dôjde k vypnutiu aplikácie.
+ \end{itemize}
+
+
+\part*{Záver}
+
+Ciele tejto práce sme splnili zatia¾ na cca 95\%, prièom doteraz som sa hlavne venoval implementaènej èasti. Poèas februára a marca hodlám najmä lepšie objasni namerané vısledky a optimalizova paralelizáciu algoritmov. V súèasnosti je webová aplikácia, a na zopár detailov hotová. Kadému kto tento èlánok doèítal a do konca, zo srdca blahoelám.
+
+%
+%\bibliography{dp} %berie sa z dp.bib
+
+%\renewcommand{\bibname}{Zoznam pou?itej literat?ry}
+\begin{thebibliography}{9}
+\bibitem{splines}  David Salomon, Curves and Surfaces for Computer Graphics, Springer, 2006
+\bibitem{szabominotorok}  I. Szabó, L. Miòo, C. Török, Biquartic polynomials in bicubicspline construction, PF UPJŠ, 2014 
+\bibitem{lukasRigorozka}  L. Miòo, Parametrické modelovanie dát komplexnej štruktúry, PF UPJŠ, 2014
+\bibitem{deboor}  C. de Boor, Bicubic spline interpolation, Journal of Mathematics and Physics, 41(3),1962, 212-218.
+\bibitem{csharp}  J. Albahari, B.Albahari, C\# 5.0 in a Nutshell, O'Reilly, 2012
+\bibitem{her_nat}	 E. S\"{u}li, D. Mayers, An Introduction to Numerical Analysis, Cambridge University Press, 2003, ISBN 0 521 00794 1
+\bibitem{app}  https://github.com/vildibald/VKDiplom-master, repozitár so zdrojovımi kódmi k aplikáciám.
+\bibitem{z netu} TODO: Doplni èlánky z internetu
+\end{thebibliography}
+%
+\end{document}
