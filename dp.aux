@@ -15,6 +15,8 @@
 \citation{her_nat}
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Splajny}{7}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Funkcia $sin(\sqrt  {x^2+y^2})$ aproximovan\'a bikubick\'ym splajnom.}}{7}}
+\newlabel{df:curve_spline}{{1.6}{8}{Splajny}{}{}}
+\newlabel{df:surface_spline}{{1.8}{8}{Splajny}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces Uk\'a\v zka uzlov pre \v stvorsegmentov\'y splajn.}}{10}}
 \newlabel{pic:fseg}{{1.2}{10}{Ukážka uzlov pre štvorsegmentový splajn}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {1.3}LU dekompoz\IeC {\'\i }cia}{11}}
@@ -42,46 +44,59 @@
 \newlabel{eq:redr4c}{{1.22}{17}{Poèítanie derivácií redukovanou sústavou}{}{}}
 \newlabel{eq:redM}{{1.23}{17}{Poèítanie derivácií redukovanou sústavou}{}{}}
 \newlabel{eq:reducedOddD}{{1.24}{17}{Poèítanie derivácií redukovanou sústavou}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.6}Kon\v strukcia splajnu}{18}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Zr\'ychlenie}{19}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{spdup}{{2}{19}{Zrýchlenie}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Po\v cty oper\'acii}{19}}
-\citation{5}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Po\v cty pre pln\'y algoritmus}{20}}
-\newlabel{lu_operations}{{2.1.1}{20}{Poèty pre plný algoritmus}{}{}}
-\newlabel{full_operations}{{2.1.1}{21}{Poèty pre plný algoritmus}{}{}}
-\newlabel{sum_full_operations}{{2.1}{21}{Poèty pre plný algoritmus}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Po\v cty pre redukovan\'y algoritmus}{21}}
-\newlabel{cross_lu_operations}{{2.1.2}{21}{Poèty pre redukovaný algoritmus}{}{}}
-\newlabel{red_operations}{{2.1.2}{22}{Poèty pre redukovaný algoritmus}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Zhrnutie}{23}}
-\newlabel{sum_red_operations}{{2.2}{23}{Zhrnutie}{}{}}
-\newlabel{full_red_ratio}{{2.3}{23}{Zhrnutie}{}{}}
-\newlabel{ratio10}{{2.2}{23}{Zhrnutie}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Zr\'ychlenie v praxi}{23}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Procesorov\'a architekt\'ura}{19}}
 \citation{z netu}
-\newlabel{real_speedup}{{2.2}{24}{Zrýchlenie v praxi}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implement\'acia a u\v z\IeC {\'\i }vate\v lsk\'a pr\IeC {\'\i }ru\v cka}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Ke\v sovanie}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Vizu\'alna reprezent\'acia d\'atovej \v strukt\'ury \IeC {\quotedblbase }{pole pol\IeC {\'\i }}\IeC {\textquotedblleft }.}}{20}}
+\citation{cacheIntel}
+\citation{cacheIntel}
+\citation{intelOpt}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Graf r\'ychlosti pr\IeC {\'\i }stupu k d\'atam r\^oznych ve\v lkost\IeC {\'\i } na modern\'ych CPU\cite  {cacheIntel}.}}{21}}
+\citation{app}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Jadro mikroarchitekt\'ury Intel Skylake\cite  {intelOpt}.}}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}In\v struk\v cn\'y paralelizmus}{22}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Po\v cty oper\'acii}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Po\v cty pre pln\'y algoritmus}{22}}
+\newlabel{lu_operations}{{2.2.1}{23}{Poèty pre plný algoritmus}{}{}}
+\newlabel{full_operations_cached}{{2.2.1}{23}{Poèty pre plný algoritmus}{}{}}
+\newlabel{full_operations_uncached}{{2.2.1}{23}{Poèty pre plný algoritmus}{}{}}
+\newlabel{sum_full_operations}{{2.1}{24}{Poèty pre plný algoritmus}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Po\v cty pre redukovan\'y algoritmus}{24}}
+\newlabel{cross_lu_operations}{{2.2.2}{24}{Poèty pre redukovaný algoritmus}{}{}}
+\newlabel{red_operations}{{2.2.2}{25}{Poèty pre redukovaný algoritmus}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Zhrnutie}{26}}
+\newlabel{sum_red_operations}{{2.2}{26}{Zhrnutie}{}{}}
+\newlabel{full_red_ratio}{{2.3}{26}{Zhrnutie}{}{}}
+\newlabel{ratio10}{{2.2}{26}{Zhrnutie}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Zr\'ychlenie v praxi}{26}}
+\citation{z netu}
+\newlabel{real_speedup}{{2.3}{27}{Zrýchlenie v praxi}{}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implement\'acia a u\v z\IeC {\'\i }vate\v lsk\'a pr\IeC {\'\i }ru\v cka}{29}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Uk\'a\v zka z aplik\'acie.}}{27}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces V\'ykonnostn\'y tester.}}{27}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.1}Vizualiz\'acia}{28}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Aplik\'acia po spusten\IeC {\'\i }.}}{28}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Panel zad\'avania splajnu.}}{28}}
-\newlabel{apka_spod}{{3.6}{28}{Panel zadávania splajnu}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Hlavn\'e zobrazovacie okn\'a.}}{29}}
-\newlabel{apka_stred}{{3.7}{29}{Hlavné zobrazovacie okná}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Li\v sta n\'astrojov.}}{30}}
-\newlabel{apka_vrch}{{3.8}{30}{Lišta nástrojov}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.2}V\'ykonnostn\'y tester}{30}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces V\'ykonnostn\'y tester.}}{30}}
-\newlabel{bench}{{3.9}{30}{Výkonnostný tester}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Zadanie \'udajov pre testovanie.}}{31}}
-\newlabel{bench_surface}{{3.10}{31}{Zadanie údajov pre testovanie}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces V\'ysledky testu.}}{31}}
-\newlabel{bench_surface_results}{{3.11}{31}{Výsledky testu}{}{}}
+\newlabel{chapt:impl}{{3}{29}{Implementácia a užívate¾ská príruèka}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Uk\'a\v zka z aplik\'acie.}}{30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces V\'ykonnostn\'y tester.}}{30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.1}Vizualiz\'acia}{31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Aplik\'acia po spusten\IeC {\'\i }.}}{31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Panel zad\'avania splajnu.}}{31}}
+\newlabel{apka_spod}{{3.9}{31}{Panel zadávania splajnu}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Hlavn\'e zobrazovacie okn\'a.}}{32}}
+\newlabel{apka_stred}{{3.10}{32}{Hlavné zobrazovacie okná}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Li\v sta n\'astrojov.}}{33}}
+\newlabel{apka_vrch}{{3.11}{33}{Lišta nástrojov}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.2}V\'ykonnostn\'y tester}{33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces V\'ykonnostn\'y tester.}}{33}}
+\newlabel{bench}{{3.12}{33}{Výkonnostný tester}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Zadanie \'udajov pre testovanie.}}{34}}
+\newlabel{bench_surface}{{3.13}{34}{Zadanie údajov pre testovanie}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces V\'ysledky testu.}}{34}}
+\newlabel{bench_surface_results}{{3.14}{34}{Výsledky testu}{}{}}
 \bibcite{splines}{1}
 \bibcite{szabominotorok}{2}
 \bibcite{lukasRigorozka}{3}
@@ -89,4 +104,7 @@
 \bibcite{csharp}{5}
 \bibcite{her_nat}{6}
 \bibcite{app}{7}
-\bibcite{z netu}{8}
+\bibcite{cacheIntel}{8}
+\bibcite{intelOpt}{9}
+\bibcite{pipelining}{10}
+\bibcite{z netu}{11}
