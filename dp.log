@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2016.2.5)  14 MAR 2016 17:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2016.2.5)  20 MAR 2016 21:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -301,6 +301,156 @@ Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 137.
 LaTeX Info: Redefining \bm on input line 203.
 )
+(c:/texlive/2014/texmf-dist/tex/latex/mnsymbol/MnSymbol.sty
+Package: MnSymbol 2007/01/21 v1.4 support for the MnSymbol font
+
+(c:/texlive/2014/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
+
+(c:/texlive/2014/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 266.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 311.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 312.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 313.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 314.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 315.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 316.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 317.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 318.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 319.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 320.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 321.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 322.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 323.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 324.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 325.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 326.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 327.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 328.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 329.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 330.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 331.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 332.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 333.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 334.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 335.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 336.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 337.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
+)
+LaTeX Info: Redefining \dagger on input line 84.
+LaTeX Info: Redefining \ddagger on input line 84.
+LaTeX Info: Redefining \mathparagraph on input line 84.
+LaTeX Info: Redefining \mathsection on input line 84.
+LaTeX Info: Redefining \mathdollar on input line 84.
+LaTeX Info: Redefining \mathsterling on input line 84.
+LaTeX Info: Redefining \yen on input line 84.
+LaTeX Info: Redefining \circledR on input line 84.
+LaTeX Info: Redefining \Re on input line 84.
+LaTeX Info: Redefining \Im on input line 84.
+\symMnSyA=\mathgroup9
+\symMnSyB=\mathgroup10
+\symMnSyC=\mathgroup11
+\symMnSyD=\mathgroup12
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 119.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/MnSymbolE/m/n on input line 119.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/MnSymbolE/m/n on input line 119.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 120.
+LaTeX Font Info:    Encoding `OMS' has changed to `U' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 120.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> U/MnSymbolF/m/n on input line 120.
+LaTeX Font Info:    Encoding `OMS' has changed to `U' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 120.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> U/MnSymbolF/m/n on input line 120.
+LaTeX Font Info:    Overwriting symbol font `MnSyA' in version `bold'
+(Font)                  U/MnSymbolA/m/n --> U/MnSymbolA/b/n on input line 121.
+LaTeX Font Info:    Overwriting symbol font `MnSyB' in version `bold'
+(Font)                  U/MnSymbolB/m/n --> U/MnSymbolB/b/n on input line 122.
+LaTeX Font Info:    Overwriting symbol font `MnSyC' in version `bold'
+(Font)                  U/MnSymbolC/m/n --> U/MnSymbolC/b/n on input line 123.
+LaTeX Font Info:    Overwriting symbol font `MnSyD' in version `bold'
+(Font)                  U/MnSymbolD/m/n --> U/MnSymbolD/b/n on input line 124.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/MnSymbolE/m/n --> OMX/MnSymbolE/b/n on input line 1
+25.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  U/MnSymbolF/m/n --> U/MnSymbolF/b/n on input line 126.
+LaTeX Font Info:    Redeclaring math alphabet \mathcal on input line 241.
+LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `bold'
+(Font)                  OMS/MnSymbolS/m/n --> OMS/MnSymbolS/b/n on input line 2
+41.
+LaTeX Info: Redefining \longrightarrow on input line 548.
+LaTeX Info: Redefining \longleftarrow on input line 549.
+LaTeX Info: Redefining \longleftrightarrow on input line 550.
+LaTeX Info: Redefining \Longrightarrow on input line 551.
+LaTeX Info: Redefining \Longleftarrow on input line 552.
+LaTeX Info: Redefining \Longleftrightarrow on input line 553.
+LaTeX Info: Redefining \longmapsto on input line 554.
+LaTeX Info: Redefining \vdots on input line 868.
+LaTeX Font Info:    Redeclaring math symbol \braceld on input line 1721.
+LaTeX Font Info:    Redeclaring math symbol \bracelu on input line 1722.
+LaTeX Font Info:    Redeclaring math symbol \bracerd on input line 1723.
+LaTeX Font Info:    Redeclaring math symbol \braceru on input line 1724.
+LaTeX Info: Redefining \downbracefill on input line 1799.
+LaTeX Info: Redefining \upbracefill on input line 1800.
+LaTeX Info: Redefining \overbrace on input line 1819.
+LaTeX Info: Redefining \underbrace on input line 1820.
+LaTeX Info: Redefining \surd on input line 1843.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 1845.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 1846.
+LaTeX Font Info:    Redeclaring math accent \vec on input line 1848.
+)
 (c:/texlive/2014/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 (c:/texlive/2014/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 (c:/texlive/2014/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
@@ -584,18 +734,26 @@ File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
 ) (./dp.aux)
 \openout1 = `dp.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 230.
-LaTeX Font Info:    ... okay on input line 230.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 230.
-LaTeX Font Info:    ... okay on input line 230.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 230.
-LaTeX Font Info:    ... okay on input line 230.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 230.
-LaTeX Font Info:    ... okay on input line 230.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 230.
-LaTeX Font Info:    ... okay on input line 230.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 230.
-LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 231.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 231.
+
+
+(c:/texlive/2014/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 231.
 
 Zoznam pou∫itej literat˙ry
 (c:/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -647,7 +805,7 @@ e
 \c@lstlisting=\count150
 
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 249.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 233.
 
 
 (c:/texlive/2014/texmf-dist/tex/latex/base/t1cmss.fd
@@ -655,16 +813,16 @@ File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 ) [1
 
 {c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for U+msa on input line 249.
+LaTeX Font Info:    Try loading font information for U+msa on input line 233.
 
 (c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 249.
+LaTeX Font Info:    Try loading font information for U+msb on input line 233.
 
 (c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1] [2] (./dp.toc
+) [1] [2] [3] (./dp.toc
 \p@rindent=\dimen184
 \p@rindent=\dimen185
 \p@rindent=\dimen186
@@ -673,288 +831,290 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout4 = `dp.toc'.
 
 
-[3
+[4
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 262.
-
- (c:/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 262.
-
-Underfull \hbox (badness 10000) in paragraph at lines 280--281
+Underfull \hbox (badness 10000) in paragraph at lines 264--265
 
  []
 
-[4] [5]
+[5] [6]
 Kapitola 1.
-[6
+[7
 
-] <mexHatWKnots.png, id=46, 327.11684pt x 324.83463pt>
+] <mexHatWKnots.png, id=54, 327.11684pt x 324.83463pt>
 File: mexHatWKnots.png Graphic file (type png)
 
 <use mexHatWKnots.png>
-Package pdftex.def Info: mexHatWKnots.png used on input line 342.
+Package pdftex.def Info: mexHatWKnots.png used on input line 326.
 (pdftex.def)             Requested size: 228.98021pt x 227.38268pt.
- [7 <./mexHatWKnots.png>]
-Overfull \hbox (14.26773pt too wide) in paragraph at lines 393--395
-\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v[]; [] ; v[]\OT1/cmr/m/n/12 )$ \T1/cmr/m/n/1
-2 s˙ rov-no-merne ras-t˙ce po-stup-nosti. Nech pre ka∫dÈ $\OML/cmm/m/it/12 i$ \
-T1/cmr/m/n/12 z $\OMS/cmsy/m/n/12 f\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 ; \OT1/cmr
-/m/n/12 1\OML/cmm/m/it/12 ; [] I \OMS/cmsy/m/n/12 ^^@
+ [8 <./mexHatWKnots.png>]
+Overfull \hbox (9.00766pt too wide) in paragraph at lines 377--379
+\OMX/MnSymbolE/m/n/12 à\OML/cmm/m/it/12 v[]; [] ; v[]\OMX/MnSymbolE/m/n/12 ç$ \
+T1/cmr/m/n/12 s˙ rov-no-merne ras-t˙ce po-stup-nosti. Nech pre ka∫dÈ $\OML/cmm/
+m/it/12 i$ \T1/cmr/m/n/12 z $\OMX/MnSymbolE/m/n/12 ò\OT1/cmr/m/n/12 0\OML/cmm/m
+/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; [] I \U/MnSymbolC/m/n/12 ^^P
  []
 
-[8] [9] <fseg.png, id=62, 526.96875pt x 376.40625pt>
+[9] [10] <fseg.png, id=72, 526.96875pt x 376.40625pt>
 File: fseg.png Graphic file (type png)
  <use fseg.png>
-Package pdftex.def Info: fseg.png used on input line 453.
+Package pdftex.def Info: fseg.png used on input line 437.
 (pdftex.def)             Requested size: 263.48372pt x 188.20265pt.
-
-Overfull \hbox (7.82161pt too wide) in paragraph at lines 455--456
-\T1/cmr/m/n/12 ch·-dza splaj-nov˝ seg-ment. Ka∫d˝ seg-ment $\OML/cmm/m/it/12 S[
-]$ \T1/cmr/m/n/12 je bi-ku-bick· fun-kcia z $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 
-u[]; u[]\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12 ^^B
- []
-
-[10 <./fseg.png>] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 577--581
+ [11 <./fseg.png>] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 561--565
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 581--585
+Underfull \hbox (badness 10000) in paragraph at lines 565--569
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 585--589
+Underfull \hbox (badness 10000) in paragraph at lines 569--573
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 589--592
+Underfull \hbox (badness 10000) in paragraph at lines 573--576
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 594--598
+Underfull \hbox (badness 10000) in paragraph at lines 578--582
 
  []
 
-[12] [13] [14] [15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 842--843
-
+[13] [14] [15] [16]
+Overfull \hbox (16.50697pt too wide) in paragraph at lines 751--754
+\T1/cmr/m/n/12 N·sledne vy-po-£Ì-tame zvy≤nÈ de-ri-v·-cie $\OML/cmm/m/it/12 d[]
+$\T1/cmr/m/n/12 . Pre $\OML/cmm/m/it/12 i \U/MnSymbolD/m/n/12 > \OMX/MnSymbolE/
+m/n/12 ò\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 3\OML/cmm/m/it/12 ;
+ [] ; I[]\OMX/MnSymbolE/m/n/12 ù$ \T1/cmr/m/n/12 a $\OML/cmm/m/it/12 j \U/MnSym
+bolD/m/n/12 > \OMX/MnSymbolE/m/n/12 ò\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; \OT1/c
+mr/m/n/12 3\OML/cmm/m/it/12 ; [] ; J[]\OMX/MnSymbolE/m/n/12 ù$
  []
 
 [17]
-Overfull \hbox (119.12901pt too wide) detected at line 888
-[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t[]; t[]; s[]; s[]\OT1/cmr/m/n/12 ) = [] []
-  [][] []
+Underfull \hbox (badness 10000) in paragraph at lines 826--827
+
  []
 
-[18]
+[18] [19]
 Kapitola 2.
-<jarr.png, id=95, 519.44063pt x 361.35pt>
+<jarr.png, id=105, 519.44063pt x 361.35pt>
 File: jarr.png Graphic file (type png)
  <use jarr.png>
-Package pdftex.def Info: jarr.png used on input line 909.
+Package pdftex.def Info: jarr.png used on input line 893.
 (pdftex.def)             Requested size: 211.41061pt x 147.06825pt.
- [19
+ [20
 
-] [20 <./jarr.png>] <cacheIntel.png, id=107, 510.40688pt x 330.48468pt>
+] [21 <./jarr.png>] <cacheIntel.png, id=118, 510.40688pt x 330.48468pt>
 File: cacheIntel.png Graphic file (type png)
  <use cacheIntel.png>
-Package pdftex.def Info: cacheIntel.png used on input line 919.
+Package pdftex.def Info: cacheIntel.png used on input line 903.
 (pdftex.def)             Requested size: 255.2028pt x 165.24193pt.
 
-<skylakeCore.png, id=108, 469.755pt x 331.99031pt>
+[22 <./cacheIntel.png>] <skylakeCore.png, id=123, 469.755pt x 331.99031pt>
 File: skylakeCore.png Graphic file (type png)
- <use skylakeCore.png>
-Package pdftex.def Info: skylakeCore.png used on input line 923.
+
+<use skylakeCore.png>
+Package pdftex.def Info: skylakeCore.png used on input line 915.
 (pdftex.def)             Requested size: 234.87692pt x 165.99474pt.
-
-[21 <./cacheIntel.png>]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 944--944
+ [23] [24 <./skylakeCore.png>]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 942--942
 [][] 
  []
 
-[22 <./skylakeCore.png>]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 987--987
-[][] 
- []
-
-
-Overfull \hbox (16.60074pt too wide) in paragraph at lines 987--987
-[]|\T1/cmr/m/n/12 ÉÌtanie/Z·pis| 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1006--1006
+[25]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 983--983
 [][] 
  []
 
 
-Overfull \hbox (16.60074pt too wide) in paragraph at lines 1006--1006
-[]|\T1/cmr/m/n/12 ÉÌtanie/Z·pis| 
- []
-
-[23]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1027--1027
-[][] 
- []
-
-[24]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1084--1084
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1002--1002
 [][] 
  []
 
 
-Overfull \hbox (1.35173pt too wide) in paragraph at lines 1084--1084
-[]|\T1/cmr/m/n/12 N·sobenie| 
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1011--1011
+[][] 
  []
 
 
-Overfull \hbox (19.62917pt too wide) in paragraph at lines 1084--1084
-[]|\T1/cmr/m/n/12 ÉÌtanie/Z·pis| 
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1024--1024
+[][] 
+ []
+
+[26]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1035--1035
+[][] 
+ []
+
+[27]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1068--1068
+[][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1084--1084
-[]|$[][] \OML/cmm/m/it/12 =[]IJ \OMS/cmsy/m/n/12 ^^@
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1080--1080
+[][] 
  []
 
-[25] [26]
-Overfull \hbox (10.46817pt too wide) in paragraph at lines 1128--1140
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1106--1106
+[][] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1124--1124
+[][] 
+ []
+
+[28] [29]
+Overfull \hbox (10.46817pt too wide) in paragraph at lines 1211--1223
  [] 
  []
 
-[27] [28]
+[30] [31]
 Kapitola 3.
-<silverlight.jpg, id=137, 642.4pt x 363.3575pt>
+<silverlight.jpg, id=157, 642.4pt x 363.3575pt>
 File: silverlight.jpg Graphic file (type jpg)
  <use silverlight.jpg>
-Package pdftex.def Info: silverlight.jpg used on input line 1160.
+Package pdftex.def Info: silverlight.jpg used on input line 1243.
 (pdftex.def)             Requested size: 128.47772pt x 72.6702pt.
 
-<apka_spl.png, id=138, 939.51pt x 690.58pt>
+<apka_spl.png, id=158, 939.51pt x 690.58pt>
 File: apka_spl.png Graphic file (type png)
  <use apka_spl.png>
-Package pdftex.def Info: apka_spl.png used on input line 1171.
+Package pdftex.def Info: apka_spl.png used on input line 1254.
 (pdftex.def)             Requested size: 288.43529pt x 212.01225pt.
- [29
+ [32
 
- <./silverlight.jpg>] <bench.png, id=142, 708.6475pt x 509.905pt>
+ <./silverlight.jpg>] <bench.png, id=162, 708.6475pt x 509.905pt>
 File: bench.png Graphic file (type png)
  <use bench.png>
-Package pdftex.def Info: bench.png used on input line 1175.
+Package pdftex.def Info: bench.png used on input line 1258.
 (pdftex.def)             Requested size: 288.41718pt x 207.52963pt.
 
-<apka.png, id=143, 939.51pt x 688.5725pt>
+<apka.png, id=163, 939.51pt x 688.5725pt>
 File: apka.png Graphic file (type png)
  <use apka.png>
-Package pdftex.def Info: apka.png used on input line 1183.
+Package pdftex.def Info: apka.png used on input line 1266.
 (pdftex.def)             Requested size: 288.43529pt x 211.39594pt.
- [30 <./apka_spl.png> <./bench.png>] <apka_spod.png, id=150, 935.495pt x 107.40
+ [33 <./apka_spl.png> <./bench.png>] <apka_spod.png, id=169, 935.495pt x 107.40
 125pt>
 File: apka_spod.png Graphic file (type png)
 
 <use apka_spod.png>
-Package pdftex.def Info: apka_spod.png used on input line 1193.
+Package pdftex.def Info: apka_spod.png used on input line 1276.
 (pdftex.def)             Requested size: 374.19136pt x 42.95973pt.
- [31 <./apka.png> <./apka_spod.png>]
-<apka_stred.png, id=156, 935.495pt x 489.83pt>
+ [34 <./apka.png> <./apka_spod.png>]
+<apka_stred.png, id=175, 935.495pt x 489.83pt>
 File: apka_stred.png Graphic file (type png)
  <use apka_stred.png>
-Package pdftex.def Info: apka_stred.png used on input line 1214.
+Package pdftex.def Info: apka_stred.png used on input line 1297.
 (pdftex.def)             Requested size: 374.19136pt x 195.92853pt.
 
-<apka_vrch.png, id=157, 937.5025pt x 33.12375pt>
+<apka_vrch.png, id=176, 937.5025pt x 33.12375pt>
 File: apka_vrch.png Graphic file (type png)
  <use apka_vrch.png>
-Package pdftex.def Info: apka_vrch.png used on input line 1219.
+Package pdftex.def Info: apka_vrch.png used on input line 1302.
 (pdftex.def)             Requested size: 374.99435pt x 13.24925pt.
- [32 <./apka_stred.png>]
+ [35 <./apka_stred.png>]
 File: bench.png Graphic file (type png)
  <use bench.png>
-Package pdftex.def Info: bench.png used on input line 1226.
+Package pdftex.def Info: bench.png used on input line 1309.
 (pdftex.def)             Requested size: 288.41718pt x 207.52963pt.
 
-<bench_surface.png, id=162, 708.6475pt x 509.905pt>
+<bench_surface.png, id=181, 708.6475pt x 509.905pt>
 File: bench_surface.png Graphic file (type png)
  <use bench_surface.png>
-Package pdftex.def Info: bench_surface.png used on input line 1227.
+Package pdftex.def Info: bench_surface.png used on input line 1310.
 (pdftex.def)             Requested size: 288.41718pt x 207.52963pt.
 
-<bench_surface_results.png, id=163, 708.6475pt x 509.905pt>
+<bench_surface_results.png, id=182, 708.6475pt x 509.905pt>
 File: bench_surface_results.png Graphic file (type png)
 
 <use bench_surface_results.png>
-Package pdftex.def Info: bench_surface_results.png used on input line 1228.
+Package pdftex.def Info: bench_surface_results.png used on input line 1311.
 (pdftex.def)             Requested size: 288.41718pt x 207.52963pt.
- [33 <./apka_vrch.png>] [34 <./bench_surface.png> <./bench_surface_results.png>
-] [35]
-Underfull \hbox (badness 1571) in paragraph at lines 1262--1263
+ [36 <./apka_vrch.png>] [37 <./bench_surface.png> <./bench_surface_results.png>
+] [38]
+Underfull \hbox (badness 1571) in paragraph at lines 1345--1346
 []\T1/cmr/m/n/12 https://github.com/vildibald/VKDiplom-master, re-po-zi-t·r so 
 zdro-jo-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1263--1264
+Underfull \hbox (badness 10000) in paragraph at lines 1346--1347
 []\T1/cmr/m/n/12 http://www.anandtech.com/show/9483/intel-skylake-review-6700k-
 
  []
 
 
-Overfull \hbox (45.81973pt too wide) in paragraph at lines 1264--1265
+Overfull \hbox (45.81973pt too wide) in paragraph at lines 1347--1348
 []\T1/cmr/m/n/12 http://www.intel.com/content/dam/www/public/us/en/documents/ma
 nuals/64-
  []
 
-[36
+
+Underfull \hbox (badness 10000) in paragraph at lines 1349--1350
+[]\T1/cmr/m/n/12 http://techreport.com/review/23750/amd-fx-8350-processor-
+ []
+
+[39
 
 ] (./dp.aux) ) 
 Here is how much of TeX's memory you used:
- 15361 strings out of 493117
- 282964 string characters out of 6138985
- 371165 words of memory out of 5000000
- 18435 multiletter control sequences out of 15000+600000
- 33809 words of font info for 82 fonts, out of 8000000 for 9000
+ 17252 strings out of 493117
+ 308039 string characters out of 6138985
+ 373273 words of memory out of 5000000
+ 20281 multiletter control sequences out of 15000+600000
+ 44743 words of font info for 113 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  55i,17n,58p,1041b,721s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.
-enc}<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/201
-4/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2014/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2014/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2014/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi8.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-2.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2014/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2014/texmf-dist/fonts/t
-ype1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2014/texmf-dist/fonts/type1
-/public/cm-super/sfbi1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm
--super/sfbx0600.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfb
-x1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb>
-<c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb><c:/texliv
-e/2014/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb><c:/texlive/2014/tex
-mf-dist/fonts/type1/public/cm-super/sfrm0700.pfb><c:/texlive/2014/texmf-dist/fo
-nts/type1/public/cm-super/sfrm0800.pfb><c:/texlive/2014/texmf-dist/fonts/type1/
-public/cm-super/sfrm1000.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-
-super/sfrm1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfsl
-1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfss1728.pfb><
-c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/texlive
-/2014/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/texlive/2014/texm
-f-dist/fonts/type1/public/cm-super/sfsx2488.pfb><c:/texlive/2014/texmf-dist/fon
-ts/type1/public/cm-super/sfti1000.pfb><c:/texlive/2014/texmf-dist/fonts/type1/p
-ublic/cm-super/sfti1200.pfb>
-Output written on dp.pdf (37 pages, 1049071 bytes).
+enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolC.enc}{c:/texl
+ive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolE.enc}{c:/texlive/2014/tex
+mf-dist/fonts/enc/dvips/mnsymbol/MnSymbolD.enc}{c:/texlive/2014/texmf-dist/font
+s/enc/dvips/mnsymbol/MnSymbolF.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/
+mnsymbol/MnSymbolA.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-
+super-ts1.enc}<c:/texlive/2014/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol1
+0.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol12.pfb><c
+:/texlive/2014/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol6.pfb><c:/texlive
+/2014/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol8.pfb><c:/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2014/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2014/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi6.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi8.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2014/texmf-dist/fon
+ts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/cm-super/sfbi1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/publi
+c/cm-super/sfbx0600.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super
+/sfbx1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfbx1440.
+pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb><c:/te
+xlive/2014/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb><c:/texlive/2014
+/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><c:/texlive/2014/texmf-dis
+t/fonts/type1/public/cm-super/sfrm0700.pfb><c:/texlive/2014/texmf-dist/fonts/ty
+pe1/public/cm-super/sfrm0800.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public
+/cm-super/sfrm1000.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/
+sfrm1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfsl1200.p
+fb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfss1728.pfb><c:/tex
+live/2014/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/texlive/2014/
+texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/texlive/2014/texmf-dist
+/fonts/type1/public/cm-super/sfsx2488.pfb><c:/texlive/2014/texmf-dist/fonts/typ
+e1/public/cm-super/sfti0600.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/
+cm-super/sfti1000.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/s
+fti1200.pfb>
+Output written on dp.pdf (40 pages, 1151450 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 180 compressed objects within 2 object streams
+ 319 PDF objects out of 1000 (max. 8388607)
+ 215 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  83 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -325,26 +325,26 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   \vskip2cm
 \fi
 % dalsia strana pre zadanie, vypiseme boilerplate varovanie
-\if@disablespecwarning\relax
-\else 
-  \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
-  \newpage\thispagestyle{empty}  
-  \par
-  \null
-  \vfill
-  \begin{center}
-  \begin{minipage}{12cm}
-  \flushleft
-  {Zadanie pr\'{a}ce%\LARGE\bf Ciele pr\'{a}ce: 
- %	\begin{itemize}
- %	\item Web grafika na z\'{a}klade MS Silverlight
-%	\item Anal\'{y}za numerick\'{y}ch algoritmov natur\'{a}lnych, Hermitovsk\'{y}ch a B-splajnov a ned\'{a}vno navrhnut\'{y}ch tried b\'{a}zov\'{y}ch funkci\'{i}
-%\item Implement\'{a}cia a testovanie nov\'{y}ch algoritmov v r\'{a}mci interakt\'{i}vnej webovej aplik\'{a}cie
-% 	\end{itemize}
-  }\end{minipage}
-  \end{center}
-  \vfill
-\fi
+%\if@disablespecwarning\relax
+%\else 
+%  \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
+%  \newpage\thispagestyle{empty}  
+%  \par
+%  \null
+%  \vfill
+%  \begin{center}
+%  \begin{minipage}{12cm}
+%  \flushleft
+%  { Podp\'{i}san\'{e} zadanie pr\'{a}ce z AIS2%\LARGE\bf Ciele pr\'{a}ce: 
+% %	\begin{itemize}
+% %	\item Web grafika na z\'{a}klade MS Silverlight
+%%	\item Anal\'{y}za numerick\'{y}ch algoritmov natur\'{a}lnych, Hermitovsk\'{y}ch a B-splajnov a ned\'{a}vno navrhnut\'{y}ch tried b\'{a}zov\'{y}ch funkci\'{i}
+%%\item Implement\'{a}cia a testovanie nov\'{y}ch algoritmov v r\'{a}mci interakt\'{i}vnej webovej aplik\'{a}cie
+%% 	\end{itemize}
+%  }\end{minipage}
+%  \end{center}
+%  \vfill
+%\fi
 % dalsia strana pre abstrakt, treba implementovat, ak chyba
 \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
 \newpage\thispagestyle{empty}  
@@ -895,7 +895,8 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand\appendixname{Dodatok}
 \newcommand\universityname{Univerzita Pavla Jozefa \v{S}af\'arika v Ko\v{s}iciach}
 \newcommand\facultyname{Pr\'{\i}rodovedeck\'a fakulta}
-\newcommand\thesisname{pr\'aca}
+%\newcommand\thesisname{pr\'aca}
+\newcommand\thesisname{}
 \newcommand\studyprogrammename{\v{S}tudijn\a'{y} program}
 \newcommand\fieldofstudyname{\v{S}tudijn\a'{y} odbor}
 \newcommand\institutename{\v{S}koliace pracovisko}
