@@ -245,22 +245,30 @@ Technológia v ktorej tieto poznatky implementujeme je Microsoft Silverlight. Jed
 \begin{itemize}
 \item{\textbf{De Boorov algoritmus a návrh zrıchlenia}}
 \begin{itemize}
-	\item{\textbf{Splajn plochy}}\newline
-	Definícia pojmu splajn.
+	\item{\textbf{Polynómy}}\newline
+	Základné pojmy o polynómoch.
+	\item{\textbf{Splajny}}\newline
+	Definícia krivkovıch a povrchovıch splajn.
+	\item{\textbf{LU dekompozícia}}\newline
+	Spôsob poèítania trojdiagonálnych sústav.
 	\item{\textbf{De Boorova interpolácia}}\newline
-	V tejto èasti si vysvetlíme bikubickú splajn interpoláciu pod¾a Carla de Boora. 	
+	V tejto èasti si vysvetlíme splajn interpoláciu pod¾a Carla de Boora. 	
 	\item{\textbf{Poèítanie derivácií redukovanou sústavou}}\newline
 	Ukáka modifikovaného postupu pre kubické splajny a jeho rozšírenie pre bikubické splajny.	
-	\item{\textbf{Zrıchlenie}}\newline
-	Oèakávané zrıchlenie vıpoètov novım algoritmom.
+	\item{\textbf{Konštrukcia splajnu}}\newline
+	Zostrojenie splajnu ako zloenej funkcie segmentov.
 \end{itemize}
-\item{\textbf{Implementácia}}\newline
-Podrobnosti implementácie v MS Silverlight a \cpp. Namerané vısledky.
-%\begin{itemize}
-%\end{itemize}
-%\item{\textbf{Pouívate¾ská príruèka}}\newline
-%\begin{itemize}
-%\end{itemize}
+\item{\textbf{Zrıchlenie}}\newline
+Oèakávané zrıchlenie vıpoètov novım algoritmom.
+\begin{itemize}
+	\item{\textbf{Procesorová architektúra}}\newline
+	Tu si objasníme vplyv modernıch inštrukènıch sád na zrıchlenie redukovaného algoritmu.
+	\item{\textbf{Poèty operácií}}\newline
+	Spoèítanie èasovej zloitosti  vysvetlenie vplyvu základnıch aritmetickıch a pamäovıch operácií. 
+\end{itemize}
+\item{\textbf{Implementácia a uívate¾ská príruèka}}\newline
+Podrobnosti implementácie v MS Silverlight a \cpp. 
+Struènı návod na pouitie programov.
 \item{\textbf{Záver}}\newline
 \end{itemize}
 
@@ -890,7 +898,7 @@ Architektúry CPU prešli za posledné desaroèia znaènım vıvojom. V dnešnej dobe u
 
 Pri návrhu algoritmu je vhodné si uvedomi tvar dátovıch štruktúr do ktorıch pri reálnej implementácií budeme uklada funkèné hodnoty, uzly a derivácie.
 Naša implementácia v prípade kriviek pouíva klasické polia teda vektory. Pri povrchoch sa hodnoty reprezentujú maticami. Maticu je moné interpretova buï ako \uv{pole polí} respektíve \uv{vektor vektorov} (anglicky \uv{jagged array}), alebo ako jedno spojité pole, kde prvok na $i$-tom riadku a $j$-tom ståpci má v takejto reprezentácii index $n*i+j$, kde $n$ je poèet ståpcov. My budeme  v meraniach a vıpoètoch uvaova práve prvú reprezentáciu znázornenú na obrázku nišie.
-\obrazok{jarr.png}{0.407}{Vizuálna reprezentácia dátovej štruktúry \uv{pole polí}.}
+\obrazok{jarr.png}{0.407}{Vizuálna reprezentácia dátovej štruktúry \uv{pole polí}.\label{obr:jagged_array}}
 
 Operaèná pamä v dnešnıch poèítaèoch je rádovo pomalšia ako procesor, ktorı musí èaka desiatky a stovky strojovıch cyklov ak chce naèíta hodnotu z pamäte. Moderné procesory preto pouívajú systém malıch, ale rıchlych vyrovnávacíc-h pamätí\cite{z netu} tzv. \textit{cache} do ktorıch sa prednaèítavajú dáta a strojové inštrukcie programu z operaènej pamäte, v ideálnom prípade skôr ako ich procesor bude potrebova. Toto kešovanie je plne automatickı proces riadenı samotnım CPU. Programátor má len nepriame monosti ovplyvnenia tohto procesu, napríklad vhodnım vıberom dátovıch štruktúr a podobne. 
 
@@ -900,7 +908,7 @@ Pozornı èitate¾ si môe všimnú, e v prípade pouitia druhej reprezentácie mati
 
 V aplikácii sme toti vyskúšali obe varianty reprezentácie a pre matice s rádovo $1000 \times 1000$ prvkami sa ako efektívnejšia ukazuje práve prvá reprezentácia, teda \uv{pole polí}. Toti ak jeden prvok matice má $8$ bajtov (ve¾kos èíselného typu \textit{double} vo väèšine jazykoch), tak matica zaberá v pamäti pribline $7\text{,}63$ megabajtov. Pri matici typu pole polí máme $1000$ polí kadé zaberajúce práve $7\text{,}81$ kilobajtov ($1$ kB = $1024$ B, $1$ MB = $1024$ kB, atï.). Pre CPU je kešovanie takıchto polí podstatne jednoduchšie ako v prípade matice reprezentovanej jednım po¾om, ktoré samotné má ve¾kos práve $7\text{,}63$ MB, èo presahuje kapacitu väèšiny vyrovnávacích pamätí. Obrázok nišie názorne ukazuje vzah medzi ve¾kosou dátovej štruktúry v kB a poètom strojovıch cyklov, ktoré procesor musí èaka pre prístup k jej prvkom. Ako vidie do pri dosiahnutí ve¾kosti $32$ kB, dáta sú namiesto ve¾mi rıchlej vyrovnávacej pamäte L1 kešované do trojnásobne pomalšej vyrovnávacej pamäte L2 atï..
 
-\obrazok{cacheIntel.png}{0.5}{Graf rıchlosti prístupu k dátam rôznych ve¾kostí na modernıch CPU\cite{cacheIntel}.}
+\obrazok{cacheIntel.png}{0.5}{Graf rıchlosti prístupu k dátam rôznych ve¾kostí na modernıch CPU\cite{cacheIntel}.\label{img:cacheSpeed}}
 
 \subsection{Inštrukènı paralelizmus}\label{sec:instrukcny_paralelizmus}
 
@@ -962,7 +970,10 @@ Procedúra \textit{VypoèítajDyx} vypoèíta parciálne derivácie $d^{xy}$ pomocou pr
 \item
 Procedúra \textit{VypoèítajPlnı} vypoèíta na základe vstupnıch hodnôt pre de Boorovu interpoláciu \ref{eq:deboor_input} zavolaním procedúr \textit{VypoèítajDx}, \textit{VypoèítajDxy}, \textit{VypoèítajDy} a \textit{VypoèítajDyx}.    
 \end{itemize}
-Nech $I$ znaèí poèet uzlov na osi $x$ a $J$ znaèí poèet uzlov na osi $y$. Všetky poèty sú v tvare $a\cdot IJ + b\cdot I + c\cdot J + d$. Pre zjednodušenie budeme poèty, tam kde je koeficient $a$ nenulovı, uvádza v tvare $a\cdot IJ$. Keïe poèty rastú kvadraticky tak pre ve¾ké $I$ a $J$ bude odchılka zanedbate¾ná. Pre plnı algoritmus teda dostaneme poèty operácií nad kešovanımi dátami   
+
+V podsekcii \ref{sec:kesovanie} sme odlišovali operácie vykonané na spojitıch vektoroch, t.j. operácie vykonané na ståpcoch matice uzlov a operácie vykonané na riadkoch, kde kadı prvok riadka je z iného vektora a teda aj z inej èasti pamäte pod¾a obrázka \ref{obr:jagged_array}. Kešovanie riadkov znamená kešovanie celej matice uzlov, èo je v prípade ve¾kıch matíc nemoné. Teda operácie na prvkov v riadkoch vo všeobecnosti nemôu by tak efektívne ako v prípade operácií na ståpcoch. Pri našej implementácii, ako bolo spomenuté, na ukladanie uzlov a derivácií pouívame práve dátové štruktúry typu vektor vektorov, prièom derivácie $d^x$ sú poèítané po riadkoch (teda neefektívne)
+
+Nech $I$ znaèí poèet uzlov na osi $x$ a $J$ znaèí poèet uzlov na osi $y$. Všetky poèty sú v tvare $a\cdot IJ + b\cdot I + c\cdot J + d$. Pre zjednodušenie budeme poèty, tam kde je koeficient $a$ nenulovı, uvádza v tvare $a\cdot IJ$. Keïe poèty rastú kvadraticky tak pre ve¾ké $I$ a $J$ bude odchılka zanedbate¾ná. Pre plnı algoritmus teda dostaneme tieto poèty
 
 \begin{center}\label{full_operations_cached}	
 	\begin{tabularx}{\textwidth}{l|XXXX}
@@ -970,38 +981,38 @@ Nech $I$ znaèí poèet uzlov na osi $x$ a $J$ znaèí poèet uzlov na osi $y$. Všetky
 		& $+$ & $\times$ & $\div$ & M \\
 		\hline
 		\textit{VypoèítajDx}
-		& $3IJ$ & $3\textit{,}5IJ$ & $0$ & $0$\\
+		& $4IJ$ & $4\textit{,}5IJ$ & $IJ$ & $IJ$\\
 		\textit{VypoèítajDxy}
-		& $6I$ & $7I$ & $2I$ & $0$\\
+		& $8I$ & $9I$ & $2I$ & $I$\\
 		\textit{VypoèítajDy}
 		& $4IJ$ & $4\textit{,}5IJ$ & $0$ & $IJ$\\
 		\textit{VypoèítajDyx}
 		& $4IJ$ & $4\textit{,}5IJ$ & $0$ & $IJ$\\
 		\hdashline
 		\textbf{\textit{VypoèítajPlnı}}
-		& $11IJ$ & $12\textit{,}5IJ$ & $2IJ$ & $2IJ$\\
+		& $12IJ$ & $13\textit{,}5IJ$ & $3IJ$ & $3IJ$\\
 	\end{tabularx}
 \end{center}
-Pre operácie nad nekešovanımi dátami dostávame  
-\begin{center}\label{full_operations_uncached}	
-	\begin{tabularx}{\textwidth}{l|XXXX}
-		\diag{.1em}{4cm}{Procedúra}{Operácia}
-		& $+$ & $\times$ & $\div$ & M \\
-		\hline
-		\textit{VypoèítajDx}
-		& $IJ$ & $IJ$ & $IJ$ & $IJ$\\
-		\textit{VypoèítajDxy}
-		& $2I$ & $7I$ & $2I$ & $m$\\
-		\textit{VypoèítajDy}
-		& $0$ & $0$ & $0$ & $0$\\
-		\textit{VypoèítajDyx}
-		& $0$ & $0$ & $0$ & $0$\\
-		\hdashline
-		\textbf{\textit{VypoèítajPlnı}}
-		& $IJ$ & $IJ$ & $IJ$ & $IJ$\\
-	\end{tabularx}
-\end{center}
- 
+%Pre operácie nad nekešovanımi dátami dostávame  
+%\begin{center}\label{full_operations_uncached}	
+%	\begin{tabularx}{\textwidth}{l|XXXX}
+%		\diag{.1em}{4cm}{Procedúra}{Operácia}
+%		& $+$ & $\times$ & $\div$ & M \\
+%		\hline
+%		\textit{VypoèítajDx}
+%		& $IJ$ & $IJ$ & $IJ$ & $IJ$\\
+%		\textit{VypoèítajDxy}
+%		& $2I$ & $7I$ & $2I$ & $m$\\
+%		\textit{VypoèítajDy}
+%		& $0$ & $0$ & $0$ & $0$\\
+%		\textit{VypoèítajDyx}
+%		& $0$ & $0$ & $0$ & $0$\\
+%		\hdashline
+%		\textbf{\textit{VypoèítajPlnı}}
+%		& $IJ$ & $IJ$ & $IJ$ & $IJ$\\
+%	\end{tabularx}
+%\end{center}
+% 
 \subsection{Poèty pre redukovanı algoritmus}
 Redukovanı spôsob na poèítanie derivácií vyuíva inı tvar trojdiagonálej sústavy rovníc. Zmeòme poèty operácií procedúr \textit{VyriešLU} a \textit{InicalizujLU}. 
 Ïalej polome dve nové pomocné procedúry \textit{InicalizujZmiešLU}, ktorá inicializuje hodnoty $r_0$, \dots, $r_{K-1}$ a $b$ z LU dekompozície \ref{eq:LU} pre zmiešané derivácie $d^{xy}$ a k nej príslušnú \textit{VyriešZmiešLU}.
@@ -1017,8 +1028,9 @@ Redukovanı spôsob na poèítanie derivácií vyuíva inı tvar trojdiagonálej sústavy
 		& $4\textit{,}5K$ & $4\textit{,}5K$ & $K$ & $K$\\
 	\end{tabular}
 \end{center}
-Podobne ako pri plnom algoritme, to èi operácie budú vykonané na kešovanıch dátach závisí od toho z ktorej procedúry sú volané. 
-Pri procedúrach \textit{InicalizujZmiešLU} a \textit{VyriešZmiešLU}, ktoré sú volané len v jednom kontexte ale vieme exaktne urèi ktoré operácie budú vykonané na kešovanıch dátach a ktoré nie.
+
+V prípade poètov operácií v procedúrach pre zmiešané derivácie nepristupujeme k dátam spojito, navyše èítame dáta z nieko¾kıch vektorov naraz èo má malı negatívny vplyv na vıkon. Ten sa pri testovaní ukázal by malı v rozsahu 10\% a 20\%. Aby sa nám to v následujúcej èasti nemılilo tak poèty uvedieme v samostatnıch tabu¾kách kde v prvej budú uvedené len poèty operácií na spojitıch dátach a následne na nespojitıch dátach. Pre spojité dáta máme
+
 \begin{center}\label{cross_lu_operations_cached}
 	\begin{tabular}{l|cccc}
 		\diag{.1em}{4cm}{Procedúra}{Operácia}
@@ -1029,7 +1041,7 @@ Pri procedúrach \textit{InicalizujZmiešLU} a \textit{VyriešZmiešLU}, ktoré sú vo
 		& $3K$ & $3\textit{,}5K$ & $K$ & $0$\\
 	\end{tabular}
 \end{center}
-
+a pre operácie na nespojitıch dátach dostaneme 
 \begin{center}\label{cross_lu_operations_uncached}
 	\begin{tabular}{l|cccc}
 		\diag{.1em}{4cm}{Procedúra}{Operácia}
@@ -1061,27 +1073,19 @@ Analogicky polome procedúry predstavujúce implementáciu redukovaného algoritmu:
 	Procedúra \textit{VypoèítajRedukovanı} vypoèíta na základe vstupnıch hodnôt pre de Boorovu interpoláciu \ref{eq:deboor_input} postupnım vykonaním predchádzajúcich siedmich procedúr.    
 \end{itemize}
 
-Najprv si spoèítajme procedúry pre resty. Všimnime si, e všetky vıpoèty v \textit{VypoèítajDyResty} sú kešované ale vıpoèty v \textit{VypoèítajDxResty} nie.
+Najprv si spoèítajme procedúry pre resty.
 
 \begin{center}\label{rest_operations_cached}
 	\begin{tabular}{l|cccc}
 		\diag{.1em}{4cm}{Procedúra}{Operácia}
 		& $+$ & $\times$ & $\div$ & M \\
 		\hline
+		\textit{VypoèítajDxResty}
+		& $1\textit{,}5IJ$ & $IJ$ & $0$ & $\rfrac{5}{2}IJ$\\
 		\textit{VypoèítajDyResty}
 		& $1\textit{,}5IJ$ & $IJ$ & $0$ & $\rfrac{5}{2}IJ$\\
 		\textit{VypoèítajZmiešResty}
 		& $7IJ$ & $2\textit{,}5IJ$ & $0$ & $0$\\
-	\end{tabular}
-\end{center}
-Pri nekešované vıpoèty v \textit{VypoèítajDxResty} dostávame
-\begin{center}\label{rest_operations_uncached}
-	\begin{tabular}{l|cccc}
-		\diag{.1em}{4cm}{Procedúra}{Operácia}
-		& $+$ & $\times$ & $\div$ & M \\
-		\hline
-		\textit{VypoèítajDxResty}
-		& $1\textit{,}5IJ$ & $IJ$ & $0$ & $\rfrac{5}{2}IJ$\\
 	\end{tabular}
 \end{center}
 
@@ -1105,18 +1109,12 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 		& $7\textit{,}375IJ$ & $6\textit{,}25IJ$ & $0\textit{,}75IJ$ & $0\textit{,}75IJ$\\
 	\end{tabularx}
 \end{center}
-Pre operácie nad nekešovanımi dátami dostávame  
+V prípade \textit{VypoèítajDyx} ešte musíme zapoèíta operácie nad nespojitımi dátami
 \begin{center}\label{red_operations_uncached}	
 	\begin{tabularx}{\textwidth}{l|XXXX}
 		\diag{.1em}{4cm}{Procedúra}{Operácia}
 		& $\plus$ & $\times$ & $\div$ & M \\
 		\hline
-		\textit{VypoèítajDx}
-		& $1\textit{,}5IJ$ & $IJ$ & $0\textit{,}5IJ$ & $0\textit{,}5IJ$\\
-		\textit{VypoèítajDy}
-		& $0$ & $0$ & $0$ & $0$\\
-		\textit{VypoèítajDxy}
-		& $2I$ & $2I$ & $2J$ & $J$\\
 		\textit{VypoèítajDyx}
 		& $4\textit{,}175IJ$ & $2\textit{,}125IJ$ & $0$ & $0$\\\hdashline	
 		\textbf{\textit{VypoèítajRedukovanı}}
@@ -1126,14 +1124,17 @@ Pre operácie nad nekešovanımi dátami dostávame
 
 \subsection{Zhrnutie}
 Teraz máme spoèítané jednotlivé matematické a pamäové operácie.
+
 V záujme preh¾adnosti v rámci tejto podsekcie zaveïme tieto oznaèenia 
+\begin{oznac} \label{oznac:spoj_nespoj_dat_strukt}
+Oznaème dve triedy dátovıch štruktúr symbolmi:
 \begin{itemize}
 	\item
 	$\rightY$ oznaèuje spojité dátové štruktúry ako napríklad vektory,
 	\item 
 	$\righttherefore$  oznaèuje nespojité dátové štruktúry ako napríklad vektory referencií na nejaké dáta alebo spájané zoznamy.
 \end{itemize} 
-
+\end{oznac}
 Nech $t_\text{operácia}^\text{dáta}$ udáva dobu trvania nejakej operácie na nejakıch dátach.
 Napríklad $t_+^\text{spojité}$ udáva èas sèítania dvoch rovnako ve¾kıch spojitıch kešovanıch vektorov.
 Na zaèiatku sekcie sme zvolili predpoklad, e pri èíselnıch typoch s pohyblivou èiarkou sú operácie sèítania (odèítania) a násobenia rovnako rıchle. Na všetkıch testovanıch procesoroch je totone rıchla aj pamäová operácia kopírovania pri spojitıch dátach. Teda $t_+ = t_\times = t_{\text{MEM}_\text{c}}$.
@@ -1188,7 +1189,7 @@ Ak chceme urèi zrıchlenie redukovaného algoritmu staèí vydeli \ref{sum_full_op
 	Vıraz \ref{full_red_ratio} nazveme \pojem{pomer rıchlostí}. 
 \end{df}
 \pr{ \label{ratio10}
-	Ak budeme predpoklada $\gamma = 10$, to jest operácia delenia je desanásobne pomalšia ako operácia sèítania tak a budeme uvaova maticu uzlov s poètom $I\times J = 1000\times1000$ tak pomer rıchlostí bude $1{,}187$.	
+	Ak budeme predpoklada $\gamma = 3$, to jest operácia delenia je trojnásobne pomalšia ako operácia sèítania, ïalej $\eta = 15$ (pod¾a obrázka \ref{img:cacheSpeed}), $\iota = 3$ a $\lambda = 1$ a budeme uvaova maticu uzlov s poètom $I\times J = 1000\times1000$ tak pomer rıchlostí bude $1{,}287$, teda plnı algoritmus je $1{,}287$ krát pomalší ako redukovanı.	
 }
 
 \section{Zrıchlenie v praxi}
@@ -1200,12 +1201,30 @@ Ako bolo spomenuté, testovacia aplikácia bola implementovaná v jazyku \cpp.
 Program obsahuje testy pre sekvenèné aj paralelné poèítanie derivácií pre oba predmetné algoritmy.
 Pouitı prekladaè bol Intel \cpp Compiler v 64 bitovej verzii nastavenı na generovanie agresívne optimalizovaného binárneho kódu (-O2), prièom paralelnı kód bol implementovanı pomocou rozhrania OpenMP.    
 
-Testy boli vykonané na troch rôznych poèítaèovıch zostavách, všetky so systémom Windows 10. 
-Testovacie stroje obsahujú moderné viacvláknové procesory so vzájomne odlišnımi architektúrami a hlavne spôsobmi vykonávania paralelizovanıch procesov.
-Ståpce 2-4 v tabu¾ke predstavujú èasy trvania testov základnıch aritmetickıch operácií. 
+Testy boli vykonané na šiestich rôznych poèítaèovıch zostavách, všetky so systémom Windows 7 a 10. 
+Testovacie stroje obsahujú rozlièné multivláknové procesory od starého Core z roku 2007 a po najmodernejší Skylake z roku 2015 so vzájomne odlišnımi architektúrami a hlavne spôsobmi vykonávania paralelizovanıch procesov.
+
+Z. 
+
+\begin{center}\label{real_op_speed}
+	\begin{tabular}{l?{2}ccc|ccc|ccr}
+		& \multicolumn{3}{c|}{Operácia} & \multicolumn{3}{c|}{Sekvenène} & \multicolumn{3}{c}{Paralelne}  \\
+		CPU
+		& $+$ & $\cdot$ & $/$ & Plnı & Red & F : R & Plnı & Red & F : R  \\
+		\hline
+		Core i5 4400
+		& 121 & 121 & 1087 & 128 & 101 & 1,27 & 55 & 56 & 0.98  \\
+		Core i3 2350M
+		& 325 & 297 & 3151 & 252 & 202 & 1,25 & 142 & 145 & 0,98  \\
+		FX-6300
+		& 133 & 136 & 529 & 180 & 146 & 1,23 & 78 & 79 & 0,99  \\
+	\end{tabular}
+\end{center}
 
 Ståpce 5 a 6 predstavujú èasy behov sekvenènıch implementácií de Boorovho a redukovaného algoritmu, prièom ståpec 7 ukazuje pomer tıchto èasov.
-Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií. Všetky uvedené èasové údaje sú v milisekundách.    
+Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií. Všetky uvedené èasové údaje sú v milisekundách.  
+
+  
 
 \begin{center}\label{real_speedup}
 	\begin{tabular}{l?{2}ccc|ccc|ccr}
