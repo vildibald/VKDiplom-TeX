@@ -26,6 +26,11 @@
 \usepackage{MnSymbol}
 \usepackage{scrextend}
 \usepackage{booktabs}
+\usepackage{xfrac}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+%\usepackage{fontspec}
 % cierne linky bez ohranicenia
 \usepackage[bookmarksnumbered,colorlinks=true, allcolors=black]{hyperref}
 % linky s ohranicenim
@@ -33,6 +38,22 @@
 
 \newcolumntype{x}[1]{>{\centering\arraybackslash}p{#1}}
 \usepackage{tikz}
+
+
+\makeatletter
+\renewcommand{\ALG@name}{Algoritmus}
+\renewcommand{\listalgorithmname}{Zoznam algoritmov}
+
+\renewcommand\algorithmicwhile{\textbf{pokia¾}}
+\renewcommand\algorithmicdo{\textbf{}}
+\renewcommand\algorithmicend{\textbf{koiec}}
+\renewcommand\algorithmicif{\textbf{ak}}
+\renewcommand\algorithmicthen{\textbf{potom}}
+\renewcommand\algorithmicelse{\textbf{inak}}
+\renewcommand\algorithmicfor{\textbf{pre}}
+\renewcommand\algorithmicprocedure{\textbf{procedúra}}
+
+\makeatother
 
 \newcommand\diag[4]{%
 	\multicolumn{1}{p{#2}|}{\hskip-\tabcolsep
@@ -141,6 +162,9 @@ enum, namespace, string, partial, get, set, var},
 		xor,xor\_eq
 	},
 }
+
+%Setup pseudocode
+
 %\usepackage{xcolor}
 
 %\lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{blue!80!black}}
@@ -239,6 +263,7 @@ enum, namespace, string, partial, get, set, var},
 \maketitle
 \newpage
 \tableofcontents
+%\listofalgorithms
 \newpage
 %==================================================================================================================================================================================
 \chapter*{Úvod}
@@ -469,7 +494,7 @@ Vısledná funkcia $S$ teda vznikne zjednotením segmentov $S_{i,j}$.
 Na vypoèítanie kadého segmentu potrebujeme štyri uzly, a pre kadı uzol príslušne hodnoty $z$, $d^x$, $d^y$ a $d^{xy}$. 
 Tieto hodnoty vieme získa buï priamo z interpolovanej funkcie $f$, alebo ich vypoèíta inım spôsobom, napríklad De Boorovou interpoláciou. 
 
-\section{LU dekompozícia}
+\section{Trojdiagonálna LU dekompozícia}
 
 \begin{df}
 	Nech $n \ge 3$ je z \uinteger. Sústavu rovníc tvaru
@@ -1098,7 +1123,7 @@ Od tejto chvíle ak spomenieme operáciu sèítania tak tım budeme súèasne myslie a
 Ako vidie zïaleka najpomalšie je práve delenie.
 
 Pre zaujímavos si môeme ukáza praktické vısledky z testovacej aplikácie. 
-Merali sme operácie na dvoch 512 prvkovıch poliach, prièom aby sme dostali \uv{rozumne} dlhé èasy vıpoèty bilo opakované 500000 krát. 
+Merali sme operácie na dvoch 512 prvkovıch poliach, prièom aby sme dostali \uv{rozumne} dlhé èasy vıpoèty boli opakované 500000 krát. 
 V tabu¾ke sú namiesto mikroarchitektúr uvedené konkrétne modely procesorov, prièom ich poradie zodpovedá poradiu z minulej tabu¾ky. 
 Všetky údaju sú v milisekundách.
 
@@ -1130,7 +1155,7 @@ To je spôsobné ve¾mi vysokou hodnotou inverzného prietoku v prípade opakovane vy
 V prípade našich algoritmov ale dochádza len k jednému deleniu na mnoho sèítaní a násobení. 
 Z toho dôvodu môeme inverznı prietok v prípade delenia zanedba a v kontexte implementovanıch algoritmov delenie povaova pod¾a jeho odozvy za pribline \textbf{trojnásobne} pomalšie ako násobenie. 
 
-\section{Poèty aritmetickıch operácii}
+\section{Teoretické zrıchlenie}
 Dôvod, preèo je náš redukovanı algoritmus rıchlejší je práve fakt, e pri òom dochádza k znaène menšiemu poètu delení, ktoré je oproti ostatnım trom operáciám vırazne pomalšie. 
 V ïalšej sekcii sy spoèítame jednotlivé operácie a vypoèítame teoretické zrıchlenie redukovaného algoritmu.
 
@@ -1390,6 +1415,96 @@ V prípade \textit{VypoèítajDyx} ešte musíme zapoèíta operácie nad nespojitımi d
 		\bottomrule
 	\end{tabular}
 \end{center}
+
+\subsection{Pamäové nároky}
+
+Redukovanı algoritmus by nemal by lepší len v poète aritmetickıch operácií. 
+Uvaujme maticu uzlov ve¾kosti $I$ a $J$.
+Potrebujeme si pamäta $I\cdot J$ funkènıch hodnôt v uzloch, derivácií pod¾a $x$, $y$ a zmiešanıch derivácií. 
+Samotné uzly si pamäta nemusíme lebo uvaujeme len uniformné splajny. 
+Teda staèí si nám uloi iba uzly $u_0$, $u_{I-1}$, $v_0$, $v_{J-1}$. 
+Zvyšné uzly si vieme vypoèíta vzorcom $u_i =u_0 + |u_{I-1} - u_0|\cdot \frac{i}{I}$ pre ¾ubovo¾né $i$ z $\{1, \dots, I-2\}$, respektíve $v_j =v_0 + |v_{J-1} - v_0|\cdot \frac{j}{J}$ pre ¾ubovo¾né $j$ z $\{1, \dots, J-2\}$. Potrebujeme si teda pamäta aspoò $4\cdot I\cdot J + 4$ èísel pre funkèné hodnoty uzlov.
+
+Poèítanie LU dekompozície všeobecne potrebuje pä vektorov, kde tri predstavujú trojdiagonálu, jeden pravú stranu a poslednı pre vısledok.
+Ten môeme zapisova priamo do vektora pravej strany ak ju nepotrebujeme zachova. 
+ 
+\begin{algorithm}
+	\caption{Všeobecná LU dekompozícia
+	\label{alg:SolveGeneralLU}}
+	\begin{algorithmic}[1]
+	\Procedure{VyriešLU}{}
+	\State \textbf{vstup:}	
+	\State
+	$l[0..n-2]$ spodná diagonála
+	\State
+	$m[0..n-1]$ hlavná diagonála
+	\State
+	$u[0..n-2]$ horná diagonála, po skonèení sa nezachová
+	\State
+	$r[0..n-1]$ pravá strana
+	\State \textbf{vıstup:} $r[0..n-1]$ pravá strana obsahujúca vısledok 
+	\State
+	
+%	$p \gets [0..n-1]$
+	\State $u[0]\gets \sfrac{u[0]}{m[0]}$
+	\State $r[0]\gets \sfrac{r[0]}{m[0]}$
+	\For{$i$ \textbf{od} $1$ \textbf{a} $n-1$} 
+		\State $q \gets \sfrac{1}{m[i]-l[i]\cdot u[i-1]}$
+		\State $u[i] \gets q\cdot u[i]$
+		\State $r[i] \gets q\cdot (r[i] - l[i]\cdot r[i-1])$
+	\EndFor
+	\For{$i$ \textbf{od} $n-2$ \textbf{a} $0$} 	
+		\State $r[i] \gets r[i] - u[i]\cdot r[i+1]$
+	\EndFor
+	\EndProcedure
+
+	\end{algorithmic}
+\end{algorithm}
+
+V prípade poèítania derivácií je sústava rovníc v špeciálnom tvare pod¾a \ref{eq:deboorM} pre plnı alebo \ref{eq:redM} pre redukovanı algoritmus.
+V oboch prípadoch všetky èísla na hornej aj spodnej diagonále majú hodnotu $1$. 
+Na hlavnej diagonále sú to hodnoty $4$ pri plnom algoritme a v prípade redukovaného postupu sú to hodnoty $-14$. 
+Poslednı prvok diagonály tie môe obsahova hodnotu $-15$ ak poèet rovníc je párny. 
+Teda pri implementácii si nemusíme pamäta vektory, staèí nám zapamäta si iba štyri hodnoty. 
+Upravenı algoritmus, ktorı rieši LU dekompozíciu pre plnı a redukovanı algoritmus vyzerá takto. 
+
+\begin{algorithm}
+	\caption{Špeciálna LU dekompozícia
+		\label{alg:SolveLU}}
+	\begin{algorithmic}[1]
+		\Procedure{VyriešLU}{}
+		\State \textbf{vstup:}	
+		\State
+		\State
+		$m$ hodnota prvkov hlavnej diagonály
+		\State
+		$m_l$ hodnota posledného prvku hlavnej diagonály
+		\State
+		$r[0..n-1]$ pravá strana
+		\State \textbf{vıstup:} $r[0..n-1]$ pravá strana obsahujúca vısledok 
+		\State
+				
+		\State$u \gets [0..n-2]$
+		\Comment Pomocnı vektor nahradzujúci hornú diagonálu
+		\State $q \gets \sfrac{1}{m}$
+		\State $u[0]\gets q$
+		\State $r[0]\gets q \cdot r[0]$
+		\For{$i$ \textbf{od} $1$ \textbf{a} $n-2$} 
+		\State $q \gets \sfrac{1}{m - u[i-1]}$
+		\State $u[i] \gets q$
+		\State $r[i] \gets q\cdot (r[i] - r[i-1])$
+		\EndFor
+		\State $q \gets \sfrac{1}{m_l - u[n-1]}$
+		\State $u[i] \gets q$
+		\State $r[i] \gets q\cdot (r[n-1] - r[n-2])$
+		\For{$i$ \textbf{od} $n-2$ \textbf{a} $0$} 	
+		\State $r[i] \gets r[i] - u[i]\cdot r[i+1]$
+		\EndFor
+		\EndProcedure	
+	\end{algorithmic}
+\end{algorithm}
+
+Pri pouitá tejto priestorovo optimalizovanej varianty vıpoètu LU dekompozície potrebujeme na vypoèítanie $I\cdot J$ uzlov práve $I\cdot J + 2I + 2J$ pamäte.
 
 \subsection{Zhrnutie}
 Teraz máme spoèítané jednotlivé matematické a pamäové operácie.
@@ -1665,7 +1780,10 @@ Ich vıznam si teraz vyjasníme.
 
 \chapter*{Záver}
 
-
+Podarilo sa nám teda pomerne vırazne urıchli vıpoèet derivácií splajnov v ich uzloch a tie zmenši pamäové nároky algoritmu.
+Samozrejme stále existujú oblasti v ktorıch by sa dal zlepši. 
+Prioritou teraz ostáva jednak zovšeobecni redukovanı algoritmus aj pre neuniformné splajny a upravi zmiešané zbytkové derivácie aby sme mohli zefektívni paralelizáciu. 
+Tá má momentálne prínos najmä v poloviènıch pamäovıch nárokoch. 
 
 %
 %\bibliography{dp} %berie sa z dp.bib

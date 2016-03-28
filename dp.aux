@@ -36,11 +36,11 @@
 \newlabel{df:surface_spline}{{1.8}{9}{Splajny}{veta.1.8}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces Uk\'a\v zka uzlov pre \v stvorsegmentov\'y splajn.}}{11}{figure.1.2}}
 \newlabel{pic:fseg}{{1.2}{11}{Ukáka uzlov pre štvorsegmentovı splajn}{figure.1.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.3}LU dekompoz\IeC {\'\i }cia}{12}{section.1.3}}
-\newlabel{eq:lu}{{1.3}{12}{LU dekompozícia}{equation.1.3.3}{}}
-\newlabel{eq:LU}{{1.5}{12}{LU dekompozícia}{equation.1.3.5}{}}
-\newlabel{eq:FwLy}{{1.6}{12}{LU dekompozícia}{equation.1.3.6}{}}
-\newlabel{eq:BwUd}{{1.7}{12}{LU dekompozícia}{equation.1.3.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Trojdiagon\'alna LU dekompoz\IeC {\'\i }cia}{12}{section.1.3}}
+\newlabel{eq:lu}{{1.3}{12}{Trojdiagonálna LU dekompozícia}{equation.1.3.3}{}}
+\newlabel{eq:LU}{{1.5}{12}{Trojdiagonálna LU dekompozícia}{equation.1.3.5}{}}
+\newlabel{eq:FwLy}{{1.6}{12}{Trojdiagonálna LU dekompozícia}{equation.1.3.6}{}}
+\newlabel{eq:BwUd}{{1.7}{12}{Trojdiagonálna LU dekompozícia}{equation.1.3.7}{}}
 \citation{deboor}
 \@writefile{toc}{\contentsline {section}{\numberline {1.4}De Boorova interpol\'acia}{13}{section.1.4}}
 \newlabel{eq:deboor_input}{{1.4}{13}{De Boorova interpolácia}{section.1.4}{}}
@@ -87,7 +87,7 @@
 \newlabel{tab:instr_speed}{{2.1.3}{27}{Rıchlos aritmetickıch operácií}{subsection.2.1.3}{}}
 \newlabel{footnote:round_divisor}{{2}{27}{}{Hfootnote.2}{}}
 \newlabel{real_op_speed}{{2.1.3}{28}{Rıchlos aritmetickıch operácií}{subsection.2.1.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Po\v cty aritmetick\'ych oper\'acii}{28}{section.2.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Teoretick\'e zr\'ychlenie}{28}{section.2.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Po\v cty pre pln\'y algoritmus}{29}{subsection.2.2.1}}
 \newlabel{lu_operations}{{2.2.1}{29}{Poèty pre plnı algoritmus}{subsection.2.2.1}{}}
 \newlabel{full_operations_cached}{{2.2.1}{30}{Poèty pre plnı algoritmus}{subsection.2.2.1}{}}
@@ -98,35 +98,40 @@
 \newlabel{rest_operations_cached}{{2.2.2}{32}{Poèty pre redukovanı algoritmus}{subsection.2.2.2}{}}
 \newlabel{red_operations_cached}{{2.2.2}{32}{Poèty pre redukovanı algoritmus}{subsection.2.2.2}{}}
 \newlabel{red_operations_uncached}{{2.2.2}{32}{Poèty pre redukovanı algoritmus}{subsection.2.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Zhrnutie}{32}{subsection.2.2.3}}
-\newlabel{oznac:spoj_nespoj_dat_strukt}{{2.1}{32}{Zhrnutie}{veta.2.1}{}}
-\newlabel{sum_full_operations}{{2.1}{33}{Zhrnutie}{equation.2.2.1}{}}
-\newlabel{sum_red_operations}{{2.2}{33}{Zhrnutie}{equation.2.2.2}{}}
-\newlabel{full_red_ratio}{{2.3}{33}{Zhrnutie}{equation.2.2.3}{}}
-\newlabel{ratio10}{{2.3}{33}{Zhrnutie}{veta.2.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Zr\'ychlenie v praxi}{34}{section.2.3}}
-\newlabel{real_speedup}{{2.3}{34}{Zrıchlenie v praxi}{section.2.3}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implement\'acia a u\v z\IeC {\'\i }vate\v lsk\'a pr\IeC {\'\i }ru\v cka}{36}{chapter.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Pam\"a\v tov\'e n\'aroky}{32}{subsection.2.2.3}}
+\newlabel{alg:SolveGeneralLU}{{1}{33}{Pamäové nároky}{algorithm.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces V\v seobecn\'a LU dekompoz\IeC {\'\i }cia }}{33}{algorithm.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Zhrnutie}{33}{subsection.2.2.4}}
+\newlabel{oznac:spoj_nespoj_dat_strukt}{{2.1}{33}{Zhrnutie}{veta.2.1}{}}
+\newlabel{alg:SolveLU}{{2}{34}{Pamäové nároky}{algorithm.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces \v Speci\'alna LU dekompoz\IeC {\'\i }cia }}{34}{algorithm.2}}
+\newlabel{sum_full_operations}{{2.1}{35}{Zhrnutie}{equation.2.2.1}{}}
+\newlabel{sum_red_operations}{{2.2}{35}{Zhrnutie}{equation.2.2.2}{}}
+\newlabel{full_red_ratio}{{2.3}{35}{Zhrnutie}{equation.2.2.3}{}}
+\newlabel{ratio10}{{2.3}{35}{Zhrnutie}{veta.2.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Zr\'ychlenie v praxi}{36}{section.2.3}}
+\newlabel{real_speedup}{{2.3}{36}{Zrıchlenie v praxi}{section.2.3}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implement\'acia a u\v z\IeC {\'\i }vate\v lsk\'a pr\IeC {\'\i }ru\v cka}{38}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapt:impl}{{3}{36}{Implementácia a uívate¾ská príruèka}{chapter.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Uk\'a\v zka z aplik\'acie.}}{37}{figure.3.6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces V\'ykonnostn\'y tester.}}{37}{figure.3.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.1}Vizualiz\'acia}{38}{subsection.3.0.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Aplik\'acia po spusten\IeC {\'\i }.}}{38}{figure.3.8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Panel zad\'avania splajnu.}}{38}{figure.3.9}}
-\newlabel{apka_spod}{{3.9}{38}{Panel zadávania splajnu}{figure.3.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Hlavn\'e zobrazovacie okn\'a.}}{39}{figure.3.10}}
-\newlabel{apka_stred}{{3.10}{39}{Hlavné zobrazovacie okná}{figure.3.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Li\v sta n\'astrojov.}}{40}{figure.3.11}}
-\newlabel{apka_vrch}{{3.11}{40}{Lišta nástrojov}{figure.3.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.2}V\'ykonnostn\'y tester}{40}{subsection.3.0.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces V\'ykonnostn\'y tester.}}{40}{figure.3.12}}
-\newlabel{bench}{{3.12}{40}{Vıkonnostnı tester}{figure.3.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Zadanie \'udajov pre testovanie.}}{41}{figure.3.13}}
-\newlabel{bench_surface}{{3.13}{41}{Zadanie údajov pre testovanie}{figure.3.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces V\'ysledky testu.}}{41}{figure.3.14}}
-\newlabel{bench_surface_results}{{3.14}{41}{Vısledky testu}{figure.3.14}{}}
+\newlabel{chapt:impl}{{3}{38}{Implementácia a uívate¾ská príruèka}{chapter.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Uk\'a\v zka z aplik\'acie.}}{39}{figure.3.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces V\'ykonnostn\'y tester.}}{39}{figure.3.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.1}Vizualiz\'acia}{40}{subsection.3.0.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Aplik\'acia po spusten\IeC {\'\i }.}}{40}{figure.3.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Panel zad\'avania splajnu.}}{40}{figure.3.9}}
+\newlabel{apka_spod}{{3.9}{40}{Panel zadávania splajnu}{figure.3.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Hlavn\'e zobrazovacie okn\'a.}}{41}{figure.3.10}}
+\newlabel{apka_stred}{{3.10}{41}{Hlavné zobrazovacie okná}{figure.3.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Li\v sta n\'astrojov.}}{42}{figure.3.11}}
+\newlabel{apka_vrch}{{3.11}{42}{Lišta nástrojov}{figure.3.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.2}V\'ykonnostn\'y tester}{42}{subsection.3.0.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces V\'ykonnostn\'y tester.}}{42}{figure.3.12}}
+\newlabel{bench}{{3.12}{42}{Vıkonnostnı tester}{figure.3.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Zadanie \'udajov pre testovanie.}}{43}{figure.3.13}}
+\newlabel{bench_surface}{{3.13}{43}{Zadanie údajov pre testovanie}{figure.3.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces V\'ysledky testu.}}{43}{figure.3.14}}
+\newlabel{bench_surface_results}{{3.14}{43}{Vısledky testu}{figure.3.14}{}}
 \bibcite{splines}{1}
 \bibcite{szabominotorok}{2}
 \bibcite{lukasRigorozka}{3}
