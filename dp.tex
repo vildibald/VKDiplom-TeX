@@ -273,7 +273,12 @@ Témou mojej diplomovej práce sú rovinné krivkové splajny a priestorové splajn po
 Vısledok tejto práce je návrh novej metódy vıpoètu derivácií splajnu v jeho uzloch, jej porovnanie s de Boorovym postupom z ktorého vychádzame, vysvetlenie zrıchlenia a implementácia aplikácií na vizuálne a vıkonnostne porovnávanie oboch metód.
 
 Prínos zrıchlenia vıpoètu splajnov spoèíva v lepších monostiach modelovania ¾ubovo¾nıch trojrozmernıch útvarov ako po èastiach polynomickıch funkcií. 
-Akéko¾vek zrıchlenie toti znamená monos v reálnom èase modelova zloitejšie objekty. 
+Akéko¾vek zrıchlenie toti znamená monos v reálnom èase modelova zloitejšie objekty, èo je uitoèné nielen vzh¾adom na vizuálnu reprezentáciu, ale aj na skúmanie fyzikálnych vlastností ako napríklad aerodynamické vlastnosti lietadiel a podobne. 
+
+%\obrazok{airplaneSpline.jpg}{0.4}{Splajnovı model lietadla\footnote{http://discourse.mcneel.com/uploads/default/16061/b153158e1cbcbd86.jpg}.}
+\obrazok{airplaneSpline.jpg}{0.15}{Splajnovı model lietadla$^0$.} % nejde spravit \footref{footnote:airplane_spline} v popise obrazka
+
+\footnotetext{\label{footnote:airplane_spline}Odozva je nadobúda menšie hodnoty ak je delite¾ celı.}
 Technológia v ktorej tieto poznatky implementujeme je Microsoft Silverlight. 
 Jedná sa o ve¾mi schopnı nástroj na tvorbu webovıch aplikácii s plnou podporou hardvérovej akcelerácie uívate¾ského prostredia a monosou tvorby rıchlej trojrozmernej grafiky. 
 Vıhodou tohto frameworku je, kede beí na platforme Microsoft .NET, monos jednoduchej portácie na desktopovú prípadne mobilnú aplikáciu. 
@@ -301,8 +306,10 @@ Oèakávané zrıchlenie vıpoètov novım algoritmom.
 \begin{itemize}
 	\item{\textbf{Procesorová architektúra}}\newline
 	Tu si objasníme vplyv modernıch inštrukènıch sád na zrıchlenie redukovaného algoritmu.
-	\item{\textbf{Poèty operácií}}\newline
+	\item{\textbf{Teoretické zrıchlenie}}\newline
 	Spoèítanie èasovej zloitosti  vysvetlenie vplyvu základnıch aritmetickıch a pamäovıch operácií. 
+	\item{\textbf{Zrıchlenie v praxi}}\newline
+	Vısledky z našej implementácie.
 \end{itemize}
 \item{\textbf{Implementácia a uívate¾ská príruèka}}\newline
 Podrobnosti implementácie v MS Silverlight a \cpp. 
@@ -594,6 +601,84 @@ Pre priamy a spätnı chod máme
 \text{Spätnı: } U\mathbf{d} = \mathbf{y} \text{, } d_i = \frac{y_i}{u_i} \text{, } \left\{ d_i = \frac{1}{u_i}(y_i - d_{i+1})\right\} \text{,} i \in \{n-1, \dots, 1\}\text{.}
 \end{equation}
 LU dekompozíciou sa rieši ako de Boorova sústava (\ref{eq:deboorM}), tak aj naša redukovaná (\ref{eq:redM}).
+Nišie si ukáeme pseudokód tohto algoritmu.
+Procedúra algoritmu je priestorovo optimalizovaná kde pouívame LU rozklad robíme priamo na vstupnıch vektoroch predstavujúce diagonály a vısledok ukladáme do vektora obsahujúci pravú stranu.
+
+\begin{algorithm}
+	\caption{Všeobecná LU dekompozícia
+		\label{alg:SolveGeneralLU}}
+	\begin{algorithmic}[1]
+		\Procedure{VyriešLU}{}
+		\State \textbf{vstup:}	
+		\State
+		$c[0..n-2]$ spodná diagonála
+		\State
+		$b[0..n-1]$ hlavná diagonála
+		\State
+		$a[0..n-2]$ horná diagonála, po skonèení sa nezachová
+		\State
+		$r[0..n-1]$ pravá strana
+		\State \textbf{vıstup:} $r[0..n-1]$ pravá strana obsahujúca vısledok 
+		\State
+		
+		%	$p \gets [0..n-1]$
+		\State $a[0]\gets \sfrac{a[0]}{b[0]}$
+		\State $r[0]\gets \sfrac{r[0]}{b[0]}$
+		\For{$i$ \textbf{od} $1$ \textbf{a} $n-1$} 
+		\State $m \gets \sfrac{1}{b[i]-c[i]\cdot a[i-1]}$
+		\State $a[i] \gets m\cdot a[i]$
+		\State $r[i] \gets m\cdot (r[i] - c[i]\cdot r[i-1])$
+		\EndFor
+		\For{$i$ \textbf{od} $n-2$ \textbf{a} $0$} 	
+		\State $r[i] \gets r[i] - a[i]\cdot r[i+1]$
+		\EndFor
+		\EndProcedure
+		
+	\end{algorithmic}
+\end{algorithm}
+
+V prípade poèítania derivácií je sústava rovníc v špeciálnom tvare pod¾a \ref{eq:deboorM} pre plnı alebo \ref{eq:redM} pre redukovanı algoritmus.
+V oboch prípadoch všetky èísla na hornej aj spodnej diagonále majú hodnotu $1$. 
+Na hlavnej diagonále sú to hodnoty $4$ pri plnom algoritme a v prípade redukovaného postupu sú to hodnoty $-14$. 
+Poslednı prvok diagonály tie môe obsahova hodnotu $-15$ ak poèet rovníc je párny. 
+Teda pri implementácii si nemusíme pamäta vektory, staèí nám zapamäta si iba štyri hodnoty. 
+Upravenı algoritmus, ktorı rieši LU dekompozíciu špeciálne pre plnı a redukovanı algoritmus je nišie. 
+
+\begin{algorithm}
+	\caption{Špeciálna LU dekompozícia
+		\label{alg:SolveLU}}
+	\begin{algorithmic}[1]
+		\Procedure{VyriešLU}{}
+		\State \textbf{vstup:}	
+		\State
+		\State
+		$b$ hodnota prvkov hlavnej diagonály
+		\State
+		$b_l$ hodnota posledného prvku hlavnej diagonály
+		\State
+		$r[0..n-1]$ pravá strana
+		\State \textbf{vıstup:} $r[0..n-1]$ pravá strana obsahujúca vısledok 
+		\State
+		
+		\State$u \gets [0..n-2]$
+		\Comment Pomocnı vektor nahradzujúci hornú diagonálu
+		\State $m \gets \sfrac{1}{b}$
+		\State $p[0]\gets q$
+		\State $r[0]\gets q \cdot r[0]$
+		\For{$i$ \textbf{od} $1$ \textbf{a} $n-2$} 
+		\State $q \gets \sfrac{1}{b - p[i-1]}$
+		\State $p[i] \gets m$
+		\State $r[i] \gets m\cdot (r[i] - r[i-1])$
+		\EndFor
+		\State $m \gets \sfrac{1}{b_l - p[n-1]}$
+		\State $p[i] \gets m$
+		\State $r[i] \gets m\cdot (r[n-1] - r[n-2])$
+		\For{$i$ \textbf{od} $n-2$ \textbf{a} $0$} 	
+		\State $r[i] \gets r[i] - p[i]\cdot r[i+1]$
+		\EndFor
+		\EndProcedure	
+	\end{algorithmic}
+\end{algorithm}
 
 \section{De Boorova interpolácia}
 
@@ -1242,15 +1327,15 @@ Pre plnı algoritmus teda dostaneme tieto poèty
 		& $\pm$ & $\cdot$ & $\div$ & M \\
 		\midrule
 		\textit{VypoèítajDx}
-		& $4IJ$ & $4\textit{,}5IJ$ & $IJ$ & $IJ$\\
+		& $4IJ$ & $3IJ$ & $IJ$ & $IJ$\\
 		\textit{VypoèítajDxy}
-		& $8I$ & $9I$ & $2I$ & $I$\\
+		& $8I$ & $6I$ & $2I$ & $I$\\
 		\textit{VypoèítajDy}
-		& $4IJ$ & $4\textit{,}5IJ$ & $0$ & $IJ$\\
+		& $4IJ$ & $3IJ$ & $IJ$ & $IJ$\\
 		\textit{VypoèítajDyx}
-		& $4IJ$ & $4\textit{,}5IJ$ & $0$ & $IJ$\\
+		& $4IJ$ & $3IJ$ & $IJ$ & $IJ$\\
 		\textbf{\textit{VypoèítajPlnı}}
-		& $12IJ$ & $13\textit{,}5IJ$ & $3IJ$ & $3IJ$\\
+		& $12IJ$ & $9IJ$ & $3IJ$ & $3IJ$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1288,7 +1373,7 @@ Zmeòme poèty operácií procedúr \textit{VyriešLU} a \textit{InicalizujLU}.
 		\textit{InicalizujLU}
 		& $1\textit{,}5K$ & $K$ & $0$ & $0$\\
 		\textit{VyriešLU}
-		& $4\textit{,}5K$ & $4\textit{,}5K$ & $K$ & $K$\\
+		& $4\textit{,}5K$ & $3K$ & $K$ & $K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1307,7 +1392,7 @@ Pre spojité dáta máme
 		\textit{InicalizujZmiešLU}
 		& $0$ & $0$ & $0$ & $0$\\
 		\textit{VyriešZmiešLU}
-		& $3K$ & $3\textit{,}5K$ & $K$ & $0$\\
+		& $3K$ & $3K$ & $K$ & $0$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1321,7 +1406,7 @@ a pre operácie na nespojitıch dátach dostaneme
 		\textit{InicalizujZmiešLU}
 		& $16\textit{,}5K$ & $8\textit{,}5K$ & $0$ & $0$\\
 		\textit{VyriešZmiešLU}
-		& $16\textit{,}5K$ & $8\textit{,}K$ & $0$ & $K$\\
+		& $16\textit{,}5K$ & $8\textit{,}5K$ & $0$ & $K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1389,15 +1474,15 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 		& $\pm$ & $\cdot$ & $\div$ & M \\
 		\midrule
 		\textit{VypoèítajDx}
-		& $1\textit{,}5IJ$ & $1\textit{,}75IJ$ & $0$ & $0$\\
+		& $3IJ$ & $2IJ$ & $0\textit{,}5IJ$ & $0$\\
 		\textit{VypoèítajDy}
-		& $3IJ$ & $2\textit{,}75IJ$ & $0\textit{,}5IJ$ & $0\textit{,}5IJ$\\
+		& $3IJ$ & $2IJ$ & $0\textit{,}5IJ$ & $0$\\
 		\textit{VypoèítajDxy}
-		& $6I+8J$ & $7I+9J$ & $2I$ & $I$\\
+		& $6I+8J$ & $7I+9J$ & $2I$ & $I+J$\\
 		\textit{VypoèítajDyx}
-		& $2\textit{,}875IJ$ & $1\textit{,}75IJ$ & $0\textit{,}25IJ$ & $0\textit{,}25IJ$\\	
+		& $2\textit{,}875IJ$ & $1\textit{,}625IJ$ & $0IJ$ & $0$\\	
 		\textbf{\textit{VypoèítajRedukovanı}}
-		& $7\textit{,}375IJ$ & $6\textit{,}25IJ$ & $0\textit{,}75IJ$ & $0\textit{,}75IJ$\\
+		& $8\textit{,}875IJ$ & $5\textit{,}625IJ$ & $1\textit{,}25IJ$ & $0$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1408,103 +1493,30 @@ V prípade \textit{VypoèítajDyx} ešte musíme zapoèíta operácie nad nespojitımi d
 		Procedúra
 		& $\pm$ & $\cdot$ & $\div$ & M \\
 		\midrule
+		\textit{VypoèítajDx}
+		& $0$ & $0$ & $0$ & $0\textit{,}5IJ$\\
+		\textit{VypoèítajDy}
+		& $0$ & $0$ & $0$ & $0\textit{,}5IJ$\\
 		\textit{VypoèítajDyx}
-		& $4\textit{,}175IJ$ & $2\textit{,}125IJ$ & $0$ & $0$\\
+		& $4\textit{,}125IJ$ & $2\textit{,}125IJ$ & $0$ & $0\textit{,}25IJ$\\	
 		\textbf{\textit{VypoèítajRedukovanı}}
-		& $2\textit{,}675IJ$ & $3\textit{,}215IJ$ & $0\textit{,}5IJ$ & $0\textit{,}5IJ$\\
+		& $4\textit{,}125IJ$ & $2\textit{,}125IJ$ & $0$ & $1\textit{,}25IJ$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
 
 \subsection{Pamäové nároky}
 
-Redukovanı algoritmus by nemal by lepší len v poète aritmetickıch operácií. 
+Redukovanı algoritmus by nemal by lepší len v poète aritmetickıch operácií, ale taktie prinies menšie pamäové nároky vyplıvajúce z poloviènej ve¾kosti sústav rovníc riešenıch LU dekompozíciou. 
 Uvaujme maticu uzlov ve¾kosti $I$ a $J$.
 Potrebujeme si pamäta $I\cdot J$ funkènıch hodnôt v uzloch, derivácií pod¾a $x$, $y$ a zmiešanıch derivácií. 
 Samotné uzly si pamäta nemusíme lebo uvaujeme len uniformné splajny. 
 Teda staèí si nám uloi iba uzly $u_0$, $u_{I-1}$, $v_0$, $v_{J-1}$. 
 Zvyšné uzly si vieme vypoèíta vzorcom $u_i =u_0 + |u_{I-1} - u_0|\cdot \frac{i}{I}$ pre ¾ubovo¾né $i$ z $\{1, \dots, I-2\}$, respektíve $v_j =v_0 + |v_{J-1} - v_0|\cdot \frac{j}{J}$ pre ¾ubovo¾né $j$ z $\{1, \dots, J-2\}$. Potrebujeme si teda pamäta aspoò $4\cdot I\cdot J + 4$ èísel pre funkèné hodnoty uzlov.
 
-Poèítanie LU dekompozície všeobecne potrebuje pä vektorov, kde tri predstavujú trojdiagonálu, jeden pravú stranu a poslednı pre vısledok.
-Ten môeme zapisova priamo do vektora pravej strany ak ju nepotrebujeme zachova. 
- 
-\begin{algorithm}
-	\caption{Všeobecná LU dekompozícia
-	\label{alg:SolveGeneralLU}}
-	\begin{algorithmic}[1]
-	\Procedure{VyriešLU}{}
-	\State \textbf{vstup:}	
-	\State
-	$l[0..n-2]$ spodná diagonála
-	\State
-	$m[0..n-1]$ hlavná diagonála
-	\State
-	$u[0..n-2]$ horná diagonála, po skonèení sa nezachová
-	\State
-	$r[0..n-1]$ pravá strana
-	\State \textbf{vıstup:} $r[0..n-1]$ pravá strana obsahujúca vısledok 
-	\State
-	
-%	$p \gets [0..n-1]$
-	\State $u[0]\gets \sfrac{u[0]}{m[0]}$
-	\State $r[0]\gets \sfrac{r[0]}{m[0]}$
-	\For{$i$ \textbf{od} $1$ \textbf{a} $n-1$} 
-		\State $q \gets \sfrac{1}{m[i]-l[i]\cdot u[i-1]}$
-		\State $u[i] \gets q\cdot u[i]$
-		\State $r[i] \gets q\cdot (r[i] - l[i]\cdot r[i-1])$
-	\EndFor
-	\For{$i$ \textbf{od} $n-2$ \textbf{a} $0$} 	
-		\State $r[i] \gets r[i] - u[i]\cdot r[i+1]$
-	\EndFor
-	\EndProcedure
-
-	\end{algorithmic}
-\end{algorithm}
-
-V prípade poèítania derivácií je sústava rovníc v špeciálnom tvare pod¾a \ref{eq:deboorM} pre plnı alebo \ref{eq:redM} pre redukovanı algoritmus.
-V oboch prípadoch všetky èísla na hornej aj spodnej diagonále majú hodnotu $1$. 
-Na hlavnej diagonále sú to hodnoty $4$ pri plnom algoritme a v prípade redukovaného postupu sú to hodnoty $-14$. 
-Poslednı prvok diagonály tie môe obsahova hodnotu $-15$ ak poèet rovníc je párny. 
-Teda pri implementácii si nemusíme pamäta vektory, staèí nám zapamäta si iba štyri hodnoty. 
-Upravenı algoritmus, ktorı rieši LU dekompozíciu pre plnı a redukovanı algoritmus vyzerá takto. 
-
-\begin{algorithm}
-	\caption{Špeciálna LU dekompozícia
-		\label{alg:SolveLU}}
-	\begin{algorithmic}[1]
-		\Procedure{VyriešLU}{}
-		\State \textbf{vstup:}	
-		\State
-		\State
-		$m$ hodnota prvkov hlavnej diagonály
-		\State
-		$m_l$ hodnota posledného prvku hlavnej diagonály
-		\State
-		$r[0..n-1]$ pravá strana
-		\State \textbf{vıstup:} $r[0..n-1]$ pravá strana obsahujúca vısledok 
-		\State
-				
-		\State$u \gets [0..n-2]$
-		\Comment Pomocnı vektor nahradzujúci hornú diagonálu
-		\State $q \gets \sfrac{1}{m}$
-		\State $u[0]\gets q$
-		\State $r[0]\gets q \cdot r[0]$
-		\For{$i$ \textbf{od} $1$ \textbf{a} $n-2$} 
-		\State $q \gets \sfrac{1}{m - u[i-1]}$
-		\State $u[i] \gets q$
-		\State $r[i] \gets q\cdot (r[i] - r[i-1])$
-		\EndFor
-		\State $q \gets \sfrac{1}{m_l - u[n-1]}$
-		\State $u[i] \gets q$
-		\State $r[i] \gets q\cdot (r[n-1] - r[n-2])$
-		\For{$i$ \textbf{od} $n-2$ \textbf{a} $0$} 	
-		\State $r[i] \gets r[i] - u[i]\cdot r[i+1]$
-		\EndFor
-		\EndProcedure	
-	\end{algorithmic}
-\end{algorithm}
-
-Pri pouitá tejto priestorovo optimalizovanej varianty vıpoètu LU dekompozície potrebujeme na vypoèítanie $I\cdot J$ uzlov práve $I\cdot J + 2I + 2J$ pamäte.
+Poèítanie LU dekompozície všeobecne pod¾a algoritmu \ref{alg:SolveGeneralLU} potrebuje pä vektorov, kde tri predstavujú trojdiagonálu, jeden pravú stranu, v ktorom na konci bude vısledok.
+Nám ale staèí uvaova iba procedúru pre náš špeciálny tvar trojdiagonálnej sústavy pod¾a algoritmu \ref{alg:SolveLU}.
+Pri pouití tejto priestorovo optimalizovanej varianty vıpoètu LU dekompozície potrebujeme na vypoèítanie $I\cdot J$ uzlov práve $I\cdot J + 2I + 2J$ pamäte.
 
 \subsection{Zhrnutie}
 Teraz máme spoèítané jednotlivé matematické a pamäové operácie.
@@ -1618,7 +1630,7 @@ Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií. Všetky 
 		Ci5 4440 \tiny{4C/4T}
 		&  &  &  &  &  &\\
 		Ci7 6700K \tiny{4C/8T}
-		& 29 & 25 & 61 & 52 & 25 & 26 \\
+		& 29 & 25 & 55 & 49 & 28 & 30 \\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1639,7 +1651,7 @@ Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií. Všetky 
 %\end{center}
 
 %Na kadom z troch testovacích strojov sú rıchlosti sèítania a násobenia 64 bitovıch èísel s plávajúcou desatinnou èiarkou totoné. V prípade násobenia, respektíve sèítania a delenia vychádza pomer na procesoroch Intel Core i5 a i3 pribline 9.
-Sériová verzia redukovaného algoritmu je o pribline 18\% rıchlejšia ako pôvodnı de Boorov postup èo súhlasí s odhadnutım zlepšením na konci kapitoly \nameref{spdup} v príklade \ref{ratio10}. 
+Sériová verzia redukovaného algoritmu je o pribline 12\% rıchlejšia ako pôvodnı de Boorov postup èo viac-menej súhlasí s odhadnutım zlepšením na konci kapitoly \nameref{spdup} v príklade \ref{ratio10}. 
 %Tam nám vyšlo 19\% zrıchlenie, kde zbytok prisudzujem vplyvu pamäovıch operácií, ktoré sme vtedy nebrali do úvahy.
 
 %V prípade procesora AMD FX si môeme všimnú anomáliu, kde novı algoritmus je vırazne rıchlejší ne by mal by pod¾a dosiahnutého pomeru rıchlosti násobenia a delenia. 
@@ -1782,8 +1794,9 @@ Ich vıznam si teraz vyjasníme.
 
 Podarilo sa nám teda pomerne vırazne urıchli vıpoèet derivácií splajnov v ich uzloch a tie zmenši pamäové nároky algoritmu.
 Samozrejme stále existujú oblasti v ktorıch by sa dal zlepši. 
-Prioritou teraz ostáva jednak zovšeobecni redukovanı algoritmus aj pre neuniformné splajny a upravi zmiešané zbytkové derivácie aby sme mohli zefektívni paralelizáciu. 
-Tá má momentálne prínos najmä v poloviènıch pamäovıch nárokoch. 
+Prioritou teraz ostáva jednak zovšeobecni redukovanı algoritmus aj pre neuniformné splajny a upravi zmiešané zbytkové derivácie aby sme mohli zefektívni paralelizáciu.
+%Zlepšenie paralelizácie by v budúcnosti umonilo vıpoèty akcelerova grafickou kartou. 
+Tá má momentálne prínos najmä v poloviènıch pamäovıch nárokoch samotného algoritmu. 
 
 %
 %\bibliography{dp} %berie sa z dp.bib
