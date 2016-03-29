@@ -276,9 +276,9 @@ Prínos zrıchlenia vıpoètu splajnov spoèíva v lepších monostiach modelovania ¾ub
 Akéko¾vek zrıchlenie toti znamená monos v reálnom èase modelova zloitejšie objekty, èo je uitoèné nielen vzh¾adom na vizuálnu reprezentáciu, ale aj na skúmanie fyzikálnych vlastností ako napríklad aerodynamické vlastnosti lietadiel a podobne. 
 
 %\obrazok{airplaneSpline.jpg}{0.4}{Splajnovı model lietadla\footnote{http://discourse.mcneel.com/uploads/default/16061/b153158e1cbcbd86.jpg}.}
-\obrazok{airplaneSpline.jpg}{0.15}{Splajnovı model lietadla$^0$.} % nejde spravit \footref{footnote:airplane_spline} v popise obrazka
+\obrazok{airplaneSpline.jpg}{0.1}{Splajnovı model lietadla.} % nejde spravit \footref{footnote:airplane_spline} v popise obrazka
 
-\footnotetext{\label{footnote:airplane_spline}Odozva je nadobúda menšie hodnoty ak je delite¾ celı.}
+%\footnotetext{\label{footnote:airplane_spline}Odozva je nadobúda menšie hodnoty ak je delite¾ celı.}
 Technológia v ktorej tieto poznatky implementujeme je Microsoft Silverlight. 
 Jedná sa o ve¾mi schopnı nástroj na tvorbu webovıch aplikácii s plnou podporou hardvérovej akcelerácie uívate¾ského prostredia a monosou tvorby rıchlej trojrozmernej grafiky. 
 Vıhodou tohto frameworku je, kede beí na platforme Microsoft .NET, monos jednoduchej portácie na desktopovú prípadne mobilnú aplikáciu. 
@@ -679,7 +679,7 @@ Upravenı algoritmus, ktorı rieši LU dekompozíciu špeciálne pre plnı a redukovanı
 		\EndProcedure	
 	\end{algorithmic}
 \end{algorithm}
-
+\newpage
 \section{De Boorova interpolácia}
 
 Nech sú dané hodnoty $(u_0$, ...,$u_{I-1})$ a $(v_0$, ...,$v_{J-1})$, kde $I$,$J$ sú z \uinteger, prièom chceme interpolova funkciu $f$ na $[u_0, u_{I-1}] \times [v_0, v_{J-1}]$. 
@@ -1164,8 +1164,8 @@ Tabu¾ka obashuje tieto ståpce.
 	\item \textbf{Architektúra (rok)}\newline
 	Testovaná mikroarchitektúra a rok jej uvedenia na trh. 
 	Architektúry sú zoradené abecedne pod¾a vırobcu a následne pod¾a roku vydania.
-	\item \textbf{Operácia}\newline
-	Symbol pre príslušnú skalárnu aritmetickú operáciu na 64 bitovıch èíselnıch typoch s pohyblivou desatinnou èiarkou inštrukènıch sadách SSE a SSE4.
+%	\item \textbf{Operácia}\newline
+%	Symbol pre príslušnú skalárnu aritmetickú operáciu na 64 bitovıch èíselnıch typoch s pohyblivou desatinnou èiarkou inštrukènıch sadách SSE a SSE4.
 	\item \textbf{Odozva}\newline
 	Poèet strojovıch cyklov potrebnıch na vykonanie inštrukcie.
 	\item \textbf{Inverznı prietok}\newline
@@ -1278,7 +1278,7 @@ Zatia¾ budeme predpoklada, e všetky operácie sú vykonávané na spojitıch dátach
 		\textit{InicalizujLU}
 		& $K$ & $K$ & $0$ & $0$\\
 		\textit{VyriešLU}
-		& $4K$ & $4\textit{,}5K$ & $K$ & $K$\\
+		& $4K$ & $3K$ & $K$ & $K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1526,9 +1526,9 @@ V záujme preh¾adnosti v rámci tejto podsekcie zaveïme tieto oznaèenia
 Oznaème dve triedy dátovıch štruktúr symbolmi:
 \begin{itemize}
 	\item
-	$\rightY$ oznaèuje spojité dátové štruktúry ako napríklad vektory,
+	$\rightY$ oznaèuje spojité dátové štruktúry ako napríklad vektory.
 	\item 
-	$\righttherefore$  oznaèuje nespojité dátové štruktúry ako napríklad spájané zoznamy alebo vektory referencií na konkrétne dáta .
+	$\righttherefore$  oznaèuje nespojité dátové štruktúry ako napríklad spájané zoznamy alebo vektory referencií na konkrétne dáta.
 \end{itemize} 
 \end{oznac}
 Nech $t_\text{operácia}^\text{dáta}$ udáva dobu trvania nejakej operácie na nejakıch dátach.
