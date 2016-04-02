@@ -1253,43 +1253,29 @@ Tieto dve operácie preto budeme spoloène oznaèova symbolom $\pm$.
 Od tejto chvíle ak spomenieme operáciu sèítania tak tım budeme súèasne myslie aj operáciu odèítania. 
 Ako vidie zïaleka najpomalšie je práve delenie.
 
-
 Pre zaujímavos si môeme ukáza praktické vısledky z testovacej aplikácie. 
 Merali sme operácie na dvoch 512 prvkovıch poliach, prièom aby sme dostali \uv{rozumne} dlhé èasy vıpoèty boli opakované 500000 krát. 
-Ïalej budeme mera aj pamäovú operáciu kopírovania, prièom rozlišujeme medzi kopírovaním spojitıch a nespojitıch dát.
-
-\begin{oznac} \label{oznac:spoj_nespoj_dat_strukt}
-Oznaème dve triedy dátovıch štruktúr symbolmi:
-\begin{itemize}
-	\item
-	$\rightY$ oznaèuje spojité dátové štruktúry ako napríklad vektory.
-	\item 
-	$\righttherefore$  oznaèuje nespojité dátové štruktúry ako napríklad spájané zoznamy alebo vektory referencií na konkrétne dáta.
-	Taktie oznaèuje aj spojité vektory ak operácia kopírovania z jedného vektora do druhého nie je vykonávaná spojite (napr. kopírujeme iba prvky na nepárnych indexoch).
-\end{itemize} 
-\end{oznac}
-
 V tabu¾ke sú namiesto mikroarchitektúr uvedené konkrétne modely procesorov, prièom ich poradie zodpovedá poradiu z minulej tabu¾ky. 
 Všetky údaju sú v milisekundách.
 \begin{table}
 \begin{center}
-	\begin{tabular}{lccccc}	
+	\begin{tabular}{lccc}	
 		\toprule
 		Procesor
-		& $\pm$ & $\cdot$ & $\div$ & $\rightY$ & $\righttherefore$\\
+		& $\pm$ & $\cdot$ & $\div$  \\
 		\midrule
 		AMD FX-6300
-		& 176 & 173 & 673 & &  \\
+		& 176 & 173 & 673  \\
 		Intel Core 2 Duo E8200 
-		& namerat & u & c. toroka & & \\
+		& namerat & u & c. toroka  \\
 		Intel Core i5 650
-		& 198 & 224 & 1758 & &  \\
+		& 198 & 224 & 1758  \\
 		Intel Core i3 2350M
-		& 233 & 231 & 2462 & &  \\	
+		& 233 & 231 & 2462  \\	
 		Intel Core i5 4440
-		& 120 & 119 & 1087 & &  \\
+		& 120 & 119 & 1087  \\
 		Intel Core i7 6700K
-		& 99 & 99 & 257 & 3,8 & 59 \\
+		& 99 & 99 & 257  \\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1409,13 +1395,15 @@ Najprv polome procedúry predstavujúce LU dekompozíciu spoloèné pre oba postupy.
 \end{itemize}
 
 \subsection{Cena plného algoritmu}
-\label{sec:full_cost}
+
 Poèty základnıch aritmetickıch a pamäovıch operácií pre vyššie uvedené procedúry môeme zhrnú do tabu¾ky, prièom uvaujeme poèty v našej ukákovej implementácii\footnote{Repozitár so zdrojovımi kódmi k aplikáciám mono nájs na adrese https://github.com/vildibald/VKDiplom-master}.
 Riadky tabu¾ky predstavujú jednotlivé procedúry a 
 ståpce udávajú poèet vykonanıch operácii, pre základné matematické operácie, kde $K$ je poèet neznámych. 
 Podotıkam, e operáciu odèítania budeme uvaova ako sèítanie. 
-Operácia $\rightY$ predstavuje kopírovanie vypoèítanıch derivácií do vıslednej matice uzlov. 
+Operácia \textit{M} predstavuje kopírovanie vypoèítanıch derivácií do vıslednej matice uzlov. 
+Ïalej musíme odlíši pamäovú operáciu kopírovania vykonanú buï na spojitıch alebo na nespojitıch dátach pod¾a sekcie \ref{sec:kesovanie} o kešovaní.
 Pri meraní sa ukázalo, e kopírovanie spojitıch dát vieme má cenu $0\text{,}04$ teda kopírovanie je $25$ násobne rıchlejšie ako sèítanie.
+V prípade nespojitıch dát má kopírovanie cenu pribline $0\text{,}6$.
 V tabu¾kách budeme pre sèítanie, násobenie a delenie uvádza ich ceny pod¾a definície \ref{df:oper_weights}.
 V prípade plného algoritmu dochádza len ku kopírovaniu spojitıch dát, teda poèet kopírovaní v tabu¾kách vynásobime $0\text{,}04$.
 
@@ -1425,7 +1413,7 @@ V prípade plného algoritmu dochádza len ku kopírovaniu spojitıch dát, teda poèet
 		\toprule
 		%		\diag{.1em}{4cm}{Procedúra}{Operácia}
 		Procedúra
-		& $\pm$ & $\cdot$ & $\div$ & $\rightY$ \\
+		& $\pm$ & $\cdot$ & $\div$ & \textit{M} \\
 		\midrule
 		\textit{InicalizujLU}
 		& $K$ & $K$ & $0$ & $0$\\
@@ -1479,18 +1467,18 @@ Pre plnı algoritmus teda dostaneme tieto poèty
 		\begin{tabular}{lcccc}			
 			\toprule
 			Procedúra
-			& $\pm$ & $\cdot$ & $\div$ & $\rightY$ \\
+			& $\pm$ & $\cdot$ & $\div$ &\textit{M} \\
 			\midrule
 			\textit{VypoèítajDx}
-			& $4IJ$ & $3IJ$ & $3IJ$ & $0\text{,}04IJ$\\
+			& $4IJ$ & $3IJ$ & $IJ$ & $0\text{,}04IJ$\\
 			\textit{VypoèítajDxy}
-			& $8I$ & $6I$ & $6I$ & $0\text{,}04I$\\
+			& $8I$ & $6I$ & $2I$ & $0\text{,}04I$\\
 			\textit{VypoèítajDy}
-			& $4IJ$ & $3IJ$ & $3IJ$ & $0\text{,}04IJ$\\
+			& $4IJ$ & $3IJ$ & $IJ$ & $0\text{,}04IJ$\\
 			\textit{VypoèítajDyx}
-			& $4IJ$ & $3IJ$ & $3IJ$ & $0\text{,}04IJ$\\
-%			\textbf{\textit{SUMA}}
-%			& $12IJ$ & $9IJ$ & $9IJ$ & $3IJ$\\
+			& $4IJ$ & $3IJ$ & $IJ$ & $0\text{,}04IJ$\\
+%			\textbf{\textit{VypoèítajPlnı}}
+%			& $12IJ$ & $9IJ$ & $3IJ$ & $3IJ$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -1498,12 +1486,12 @@ Pre plnı algoritmus teda dostaneme tieto poèty
 	\label{full_operations_cached}	
 \end{table}
 
-Sèítaním všetkıch cien operácií v tabu¾ke dostaneme následujúci vısledok.
+Sèítaním operácií v tabu¾ke dostaneme následujúci vısledok.
 
 \begin{lema}
 \label{lema:full_oper_count}
 Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$. 
-Potom sumárna cena operácií plného algoritmu je
+Potom sumárny poèet operácií plného algoritmu je
 \begin{itemize} 
 \item
 $12IJ$ sèítaní,
@@ -1514,32 +1502,25 @@ $3IJ$ delení,
 \item
 $0\text{,}12IJ$ kopírovaní.
 \end{itemize}
-Cena plného algoritmu teda je
-$$30\text{,}IJ$$
+prièom vzh¾adom k tomu, e operácia kopírovania je vykonávaná na spojitıch dátach,
+Pod¾a lemy \ref{}
 \end{lema}
 
 \subsection{Poèty pre redukovanı algoritmus}
-\label{sec:red_cost}
 Redukovanı spôsob na poèítanie derivácií vyuíva inı tvar trojdiagonálej sústavy rovníc. 
 Zmeòme poèty operácií procedúr \textit{VyriešLU} a \textit{InicalizujLU}. 
 Ïalej polome dve nové pomocné procedúry \textit{InicalizujZmiešLU}, ktorá inicializuje hodnoty $r_0$, \dots, $r_{K-1}$ a $b$ z LU dekompozície \ref{eq:LU} pre zmiešané derivácie $d^{xy}$ a k nej príslušnú \textit{VyriešZmiešLU}.
-
-V prípade redukovaného algoritmu nie je kopírovanie vısledku LU dekompozície spojité.
-Konkrétne to znamená, e potrebujeme do vektora dåky napríklad $I$ na kadú nepárnu pozíciu uloi hodnotu z vektora $\rfrac{I}{2}$, pretoe LU nám nájde iba polovicu h¾adanıch derivácií.
-Cena kopírovania bude pod¾a reálneho merania $0.6$.
-Aby sme takéto kopírovanie vizuálne odlíšili od kopírovania v predchádzajúcej èasti, budeme túto operáciu oznaèova symbolom  $\righttherefore$.
-
 \begin{table}
 \begin{center}
 	\begin{tabular}{lcccc}	
 		\toprule
 		Procedúra
-		& $\pm$ & $\cdot$ & $\div$ &  $\righttherefore$ \\
+		& $\pm$ & $\cdot$ & $\div$ & \textit{M} \\
 		\midrule
 		\textit{InicalizujLU}
 		& $1\textit{,}5K$ & $K$ & $0$ & $0$\\
 		\textit{VyriešLU}
-		& $4\textit{,}5K$ & $3K$ & $3K$ & $0\textit{,}6K$\\
+		& $4\textit{,}5K$ & $3K$ & $K$ & $K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1547,23 +1528,21 @@ Aby sme takéto kopírovanie vizuálne odlíšili od kopírovania v predchádzajúcej èa
 \label{red_lu_operations}	
 \end{table}
 
-%V prípade poètov operácií v procedúrach pre zmiešané derivácie nepristupujeme k niektorım dátam spojito, navyše èítame dáta z nieko¾kıch vektorov naraz èo má malı negatívny vplyv na vıkon. 
-%Ten sa pri testovaní ukázal by malı v rozsahu  0\% a 10\% v závislosti od konkrétneho procesora. 
-%Aby sa nám to v následujúcej èasti nemılilo tak poèty uvedieme v samostatnıch tabu¾kách kde v prvej budú uvedené len poèty operácií na spojitıch dátach a následne na nespojitıch dátach. 
-V prípade zmiešanıch derivácií pouívame odlišné pravé strany rovníc pre LU dekompozíciu.
-Osobitne si spoèítajme ceny aj pre tieto procedúry.
-
+V prípade poètov operácií v procedúrach pre zmiešané derivácie nepristupujeme k niektorı dátam spojito, navyše èítame dáta z nieko¾kıch vektorov naraz èo má malı negatívny vplyv na vıkon. 
+Ten sa pri testovaní ukázal by malı v rozsahu 5\% a 20\% v závislosti od konkrétneho procesora. 
+Aby sa nám to v následujúcej èasti nemılilo tak poèty uvedieme v samostatnıch tabu¾kách kde v prvej budú uvedené len poèty operácií na spojitıch dátach a následne na nespojitıch dátach. 
+Pre spojité dáta máme
 \begin{table}
 \begin{center}
 	\begin{tabular}{lcccc}		
 		\toprule
 		Procedúra
-		& $\pm$ & $\cdot$ & $\div$ & $\righttherefore$\\
+		& $\pm$ & $\cdot$ & $\div$ & \textit{M}\\
 		\midrule
 		\textit{InicalizujZmiešLU}
-		& $16\textit{,}5K$ & $8\textit{,}5K$ & $0$ & $0$\\
+		& $0$ & $0$ & $0$ & $0$\\
 		\textit{VyriešZmiešLU}
-		& $19\textit{,}5K$ & $11\textit{,}5K$ & $3K$ & $0\textit{,}6K$\\
+		& $3K$ & $3K$ & $K$ & $0$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1571,24 +1550,25 @@ Osobitne si spoèítajme ceny aj pre tieto procedúry.
 \label{cross_lu_operations_cached}	
 \end{table}
 
-%a pre operácie na nespojitıch dátach dostaneme 
-%\begin{table}
-%\begin{center}
-%	\begin{tabular}{lcccc}	
-%		\toprule
-%		Procedúra		
-%		& $+$ & $\cdot$ & $\div$ & \textit{M} \\
-%		\midrule
-%		\textit{InicalizujZmiešLU}
-%		& $16\textit{,}5K$ & $8\textit{,}5K$ & $0$ & $0$\\
-%		\textit{VyriešZmiešLU}
-%		& $16\textit{,}5K$ & $8\textit{,}5K$ & $0$ & $K$\\
-%		\bottomrule
-%	\end{tabular}
-%\end{center}
-%\caption{Poèty operácií LU dekompozície na nespojitıch dátach pre zmiešané zostatkové derivácie.}
-%\label{cross_lu_operations_uncached}	
-%\end{table}
+a pre operácie na nespojitıch dátach dostaneme 
+\begin{table}
+\begin{center}
+	\begin{tabular}{lcccc}
+	
+		\toprule
+		Procedúra		
+		& $+$ & $\cdot$ & $\div$ & \textit{M} \\
+		\midrule
+		\textit{InicalizujZmiešLU}
+		& $16\textit{,}5K$ & $8\textit{,}5K$ & $0$ & $0$\\
+		\textit{VyriešZmiešLU}
+		& $16\textit{,}5K$ & $8\textit{,}5K$ & $0$ & $K$\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\caption{Poèty operácií LU dekompozície na nespojitıch dátach pre zmiešané zostatkové derivácie.}
+\label{cross_lu_operations_uncached}	
+\end{table}
 
 Analogicky ako v predchádzajúcej sekcii polome procedúry predstavujúce implementáciu redukovaného algoritmu pod¾a èasti \ref{sec:red_deboor}::
 \begin{itemize}
@@ -1631,7 +1611,7 @@ Najprv si spoèítajme procedúry pre resty.
 	\begin{tabular}{lcccc}	
 		\toprule
 		Procedúra
-		& $\pm$ & $\cdot$ & $\div$ & $\righttherefore$ \\
+		& $\pm$ & $\cdot$ & $\div$ & \textit{M} \\
 		\midrule
 		\textit{VypoèítajDxResty}
 		& $1\textit{,}5IJ$ & $IJ$ & $0$ & $0$\\
@@ -1655,64 +1635,49 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 	\begin{tabular}{lcccc}	
 		\toprule
 		Procedúra
-		& $\pm$ & $\cdot$ & $\div$ & $\righttherefore$ \\
+		& $\pm$ & $\cdot$ & $\div$ & \textit{M} \\
 		\midrule
 		\textit{VypoèítajDx}
-		& $3IJ$ & $2IJ$ & $1\textit{,}5IJ$ & $0\textit{,}3IJ$\\
+		& $3IJ$ & $2IJ$ & $0\textit{,}5IJ$ & $0$\\
 		\textit{VypoèítajDy}
-		& $3IJ$ & $2IJ$ & $1\textit{,}5IJ$ & $0\textit{,}3IJ$\\
+		& $3IJ$ & $2IJ$ & $0\textit{,}5IJ$ & $0$\\
 		\textit{VypoèítajDxy}
-		& $6I+8J$ & $7I+9J$ & $6I$ & $I+J$\\
+		& $6I+8J$ & $7I+9J$ & $2I$ & $I+J$\\
 		\textit{VypoèítajDyx}
-		& $7IJ$ & $3,75IJ$ & $0\textit{,}75IJ$ & $0\textit{,}15IJ$\\
+		& $2\textit{,}875IJ$ & $1\textit{,}625IJ$ & $0IJ$ & $0$\\	
+		\textbf{\textit{VypoèítajRedukovanı}}
+		& $8\textit{,}875IJ$ & $5\textit{,}625IJ$ & $1\textit{,}25IJ$ & $0$\\
 		\bottomrule
 	\end{tabular}
 \end{center}	
 \caption{Poèty operácií na spojitıch dátach redukovaného algoritmu.}
 \label{red_operations_cached}
 \end{table}
-%V prípade \textit{VypoèítajDyx} ešte musíme zapoèíta operácie nad nespojitımi dátami
-%\begin{table}
-%\begin{center}
-%	\begin{tabular}{lcccc}
-%		\toprule
-%	
-%		Procedúra
-%		& $\pm$ & $\cdot$ & $\div$ &\textit{M} \\
-%		\midrule
-%		\textit{VypoèítajDx}
-%		& $0$ & $0$ & $0$ & $0\textit{,}5IJ$\\
-%		\textit{VypoèítajDy}
-%		& $0$ & $0$ & $0$ & $0\textit{,}5IJ$\\
-%		\textit{VypoèítajDyx}
-%		& $4\textit{,}125IJ$ & $2\textit{,}125IJ$ & $0$ & $0\textit{,}25IJ$\\	
-%		%\textbf{\textit{VypoèítajRedukovanı}}
-%		%& $4\textit{,}125IJ$ & $2\textit{,}125IJ$ & $0$ & $1\textit{,}25IJ$\\
-%		\bottomrule
-%	\end{tabular}
-%\end{center}	
-%\caption{Poèty operácií na nespojitıch dátach redukovaného algoritmu.}
-%\label{red_operations_uncached}
-%\end{table}
 
-Sèítaním operácií v tabu¾ke dostaneme následujúci vısledok.
-\begin{lema}
-	\label{lema:red_oper_count}
-	Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$. 
-	Potom sumárny poèet operácií plného algoritmu je
-	\begin{itemize} 
-		\item
-		$13IJ$ sèítaní,
-		\item
-		$7\text{,}75IJ$ násobení,
-		\item
-		$3\text{,}75IJ$ delení,
-		\item
-		$0\text{,}75IJ$ kopírovaní.
-	\end{itemize}
-	Cena redukovaného algoritmu teda je
-	$$25\text{,}25IJ$$
-\end{lema}
+V prípade \textit{VypoèítajDyx} ešte musíme zapoèíta operácie nad nespojitımi dátami
+\begin{table}
+\begin{center}
+	\begin{tabular}{lcccc}
+		\toprule
+	
+		Procedúra
+		& $\pm$ & $\cdot$ & $\div$ &\textit{M} \\
+		\midrule
+		\textit{VypoèítajDx}
+		& $0$ & $0$ & $0$ & $0\textit{,}5IJ$\\
+		\textit{VypoèítajDy}
+		& $0$ & $0$ & $0$ & $0\textit{,}5IJ$\\
+		\textit{VypoèítajDyx}
+		& $4\textit{,}125IJ$ & $2\textit{,}125IJ$ & $0$ & $0\textit{,}25IJ$\\	
+		\textbf{\textit{VypoèítajRedukovanı}}
+		& $4\textit{,}125IJ$ & $2\textit{,}125IJ$ & $0$ & $1\textit{,}25IJ$\\
+		\bottomrule
+	\end{tabular}
+\end{center}	
+\caption{Poèty operácií na nespojitıch dátach redukovaného algoritmu.}
+\label{red_operations_uncached}
+\end{table}
+
 
 \subsection{Pamäové nároky}
 
@@ -1723,7 +1688,7 @@ Samotné uzly si pamäta nemusíme lebo uvaujeme len uniformné splajny.
 Teda staèí si nám uloi iba uzly $u_0$, $u_{I-1}$, $v_0$, $v_{J-1}$. 
 Zvyšné uzly si vieme vypoèíta vzorcom $u_i =u_0 + |u_{I-1} - u_0|\cdot \frac{i}{I}$ pre ¾ubovo¾né $i$ z $\{1, \dots, I-2\}$, respektíve $v_j =v_0 + |v_{J-1} - v_0|\cdot \frac{j}{J}$ pre ¾ubovo¾né $j$ z $\{1, \dots, J-2\}$. Potrebujeme si teda pamäta aspoò $4\cdot I\cdot J + 4$ èísel pre funkèné hodnoty uzlov.
 
-Poèítanie všeobecnej LU dekompozície pod¾a algoritmu \ref{alg:SolveGeneralLU} potrebuje pä vektorov, kde tri predstavujú trojdiagonálu, jeden pravú stranu, v ktorom na konci bude vısledok.
+Poèítanie LU dekompozície všeobecne pod¾a algoritmu \ref{alg:SolveGeneralLU} potrebuje pä vektorov, kde tri predstavujú trojdiagonálu, jeden pravú stranu, v ktorom na konci bude vısledok.
 Nám ale staèí uvaova iba procedúru pre náš špeciálny tvar trojdiagonálnej sústavy pod¾a algoritmu \ref{alg:SolveLU}.
 Pri pouití tejto priestorovo optimalizovanej varianty vıpoètu LU dekompozície potrebujeme na vypoèítanie $I\cdot J$ uzlov práve $I\cdot J + 2I + 2J$ pamäte.
 
@@ -1770,17 +1735,8 @@ Pri pouití tejto priestorovo optimalizovanej varianty vıpoètu LU dekompozície p
 %	\item 
 %	$c_\plus^{\lefttherefore} = IJ$
 %\end{itemize}
-
-%Máme všetko pripravené aby sme uviedli náš hlavnı vısledok.
-Po spoèítaní jednotlivıch matematickıch a pamäovıch operácií v èastiach \ref{sec:full_cost} a \ref{sec:red_cost} pristúpime k formulácii zrıchlenia.
-
-
-\begin{veta}
-Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$.
-Potom zrıchlenie plného algoritmu je dané pomerom
-\end{veta}
-		
-Celková cena algoritmu je súèet poètu všetkıch operácií z tabuliek \ref{full_operations_cached} pre plnı algoritmus, respektíve \ref{red_operations_cached} a \ref{red_operations_uncached} pre redukovanı algoritmus z predchádzajúcich podsekcií. 
+	
+Celková cena algoritmu je teda súèet poètu všetkıch operácií z tabuliek \ref{full_operations_cached} pre plnı algoritmus, respektíve \ref{red_operations_cached} a \ref{red_operations_uncached} pre redukovanı algoritmus z predchádzajúcich podsekcií. 
 Poèty operácií delenia na kešovanıch dátach vynásobime $\gamma$, poèty nekešovanıch pamäovıch operácií vynásobime $\eta$, poèty operácií sèítania a násobenia na nespojitıch dátach vynásobime $\iota$.
 %a nakoniec poèty operácií delenia na nekešovanıch dátach vynásobime $\lambda \iota$ (pretoe $\lambda$ udáva pomer delenia a sèítania na nekešovanıch dátach a to ešte treba vynásobi $\iota$).
 
@@ -1803,15 +1759,15 @@ Ak chceme urèi zrıchlenie redukovaného algoritmu staèí vydeli \ref{sum_full_op
 }
 \end{equation}
 
-%\begin{df}
-%	Vıraz \ref{full_red_ratio} nazveme \pojem{pomer rıchlostí}. 
-%\end{df}
+\begin{df}
+	Vıraz \ref{full_red_ratio} nazveme \pojem{pomer rıchlostí}. 
+\end{df}
 \pr{ \label{ratio10}
 	Ak budeme predpoklada $\gamma = 3$, to jest operácia delenia je trojnásobne pomalšia ako operácia sèítania, ïalej $\eta = 4$ (pod¾a obrázka \ref{img:cacheSpeed}), $\iota = 1\textit{,},1$ a $\lambda = 1$ a budeme uvaova maticu uzlov s poètom $I\times J = 1000\times1000$ tak pomer rıchlostí bude $1{,}18$, teda plnı algoritmus je $1{,}18$ krát pomalší ako redukovanı.	
 }
 
-\section{Merané zrıchlenie}
-\label{sec:real_speedup}
+\section{Zrıchlenie v praxi}
+
 V kapitole \nameref{spdup} sme urèili teoretické zrıchlenie poèítania uzlov, dosiahnute¾né zredukovaním ve¾kosti trojdiagonálnych sústav. 
 V tejto èasti si ukáeme reálne vısledky dosiahnuté v ukákovej implementácii. 
 
@@ -1902,9 +1858,6 @@ Ak je táto hypotéza korektná tak by bolo potrebné upravi resty, najmä pri zmieš
   
 %Táto príèina sa po prepracovaní implementácie ukázala bezpredmetná.  
 %\footnote{Túto hypotézu vplyvu cache je potrebné ešte podrobnejšie otestova, k èomu sa dostanem pravdepodobne v priebehu februára.} 
-
-Táto kapitola sa venovala poèítaniu zrıchlenia redukovaného algoritmu vzh¾adom na plnı algoritmus.
-Ako sme videli, teoretické zrıchlenie je v súlade s nameranım zrıchlením v závislosti od typu procesora.
 
 \chapter{Implementácia a uívate¾ská príruèka} \label{chapt:impl}
 Jednım z naším cie¾om je vytvorenie aplikácií na vizuálne a vıkonnostné porovnávanie splajnov, ktorıch uzly sú poèítané De Boorovim a našim redukovanım algoritmom. 
