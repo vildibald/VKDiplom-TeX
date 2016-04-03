@@ -32,8 +32,8 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Splajny}{8}{section.1.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Funkcia $sin(\sqrt  {x^2+y^2})$ aproximovan\'a bikubick\'ym splajnom.}}{8}{figure.1.1}}
 \newlabel{df:curve_spline}{{1.5}{9}{Splajny}{veta.1.5}{}}
+\newlabel{df:surface_spline}{{1.7}{9}{Splajny}{veta.1.7}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces De Boorov model vstupn\'ych hodn\^ot pre splajnov\'y povrch.}}{10}{figure.1.2}}
-\newlabel{df:surface_spline}{{1.7}{10}{Splajny}{veta.1.7}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces Uk\'a\v zka uzlov pre \v stvorsegmentov\'y splajn.}}{12}{figure.1.3}}
 \newlabel{pic:fseg}{{1.3}{12}{Ukáka uzlov pre štvorsegmentovı splajn}{figure.1.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {1.3}Trojdiagon\'alna LU dekompoz\IeC {\'\i }cia}{12}{section.1.3}}
@@ -71,6 +71,7 @@
 \newlabel{eq:redr4c}{{1.22}{21}{Poèítanie derivácií redukovanou sústavou}{equation.1.5.22}{}}
 \newlabel{eq:redM}{{1.23}{21}{Poèítanie derivácií redukovanou sústavou}{equation.1.5.23}{}}
 \newlabel{eq:reducedOddD}{{1.24}{22}{Poèítanie derivácií redukovanou sústavou}{equation.1.5.24}{}}
+\@writefile{toc}{\contentsline {subparagraph}{Paraleliz\'acia}{22}{section*.3}}
 \@writefile{toc}{\contentsline {section}{\numberline {1.6}Kon\v strukcia hermitovho splajnu}{22}{section.1.6}}
 \newlabel{sec:her_constr}{{1.6}{22}{Konštrukcia hermitovho splajnu}{section.1.6}{}}
 \newlabel{lema:spline_interpolation}{{1.18}{23}{Konštrukcia hermitovho splajnu}{veta.1.18}{}}
@@ -101,58 +102,57 @@
 \newlabel{footnote:round_divisor}{{2}{30}{}{Hfootnote.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces R\'ychlos\v t aritmetick\'ych oper\'aci\IeC {\'\i } na konkr\'etnych CPU.}}{31}{table.2.2}}
 \newlabel{real_op_speed}{{2.2}{31}{Rıchlos aritmetickıch operácií na konkrétnych CPU}{table.2.2}{}}
-\newlabel{oznac:spoj_nespoj_dat_strukt}{{2.1}{31}{Rıchlos aritmetickıch operácií}{veta.2.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Teoretick\'e zr\'ychlenie}{31}{section.2.2}}
-\newlabel{sec:theory_speedup}{{2.2}{31}{Teoretické zrıchlenie}{section.2.2}{}}
-\newlabel{df:oper_count}{{2.3}{32}{Teoretické zrıchlenie}{veta.2.3}{}}
-\newlabel{df:oper_weights}{{2.5}{32}{Teoretické zrıchlenie}{veta.2.5}{}}
-\newlabel{df:oper_count_alg}{{2.6}{33}{Teoretické zrıchlenie}{veta.2.6}{}}
-\newlabel{df:oper_weights_alg}{{2.7}{33}{Teoretické zrıchlenie}{veta.2.7}{}}
+\newlabel{oznac:spoj_nespoj_dat_strukt}{{2.2}{31}{Rıchlos aritmetickıch operácií}{veta.2.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Teoretick\'e zr\'ychlenie}{32}{section.2.2}}
+\newlabel{sec:theory_speedup}{{2.2}{32}{Teoretické zrıchlenie}{section.2.2}{}}
+\newlabel{df:oper_count}{{2.4}{32}{Teoretické zrıchlenie}{veta.2.4}{}}
+\newlabel{df:oper_weights}{{2.8}{32}{Teoretické zrıchlenie}{veta.2.8}{}}
+\newlabel{df:oper_count_alg}{{2.9}{33}{Teoretické zrıchlenie}{veta.2.9}{}}
+\newlabel{df:oper_weights_alg}{{2.10}{33}{Teoretické zrıchlenie}{veta.2.10}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces Ceny oper\'aci\IeC {\'\i } LU dekompoz\IeC {\'\i }cie pre pln\'y algoritmus vzh\v ladom na po\v cet uzlov $I\cdot J$.}}{34}{table.2.3}}
 \newlabel{lu_operations}{{2.3}{34}{Ceny operácií LU dekompozície pre plnı algoritmus vzh¾adom na poèet uzlov $I\cdot J$}{table.2.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Cena pln\'eho algoritmu}{34}{subsection.2.2.1}}
 \newlabel{sec:full_cost}{{2.2.1}{34}{Cena plného algoritmu}{subsection.2.2.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } pln\'eho algoritmu.}}{35}{table.2.4}}
-\newlabel{full_operations_cached}{{2.4}{35}{Poèty operácií plného algoritmu}{table.2.4}{}}
-\newlabel{lema:full_oper_count}{{2.8}{35}{Cena plného algoritmu}{veta.2.8}{}}
+\newlabel{lema:full_oper_count}{{2.11}{35}{Cena plného algoritmu}{veta.2.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } pln\'eho algoritmu.}}{36}{table.2.4}}
+\newlabel{full_operations_cached}{{2.4}{36}{Poèty operácií plného algoritmu}{table.2.4}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2.5}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } LU dekompoz\IeC {\'\i }cie pre redukovan\'y algoritmus.}}{36}{table.2.5}}
 \newlabel{red_lu_operations}{{2.5}{36}{Poèty operácií LU dekompozície pre redukovanı algoritmus}{table.2.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.6}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } LU dekompoz\IeC {\'\i }cie na spojit\'ych d\'atach pre zmie\v san\'e zostatkov\'e deriv\'acie.}}{36}{table.2.6}}
-\newlabel{cross_lu_operations_cached}{{2.6}{36}{Poèty operácií LU dekompozície na spojitıch dátach pre zmiešané zostatkové derivácie}{table.2.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Po\v cty pre redukovan\'y algoritmus}{36}{subsection.2.2.2}}
 \newlabel{sec:red_cost}{{2.2.2}{36}{Poèty pre redukovanı algoritmus}{subsection.2.2.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.7}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } pre zmie\v san\'e zostatkov\'e deriv\'acie.}}{37}{table.2.7}}
-\newlabel{rest_operations_cached}{{2.7}{37}{Poèty operácií pre zmiešané zostatkové derivácie}{table.2.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.8}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } na spojit\'ych d\'atach redukovan\'eho algoritmu.}}{38}{table.2.8}}
-\newlabel{red_operations_cached}{{2.8}{38}{Poèty operácií na spojitıch dátach redukovaného algoritmu}{table.2.8}{}}
-\newlabel{lema:red_oper_count}{{2.9}{38}{Poèty pre redukovanı algoritmus}{veta.2.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Pam\"a\v tov\'e n\'aroky}{38}{subsection.2.2.3}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.6}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } LU dekompoz\IeC {\'\i }cie na spojit\'ych d\'atach pre zmie\v san\'e zostatkov\'e deriv\'acie.}}{37}{table.2.6}}
+\newlabel{cross_lu_operations_cached}{{2.6}{37}{Poèty operácií LU dekompozície na spojitıch dátach pre zmiešané zostatkové derivácie}{table.2.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.7}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } na spojit\'ych d\'atach redukovan\'eho algoritmu.}}{38}{table.2.7}}
+\newlabel{red_operations_cached}{{2.7}{38}{Poèty operácií na spojitıch dátach redukovaného algoritmu}{table.2.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.8}{\ignorespaces Po\v cty oper\'aci\IeC {\'\i } pre zmie\v san\'e zostatkov\'e deriv\'acie.}}{38}{table.2.8}}
+\newlabel{rest_operations_cached}{{2.8}{38}{Poèty operácií pre zmiešané zostatkové derivácie}{table.2.8}{}}
+\newlabel{lema:red_oper_count}{{2.12}{39}{Poèty pre redukovanı algoritmus}{veta.2.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Pam\"a\v tov\'e n\'aroky}{39}{subsection.2.2.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Zhrnutie}{39}{subsection.2.2.4}}
-\newlabel{sum_full_operations}{{2.1}{39}{Zhrnutie}{equation.2.2.1}{}}
-\newlabel{sum_red_operations}{{2.2}{39}{Zhrnutie}{equation.2.2.2}{}}
-\newlabel{full_red_ratio}{{2.3}{39}{Zhrnutie}{equation.2.2.3}{}}
-\newlabel{ratio10}{{2.11}{39}{Zhrnutie}{veta.2.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Meran\'e zr\'ychlenie}{39}{section.2.3}}
-\newlabel{sec:real_speedup}{{2.3}{39}{Merané zrıchlenie}{section.2.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.9}{\ignorespaces Re\'alne merania pln\'eho a redukovan\'eho algoritmu na mrie\v zke $1000\times 1000$ uzlov.}}{40}{table.2.9}}
-\newlabel{real_speedup}{{2.9}{40}{Reálne merania plného a redukovaného algoritmu na mrieke $1000\times 1000$ uzlov}{table.2.9}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implement\'acia a u\v z\IeC {\'\i }vate\v lsk\'a pr\IeC {\'\i }ru\v cka}{42}{chapter.3}}
+\newlabel{veta:full_red_ratio}{{2.13}{39}{Zhrnutie}{veta.2.13}{}}
+\newlabel{pr:ratio1}{{2.14}{40}{Zhrnutie}{veta.2.14}{}}
+\newlabel{pr:ratio2}{{2.15}{40}{Zhrnutie}{veta.2.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Meran\'e zr\'ychlenie}{40}{section.2.3}}
+\newlabel{sec:real_speedup}{{2.3}{40}{Merané zrıchlenie}{section.2.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.9}{\ignorespaces Re\'alne merania pln\'eho a redukovan\'eho algoritmu na mrie\v zke $1000\times 1000$ uzlov.}}{41}{table.2.9}}
+\newlabel{real_speedup}{{2.9}{41}{Reálne merania plného a redukovaného algoritmu na mrieke $1000\times 1000$ uzlov}{table.2.9}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implement\'acia a u\v z\IeC {\'\i }vate\v lsk\'a pr\IeC {\'\i }ru\v cka}{43}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapt:impl}{{3}{42}{Implementácia a uívate¾ská príruèka}{chapter.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Uk\'a\v zka z aplik\'acie.}}{43}{figure.3.7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces V\'ykonnostn\'y tester.}}{43}{figure.3.8}}
+\newlabel{chapt:impl}{{3}{43}{Implementácia a uívate¾ská príruèka}{chapter.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Uk\'a\v zka z aplik\'acie.}}{44}{figure.3.7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces V\'ykonnostn\'y tester.}}{44}{figure.3.8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.0.1}Vizualiz\'acia}{44}{subsection.3.0.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Aplik\'acia po spusten\IeC {\'\i }.}}{44}{figure.3.9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Panel zad\'avania splajnu.}}{44}{figure.3.10}}
-\newlabel{apka_spod}{{3.10}{44}{Panel zadávania splajnu}{figure.3.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Hlavn\'e zobrazovacie okn\'a.}}{45}{figure.3.11}}
-\newlabel{apka_stred}{{3.11}{45}{Hlavné zobrazovacie okná}{figure.3.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Aplik\'acia po spusten\IeC {\'\i }.}}{45}{figure.3.9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Panel zad\'avania splajnu.}}{45}{figure.3.10}}
+\newlabel{apka_spod}{{3.10}{45}{Panel zadávania splajnu}{figure.3.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Hlavn\'e zobrazovacie okn\'a.}}{46}{figure.3.11}}
+\newlabel{apka_stred}{{3.11}{46}{Hlavné zobrazovacie okná}{figure.3.11}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Li\v sta n\'astrojov.}}{46}{figure.3.12}}
 \newlabel{apka_vrch}{{3.12}{46}{Lišta nástrojov}{figure.3.12}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.0.2}V\'ykonnostn\'y tester}{46}{subsection.3.0.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces V\'ykonnostn\'y tester.}}{46}{figure.3.13}}
-\newlabel{bench}{{3.13}{46}{Vıkonnostnı tester}{figure.3.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces V\'ykonnostn\'y tester.}}{47}{figure.3.13}}
+\newlabel{bench}{{3.13}{47}{Vıkonnostnı tester}{figure.3.13}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces Zadanie \'udajov pre testovanie.}}{47}{figure.3.14}}
 \newlabel{bench_surface}{{3.14}{47}{Zadanie údajov pre testovanie}{figure.3.14}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces V\'ysledky testu.}}{47}{figure.3.15}}

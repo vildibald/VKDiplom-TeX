@@ -385,7 +385,7 @@ Keïe naším cie¾om je zrıchlenı algoritmus poèítania povrchovıch splajnov, ktorı
 Iste by bolo mono elegantnejšie zadefinova splajn všeobecne, ale rozdelenie definície špeciálne pre krivkové splajny v rovine a povrchové v priestore bude èitate¾nejšie.  
  
 \obrazok{mexHatWKnots.png}{0.7}{Funkcia $sin(\sqrt{x^2+y^2})$ aproximovaná bikubickım splajnom.}
-Formálnejšie si popíšme základné pojmy s ktorımi budem v tomto èlánku pracova. 
+%Formálnejšie si popíšme základné pojmy s ktorımi budem v tomto èlánku pracova. 
 
 Formálna definícia krivkového splajnu v rovine je nasledovná.
 
@@ -491,6 +491,7 @@ Funkciu $S$ z intervalu $[u_{0}, u_{I-1}] \times [v_{0}, v_{J-1}]$ do $\mathbb{R
 		$h_x = u_i - u_{i-1}$ a $h_y = v_j - v_{j-1}$ pre ¾ubovo¾né $i \in  \{1, \dots, I-1\}$, resp. $j \in  \{1, \dots, J-1\}$.
 	\end{itemize}
 }
+
 Prirodzene vidie, e takto definovanı krivkovı a povrchovı splajn je triedy $C^1$. 
 Pri vhodne zvolenıch hodnotách derivácií v uzloch vieme ale zaruèi rovnos aj druhıch derivácií, èim dostaneme splajn z triedy $C^2$ èo nám zaruèí hladkos \pojem{spojenia} jednotlivıch segmentov. 
 Ak uvaujeme ¾ubovo¾nú funkciu tak pomocou nej vieme nájs iadané hodnoty derivácií. 
@@ -501,7 +502,8 @@ Poskytujú prunı nástroj na modelovanie reálnych situácií na lokálne poiadavky,
 Navyše sa dá ukáza, e interpolácia funkcie kubickım splajnom je jednoznaèná. 
 Témou tejto práce sú práve metódy vıpoètu prvıch derivácií, ktorımi je moné dosiahnu práve spomenutı cie¾.
 
-Témou následovnıch èastiach práce je úloha na základe vstupnıch uzlov a funkcie $d: \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ nájs \pojem{hladkú}, po èastiach definovanú funkciu $S: [u_0, u_{I+1}] \times [v_0, v_{J+1}] \to \mathbb{R}$ z so spojitımi deriváciami prvého aj druhého rádu takú, e pre kadé $i \in  {0, \dots, I-1}$ a $j \in  {0, \dots, J-1}$ platí $z_{i,j} = f(u_i, v_j)$ a hodnoty derivácií $S$ v uzloch sú èo najblišie hodnotám derivácií $f$. 
+Úloha v následovnıch èastiach práce je na základe vstupnıch uzlov $u_{0}$, ..., $u_{I-1}$, $v_{0}$, ..., $v_{J-1}$ a funkènıch hodnôt $z_{0,0}$, ..., $z_{I,J}$ nájs \pojem{hladkú}, po èastiach definovanú funkciu $S: [u_0, u_{I+1}] \times [v_0, v_{J+1}] \to \mathbb{R}$ so spojitımi deriváciami prvého aj druhého rádu takú, e pre kadé $i \in  {0, \dots, I-1}$ a $j \in  {0, \dots, J-1}$ platí $z_{i,j} = S(u_i, v_j)$. 
+%a hodnoty derivácií $S$ v uzloch sú èo najblišie hodnotám derivácií $f$. 
 Funkciu $S$ nazıvame splajn (konkrétne povrchovı splajn), prièom jednotlivé èasti nazveme \pojem{segmenty}. 
 
 \obrazok{fseg.png}{0.5}{\label{pic:fseg}Ukáka uzlov pre štvorsegmentovı splajn.}
@@ -829,7 +831,6 @@ Po vypoèítaní všetkıch derivácií môeme funkèné hodnoty jednoznaène interpolova
 %TO_CSABA: Preco hermitove?
 
 
-
 \section{Poèítanie derivácií redukovanou sústavou}
 \label{sec:red_deboor}
 V rámci svojej bakalárskej práce som popisoval novı postup pre kubické splajnové krivky triedy $C^2$, teda splajny, kde interpolovaná funkcia $f$ je typu $\mathbb{R} \to \mathbb{R}$. 
@@ -1027,6 +1028,15 @@ Zmiešané parciálne derivácie $d^xy$ poèítané rovnicami \ref{eq:redr4a}, \ref{eq:
 %
 %Pri kubickıch splajnoch teda potrebujume vypoèíta len prvé derivácie $D_0$, ..., $D_{K+1}$ v uzloch $u_0$, ..., $u_{K+1}$. 
 %Pri bikubickıch povrchoch máme na základe de Boora 4 typy sústav, kde postupne rátame parciálne derivácie $\partial x$ a $\partial y$, prièom dvomi typmi z tıchto sústav vypoèítame parciálne derivácie $\partial xy$. 
+%\subsubsection{Paralelizácia}
+%\paragraph{Paralelizácia}
+\subparagraph{Paralelizácia}
+Všimnime si, e v prípade oboch algoritmoch jednotlivé derivácie poèítame v vdy jednom smere.
+Uvaujme napríklad vıpoèet smerovıch derivácií po osi $x$.
+Jedna LU dekompozícia vypoèíta derivácie práve pre jeden riadok matice uzlov, prièom tieto vıpoèty sú vzájomne nezávislé.
+To umoòuje $x$-ové derivácie na jednotlivıch riadkoch matice poèíta paralelne.
+Analogická úvaha platí aj pre $y$-ové aj zmiešané derivácie. 
+
 
 \section{Konštrukcia hermitovho splajnu}
 \label{sec:her_constr}
@@ -1104,9 +1114,8 @@ Dvomi takımi optimalizáciami sú takzvané kešovanie a inštrukènı paralelizmus.
 
 Pri návrhu algoritmu je vhodné si uvedomi tvar dátovıch štruktúr do ktorıch pri reálnej implementácií budeme uklada funkèné hodnoty, uzly a derivácie.
 Naša implementácia v prípade kriviek pouíva klasické vektory, teda polia. 
- povrchoch sa hodnoty reprezentujú maticami. 
- Maticu je moné interpretova buï ako \uv{pole polí} respektíve \uv{vektor vektorov} (anglicky \uv{jagged array}), alebo ako jedno spojité pole, kde prvok na $i$-tom riadku a $j$-tom ståpci má v takejto reprezentácii index $n\cdot i+j$, kde $n$ je poèet ståpcov. 
- My budeme  v meraniach a vıpoètoch uvaova práve prvú reprezentáciu znázornenú na obrázku nišie.
+Pri povrchoch sa hodnoty reprezentujú maticami. 
+Maticu je moné interpretova buï ako \uv{pole polí} respektíve \uv{vektor vektorov} (anglicky \uv{jagged array}), alebo ako jedno spojité pole, kde prvok na $i$-tom riadku a $j$-tom ståpci má v takejto reprezentácii index $n\cdot i+j$, kde $n$ je poèet ståpcov.  My budeme  v meraniach a vıpoètoch uvaova práve prvú reprezentáciu znázornenú na obrázku nišie.
 \obrazok{jarr.png}{0.407}{Vizuálna reprezentácia dátovej štruktúry \uv{pole polí}.\label{obr:jagged_array}}
 
 Operaèná pamä v dnešnıch poèítaèoch je rádovo pomalšia ako procesor, ktorı musí èaka desiatky a stovky strojovıch cyklov ak chce naèíta hodnotu z pamäte. 
@@ -1118,14 +1127,15 @@ Uvaujme maticu $m \times n$ typu pole polí ako z obrázka vyššie.
 Ak z matice naèítame prvok $a_{0,0}$ tak je vysoko pravdepodobné, e procesor následne bude ma nakešované aj prvky $a_{0,1}$, $a_{0,2}$ pretoe sú z jedného po¾a a teda sú v pamäti \uv{ved¾a seba} (CPU kešuje pamä po spojitıch blokoch), ale u nemusí ma kešovanı prvok $a_{1,0}$ lebo tento je u z iného po¾a a teda z úplne inej oblasti pamäte. 
 Z toho v praxi vyplıva, e vıraz $a_{0,0} + a_{0,1}$ procesor vyhodnotí rıchlejšie ako vıraz $a_{0,0} + a_{1,0}$. 
 
-Pozornı èitate¾ si môe všimnú, e v prípade pouitia druhej reprezentácie matice, teda jedného ve¾kého spojitého po¾a dåky $m \cdot n$, pravdepodobnos kešovania aj prvku $a_{1,0}$ by sa zvıšila, keïe je v tomto prípade sa bude nachádza v tom istom bloku pamäte ako prvok $a_{0,0}$ iba o $n$ prvkov (t.j. jeden celı ståpec) ïalej. 
+Pozornı èitate¾ si môe všimnú, e v prípade pouitia druhej reprezentácie matice, teda jedného ve¾kého spojitého po¾a dåky $m \cdot n$ by sa zvıšila pravdepodobnos kešovania aj prvku $a_{1,0}$.
+V tomto prípade sa toti bude nachádza v tom istom bloku pamäte ako prvok $a_{0,0}$ iba o $n$ prvkov (t.j. jeden celı ståpec) ïalej. 
 Toto je pravda a všeobecne sa druhá menovaná reprezentácia povauje za efektívnejšiu vzh¾adom na procesorovı èas a pamä poèítaèa, ale to platí len pre malé matice najmä s malım poètom ståpcov $n$.
 
 V aplikácii sme toti vyskúšali obe varianty reprezentácie a pre matice s rádovo $1000 \times 1000$ prvkami sa ako efektívnejšia ukazuje práve prvá reprezentácia, teda \uv{pole polí}. 
 Toti ak jeden prvok matice má $8$ bajtov (ve¾kos èíselného typu \textit{double} vo väèšine jazykoch), tak matica zaberá v pamäti pribline $7\text{,}63$ megabajtov. 
 Pri matici typu pole polí máme $1000$ polí kadé zaberajúce práve $7\text{,}81$ kilobajtov ($1$ kB = $1024$ B, $1$ MB = $1024$ kB, atï.). 
 Pre CPU je kešovanie takıchto polí podstatne jednoduchšie ako v prípade matice reprezentovanej jednım po¾om, ktoré samotné má ve¾kos práve $7\text{,}63$ MB, èo presahuje kapacitu väèšiny vyrovnávacích pamätí.
-Obrázok nišie názorne ukazuje vzah medzi ve¾kosou dátovej štruktúry v kB a poètom strojovıch cyklov, ktoré procesor musí èaka pre prístup k jej prvkom. 
+Obrázok \ref{img:cacheSpeed} názorne ukazuje vzah medzi ve¾kosou dátovej štruktúry v kB a poètom strojovıch cyklov, ktoré procesor musí èaka pre prístup k jej prvkom. 
 Ako vidie do pri dosiahnutí ve¾kosti $32$ kB, dáta sú namiesto ve¾mi rıchlej vyrovnávacej pamäte L1 kešované do trojnásobne pomalšej vyrovnávacej pamäte L2 atï..
 
 \obrazok{cacheIntel.png}{0.6}{Graf rıchlosti prístupu k dátam rôznych ve¾kostí na modernıch CPU\cite{cacheIntel}.\label{img:cacheSpeed}}
@@ -1138,7 +1148,11 @@ Na najvyššej úrovni hovoríme o návrhu kedy je procesor zloenı z nieko¾kıch auto
 Tie zdie¾ajú systémové zbernice a pamä prièom majú väèšinou vlastnú L1 alebo L2 cache. 
 Kadé jadro môe spracováva na sebe nezávislé procesy prípadne jeden proces môe by rozdelenı do takzvanıch vlákien, kde kadé môe by spracovávané inım jadrom. 
 V tomto prípade hovoríme o takzvanom \pojem{vláknovom paralelizme} s ktorım sa stretávame najmä pri programovaní vo vyšších jazykoch. 
-V našej implementácie testujeme vláknovo paralelizované aj klasické sériové verzie algoritmov.  
+
+\begin{pozn}
+V našej implementácii testujeme vláknovo paralelizované aj klasické sériové verzie algoritmov.
+Princíp paralelizovanej verzie sme struène popísali na konci èasti \ref{sec:red_deboor}.
+\end{pozn}
 
 Ïalšie úrovne paralelizácie majú spoloèné oznaèenie \pojem{inštrukènı paralelizmus}. 
 Pod tımto pojmom rozumieme \pojem{superskalárnos}, \pojem{pipelining} a \pojem{vektorizácia}. 
@@ -1177,7 +1191,7 @@ V literatúre sa, v prípade procesoroch Intelu, èasto môeme stretnú s názvom \p
 Procesory AMD majú implementovanı odlišnı variant tejto techniky zvanı \pojem{Clustered Multi-Threading}, kde namiesto klasickıch jadier je procesor vybavenı tzv. modulmi, kde kadı modul má dve samostatné \uv{oklieštené} jadrá schopné spracováva iba celoèíselné operácie a jedinú FPU jednotku spoloènú pre oba jadrá. 
 V praxi teda SMT predstavuje akısi medzistupeò medzi vláknovım a inštrukènım paralelizmom, 
 kedy procesor operaènému systému a beiacim procesom hlási väèší poèet jadier akım je v skutoènosti vybavenı, prièom interne na úrovni mikroarchitektúry sa jedná iba o ïalšiu techniku superskalárnosti.
- 
+
 SMT má vırazne pozitívny vplyv na vıkon procesora ak procesy (vlákna) zdie¾ajúce jedno jadro nepoadujú prístup k tım istım jednotkám. 
 V opaènom prípade dochádza k javu kedy jeden proces (vlákno) musí èaka na uvo¾nenie jednotky druhám procesom (vláknom) a vtedy môe dôjs k zníeniu vıkonu oproti identickému procesor s neaktívnym SMT.
 V praktickıch meraniach má SMT na implementované algoritmy negatívny vplyv. 
@@ -1192,15 +1206,15 @@ Najlepším zdrojom ako zisti rıchlos tıchto operácií je dokumentácia inštrukènı
 Inštrukèná sada x86 sa od svojho prvotného uvedenia v roku 1978 doèkala mnohıch rozšírení. 
 Moderné procesory obsahujú mnoho spôsobov ako napríklad vynásobi dve èísla. 
 Keïe nie je v silách otestova všetky moné rozšírenia sady, zvolili sme si jedno konkrétne rozšírenie a síce Streaming SIMD Extensions (skrátene SSE), konkrétne vo verzii 4 (SSE4). 
-Sady z rodiny SSE sú v èase písania práce najpouívanejšími sadami (najmä SSE2) ktoré sú podporované prakticky všetkımi nemuzeálnymi procesormi. 
+Sady z rodiny SSE sú v èase písania práce najpouívanejšími sadami (najmä verzia SSE2) ktoré sú podporované prakticky všetkımi procesormi od roku 2003. 
 
 V súèasnosti u existuje modernejšia náhrada tejto sady zvaná Advanced Vector Extensions (skratka AVX), ktorej hlavnı prínos spoèíva vo vylepšenıch vektorovıch operáciach. 
-Vektorové operácie vyadujú aby vıpoèty vyuívajúce jednotlivé prvky vektora boli navzájom nezávislé. 
+Vektorové operácie však vyadujú aby vıpoèty vyuívajúce jednotlivé prvky vektora boli navzájom nezávislé. 
 To nie je prípad ani jedného z testovanıch algoritmov. 
 Nakonfigurovaním prekladaèa na generovanie tıchto inštrukcí by sme iba znemonili beh aplikácie na polovici z testovanıch procesorov. 
 Praktické zrıchlenie sme testovali na šiestich procesoroch architektúry x86, prièom sme pokryli väèšinu mikroarchitektúr v rozmedzí rokoch 2007 a 2015.
 
-V následujúcej tabu¾ke\cite{instrTables} uvidíme rıchlosti štyroch základnıch matematickıch operácií v rámci šiestich testovanıch mikroarchitektúr. 
+V následujúcej tabu¾ke \cite{instrTables} uvidíme rıchlosti štyroch základnıch matematickıch operácií v rámci šiestich testovanıch mikroarchitektúr. 
 Tabu¾ka obashuje tieto ståpce.
 \begin{itemize}
 	\item \textbf{Architektúra (rok)}\newline
@@ -1324,19 +1338,25 @@ $$o(\mathcal{V}) = \langle s, n, d \rangle\text{.}$$
 Funkciu $o$ budeme nazıva \pojem{poèet operácií vırazu $V$}.
 \end{df}
 
+\begin{oznac}
 Pod¾a èasti \ref{sec:instrukcny_paralelizmus} o inštrukènom paralelizme polome dve premenné, ktoré nám pomôu definova ceny aritmetickıch operácií.
-
 \begin{itemize}
 \item
-Hodnota $\beta$ z predchádzajúcej definície znaèí \pojem{úroveò superskalárnosti} operácií s plávajúcou desatinnou èiarkou.
+Hodnota $\beta$ znaèí \pojem{faktor superskalárnosti} operácií s plávajúcou desatinnou èiarkou.
 Inımi slovami hodnota $\beta$ znaèí poèet jednotiek jadra procesora schopnıch poèíta desatinné èísla.
 \item
-Hodnota $\gamma$ z predchádzajúcej definície znaèí \pojem{pomer odozvy delenia a násobenia} pri operáciách s plávajúcou desatinnou èiarkou.
+Hodnota $\gamma$ znaèí \pojem{pomer odozvy delenia a násobenia} pri operáciách s plávajúcou desatinnou èiarkou.
 Inımi slovami hodnota $\gamma$ znaèí ko¾kokrát je delenie pomalšie oproti sèítaniu v prípade, keï nedochádza k èastému opakovanému násobeniu (resp. sèítaniu).
 \end{itemize}
+\end{oznac}
 
 \begin{pozn}
 	Pre moderné procesory architektúry x86 budeme uvaova $\beta = 2$ a $\gamma = 3$.
+\end{pozn}
+	
+\begin{pozn}
+Faktor superskalárnosti $\beta$ budeme uvaova iba pre operácie sèítania násobenia. 
+iadny bene dostupnı procesor toti nedokáe paralelizova delenie.
 \end{pozn}
 
 Teraz si definujme funkciu $c$ ktorá vráti cenu aritmetickıch operácií pre nejakú matematickú operáciu berúc do úvahy hodnoty $\beta$ a $\gamma$.
@@ -1412,11 +1432,11 @@ Najprv polome procedúry predstavujúce LU dekompozíciu spoloèné pre oba postupy.
 \label{sec:full_cost}
 Poèty základnıch aritmetickıch a pamäovıch operácií pre vyššie uvedené procedúry môeme zhrnú do tabu¾ky, prièom uvaujeme poèty v našej ukákovej implementácii\footnote{Repozitár so zdrojovımi kódmi k aplikáciám mono nájs na adrese https://github.com/vildibald/VKDiplom-master}.
 Riadky tabu¾ky predstavujú jednotlivé procedúry a 
-ståpce udávajú poèet vykonanıch operácii, pre základné matematické operácie, kde $K$ je poèet neznámych. 
+ståpce udávajú poèet vykonanıch operácii, kde $K$ je poèet neznámych. 
 Podotıkam, e operáciu odèítania budeme uvaova ako sèítanie. 
 Operácia $\rightY$ predstavuje kopírovanie vypoèítanıch derivácií do vıslednej matice uzlov. 
 Pri meraní sa ukázalo, e kopírovanie spojitıch dát vieme má cenu $0\text{,}04$ teda kopírovanie je $25$ násobne rıchlejšie ako sèítanie.
-V tabu¾kách budeme pre sèítanie, násobenie a delenie uvádza ich ceny pod¾a definície \ref{df:oper_weights}.
+V tabu¾kách budeme pre sèítanie, násobenie a delenie uvádza ich ceny pod¾a definície \ref{df:oper_weights}. 
 V prípade plného algoritmu dochádza len ku kopírovaniu spojitıch dát, teda poèet kopírovaní v tabu¾kách vynásobime $0\text{,}04$.
 
 \begin{table}
@@ -1430,7 +1450,7 @@ V prípade plného algoritmu dochádza len ku kopírovaniu spojitıch dát, teda poèet
 		\textit{InicalizujLU}
 		& $K$ & $K$ & $0$ & $0$\\
 		\textit{VyriešLU}
-		& $4K$ & $3K$ & $3K$ & $0\text{,}04K$\\
+		& $3K$ & $2K$ & $\gamma K$ & $\rfrac{1}{25}K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1438,25 +1458,27 @@ V prípade plného algoritmu dochádza len ku kopírovaniu spojitıch dát, teda poèet
 \label{lu_operations}	
 \end{table}
 
+Procedúry \textit{VyriešLU} a \textit{InicalizujLU} neobsahujú matematické vırazy s viac ako jednım sèítaním prípadne násobením. 
+Superskalárnos procesora sa teda v prípade plného algoritmu neprejaví.
 Uvaujme procedúry predstavujúce implementáciu plného algoritmu pod¾a èasti \ref{sec:full_deboor}:
 \begin{itemize}
 \item
-Procedúra \textit{VypoèítajDx} vypoèíta parciálne derivácie $d^x$ pomocou procedúry \textit{VyriešLU}. 
+Procedúra \textit{VypoèítajDx} vypoèíta parciálne derivácie $d^x$ pomocou procedúr \textit{InicalizujLU} a \textit{VyriešLU}. 
 Vstupné hodnoty vezmeme z \ref{eq:deboor1}. 
 Jedno volanie \textit{VyriešLU} vypoèíta derivácie $d^x$ pre jeden ståpec. 
 Teda procedúra musí poèíta LU pre kadı ståpec, ktorıch je $J$. 
 \item
-Procedúra \textit{VypoèítajDxy} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry \textit{VyriešLU}. 
+Procedúra \textit{VypoèítajDxy} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúr \textit{InicalizujLU} a \textit{VyriešLU}. 
 Vstupné hodnoty vezmeme z \ref{eq:deboor2}. 
 Jedno volanie \textit{VyriešLU} vypoèíta derivácie $d^{xy}$ pre jeden ståpec. 
 Procedúra musí poèíta LU pre prvı a poslednı ståpec.
 \item
-Procedúra \textit{VypoèítajDy} vypoèíta parciálne derivácie $d^y$ pomocou procedúry \textit{VyriešLU}. 
+Procedúra \textit{VypoèítajDy} vypoèíta parciálne derivácie $d^y$ pomocou procedúry procedúr \textit{InicalizujLU} a \textit{VyriešLU}. 
 Vstupné hodnoty vezmeme z \ref{eq:deboor3}. 
 Jedno volanie \textit{VyriešLU} vypoèíta derivácie $d^y$ pre jeden riadok. 
 Teda procedúra musí poèíta LU pre kadı riadok, ktorıch je $I$.
 \item
-Procedúra \textit{VypoèítajDyx} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry \textit{VyriešLU}. 
+Procedúra \textit{VypoèítajDyx} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry procedúr \textit{InicalizujLU} a \textit{VyriešLU}. 
 Vstupné hodnoty vezmeme z \ref{eq:deboor4}. 
 Jedno volanie \textit{VyriešLU} vypoèíta derivácie $d^{xy}$ pre jeden riadok. 
 Teda procedúra musí poèíta LU pre kadı riadok, ktorıch je $I$.
@@ -1482,13 +1504,13 @@ Pre plnı algoritmus teda dostaneme tieto poèty
 			& $\pm$ & $\cdot$ & $\div$ & $\rightY$ \\
 			\midrule
 			\textit{VypoèítajDx}
-			& $4IJ$ & $3IJ$ & $3IJ$ & $0\text{,}04IJ$\\
+			& $4IJ$ & $3IJ$ & $\gamma IJ$ & $\rfrac{1}{25}IJ$\\
 			\textit{VypoèítajDxy}
-			& $8I$ & $6I$ & $6I$ & $0\text{,}04I$\\
+			& $8I$ & $6I$ & $2\gamma I$ & $\rfrac{1}{25}I$\\
 			\textit{VypoèítajDy}
-			& $4IJ$ & $3IJ$ & $3IJ$ & $0\text{,}04IJ$\\
+			& $4IJ$ & $3IJ$ & $\gamma IJ$ & $\rfrac{1}{25}IJ$\\
 			\textit{VypoèítajDyx}
-			& $4IJ$ & $3IJ$ & $3IJ$ & $0\text{,}04IJ$\\
+			& $4IJ$ & $3IJ$ & $\gamma IJ$ & $\rfrac{1}{25}IJ$\\
 %			\textbf{\textit{SUMA}}
 %			& $12IJ$ & $9IJ$ & $9IJ$ & $3IJ$\\
 			\bottomrule
@@ -1510,12 +1532,12 @@ $12IJ$ sèítaní,
 \item
 $9IJ$ násobení,
 \item
-$3IJ$ delení,
+$3\gamma IJ$ delení,
 \item
-$0\text{,}12IJ$ kopírovaní.
+$0\rfrac{3}{25}IJ$ kopírovaní.
 \end{itemize}
 Cena plného algoritmu teda je
-$$30\text{,}IJ$$
+$$\rfrac{528}{25}IJ+3\gamma IJ\textit{.}$$
 \end{lema}
 
 \subsection{Poèty pre redukovanı algoritmus}
@@ -1537,15 +1559,20 @@ Aby sme takéto kopírovanie vizuálne odlíšili od kopírovania v predchádzajúcej èa
 		& $\pm$ & $\cdot$ & $\div$ &  $\righttherefore$ \\
 		\midrule
 		\textit{InicalizujLU}
-		& $1\textit{,}5K$ & $K$ & $0$ & $0$\\
+		& $\rfrac{3}{\beta}K$ & $\rfrac{2}{\beta}K$ & $0$ & $0$\\
 		\textit{VyriešLU}
-		& $4\textit{,}5K$ & $3K$ & $3K$ & $0\textit{,}6K$\\
+		& $3K$ & $2K$ & $\gamma K$ & $\rfrac{3}{5}K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
 \caption{Poèty operácií LU dekompozície pre redukovanı algoritmus.}
 \label{red_lu_operations}	
 \end{table}
+
+V prípade inicializovania pravej strany pre LU dekompozíciu v procedúre \textit{InicalizujLU} dochádza k viacerım sèítaniam a/alebo násobeniam v rámci jedného vırazu.
+Tu sa následne prejaví superskalárnos vıpoètovıch jednotiek procesorového jadra pod¾a èasti \ref{sec:instrukcny_paralelizmus}.
+Moderné procesory architektúry x86 obsahujú práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou èo znamená $\beta = 2$.
+To implikuje zaujímavı dôsledok, kedy algoritmus s väèším poètom matematickıch operácií je v praxi rıchlejší ako algoritmus s menším celkovım poètom operácií, ale s viacerımi na sebe závislımi vırazmi (t.j. prípad, keï vıraz $b$ musí by vyhodnotenı a po vıraze $a$).     
 
 %V prípade poètov operácií v procedúrach pre zmiešané derivácie nepristupujeme k niektorım dátam spojito, navyše èítame dáta z nieko¾kıch vektorov naraz èo má malı negatívny vplyv na vıkon. 
 %Ten sa pri testovaní ukázal by malı v rozsahu  0\% a 10\% v závislosti od konkrétneho procesora. 
@@ -1561,9 +1588,9 @@ Osobitne si spoèítajme ceny aj pre tieto procedúry.
 		& $\pm$ & $\cdot$ & $\div$ & $\righttherefore$\\
 		\midrule
 		\textit{InicalizujZmiešLU}
-		& $16\textit{,}5K$ & $8\textit{,}5K$ & $0$ & $0$\\
+		& $\rfrac{33}{2}K$ & $\rfrac{17}{2}K$ & $0$ & $0$\\
 		\textit{VyriešZmiešLU}
-		& $19\textit{,}5K$ & $11\textit{,}5K$ & $3K$ & $0\textit{,}6K$\\
+		& $3K$ & $2K$ & $\gamma K$ & $\rfrac{3}{5}K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1595,7 +1622,7 @@ Analogicky ako v predchádzajúcej sekcii polome procedúry predstavujúce implemen
 	\item
 	Procedúra \textit{VypoèítajDxResty} vypoèíta zvyšné parciálne derivácie $d^x$ pod¾a \ref{eq:redr1}.
 	\item
-	Procedúra \textit{VypoèítajDx} vypoèíta parciálne derivácie $d^x$ pomocou procedúry \textit{VyriešLU}. 
+	Procedúra \textit{VypoèítajDx} vypoèíta parciálne derivácie $d^x$ pomocou procedúr \textit{InicalizujLU} a \textit{VyriešLU}. 
 	Vstupné hodnoty vezmeme z \ref{eq:red1}. 
 	Jedno volanie \textit{VyriešLU} vypoèíta derivácie na párnych riadkoch $d^x$ pre jeden ståpec. 
 	Teda procedúra musí poèíta LU pre kadı ståpec, ktorıch je $J$. 
@@ -1603,49 +1630,27 @@ Analogicky ako v predchádzajúcej sekcii polome procedúry predstavujúce implemen
 	\item
 	Procedúra \textit{VypoèítajDyResty} vypoèíta zvyšné parciálne derivácie $d^y$ pod¾a \ref{eq:redr2}.
 	\item
-	Procedúra \textit{VypoèítajDy} vypoèíta parciálne derivácie $d^y$ pomocou procedúry \textit{VyriešLU}. 
+	Procedúra \textit{VypoèítajDy} vypoèíta parciálne derivácie $d^y$ pomocou procedúr \textit{InicalizujLU} a \textit{VyriešLU}. 
 	Vstupné hodnoty vezmeme z \ref{eq:red2}. 
 	Jedno volanie \textit{VyriešLU} vypoèíta derivácie na párnych ståpcoch $d^y$ pre jeden riadok. 
 	Teda procedúra musí poèíta LU pre kadı riadok, ktorıch je $I$. 
 	Zvyšné derivácie dopoèítame procedúrou \textit{VypoèítajResty}.
 	\item
-	Procedúra \textit{VypoèítajDxy} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry \textit{VyriešLU}. 
+	Procedúra \textit{VypoèítajDxy} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúr \textit{InicalizujLU} a \textit{VyriešLU}. 
 	Vstupné hodnoty vezmeme z \ref{eq:red3a} a \ref{eq:red3b}. 
 	Jedno volanie \textit{VyriešLU} vypoèíta na párnych riadkoch(ståpcoch) derivácie $d^{xy}$ pre jeden ståpec(riadok). 
 	Procedúra musí poèíta LU pre prvı a poslednı ståpec a pre prvı a poslednı riadok.
 	\item
 	Procedúra \textit{VypoèítajZmiešResty} vypoèíta zvyšné parciálne derivácie $d^{xy}$ pod¾a \ref{eq:redr4a}, \ref{eq:redr4b} a \ref{eq:redr4c}.
 	\item
-	Procedúra \textit{VypoèítajDyx} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúry \textit{VyriešLU}. 
-	Vstupné hodnoty vezmeme z \ref{eq:red4}, prièom na ich inicializovanie do LU dekompozície pouijeme procedúru \textit{InicalizujZmiešLU}. 
+	Procedúra \textit{VypoèítajDyx} vypoèíta parciálne derivácie $d^{xy}$ pomocou procedúr \textit{InicalizujZmiešLU} a \textit{VyriešZmiešLU}. 
+	Vstupné hodnoty vezmeme z \ref{eq:red4}, prièom na ich inicializovanie do LU dekompozície pouijeme práve procedúru \textit{InicalizujZmiešLU}. 
 	Jedno volanie \textit{VyriešLU} vypoèíta na párnych ståpcoch $d^{xy}$ pre jeden riadok. 
 	Procedúra musí poèíta LU pre kadı párny riadok, ktorıch je $I$. 
 	Zvyšné derivácie dopoèítame procedúrou \textit{VypoèítajZmiešResty}.
 	\item
 	Procedúra \textit{VypoèítajRedukovanı} vypoèíta na základe vstupnıch hodnôt pre de Boorovu interpoláciu \ref{eq:deboor_input} postupnım vykonaním predchádzajúcich siedmich procedúr.    
 \end{itemize}
-
-Najprv si spoèítajme procedúry pre resty.
-\begin{table}
-\begin{center}
-	\begin{tabular}{lcccc}	
-		\toprule
-		Procedúra
-		& $\pm$ & $\cdot$ & $\div$ & $\righttherefore$ \\
-		\midrule
-		\textit{VypoèítajDxResty}
-		& $1\textit{,}5IJ$ & $IJ$ & $0$ & $0$\\
-		\textit{VypoèítajDyResty}
-		& $1\textit{,}5IJ$ & $IJ$ & $0$ & $0$\\
-		\textit{VypoèítajZmiešResty}
-		& $7IJ$ & $2\textit{,}5IJ$ & $0$ & $0$\\
-		\bottomrule
-	\end{tabular}
-\end{center}
-\caption{Poèty operácií pre zmiešané zostatkové derivácie.}
-\label{rest_operations_cached}	
-\end{table}
-
 
 Opä pre zjednodušenie budeme poèty v tvare $a\cdot IJ + b\cdot I + c\cdot J + d$ zanedbáva na $a\cdot IJ$.
 Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na osi $x$ tak pre redukovanı algoritmus dostaneme následujúce poèty nad kešovanımi dátami  
@@ -1658,18 +1663,39 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 		& $\pm$ & $\cdot$ & $\div$ & $\righttherefore$ \\
 		\midrule
 		\textit{VypoèítajDx}
-		& $3IJ$ & $2IJ$ & $1\textit{,}5IJ$ & $0\textit{,}3IJ$\\
+		& $\rfrac{3}{2}IJ+\rfrac{3}{2\beta}IJ$ & $1IJ+\rfrac{1}{\beta}IJ$ & $\rfrac{1}{2}\gamma IJ$ & $\rfrac{3}{10}IJ$\\
 		\textit{VypoèítajDy}
-		& $3IJ$ & $2IJ$ & $1\textit{,}5IJ$ & $0\textit{,}3IJ$\\
+		& $\rfrac{3}{2}IJ+\rfrac{3}{2\beta}IJ$ & $1IJ+\rfrac{1}{\beta}IJ$ & $\rfrac{1}{2}\gamma IJ$ & $\rfrac{3}{10}IJ$\\
 		\textit{VypoèítajDxy}
-		& $6I+8J$ & $7I+9J$ & $6I$ & $I+J$\\
+		& $8I+8J$ & $6I+6J$ & $2I+2J$ & $I+J$\\
 		\textit{VypoèítajDyx}
-		& $7IJ$ & $3,75IJ$ & $0\textit{,}75IJ$ & $0\textit{,}15IJ$\\
+		& $\rfrac{3}{4}IJ+\rfrac{33}{4\beta}IJ$ & $\rfrac{1}{2}IJ+\rfrac{17}{4\beta}IJ$ & $\rfrac{1}{4}\gamma IJ$ & $\rfrac{3}{25}IJ$\\
 		\bottomrule
 	\end{tabular}
 \end{center}	
 \caption{Poèty operácií na spojitıch dátach redukovaného algoritmu.}
 \label{red_operations_cached}
+\end{table}
+
+Najprv si spoèítajme procedúry pre resty.
+\begin{table}
+	\begin{center}
+		\begin{tabular}{lcccc}	
+			\toprule
+			Procedúra
+			& $\pm$ & $\cdot$ & $\div$ & $\righttherefore$ \\
+			\midrule
+			\textit{VypoèítajDxResty}
+			& $\rfrac{3}{2\beta}IJ$ & $\rfrac{1}{\beta}IJ$ & $0$ & $0$\\
+			\textit{VypoèítajDyResty}
+			& $\rfrac{3}{2\beta}IJ$ & $\rfrac{1}{\beta}IJ$ & $0$ & $0$\\
+			\textit{VypoèítajZmiešResty}
+			& $\rfrac{17}{4\beta}IJ$ & $\rfrac{7}{4\beta}IJ$ & $0$ & $0$\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Poèty operácií pre zmiešané zostatkové derivácie.}
+	\label{rest_operations_cached}	
 \end{table}
 %V prípade \textit{VypoèítajDyx} ešte musíme zapoèíta operácie nad nespojitımi dátami
 %\begin{table}
@@ -1695,23 +1721,23 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 %\label{red_operations_uncached}
 %\end{table}
 
-Sèítaním operácií v tabu¾ke dostaneme následujúci vısledok.
+Sèítaním operácií v predchádzajúcich dvoch tabu¾kách dostaneme následujúci vısledok.
 \begin{lema}
 	\label{lema:red_oper_count}
 	Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$. 
 	Potom sumárny poèet operácií plného algoritmu je
 	\begin{itemize} 
 		\item
-		$13IJ$ sèítaní,
+		$\rfrac{15}{4}IJ + \rfrac{37}{2\beta}IJ$ sèítaní,
 		\item
-		$7\text{,}75IJ$ násobení,
+		$\rfrac{5}{2}IJ + \rfrac{10}{\beta}IJ$ násobení,
 		\item
-		$3\text{,}75IJ$ delení,
+		$\rfrac{5}{4}\gamma IJ$ delení,
 		\item
 		$0\text{,}75IJ$ kopírovaní.
 	\end{itemize}
 	Cena redukovaného algoritmu teda je
-	$$25\text{,}25IJ$$
+	$$7IJ + \rfrac{57}{2\beta}IJ + \rfrac{5}{4}\gamma IJ\textit{.}$$
 \end{lema}
 
 \subsection{Pamäové nároky}
@@ -1728,87 +1754,42 @@ Nám ale staèí uvaova iba procedúru pre náš špeciálny tvar trojdiagonálnej súst
 Pri pouití tejto priestorovo optimalizovanej varianty vıpoètu LU dekompozície potrebujeme na vypoèítanie $I\cdot J$ uzlov práve $I\cdot J + 2I + 2J$ pamäte.
 
 \subsection{Zhrnutie}
-%Teraz máme spoèítané jednotlivé matematické a pamäové operácie.
-%
-%V záujme preh¾adnosti v rámci tejto podsekcie zaveïme tieto oznaèenia 
-%\begin{oznac} \label{oznac:spoj_nespoj_dat_strukt}
-%Oznaème dve triedy dátovıch štruktúr symbolmi:
-%\begin{itemize}
-%	\item
-%	$\rightY$ oznaèuje spojité dátové štruktúry ako napríklad vektory.
-%	\item 
-%	$\righttherefore$  oznaèuje nespojité dátové štruktúry ako napríklad spájané zoznamy alebo vektory referencií na konkrétne dáta.
-%\end{itemize} 
-%\end{oznac}
-%Nech $t_\text{operácia}^\text{dáta}$ udáva dobu trvania nejakej operácie na nejakıch dátach.
-%Napríklad $t_+^\text{spojité}$ udáva èas sèítania dvoch rovnako ve¾kıch spojitıch kešovanıch vektorov.
-%Na zaèiatku sekcie sme zvolili predpoklad, e pri èíselnıch typoch s pohyblivou èiarkou sú operácie sèítania (odèítania) a násobenia rovnako rıchle. 
-%Na všetkıch testovanıch procesoroch je totone rıchla aj pamäová operácia kopírovania pri spojitıch dátach. 
-%Teda $t_+ = t_\times = t_{\text{MEM}_\text{c}}$.
-%Polome si teraz pomery udávajúce pomery dôb trvania jednotlivıch operácií.
-%\begin{itemize}
-%\item
-%$\gamma = \frac{t_{\div}^\rightY}{t_{\plus}^\rightY}$
-%\item 
-%$\eta = \frac{t_{\textit{M}}^\righttherefore}{t_{\textit{M}}^\rightY}$
-%\item 
-%$\iota = \frac{t_{\plus}^\righttherefore}{t_{\plus}^\rightY}$
-%%\item 
-%%$\lambda = \frac{t_{\div}^\righttherefore}{t_{\plus}^\righttherefore}$
-%\end{itemize}
-	
-%Nech $c_\text{operácia}^{\text{dáta}}$ znaèí celkovú cenu operácie v algoritme.
-%Pod¾a tabuliek poètov z predchádzajúcich podsekcií a práve zadefinovanıch pomerov dostaneme následovné ceny kde $I$ a $J$ sú rozmery matice uzlov.
-%Pre plnı al
-%\begin{itemize}
-%	\item
-%	$c_\plus^{\leftY} = 11IJ$
-%	\item 
-%	$c_\plus^{\lefttherefore} = IJ$
-%	\item
-%	$c_\^{\leftY} = 11IJ$
-%	\item 
-%	$c_\plus^{\lefttherefore} = IJ$
-%\end{itemize}
 
 %Máme všetko pripravené aby sme uviedli náš hlavnı vısledok.
 Po spoèítaní jednotlivıch matematickıch a pamäovıch operácií v èastiach \ref{sec:full_cost} a \ref{sec:red_cost} pristúpime k formulácii zrıchlenia.
 
 
 \begin{veta}
+\label{veta:full_red_ratio}
 Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$.
-Potom zrıchlenie plného algoritmu je dané pomerom
+Potom zrıchlenie redukovaného algoritmu je
+$$\frac{\rfrac{528}{25}IJ+3\gamma IJ}
+	{7IJ + \rfrac{57}{2\beta}IJ + \rfrac{5}{4}\gamma IJ}\textit{.}$$ 
 \end{veta}
-		
-Celková cena algoritmu je súèet poètu všetkıch operácií z tabuliek \ref{full_operations_cached} pre plnı algoritmus, respektíve \ref{red_operations_cached} a \ref{red_operations_uncached} pre redukovanı algoritmus z predchádzajúcich podsekcií. 
-Poèty operácií delenia na kešovanıch dátach vynásobime $\gamma$, poèty nekešovanıch pamäovıch operácií vynásobime $\eta$, poèty operácií sèítania a násobenia na nespojitıch dátach vynásobime $\iota$.
-%a nakoniec poèty operácií delenia na nekešovanıch dátach vynásobime $\lambda \iota$ (pretoe $\lambda$ udáva pomer delenia a sèítania na nekešovanıch dátach a to ešte treba vynásobi $\iota$).
 
-Pre plnı algoritmus teda dostávame
-\begin{equation} \label{sum_full_operations}
-25\textit{,}5IJ+2\gamma IJ+\eta IJ+2\iota IJ+\lambda \iota IJ\text{,}
-\end{equation}
-a pre redukovanı máme
-\begin{equation} \label{sum_red_operations}
-14\textit{,}375IJ+0\textit{,}75\gamma IJ+0\textit{,}5\eta IJ+5\textit{,}84\iota IJ+0\textit{,}5\lambda \iota IJ\text{.}
-\end{equation}
+Ukáme si dva príklady zrıchlenia aby sme názorne videli vplyv superskalárnosti na rıchlos redukovaného algoritmu.
+V prvom príklade predpokladajme porovnanie algoritmov na primitívnom procesore. 
 
-Ak chceme urèi zrıchlenie redukovaného algoritmu staèí vydeli \ref{sum_full_operations} a \ref{sum_red_operations} èím dostaneme
-	
-\begin{equation} \label{full_red_ratio}
-\frac{
-	25\textit{,}5IJ+2\gamma IJ+\eta IJ+2\iota IJ+\lambda \iota IJ
-}{
-14\textit{,}375IJ+0\textit{,}75\gamma IJ+0\textit{,}5\eta IJ+5\textit{,}84\iota IJ+0\textit{,}5\lambda \iota IJ\text{.}
+\pr{ \label{pr:ratio1}
+	Nech $\beta = 1$, teda procesorové jadro má iba jednu jednotku pre vıpoèty s pohyblivou desatinnou èiarkou a $\gamma = 3$, to jest operácia delenia je trojnásobne pomalšia ako operácia sèítania pod¾a tabuliek \ref{tab:instr_speed} a \ref{real_op_speed} operácií v èasti \ref{sec:instr_rychlost}. 
+	\ref{img:cacheSpeed}), $\iota = 1\textit{,},1$ a $\lambda = 1$. 
+	Dosadením do vzahu z predchádzajúcej vety dostaneme
+	$$\frac{30\textit{,}12}{36\textit{,}75} \approx 0\textit{,}77\textit{.}$$
+	Pomer je menší ako 1 èo znamená, e bez superskalárnosti ($\beta = 1$) je redukovanı algoritmus pomalší ako plnı.
 }
-\end{equation}
 
-%\begin{df}
-%	Vıraz \ref{full_red_ratio} nazveme \pojem{pomer rıchlostí}. 
-%\end{df}
-\pr{ \label{ratio10}
-	Ak budeme predpoklada $\gamma = 3$, to jest operácia delenia je trojnásobne pomalšia ako operácia sèítania, ïalej $\eta = 4$ (pod¾a obrázka \ref{img:cacheSpeed}), $\iota = 1\textit{,},1$ a $\lambda = 1$ a budeme uvaova maticu uzlov s poètom $I\times J = 1000\times1000$ tak pomer rıchlostí bude $1{,}18$, teda plnı algoritmus je $1{,}18$ krát pomalší ako redukovanı.	
+\pr{ \label{pr:ratio2}
+	Nech $\beta = 2$, teda procesorové jadro má práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou a $\gamma = 3$.
+	Analogicky ako v predchádzajúcom príklade dosadením do vzahu dostaneme
+	$$\frac{30\textit{,}12}{25} \approx 1\textit{,}2\textit{.}$$
+	V prípade superskalárnosti s faktorom 2 je redukovanı algoritmus o 20\% rıchlejší ako plnı.
 }
+
+Pod¾a príkladov vidíme, e rıchlos redukovaného algoritmu je závislá na schopnosti hardvérovej architektúry procesora paralelizova vyhodnotenia aritmetickıch vırazov s viacerımi operandami.
+Je otázne nako¾ko by s rastúcim faktorom  $\beta$ rástlo zrıchlenie.
+Keïe nemáme k dispozícii procesor s vhodnou hardvérovou vıbavou (ak vôbec takı existuje) je nároèné predpoklada ako by si takıto stroj s redukovanım postupom poradil. 
+
+V následujúcej èasti si ukáeme reálne vısledky a uvidíme èi s nimi vypoèítané zrıchlenie skutoène súhlasí.
 
 \section{Merané zrıchlenie}
 \label{sec:real_speedup}
@@ -1828,7 +1809,7 @@ Ved¾a názvu modela CPU sa nachádza údaj tvaru $n$C/$m$T, kde $n$ je poèet fyzick
 V prípade $m > n$ je procesor vybavenı urèitou formou SMT. 
 Ståpce 2 a 3 predstavujú èasy behov sekvenènıch implementácií plného a redukovaného algoritmu v prípade krivkovıch splajnov. 
 Ståpce 4 a 5 predstavujú èasy behov sériovej verzie pre povrchové splajnov.
-Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií. Všetky uvedené èasové údaje sú v milisekundách.  
+Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií implementovanıch pod¾a myšlienky uvedenej na konci èasti \ref{sec:red_deboor}. Všetky uvedené èasové údaje sú v milisekundách.  
 \begin{table}
 \begin{center}
 	\begin{tabular}{lcccccc}
@@ -1873,7 +1854,7 @@ Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií. Všetky 
 %\end{center}
 
 %Na kadom z troch testovacích strojov sú rıchlosti sèítania a násobenia 64 bitovıch èísel s plávajúcou desatinnou èiarkou totoné. V prípade násobenia, respektíve sèítania a delenia vychádza pomer na procesoroch Intel Core i5 a i3 pribline 9.
-Sériová verzia redukovaného algoritmu je o pribline 12\% rıchlejšia ako pôvodnı de Boorov postup èo viac-menej súhlasí s odhadnutım zlepšením na konci kapitoly \nameref{spdup} v príklade \ref{ratio10}. 
+Sériová verzia redukovaného algoritmu je o pribline 20\% rıchlejšia ako pôvodnı de Boorov postup èo súhlasí s odhadnutım zlepšením na konci kapitoly \nameref{spdup} v príklade \ref{ratio2}. 
 %Tam nám vyšlo 19\% zrıchlenie, kde zbytok prisudzujem vplyvu pamäovıch operácií, ktoré sme vtedy nebrali do úvahy.
 
 %V prípade procesora AMD FX si môeme všimnú anomáliu, kde novı algoritmus je vırazne rıchlejší ne by mal by pod¾a dosiahnutého pomeru rıchlosti násobenia a delenia. 
@@ -1885,14 +1866,13 @@ Sériová verzia redukovaného algoritmu je o pribline 12\% rıchlejšia ako pôvodnı
 Môeme všimnú malé škálovanie vıkonu paralelizovaného algoritmu najmä v prípade procesorov obsahujúcich nejakú formu SMT kde je redukovanı algoritmus dokonca o nieèo pomalší ako plnı. 
 Prvou zmıš¾anou príèinou môe by fakt, e v plnom algoritme všetky parciálne derivácie pod¾a nejakej premennej vypoèítame trojdiagonálnymi sústavami naraz v jednom cykle. 
 V redukovanom ale cez trojdiagonálne sústavy vyrátame len polovicu derivácií, prièom zvyšok dopoèítame práve restami. 
-Toto rozdelenie vıpoètu na dve subprocedúry môe hypoteticky implikova vysokú réiu plánovaèa vlákien (tzv. \pojem{thread scheduler}) OpenMP alebo operaèného systému. 
-V implementácií sa nám síce podarilo spoji vıpoèet restov spolu s LU dekompozíciou do jedného kroku v prípade derivácií pod¾a premennıch $x$ a $y$. 
-Teda resty môeme poèíta súèasne s deriváciami poèítanımi cez LU.
+Toto rozdelenie vıpoètu na dve subprocedúry môe hypoteticky implikova vysokú réiu plánovaèa vlákien (tzv. \pojem{thread scheduler}) vrstvy OpenMP alebo operaèného systému. 
+V implementácií sa nám podarilo spoji vıpoèet restov spolu s LU dekompozíciou do jedného kroku v prípade derivácií pod¾a premennıch $x$ a $y$ a resty tak môeme poèíta súèasne s deriváciami poèítanımi cez LU.
 Táto optimalizácia však momentálne nie je moná pri zmiešanıch deriváciách. 
-Síce máme rozpracované zefektívnenie vıpoètu zmiešanıch restov, ktoré sa nám ale ešte nepodarilo do práce dokonèi. 
+Máme rozpracované zefektívnenie vıpoètu zmiešanıch restov, ktoré sa nám ale ešte nepodarilo do práce dokonèi. 
 
-V prípade SMT procesorov sa dá pomalos, aj keï to nemáme overené, vysvetli ešte superskalárnosou pod¾a podsekcie \ref{sec:instrukcny_paralelizmus}. 
-Väèšina modernıch mikroarchitektúr má jadrá vybavené práve dvomi matematickımi jednotkami pre operácie s plávajúcou desatinnou èiarkou (oznaèujú sa skratkou FPU). 
+V prípade SMT procesorov sa dá pomalos, aj keï to nemáme overené, vysvetli samotnou superskalárnosou pod¾a podsekcie \ref{sec:instrukcny_paralelizmus}. 
+Dnešné procesorové mikroarchitektúry majú vıpoètové jadrá vybavené práve dvomi matematickımi jednotkami pre operácie s plávajúcou desatinnou èiarkou (oznaèujú sa skratkou FPU). 
 V tomto prípade SMT môe teoreticky kadú jednotku prideli inému vláknu. 
 Pri redukovanom algoritme ale máme ve¾a operácií v tvare $a_0a_1\circ \dots\circ a_n$, kde $\circ \in \{+, \cdot\}$ kde optimalizujúci prekladaè môe takıto vıpoèet rozloi do viacerıch strojovıch inštrukcií. 
 V tomto prípade dôjde k vyuitiu oboch FPU jadra v rámci jediného vlákna ale napriek tomu SMT na toto jadro priradí aj druhé vlákno ktoré poèíta práve na FPU. 
@@ -1925,16 +1905,16 @@ Framework je moné poui aj na vıvoj off-line aplikácií v operaènıch systémoch 
 	Prípadná portácia na GNU/Linux by musela by vo forme off-line desktopovej aplikácie.
 }
 
-\obrazok{apka_spl.png}{0.307}{Ukáka z aplikácie.}
+\obrazok{apka_spl.png}{0.262}{Ukáka z aplikácie.}
 
 Pretoe CLR znemoòuje korektne porovnáva procesorovı èas a pamäové nároky implementovanıch algoritmov, rozhodli sme sa vıkonnostnı tester oddeli do samostatnej aplikácie implementovanej v natívnom jazyku, konkrétne v jazyku \cpp. 
 
-\obrazok{bench.png}{0.407}{Vıkonnostnı tester.}
+\obrazok{bench.png}{0.277}{Vıkonnostnı tester.}
 
 \subsection{Vizualizácia}
 V tejto kapitole si ukáeme struènı návod na pouívanie a testovanie implementovanıch aplikácií. 
 Zaènime aplikáciou na grafickú vizualizáciu.
-\obrazok{apka.png}{0.307}{Aplikácia po spustení.}
+\obrazok{apka.png}{0.262}{Aplikácia po spustení.}
 
 Okno aplikácie sa skladá z troch hlavnıch èastí, ktoré si trocha netradiène prejdeme zdola nahor.
 %\begin{figure}%[!htb]
@@ -1967,14 +1947,14 @@ Pomocou posuvníka oznaèenı \textit{Auto color} môeme namiesto automaticky vybra
 Nakoniec v pravej èasti okna sa nachádzajú tlaèidlá \textit{Clear} a \textit{Draw}, prièom prvé odstráni všetky vykreslené funkcie a druhé nám vypoèíta a zobrazí funkciu pod¾a aktuálne zadanıch hodnôt. 
 
 
-\obrazok{apka_stred.png}{0.4}{Hlavné zobrazovacie okná.\label{apka_stred}} 
+\obrazok{apka_stred.png}{0.262}{Hlavné zobrazovacie okná.\label{apka_stred}} 
 Na obrázku \ref{apka_stred} vidíme dominantnú èas aplikácie a síce zobrazovanie funkciovıch plôch. 
-Obrazovka je rozdelená na tri èasti, kde v najväèšia èast implicitne zobrazuje interpretovanú funkciu a zvyšné dve zobrazujú prvú, respektíve druhú zmiešanú deriváciu funkcie.
+%Obrazovka je rozdelená na tri èasti, kde v najväèšia èast implicitne zobrazuje interpretovanú funkciu a zvyšné dve zobrazujú prvú, respektíve druhú zmiešanú deriváciu funkcie.
 V ¾avej èasti okna môeme nájs posuvník na škálovanie osi $z$. 
 Na spodnej a pravej strane hlavnej èasti okna sú tlaèidlá reprezentované modrou horizontálnou, respektíve zelenou vertikálnou šípkou. Pri ich draní myšou je moné rotova obrazom v danej osi.
 
 
-\obrazok{apka_vrch.png}{0.4}{Lišta nástrojov.\label{apka_vrch}}
+\obrazok{apka_vrch.png}{0.3}{Lišta nástrojov.\label{apka_vrch}}
 Poloka \textit{Settings} umonuje prispôsobi grafické vykres¾ovanie splajnov. 
 Tieto nastavenia je vhodné upravi najmä pri starších poèítaèoch na dosiahnutie optimálnej plynulosti vykres¾ovania.
 V strednej èasti panela máme k dispozícii vysúvate¾nı zoznam vykres¾ovanıch plôch, ktorım ich môeme zvırazòova. 
@@ -1983,9 +1963,9 @@ prípadne jeho prvej alebo druhej zmiešanej derivácie.
 
 \subsection{Vıkonnostnı tester}
 Teraz si popíšme druhú implementovanú aplikáciu zameranú nie na vykres¾ovanie, ale na ukáku èi skutoène je redukovanı algoritmus rıchlejší.  
-\obrazok{bench.png}{0.407}{Vıkonnostnı tester.\label{bench}}
-\obrazok{bench_surface.png}{0.407}{Zadanie údajov pre testovanie.\label{bench_surface}}
-\obrazok{bench_surface_results.png}{0.407}{Vısledky testu.\label{bench_surface_results}}
+\obrazok{bench.png}{0.277}{Vıkonnostnı tester.\label{bench}}
+\obrazok{bench_surface.png}{0.277}{Zadanie údajov pre testovanie.\label{bench_surface}}
+\obrazok{bench_surface_results.png}{0.277}{Vısledky testu.\label{bench_surface_results}}
 Na obrázku \ref{bench} môeme vidie úvodné okno aplikácie, ktoré obsahuje sedem poloiek. 
 Ich vıznam si teraz vyjasníme.
  \begin{itemize}
