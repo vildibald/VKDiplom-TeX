@@ -1293,7 +1293,7 @@ V praxi vidno, e sèítavanie a násobenie môeme povaova za podobne rıchle oper
 Je nutné podotknú, e pomery rıchlosti operácií sú závislé od povahy testovania. %, ako sú ve¾kos dátovıch štruktúr, ïalej záv
 My sme doby trvania aritmetickıch operandov $\circ \in \{+, \cdot, \div\}$ merali na jednom vektore, prièom testy boli v tvare $a[i] = a[i] \circ a[i-1]$, teda vıpoèet $i$-teho prvku závisel od vısledku vıpoètu predchádzajúceho $(i-1)$-teho prvku.
 Tımto sme sa snaili povahu testu èo najviac napodobni tvaru vıpoètov v interpolaènıch algoritmoch.
-V prípade, ak by test bol v tvare $a[i] = b[i] \circ c[i]$ tak vıpoèty pre jednotlivé $i$ by boli na sebe nezávislé. 
+V prípade, ak by test bol v tvare $a[i] = b[i] \circ c[i]$, tak vıpoèty pre jednotlivé $i$ by boli na sebe nezávislé. 
 To by procesoru umonilo poui techniku pipeliningu a pomery èasov násobenia a sèítania by vyšli, vïaka väèšiemu prietoku tıchto dvoch operácií oproti deleniu, násobne väèšie.
 Jednak by takıto test nesúhlasil s tvarom vıpoètov v testovanıch algoritmoch a taktie by nekorešpondovalo teoretické zrıchlenie s meranım zrıchlením. 
 %Ak $\circ \in \{+, \cdot, \div\}$, tak meranie doby vıpoètu jednotlivıch operácií v tvare $a[i] = a[i+1] \circ a[i]$ vráti úplne iné vısledky ako keby operandy boli z rozliènıch vektor,
