@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2016.2.5)  11 APR 2016 16:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2016.2.5)  8 APR 2016 17:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**dp.tex
-(./dp.tex
+**svk.tex
+(./svk.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
 (./rnthesis.cls
@@ -679,11 +679,6 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_above_shortintertext_sep=\dimen193
 \l_MT_below_shortintertext_sep=\dimen194
 )
-(c:/texlive/2014/texmf-dist/tex/latex/colortbl/colortbl.sty
-Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
-\everycr=\toks30
-\minrowclearance=\skip61
-)
 (c:/texlive/2014/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
@@ -691,15 +686,15 @@ nment
 (c:/texlive/2014/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count164
-\float@exts=\toks31
+\float@exts=\toks30
 \float@box=\box48
-\@float@everytoks=\toks32
+\@float@everytoks=\toks31
 \@floatcapt=\box49
 )
 (c:/texlive/2014/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\@float@every@algorithm=\toks33
+\@float@every@algorithm=\toks32
 \c@algorithm=\count165
 )
 (c:/texlive/2014/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
@@ -712,13 +707,13 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \c@ALG@line=\count166
 \c@ALG@rem=\count167
 \c@ALG@nested=\count168
-\ALG@tlm=\skip62
-\ALG@thistlm=\skip63
+\ALG@tlm=\skip61
+\ALG@thistlm=\skip62
 \c@ALG@Lnr=\count169
 \c@ALG@blocknr=\count170
 \c@ALG@storecount=\count171
 \c@ALG@tmpcounter=\count172
-\ALG@tmplength=\skip64
+\ALG@tmplength=\skip63
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (c:/texlive/2014/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -843,13 +838,13 @@ Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip65
+\Hy@SectionHShift=\skip64
 )
 (c:/texlive/2014/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 (c:/texlive/2014/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 (c:/texlive/2014/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (c:/texlive/2014/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks34
+\pgfutil@everybye=\toks33
 \pgfutil@tempdima=\dimen199
 \pgfutil@tempdimb=\dimen200
 
@@ -871,11 +866,11 @@ Package: pgf 2013/12/18 v3.0.0 (rcs-revision 1.14)
 Package: pgfsys 2013/11/30 v3.0.0 (rcs-revision 1.47)
 
 (c:/texlive/2014/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks35
-\pgfkeys@temptoks=\toks36
+\pgfkeys@pathtoks=\toks34
+\pgfkeys@temptoks=\toks35
 
 (c:/texlive/2014/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
-\pgfkeys@tmptoks=\toks37
+\pgfkeys@tmptoks=\toks36
 ))
 \pgf@x=\dimen201
 Normal \dimen register pool exhausted, switching to extended pool.
@@ -892,9 +887,9 @@ Normal \dimen register pool exhausted, switching to extended pool.
 \c@pgf@countb=\count184
 \c@pgf@countc=\count185
 \c@pgf@countd=\count186
-\t@pgf@toka=\toks38
-\t@pgf@tokb=\toks39
-\t@pgf@tokc=\toks40
+\t@pgf@toka=\toks37
+\t@pgf@tokb=\toks38
+\t@pgf@tokc=\toks39
  (c:/texlive/2014/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
 )
@@ -941,9 +936,9 @@ Package: pgfcore 2010/04/11 v3.0.0 (rcs-revision 1.7)
 \pgfmath@dimen=\dimen263
 \pgfmath@count=\count189
 \pgfmath@box=\box51
-\pgfmath@toks=\toks41
-\pgfmath@stack@operand=\toks42
-\pgfmath@stack@operation=\toks43
+\pgfmath@toks=\toks40
+\pgfmath@stack@operand=\toks41
+\pgfmath@stack@operation=\toks42
 )
 (c:/texlive/2014/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
 (c:/texlive/2014/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.te
@@ -1076,8 +1071,8 @@ Package: pgffor 2013/12/13 v3.0.0 (rcs-revision 1.25)
 (c:/texlive/2014/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
 \pgffor@iter=\dimen290
 \pgffor@skip=\dimen291
-\pgffor@stack=\toks44
-\pgffor@toks=\toks45
+\pgffor@stack=\toks43
+\pgffor@toks=\toks44
 ))
 (c:/texlive/2014/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2013/12/13 v3.0.0 (rcs-revision 1.142)
@@ -1126,31 +1121,31 @@ File: lstlang1.sty 2014/03/04 1.5c listings language file
 )
 (c:/texlive/2014/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
-) (./dp.aux)
-\openout1 = `dp.aux'.
+) (./svk.aux)
+\openout1 = `svk.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 274.
-LaTeX Font Info:    ... okay on input line 274.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 274.
-LaTeX Font Info:    ... okay on input line 274.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 274.
-LaTeX Font Info:    ... okay on input line 274.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 274.
-LaTeX Font Info:    ... okay on input line 274.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 274.
-LaTeX Font Info:    ... okay on input line 274.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 274.
-LaTeX Font Info:    ... okay on input line 274.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 274.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 274.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 265.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 265.
 
 
 (c:/texlive/2014/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 274.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 274.
-LaTeX Font Info:    ... okay on input line 274.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
 
 Zoznam pou∫itej literat˙ry
 (c:/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -1161,12 +1156,12 @@ Normal \count register pool exhausted, switching to extended pool.
 \scratchbox=\box61
 \nofMPsegments=\count278
 \nofMParguments=\count279
-\everyMPshowfont=\toks46
+\everyMPshowfont=\toks45
 \MPscratchCnt=\count280
 \MPscratchDim=\dimen300
 \MPnumerator=\count281
 \makeMPintoPDFobject=\count282
-\everyMPtoPDFconversion=\toks47
+\everyMPtoPDFconversion=\toks46
 ) (c:/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -1184,16 +1179,16 @@ e
 ))
 \c@lstlisting=\count283
 \AtBeginShipoutBox=\box62
-Package hyperref Info: Link coloring ON on input line 274.
-LaTeX Info: Redefining \ref on input line 274.
-LaTeX Info: Redefining \pageref on input line 274.
-LaTeX Info: Redefining \nameref on input line 274.
- (./dp.out) (./dp.out)
+Package hyperref Info: Link coloring ON on input line 265.
+LaTeX Info: Redefining \ref on input line 265.
+LaTeX Info: Redefining \pageref on input line 265.
+LaTeX Info: Redefining \nameref on input line 265.
+ (./svk.out) (./svk.out)
 \@outlinefile=\write4
-\openout4 = `dp.out'.
+\openout4 = `svk.out'.
 
  ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 277.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 268.
 
 
 (c:/texlive/2014/texmf-dist/tex/latex/base/t1cmss.fd
@@ -1201,12 +1196,12 @@ File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 ) [1
 
 {c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for U+msa on input line 277.
+LaTeX Font Info:    Try loading font information for U+msa on input line 268.
 
 (c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 277.
+LaTeX Font Info:    Try loading font information for U+msb on input line 268.
 
 (c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1214,350 +1209,242 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.277 \newpage
-               [1] [2] [3] (./dp.toc
+l.268 \newpage
+               [1] [2] [3] (./svk.toc
 \p@rindent=\dimen301
 \p@rindent=\dimen302
-\p@rindent=\dimen303
 )
 \tf@toc=\write5
-\openout5 = `dp.toc'.
+\openout5 = `svk.toc'.
 
  [4
 
 ]
-<blueRedSpl.png, id=141, 457.71pt x 354.57469pt>
+<blueRedSpl.png, id=106, 457.71pt x 354.57469pt>
 File: blueRedSpl.png Graphic file (type png)
  <use blueRedSpl.png>
-Package pdftex.def Info: blueRedSpl.png used on input line 293.
+Package pdftex.def Info: blueRedSpl.png used on input line 284.
 (pdftex.def)             Requested size: 137.31406pt x 106.37321pt.
  [5
 
- <./blueRedSpl.png>] [6]
+ <./blueRedSpl.png>]
 Kapitola 1.
-[7
+<mexHatWKnots.png, id=113, 327.11684pt x 324.83463pt>
+File: mexHatWKnots.png Graphic file (type png)
+ <use mexHatWKnots.png>
+Package pdftex.def Info: mexHatWKnots.png used on input line 299.
+(pdftex.def)             Requested size: 228.98021pt x 227.38268pt.
 
-] [8]
-Overfull \hbox (2.48187pt too wide) in paragraph at lines 427--432
-\T1/cmr/m/n/12 Na to aby sme zo-stro-jili seg-menty splajnu po-tre-bu-jeme ma¥ 
-danÈ uzly, funk£nÈ
- []
+[6
 
-
-Overfull \hbox (14.0118pt too wide) in paragraph at lines 433--435
+]
+Overfull \hbox (14.0118pt too wide) in paragraph at lines 350--352
 \OMX/MnSymbolE/m/n/12 à\OML/cmm/m/it/12 v[]; [] ; v[]\OMX/MnSymbolE/m/n/12 ç$ \
 T1/cmr/m/n/12 s˙ rov-no-merne ras-t˙ce po-stup-nosti. Nech pre ka∫dÈ $\OML/cmm/
 m/it/12 i$ \T1/cmr/m/n/12 z $\OMX/MnSymbolE/m/n/12 ò\OT1/cmr/m/n/12 0\OML/cmm/m
 /it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; [] ; I \U/MnSymbolC/m/n/12 ^^P
  []
 
-[9] <DeBoorModel.png, id=195, 341.02406pt x 253.69781pt>
+[7 <./mexHatWKnots.png>] [8]
+<DeBoorModel.png, id=152, 341.02406pt x 253.69781pt>
 File: DeBoorModel.png Graphic file (type png)
  <use DeBoorModel.png>
-Package pdftex.def Info: DeBoorModel.png used on input line 502.
+Package pdftex.def Info: DeBoorModel.png used on input line 423.
 (pdftex.def)             Requested size: 238.71521pt x 177.58725pt.
 
-[10] <mexHatWKnots.png, id=202, 260.47313pt x 249.93375pt>
-File: mexHatWKnots.png Graphic file (type png)
-
-<use mexHatWKnots.png>
-Package pdftex.def Info: mexHatWKnots.png used on input line 532.
-(pdftex.def)             Requested size: 182.32994pt x 174.95242pt.
- [11 <./DeBoorModel.png>]
-<fseg.png, id=211, 526.96875pt x 376.40625pt>
+[9 <./DeBoorModel.png>] <fseg.png, id=159, 526.96875pt x 376.40625pt>
 File: fseg.png Graphic file (type png)
- <use fseg.png>
-Package pdftex.def Info: fseg.png used on input line 537.
+
+<use fseg.png>
+Package pdftex.def Info: fseg.png used on input line 476.
 (pdftex.def)             Requested size: 263.48372pt x 188.20265pt.
- [12 <./mexHatWKnots.png>]
-Overfull \hbox (3.8786pt too wide) detected at line 572
-[][][] []
- []
-
-
-Overfull \hbox (3.8786pt too wide) detected at line 577
-[][][] []
- []
-
-[13 <./fseg.png>]
-Overfull \hbox (6.33098pt too wide) in paragraph at lines 583--589
-\T1/cmr/m/n/12 ch·-dza splaj-nov˝ seg-ment. Ka∫d˝ seg-ment $\OML/cmm/m/it/12 S[
-]$ \T1/cmr/m/n/12 je bi-ku-bick· fun-kcia z $\OMX/MnSymbolE/m/n/12 ^^@\OML/cmm/
-m/it/12 u[]; u[]\OMX/MnSymbolE/m/n/12 ^^E \U/MnSymbolC/m/n/12 ^^U
- []
-
-[14] [15]
+ [10] [11 <./fseg.png>] [12]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 662.
-LaTeX Font Info:    Calculating math sizes for size <8.39789> on input line 678
+put line 598.
+LaTeX Font Info:    Calculating math sizes for size <8.39789> on input line 614
 .
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.19894> not available
-(Font)              size <5> substituted on input line 678.
+(Font)              size <5> substituted on input line 614.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.19894> not available
-(Font)              size <5> substituted on input line 678.
+(Font)              size <5> substituted on input line 614.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.19894> not available
-(Font)              size <5> substituted on input line 678.
+(Font)              size <5> substituted on input line 614.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.19894> not available
-(Font)              size <5> substituted on input line 678.
+(Font)              size <5> substituted on input line 614.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.19894> not available
-(Font)              size <5> substituted on input line 678.
-
-[16]
-Overfull \hbox (4.56482pt too wide) in paragraph at lines 740--742
-[]\T1/cmr/m/sl/12 Nech $\OML/cmm/m/it/12 n$ \T1/cmr/m/sl/12 je po-£et rov-nÌc t
-roj-dia-go-n·l-nej li-ne-·r-nej s˙-stavy, v≤etky
- []
+(Font)              size <5> substituted on input line 614.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 747.
+(hyperref)                removing `\textasciicaron' on input line 641.
 
-[17]
-Underfull \hbox (badness 10000) in paragraph at lines 771--775
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 775--779
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 665--669
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 779--783
+Underfull \hbox (badness 10000) in paragraph at lines 669--673
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 783--786
+Underfull \hbox (badness 10000) in paragraph at lines 673--677
 
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 788--792
+
+Underfull \hbox (badness 10000) in paragraph at lines 677--680
 
  []
 
-[19]
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 682--686
+
+ []
+
+[15]
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 867.
+(hyperref)                removing `\textasciicaron' on input line 765.
 
-
-Overfull \hbox (6.7446pt too wide) in paragraph at lines 873--875
-[]\T1/cmr/m/n/12 Teraz po-pÌ-≤eme tento nov˝ al-go-rit-mus, ktor˝ pra-covne ozn
-a-
+[16] [17] [18] [19] [20]
+Overfull \hbox (3.8786pt too wide) detected at line 989
+[][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 881--889
-
+Overfull \hbox (3.8786pt too wide) detected at line 995
+[][][] []
  []
 
-[20] [21] [22] [23] [24]
+
+Overfull \hbox (0.82059pt too wide) in paragraph at lines 999--1001
+[]\T1/cmr/m/sl/12 Nech s˙ spl-nenÈ pod-mienky na za-£iatku tejto £asti ([][]1.4
+[][]. Splajn
+ []
+
+[21]
 Kapitola 2.
-[25
+[22
 
-] <jarr.png, id=363, 519.44063pt x 361.35pt>
-File: jarr.png Graphic file (type png)
- <use jarr.png>
-Package pdftex.def Info: jarr.png used on input line 1092.
-(pdftex.def)             Requested size: 211.41061pt x 147.06825pt.
- [26 <./jarr.png>] [27] <cacheIntel.png, id=376, 510.40688pt x 330.48468pt>
-File: cacheIntel.png Graphic file (type png)
-
-<use cacheIntel.png>
-Package pdftex.def Info: cacheIntel.png used on input line 1114.
-(pdftex.def)             Requested size: 306.24648pt x 198.29233pt.
-
-
-Package hyperref Warning: Composite letter `\textasciicaron+c'
-(hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1116.
-
-[28 <./cacheIntel.png>] <skylakeCore.png, id=389, 469.755pt x 331.99031pt>
+] [23] <skylakeCore.png, id=312, 469.755pt x 331.99031pt>
 File: skylakeCore.png Graphic file (type png)
 
 <use skylakeCore.png>
-Package pdftex.def Info: skylakeCore.png used on input line 1157.
+Package pdftex.def Info: skylakeCore.png used on input line 1064.
 (pdftex.def)             Requested size: 281.85518pt x 199.19571pt.
- [29] [30 <./skylakeCore.png>]
+ [24 <./skylakeCore.png>]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1180.
+(hyperref)                removing `\textasciicaron' on input line 1087.
 
-[31]pdfTeX warning (ext4): destination with the same identifier (name{Hfootnote
+[25]pdfTeX warning (ext4): destination with the same identifier (name{Hfootnote
 .2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1213 ...b˙da menöie hodnoty ak je deliteæ cel˝.}
-                                                   [32] [33] [34] [35]
-Underfull \hbox (badness 10000) in paragraph at lines 1408--1408
+l.1121 ...b˙da menöie hodnoty ak je deliteæ cel˝.}
+                                                   [26] [27] [28] [29]
+Underfull \hbox (badness 10000) in paragraph at lines 1321--1321
 [][][]\T1/cmr/m/n/10 Repozit·r so zdro-jo-v˝mi kÛdmi k ap-li-k·-ci·m mo∫no n·js
 ¥ na ad-rese
  []
 
-[36] [37]
+[30] [31]
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1517.
+(hyperref)                removing `\textasciicaron' on input line 1431.
 
-[38] [39]
+[32] [33] [34]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1670.
-
-[40] [41] [42] [43] [44]
-Kapitola 3.
-
-Package hyperref Warning: Composite letter `\textasciicaron+l'
-(hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1860.
+(hyperref)                removing `\textasciicaron' on input line 1631.
 
 
-Package hyperref Warning: Composite letter `\textasciicaron+c'
-(hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1860.
+LaTeX Warning: Reference `alg:SolveGeneralLU' on page 35 undefined on input lin
+e 1640.
 
-<silverlight.jpg, id=553, 642.4pt x 363.3575pt>
-File: silverlight.jpg Graphic file (type jpg)
- <use silverlight.jpg>
-Package pdftex.def Info: silverlight.jpg used on input line 1867.
-(pdftex.def)             Requested size: 128.47772pt x 72.6702pt.
+[35]
 
-<apka_spl.png, id=554, 748.29562pt x 558.58687pt>
-File: apka_spl.png Graphic file (type png)
- <use apka_spl.png>
-Package pdftex.def Info: apka_spl.png used on input line 1877.
-(pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
+LaTeX Warning: Reference `img:cacheSpeed' on page 36 undefined on input line 16
+63.
 
-<bench.png, id=555, 532.99126pt x 383.18156pt>
-File: bench.png Graphic file (type png)
- <use bench.png>
-Package pdftex.def Info: bench.png used on input line 1880.
-(pdftex.def)             Requested size: 147.63437pt x 106.13826pt.
- [45
-
- <./silverlight.jpg>]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1882.
-
-<apka.png, id=561, 748.29562pt x 558.58687pt>
-File: apka.png Graphic file (type png)
- <use apka.png>
-Package pdftex.def Info: apka.png used on input line 1885.
-(pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
-
-<apka_spod.png, id=562, 935.495pt x 107.40125pt>
-File: apka_spod.png Graphic file (type png)
- <use apka_spod.png>
-Package pdftex.def Info: apka_spod.png used on input line 1895.
-(pdftex.def)             Requested size: 374.19136pt x 42.95973pt.
- [46 <./apka_spl.png> <./bench.png>] <apka_stred.png, id=573, 745.28438pt x 409
-.53pt>
-File: apka_stred.png Graphic file (type png)
-
-<use apka_stred.png>
-Package pdftex.def Info: apka_stred.png used on input line 1917.
-(pdftex.def)             Requested size: 195.25911pt x 107.29388pt.
- [47 <./apka.png> <./apka_spod.png>]
-<apka_vrch.png, id=582, 575.14874pt x 24.84282pt>
-File: apka_vrch.png Graphic file (type png)
- <use apka_vrch.png>
-Package pdftex.def Info: apka_vrch.png used on input line 1923.
-(pdftex.def)             Requested size: 373.84225pt x 16.14763pt.
-File: bench.png Graphic file (type png)
-
-<use bench.png>
-Package pdftex.def Info: bench.png used on input line 1932.
-(pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
- <bench_surface.png, id=583, 532.99126pt x 383.18156pt>
-File: bench_surface.png Graphic file (type png)
-
-<use bench_surface.png>
-Package pdftex.def Info: bench_surface.png used on input line 1933.
-(pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
-
-<bench_surface_results.png, id=584, 532.99126pt x 383.18156pt>
-File: bench_surface_results.png Graphic file (type png)
-
-<use bench_surface_results.png>
-Package pdftex.def Info: bench_surface_results.png used on input line 1934.
-(pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
- [48 <./apka_stred.png> <./apka_vrch.png>]
-[49 <./bench_surface.png> <./bench_surface_results.png>] [50] [51
+[36] [37] [38] [39
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1988--1989
+Underfull \hbox (badness 10000) in paragraph at lines 1759--1760
 []\T1/cmr/m/n/12 https://en.wikibooks.org/wiki/Algorithm_-Im-ple-men-ta-ti-on/L
 i-near_-Al-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1989--1990
+Underfull \hbox (badness 10000) in paragraph at lines 1760--1761
 []\T1/cmr/m/n/12 http://www.anandtech.com/show/9483/intel-skylake-review-6700k-
 
  []
 
 
-Overfull \hbox (51.6933pt too wide) in paragraph at lines 1990--1991
+Overfull \hbox (51.6933pt too wide) in paragraph at lines 1761--1762
 []\T1/cmr/m/n/12 http://www.intel.com/content/dam/www/public/us/en/documents/ma
 nuals/64-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1993--1994
+Underfull \hbox (badness 10000) in paragraph at lines 1764--1765
 []\T1/cmr/m/n/12 http://techreport.com/review/23750/amd-fx-8350-processor-
  []
 
-[52
+[40
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1996.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1996.
- (./dp.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1996.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1996.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1767.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1767.
+ (./svk.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1767.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1767.
 
-Package rerunfilecheck Info: File `dp.out' has not changed.
-(rerunfilecheck)             Checksum: 10AA6452D8DEF9CEFD1BD289E6C1FE3A;1690.
+Package rerunfilecheck Info: File `svk.out' has not changed.
+(rerunfilecheck)             Checksum: 696029F565081C021D9864237190FDFD;1149.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 2.90053pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1996.
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1767.
  ) 
 Here is how much of TeX's memory you used:
- 28564 strings out of 493117
- 518686 string characters out of 6138985
- 599893 words of memory out of 5000000
- 31289 multiletter control sequences out of 15000+600000
+ 28392 strings out of 493117
+ 516285 string characters out of 6138985
+ 599653 words of memory out of 5000000
+ 31172 multiletter control sequences out of 15000+600000
  71320 words of font info for 201 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 64i,17n,60p,10435b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,17n,60p,10436b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
 ive/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{c:/texlive/2014/
 texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolS.enc}{c:/texlive/2014/texmf-dist/f
-onts/enc/dvips/mnsymbol/MnSymbolC.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvi
-ps/mnsymbol/MnSymbolE.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/
-MnSymbolD.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolF.en
-c}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolA.enc}<c:/texliv
+onts/enc/dvips/mnsymbol/MnSymbolD.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvi
+ps/mnsymbol/MnSymbolF.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/
+MnSymbolC.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolA.en
+c}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolE.enc}<c:/texliv
 e/2014/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol10.pfb><c:/texlive/2014/t
 exmf-dist/fonts/type1/public/mnsymbol/MnSymbol12.pfb><c:/texlive/2014/texmf-dis
 t/fonts/type1/public/mnsymbol/MnSymbol6.pfb><c:/texlive/2014/texmf-dist/fonts/t
@@ -1587,10 +1474,10 @@ ublic/cm-super/sfsx1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-s
 uper/sfsx1440.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfsx2
 488.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb><c
 :/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on dp.pdf (53 pages, 1187420 bytes).
+Output written on svk.pdf (41 pages, 847334 bytes).
 PDF statistics:
- 788 PDF objects out of 1000 (max. 8388607)
- 661 compressed objects within 7 object streams
- 185 named destinations out of 1000 (max. 500000)
- 261 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 631 PDF objects out of 1000 (max. 8388607)
+ 539 compressed objects within 6 object streams
+ 145 named destinations out of 1000 (max. 500000)
+ 150 words of extra memory for PDF output out of 10000 (max. 10000000)
 
