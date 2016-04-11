@@ -1163,7 +1163,6 @@ Toto má znaènı vplyv na rıchlos najmä redukovaného algoritmu pri poèítaní pravı
 Keïe procesor má ale iba jednu delièku, pre vırazy typu $a_0 / a_1 /\dots / a_n$ takıto trik fungova nebude.
 
 Procesorové jadro na obrázku vyššie má svojich 29 jednotiek prístupnıch cez osem zberníc (porty 0 a 7). To konkrétne v prípade procesorov Skylake znamená, e dokáu naraz vyuíva maximálne osem svojich vıpoètovıch jednotiek za splnenia urèitıch podmienok. 
-
 Málokedy ale proces alebo vlákno obsahuje vdy osmice vzájomne nezávislıch inštrukcií. 
 V situácií kedy jeden proces (vlákno) nemôe vyui všetky jednotky jadra, niektoré procesory umoòujú nevyuité porty priradi inému procesu (vláknu). 
 Táto technika sa nazıva \pojem{Simultaneous Multi-Threading} (ïalej len SMT). 
@@ -1174,7 +1173,7 @@ V praxi teda SMT predstavuje akısi medzistupeò medzi vláknovım a inštrukènım par
 kedy procesor operaènému systému a beiacim procesom hlási väèší poèet jadier akım je v skutoènosti vybavenı, prièom interne na úrovni mikroarchitektúry sa jedná iba o ïalšiu techniku superskalárnosti.
 
 SMT má vırazne pozitívny vplyv na vıkon procesora ak procesy (vlákna) zdie¾ajúce jedno jadro nepoadujú prístup k tım istım jednotkám. 
-V opaènom prípade dochádza k javu kedy jeden proces (vlákno) musí èaka na uvo¾nenie jednotky druhám procesom (vláknom) a vtedy môe dôjs k zníeniu vıkonu oproti identickému procesoru s neaktívnym SMT.
+V opaènom prípade dochádza k javu kedy jeden proces (vlákno) musí èaka na uvo¾nenie jednotky druhım procesom (vláknom) a vtedy môe dôjs k zníeniu vıkonu oproti identickému procesoru s neaktívnym SMT.
 V praktickıch meraniach má SMT na implementované algoritmy negatívny vplyv. 
 
 \subsection{Rıchlos aritmetickıch operácií}\label{sec:instr_rychlost}
@@ -1184,7 +1183,7 @@ V prípade vıpoètovıch algoritmov má pochopite¾ne okrem vıberu vhodnıch dátovıch 
 
 Najlepším zdrojom ako zisti rıchlos tıchto operácií je dokumentácia inštrukènıch sád procesorov.
 Inštrukèná sada x86 sa od svojho prvotného uvedenia v roku 1978 doèkala mnohıch rozšírení. 
-Moderné procesory obsahujú mnoho spôsobov ako napríklad vynásobi dve èísla. 
+Moderné procesory obsahujú nieko¾ko spôsobov ako napríklad vynásobi dve èísla. 
 Keïe nie je v silách otestova všetky moné rozšírenia sady, zvolili sme si jedno konkrétne rozšírenie a síce Streaming SIMD Extensions (skrátene SSE), konkrétne vo verzii 4 (SSE4). 
 Sady z rodiny SSE sú v èase písania práce najpouívanejšími sadami (najmä verzia SSE2) ktoré sú podporované prakticky všetkımi procesormi od roku 2003. 
 
@@ -1207,7 +1206,7 @@ Tabu¾ka obashuje tieto ståpce.
 	\item \textbf{Inverznı prietok}\newline
 	Poèet strojovıch cyklov ktoré je nutné èaka kım je daná vıpoètová jednotka schopná zopakova inštrukciu. 
 	V prípade operácií sèítania, odèítania a násobenia je tento poèet menší ako odozva. 
-	To znamená, e aritmetické sèítaèky a násobièky sú schopné vïaka technike pipelining-u zaèa novı vıpoèet ešte pred dokonèením aktuálnehu vıpoètu.
+	To znamená, e aritmetické sèítaèky a násobièky sú schopné, vïaka technike pipelining-u, zaèa novı vıpoèet ešte pred dokonèením aktuálnehu vıpoètu.
 \end{itemize}
 
 \footnotetext{\label{footnote:round_divisor}Odozva je nadobúda menšie hodnoty ak je delite¾ celı.}
