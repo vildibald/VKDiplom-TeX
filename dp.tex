@@ -1795,7 +1795,7 @@ Ostávajúce ståpce analogicky znázoròujú èasy a pomer paralelnıch verzií implemen
 
 
 V následujúcej tabu¾ke budeme uvaova merané rıchlosti aritmetickıch operácií z tabu¾ky \ref{real_op_speed} v èasti \ref{sec:instr_rychlost}. 
-V ståpcoch 2 a 4 máme pomery rıchlostí $\gamma^\div$, $\gamma^\rightY$ a $\gamma^\righttherefore$ aritmetickıch operácií získané pod¾a tabu¾ky \ref{real_op_speed} v èasti \ref{sec:instr_rychlost} .
+V ståpcoch 2 a 4 máme pomery rıchlostí $\gamma^\div$, $\gamma^\rightY$ a $\gamma^\righttherefore$ aritmetickıch operácií získané pod¾a tabu¾ky \ref{real_op_speed} v èasti \ref{sec:instr_rychlost}.
 Ståpec 5 predstavuje teoretické zrıchlenie redukovaného algoritmu vypoèítané pod¾a vety \ref{veta:full_red_ratio} v predchádzajúcej èasti.
 Poslednı ståpec 6 predstavuje merané zrıchlenie sériovej verzie redukovaného algoritmu pod¾a predchádzajúcej tabu¾ky.
 
@@ -1847,7 +1847,8 @@ Do budúcna máme rozpracované zefektívnenie vıpoètu zmiešanıch restov, ktoré sa n
 V prípade SMT procesorov sa dá pomalos vláknovo paralelnej verzie redukovaného algoritmu, aj keï to nemáme overené, vysvetli samotnou superskalárnosou pod¾a podsekcie \ref{sec:instrukcny_paralelizmus}. 
 Dnešné procesorové mikroarchitektúry majú vıpoètové jadrá vybavené práve dvomi matematickımi jednotkami pre operácie s plávajúcou desatinnou èiarkou (oznaèujú sa skratkou FPU). 
 V tomto prípade SMT môe teoreticky kadú jednotku prideli inému vláknu. 
-Pri redukovanom algoritme ale máme ve¾a operácií v tvare $a_0a_1\circ \dots\circ a_n$, kde $\circ \in \{+, \cdot\}$ kde optimalizujúci prekladaè môe takıto vıpoèet rozloi do viacerıch strojovıch inštrukcií. 
+Pri redukovanom algoritme ale máme ve¾a operácií v tvare $a_0\circ a_1\circ \dots\circ a_n$, kde $\circ \in \{+, \cdot\}$. 
+Optimalizujúci prekladaè môe takıto vıpoèet rozloi do viacerıch strojovıch inštrukcií. 
 V tomto prípade dôjde k vyuitiu oboch FPU jadra v rámci jediného vlákna ale napriek tomu SMT na toto jadro priradí aj druhé vlákno ktoré poèíta práve na FPU. 
 Dôjde tak k zbytoènej réii plánovaèa vlákien èi u na úrovni OS alebo inštrukèného plánovaèa samotného procesora, èo spôsobí pokles vıkonu. Ak je táto hypotéza korektná, tak aj v tomto prípade by bolo potrebné upravi resty pri zmiešanıch deriváciách, aby sa ich vıpoèet dal vykona paralelne v jednom kroku spolu s LU dekompozíciou.   
   

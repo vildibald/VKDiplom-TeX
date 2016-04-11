@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2016.2.5)  11 APR 2016 20:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2016.2.5)  11 APR 2016 23:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1426,113 +1426,113 @@ Kapitola 3.
 
 Package hyperref Warning: Composite letter `\textasciicaron+l'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1860.
+(hyperref)                removing `\textasciicaron' on input line 1861.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1860.
+(hyperref)                removing `\textasciicaron' on input line 1861.
 
 <silverlight.jpg, id=553, 642.4pt x 363.3575pt>
 File: silverlight.jpg Graphic file (type jpg)
  <use silverlight.jpg>
-Package pdftex.def Info: silverlight.jpg used on input line 1867.
+Package pdftex.def Info: silverlight.jpg used on input line 1868.
 (pdftex.def)             Requested size: 128.47772pt x 72.6702pt.
 
 <apka_spl.png, id=554, 748.29562pt x 558.58687pt>
 File: apka_spl.png Graphic file (type png)
  <use apka_spl.png>
-Package pdftex.def Info: apka_spl.png used on input line 1877.
+Package pdftex.def Info: apka_spl.png used on input line 1878.
 (pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
 
 <bench.png, id=555, 532.99126pt x 383.18156pt>
 File: bench.png Graphic file (type png)
  <use bench.png>
-Package pdftex.def Info: bench.png used on input line 1880.
+Package pdftex.def Info: bench.png used on input line 1881.
 (pdftex.def)             Requested size: 147.63437pt x 106.13826pt.
  [45
 
  <./silverlight.jpg>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1882.
+(hyperref)                than one, level fixed on input line 1883.
 
 <apka.png, id=561, 748.29562pt x 558.58687pt>
 File: apka.png Graphic file (type png)
  <use apka.png>
-Package pdftex.def Info: apka.png used on input line 1885.
+Package pdftex.def Info: apka.png used on input line 1886.
 (pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
 
 <apka_spod.png, id=562, 935.495pt x 107.40125pt>
 File: apka_spod.png Graphic file (type png)
  <use apka_spod.png>
-Package pdftex.def Info: apka_spod.png used on input line 1895.
+Package pdftex.def Info: apka_spod.png used on input line 1896.
 (pdftex.def)             Requested size: 374.19136pt x 42.95973pt.
  [46 <./apka_spl.png> <./bench.png>] <apka_stred.png, id=573, 745.28438pt x 409
 .53pt>
 File: apka_stred.png Graphic file (type png)
 
 <use apka_stred.png>
-Package pdftex.def Info: apka_stred.png used on input line 1917.
+Package pdftex.def Info: apka_stred.png used on input line 1918.
 (pdftex.def)             Requested size: 195.25911pt x 107.29388pt.
  [47 <./apka.png> <./apka_spod.png>]
 <apka_vrch.png, id=582, 575.14874pt x 24.84282pt>
 File: apka_vrch.png Graphic file (type png)
  <use apka_vrch.png>
-Package pdftex.def Info: apka_vrch.png used on input line 1923.
+Package pdftex.def Info: apka_vrch.png used on input line 1924.
 (pdftex.def)             Requested size: 373.84225pt x 16.14763pt.
 File: bench.png Graphic file (type png)
 
 <use bench.png>
-Package pdftex.def Info: bench.png used on input line 1932.
+Package pdftex.def Info: bench.png used on input line 1933.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
  <bench_surface.png, id=583, 532.99126pt x 383.18156pt>
 File: bench_surface.png Graphic file (type png)
 
 <use bench_surface.png>
-Package pdftex.def Info: bench_surface.png used on input line 1933.
+Package pdftex.def Info: bench_surface.png used on input line 1934.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
 
 <bench_surface_results.png, id=584, 532.99126pt x 383.18156pt>
 File: bench_surface_results.png Graphic file (type png)
 
 <use bench_surface_results.png>
-Package pdftex.def Info: bench_surface_results.png used on input line 1934.
+Package pdftex.def Info: bench_surface_results.png used on input line 1935.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
  [48 <./apka_stred.png> <./apka_vrch.png>]
 [49 <./bench_surface.png> <./bench_surface_results.png>] [50] [51
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1988--1989
+Underfull \hbox (badness 10000) in paragraph at lines 1989--1990
 []\T1/cmr/m/n/12 https://en.wikibooks.org/wiki/Algorithm_-Im-ple-men-ta-ti-on/L
 i-near_-Al-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1989--1990
+Underfull \hbox (badness 10000) in paragraph at lines 1990--1991
 []\T1/cmr/m/n/12 http://www.anandtech.com/show/9483/intel-skylake-review-6700k-
 
  []
 
 
-Overfull \hbox (51.6933pt too wide) in paragraph at lines 1990--1991
+Overfull \hbox (51.6933pt too wide) in paragraph at lines 1991--1992
 []\T1/cmr/m/n/12 http://www.intel.com/content/dam/www/public/us/en/documents/ma
 nuals/64-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1993--1994
+Underfull \hbox (badness 10000) in paragraph at lines 1994--1995
 []\T1/cmr/m/n/12 http://techreport.com/review/23750/amd-fx-8350-processor-
  []
 
 [52
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1996.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1996.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1997.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1997.
  (./dp.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1996.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1996.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1997.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1997.
 
 Package rerunfilecheck Info: File `dp.out' has not changed.
 (rerunfilecheck)             Checksum: 10AA6452D8DEF9CEFD1BD289E6C1FE3A;1690.
@@ -1541,7 +1541,7 @@ Package rerunfilecheck Info: File `dp.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 2.90053pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1996.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1997.
  ) 
 Here is how much of TeX's memory you used:
  28564 strings out of 493117
@@ -1587,7 +1587,7 @@ ublic/cm-super/sfsx1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-s
 uper/sfsx1440.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfsx2
 488.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb><c
 :/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on dp.pdf (53 pages, 1187418 bytes).
+Output written on dp.pdf (53 pages, 1187442 bytes).
 PDF statistics:
  788 PDF objects out of 1000 (max. 8388607)
  661 compressed objects within 7 object streams
