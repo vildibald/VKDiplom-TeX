@@ -1,15 +1,12 @@
 \select@language {slovak}
-\contentsline {chapter}{\numberline {1}De Boorov model a redukovan\'y algoritmus}{6}{chapter.1}
-\contentsline {section}{\numberline {1.1}Trojdiagon\'alna LU dekompoz\IeC {\'\i }cia}{11}{section.1.1}
-\contentsline {section}{\numberline {1.2}De Boorov v\'ypo\v cet deriv\'aci\IeC {\'\i }}{14}{section.1.2}
-\contentsline {section}{\numberline {1.3}Po\v c\IeC {\'\i }tanie deriv\'aci\IeC {\'\i } redukovanou s\'ustavou}{16}{section.1.3}
-\contentsline {section}{\numberline {1.4}Kon\v strukcia hermitovho splajnu}{20}{section.1.4}
-\contentsline {chapter}{\numberline {2}Zr\'ychlenie}{22}{chapter.2}
-\contentsline {section}{\numberline {2.1}Procesorov\'a architekt\'ura}{23}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}R\'ychlos\v t aritmetick\'ych oper\'aci\IeC {\'\i }}{25}{subsection.2.1.1}
-\contentsline {section}{\numberline {2.2}Teoretick\'e zr\'ychlenie}{28}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Cena pln\'eho algoritmu}{30}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Po\v cty pre redukovan\'y algoritmus}{32}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Pam\"a\v tov\'e n\'aroky}{35}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Zhrnutie}{36}{subsection.2.2.4}
-\contentsline {section}{\numberline {2.3}Meran\'e zr\'ychlenie}{37}{section.2.3}
+\contentsline {section}{\numberline {1}De Boorov model a redukovan\'y algoritmus}{4}{section.1.1}
+\contentsline {subsection}{\numberline {1.1}Trojdiagon\'alna LU dekompoz\IeC {\'\i }cia}{7}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.2}De Boorov v\'ypo\v cet deriv\'aci\IeC {\'\i }}{8}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.3}Po\v c\IeC {\'\i }tanie deriv\'aci\IeC {\'\i } redukovanou s\'ustavou}{10}{subsection.1.1.3}
+\contentsline {section}{\numberline {2}In\v struk\v cn\'y paralelizmus}{14}{section.1.2}
+\contentsline {subsection}{\numberline {2.1}R\'ychlos\v t aritmetick\'ych oper\'aci\IeC {\'\i }}{16}{subsection.2.2.1}
+\contentsline {section}{\numberline {3}Teoretick\'e zr\'ychlenie}{19}{section.2.3}
+\contentsline {subsection}{\numberline {3.1}Cena pln\'eho algoritmu}{21}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {3.2}Cena redukovan\'eho algoritmu}{23}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {3.3}Zhrnutie}{26}{subsection.2.3.3}
+\contentsline {section}{\numberline {4}Meran\'e zr\'ychlenie}{27}{section.2.4}

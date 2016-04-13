@@ -1,14 +1,11 @@
-\BOOKMARK [0][-]{chapter.1}{1 De Boorov model a redukovan\375 algoritmus}{}% 1
-\BOOKMARK [1][-]{section.1.1}{1.1 Trojdiagon\341lna LU dekompoz\355cia}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{1.2 De Boorov v\375pocet deriv\341ci\355}{chapter.1}% 3
-\BOOKMARK [1][-]{section.1.3}{1.3 Poc\355tanie deriv\341ci\355 redukovanou s\372stavou}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.4}{1.4 Kon\235trukcia hermitovho splajnu}{chapter.1}% 5
-\BOOKMARK [0][-]{chapter.2}{2 Zr\375chlenie}{}% 6
-\BOOKMARK [1][-]{section.2.1}{2.1 Procesorov\341 architekt\372ra}{chapter.2}% 7
-\BOOKMARK [2][-]{subsection.2.1.1}{2.1.1 R\375chlost aritmetick\375ch oper\341ci\355}{section.2.1}% 8
-\BOOKMARK [1][-]{section.2.2}{2.2 Teoretick\351 zr\375chlenie}{chapter.2}% 9
-\BOOKMARK [2][-]{subsection.2.2.1}{2.2.1 Cena pln\351ho algoritmu}{section.2.2}% 10
-\BOOKMARK [2][-]{subsection.2.2.2}{2.2.2 Pocty pre redukovan\375 algoritmus}{section.2.2}% 11
-\BOOKMARK [2][-]{subsection.2.2.3}{2.2.3 Pam\344tov\351 n\341roky}{section.2.2}% 12
-\BOOKMARK [2][-]{subsection.2.2.4}{2.2.4 Zhrnutie}{section.2.2}% 13
-\BOOKMARK [1][-]{section.2.3}{2.3 Meran\351 zr\375chlenie}{chapter.2}% 14
+\BOOKMARK [1][-]{section.1.1}{1 De Boorov model a redukovan\375 algoritmus}{}% 1
+\BOOKMARK [2][-]{subsection.1.1.1}{1.1 Trojdiagon\341lna LU dekompoz\355cia}{section.1.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.2}{1.2 De Boorov v\375pocet deriv\341ci\355}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.3}{1.3 Poc\355tanie deriv\341ci\355 redukovanou s\372stavou}{section.1.1}% 4
+\BOOKMARK [1][-]{section.1.2}{2 In\235trukcn\375 paralelizmus}{}% 5
+\BOOKMARK [2][-]{subsection.2.2.1}{2.1 R\375chlost aritmetick\375ch oper\341ci\355}{section.1.2}% 6
+\BOOKMARK [1][-]{section.2.3}{3 Teoretick\351 zr\375chlenie}{}% 7
+\BOOKMARK [2][-]{subsection.2.3.1}{3.1 Cena pln\351ho algoritmu}{section.2.3}% 8
+\BOOKMARK [2][-]{subsection.2.3.2}{3.2 Cena redukovan\351ho algoritmu}{section.2.3}% 9
+\BOOKMARK [2][-]{subsection.2.3.3}{3.3 Zhrnutie}{section.2.3}% 10
+\BOOKMARK [1][-]{section.2.4}{4 Meran\351 zr\375chlenie}{}% 11
