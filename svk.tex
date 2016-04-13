@@ -398,59 +398,9 @@ Poskytujú prunı nástroj na modelovanie reálnych situácií na lokálne poiadavky,
 Navyše sa dá ukáza, e interpolácia funkcie kubickım splajnom je jednoznaèná. 
 Témou tejto práce sú práve metódy vıpoètu prvıch derivácií, ktorımi je moné dosiahnu práve spomenutı cie¾.
 
-Základná téma našej práce je úloha na základe vstupnıch uzlov $u_{0}$, ..., $u_{I-1}$, $v_{0}$, ..., $v_{J-1}$ a funkènıch hodnôt $z_{0,0}$, ..., $z_{I,J}$ nájs \pojem{hladkú}, po èastiach definovanú funkciu $S: [u_0, u_{I+1}] \times [v_0, v_{J+1}] \to \mathbb{R}$ so spojitımi deriváciami prvého aj druhého rádu takú, e pre kadé $i \in  {0, \dots, I-1}$ a $j \in  {0, \dots, J-1}$ platí $z_{i,j} = S(u_i, v_j)$. 
+Témou našej práce je úloha na základe vstupnıch uzlov $u_{0}$, ..., $u_{I-1}$, $v_{0}$, ..., $v_{J-1}$ a funkènıch hodnôt $z_{0,0}$, ..., $z_{I,J}$ nájs \pojem{hladkú}, po èastiach definovanú funkciu $S: [u_0, u_{I+1}] \times [v_0, v_{J+1}] \to \mathbb{R}$ so spojitımi deriváciami prvého aj druhého rádu takú, e pre kadé $i \in  {0, \dots, I-1}$ a $j \in  {0, \dots, J-1}$ platí $z_{i,j} = S(u_i, v_j)$. 
 %Funkèné hodnoty a hodnoty derivácií $S$ v uzloch sú èo najblišie hodnotám derivácií $f$. 
 Funkciu $S$ nazıvame splajn (konkrétne povrchovı splajn), prièom jednotlivé èasti nazveme \pojem{segmenty}. 
-
-%\subsection{Konštrukcia hermitovho splajnu}
-%\label{sec:her_constr}
-%Teraz si ukáeme ako môeme pod¾a zadanıch uzlov, ich funkènıch hodnôt a derivácií zostroji segmenty splajnu ako funkcie dvoch premennıch v priestore.
-%Predpokladajme $I \ge 3$ a $J  \ge 3$ z \uinteger, rovnomerné uzly $u_0$, \dots, $u_{I-1}$ a $v_0$, \dots, $v_{J-1}$. 
-%Úlohou je zostroji splajn $S$ triedy $C^2$ interpolujúci funkciu $f$.
-%Polome
-%\begin{itemize}
-%	\item
-%	funkèné hodnoty splajnu $z_{0,0}$, \dots, $z_{I-1,0}$, \dots, $z_{0,J-1}$, \dots, $z_{I-1,J-1}$, 
-%	\item
-%	$x$-ové derivácie splajnu  $d^x_{0,0}$, \dots, $d^x_{I-1,0}$, \dots, $d^x_{0,J-1}$, \dots, $d^x_{I-1,J-1}$,
-%	\item
-%	$y$-ové derivácie splajnu  $d^y_{0,0}$, \dots, $d^y_{I-1,0}$, \dots, $d^y_{0,J-1}$, \dots, $d^y_{I-1,J-1}$,
-%	\item
-%	zmiešané derivácie splajnu  $d^{xy}_{0,0}$, \dots, $d^{xy}_{I-1,0}$, \dots, $d^{xy}_{0,J-1}$, \dots, $d^{xy}_{I-1,J-1}$.
-%\end{itemize}
-%
-%Máme všetky potrebné hodnoty aby sme mohli definova segmenty splajnu $S$ pod¾a definície \ref{df:surface_spline}. 
-%Pre kadé $i$ z $\{0, \dots, I-2\}$ a $j$ z $\{0, \dots, J-2\}$ polome segment $S_{i,j}: [u_i, v_j] \times [u_{i+1}, v_{j+1}] \to \mathbb{R}$ vzahom:
-%\begin{equation}
-%\begin{gathered}
-%S_{i,j}(x,y) =\\ \pmb{\lambda}^\text{T}(x, u_i, u_{i+1}) \cdot \pmb{\Phi}(u_i, u_{i+1}, v_j, v_{j+1}) \cdot \pmb{\lambda}(y, v_{j}, v_{j+1})\text{,}
-%\end{gathered}
-%\end{equation}
-%kde 
-%\begin{equation}
-%\begin{gathered}
-%\pmb{\lambda}(t, t_0, t_1) =\\ \left(\frac{(t-t_1)^2(1-2\frac{t-t_0}{t_0-t_1})}{(t_0 - t_1)^2}, \frac{(t-t_0)^2(1-2\frac{t-t_1}{t_1-t_0})}{(t_1 - t_0)^2}, \frac{(t-t_1)^2(t-t_0)}{(t_0 - t_1)^2}, \frac{(t-t_0)^2(t-t_1)}{(t_1 - t_0)^2} \right)^\text{T} \text{,}
-%\end{gathered}
-%\end{equation}
-%\begin{equation}
-%\begin{gathered}
-%\pmb{\Phi}(t_0, t_1, s_0, s_1) =\\ \left(\frac{(t-t_1)^2(1-2\frac{t-t_0}{t_0-t_1})}{(t_0 - t_1)^2}, \frac{(t-t_0)^2(1-2\frac{t-t_1}{t_1-t_0})}{(t_1 - t_0)^2}, \frac{(t-t_1)^2(t-t_0)}{(t_0 - t_1)^2}, \frac{(t-t_0)^2(t-t_1)}{(t_1 - t_0)^2} \right)^\text{T} \text{,}
-%\end{gathered}
-%\end{equation}
-%%\begin{lema}
-%%	\label{lema:spline_interpolation}
-%%	Nech sú splnené podmienky na zaèiatku tejto èasti.
-%%	Splajn $S$ na rovnomerne rastúcich uzloch s vyššie definovanımi segmentami a deriváciami v uzloch vypoèítanıch pod¾a plného alebo pod¾a redukovaného algoritmu je triedy $C^2$ a interpoluje funkèné hodnoty $z_{0,0}$, \dots, $z_{I-1,0}$, \dots, $z_{0,J-1}$, \dots, $z_{I-1,J-1}$.
-%%\end{lema}
-%Ak $i$ je z $\{0, \dots, I-2\}$ a $j$ je z $\{0, \dots, J-2\}$, tak štvorice uzlov $(u_i, v_j)$, $(u_i, v_{j+1})$, $(u_{i+1}, v_j)$ a $(u_{i+1}, v_{j+1})$ tvoria obdånikovı úsek nad ktorım sa nachádza splajnovı segment. Kadı segment $S_{i,j}$ je bikubická funkcia z $[u_i, u_{i+1}] \times [v_j, v_{j+1}]$ do $\mathbb{R}$. 
-%Vısledná funkcia $S$ teda vznikne zjednotením segmentov $S_{i,j}$. 
-%Na vypoèítanie kadého segmentu potrebujeme štyri uzly, a pre kadı uzol príslušne hodnoty $z_{i,j}$, $d^x_{i,j}$, $d^y_{i,j}$ a $d^{xy}_{i,j}$. 
-%
-%\pozn{
-%Hodnoty $z_{i,j}$ musíme ma vdy vopred dané. Derivácie $d^x_{i,j}$, $d^y_{i,j}$ a $d^{xy}_{i,j}$ buï môu by dané všetky, alebo iba niektoré a z nich vieme s malou odchılkou vypoèíta hodnoty ostatnıch. 
-%Jeden z tıchto spôsobov spoèíva v De Boorovej interpolácii ktorú si v ïalších dvoch èastiach objasníme. 
-%Potom predstavíme modifikovanı spôsob interpolácie špeciálne pre splajny s rovnomerne rastúcimi uzlami.
-%}
 
 \subsection{Trojdiagonálna LU dekompozícia}
 \label{sec:tridiagonal}
@@ -603,6 +553,7 @@ Algoritmus nájdenı Carlom de Boorom \cite{deboor} umoòuje s malou odchılkou vyp
 	Náš postup v ïalšej èasti èlánku ale funguje len s takımito postupnosami. 
 	Preto v tejto èasti budeme uvaova De Boorov postup špeciálne pre rovnomerne rastúce postupnosti uzlov.
 }
+\newline
 
 Zvyšné derivácie $d^x$, $d^y$ a $d^{xy}$ vieme jednoznaène vypoèíta pomocou $2(I) + J + 5$ lineárnych sústav s celkovo $3IJ + I + J + 2$ rovnicami.
 Nišie uvádzame modelové rovnice, pomocou ktorıch sú zostrojené tieto sústavy lineárnych rovníc.
@@ -913,7 +864,7 @@ To opä nie je prípad našich algoritmov take ho zanedbáme.
 	Teda vzh¾adom na mnostvo potenciálne investovaného èasu by nezanedbanie tıchto techník bolo kontraproduktívne. 
 \end{pozn}
 
-\obrazok{skylakeCore.png}{0.6}{Schéma vıpoètového jadra mikroarchitektúry Intel Skylake\cite{intelOpt}. \label{obr:skylakeCore}}
+\obrazok{skylakeCore.png}{0.6}{Schéma vıpoètového jadra mikroarchitektúry Intel Skylake \cite{intelOpt}. \label{obr:skylakeCore}}
 
 Spomenuli sme majoritnı vplyv superskalárnosti. 
 Na obrázku \ref{obr:skylakeCore} vidíme schému jedného jadra procesorovej mikroarchitektúry Intel Skylake, ktorá je ku dòu písania práce najmodernejšou bene dostupnou procesorovou generáciou a na ktorej testujeme zrıchlenie redukovaného algoritmu. 
@@ -921,16 +872,6 @@ Jadrá (nielen) tejto architektúry sú vybavené dvomi sèítaèko-násobièkami èísiel 
 Pointa superskalárnosti v tomto prípade spoèíva v monosti vıpoèty vırazov typu $a_0\circ a_1\circ\dots\circ a_n$, kde $\circ \in \{+, \cdot\}$ rozloi medzi dve jednotky a dosiahnu dvojnásobného zrıchlenia. 
 Toto má znaènı vplyv na rıchlos redukovaného algoritmu najmä pri poèítaní pravıch strán trojdiagonálnych rovníc, ktoré sú u na prvı poh¾ad zloitejšie ako v prípade plného algoritmu. 
 Keïe procesor má ale iba jednu delièku, pre vırazy typu $a_0 / a_1 /\dots / a_n$ takıto trik fungova nebude.
-
-%Procesorové jadro na obrázku vyššie má svojich 29 jednotiek prístupnıch cez osem zberníc (porty 0 a 7). To konkrétne v prípade procesorov Skylake znamená, e dokáu naraz vyuíva maximálne osem svojich vıpoètovıch jednotiek za splnenia urèitıch podmienok. 
-%Málokedy ale proces alebo vlákno obsahuje vdy osmice vzájomne nezávislıch inštrukcií. 
-%V situácií kedy jeden proces (vlákno) nemôe vyui všetky porty jadra, niektoré procesory umoòujú nevyuité porty priradi inému procesu (vláknu). 
-%Táto technika sa nazıva \pojem{Simultaneous Multi-Threading} (ïalej len SMT). 
-%V literatúre sa, v prípade procesoroch Intelu, èasto môeme stretnú s názvom \pojem{Hyper-Threading}. 
-%Procesory AMD majú implementovanı odlišnı variant tejto techniky zvanı \pojem{Clustered Multi-Threading}. 
-%Tu namiesto klasickıch jadier je procesor vybavenı tzv. modulmi, kde kadı modul má dve samostatné \uv{oklieštené} jadrá schopné spracováva iba celoèíselné operácie a jedinú FPU jednotku spoloènú pre oba jadrá. 
-%V praxi teda SMT predstavuje akısi medzistupeò medzi vláknovım a inštrukènım paralelizmom, 
-%kedy procesor operaènému systému a beiacim procesom hlási väèší poèet jadier akım je v skutoènosti vybavenı, prièom interne na úrovni mikroarchitektúry sa jedná iba o ïalšiu techniku superskalárnosti.
 
 \subsection{Rıchlos aritmetickıch operácií}\label{sec:instr_rychlost}
 Procesory majú mnoho aritmetickıch jednotiek špecializovanıch na urèitı typ operácie. 
@@ -944,9 +885,8 @@ Keïe nie je v silách otestova všetky moné rozšírenia sady, zvolili sme si jed
 Sady z rodiny SSE sú v èase písania práce najpouívanejšími sadami (najmä verzia SSE2) ktoré sú podporované prakticky všetkımi procesormi od roku 2003. 
 
 V súèasnosti u existuje modernejšia náhrada tejto sady zvaná Advanced Vector Extensions (skratka AVX), ktorej hlavnı prínos spoèíva vo vylepšenıch vektorovıch operáciach. 
-Vektorové operácie však vyadujú aby vıpoèty vyuívajúce jednotlivé prvky vektora boli navzájom nezávislé. 
-To nie je prípad ani jedného z testovanıch algoritmov. 
-Nakonfigurovaním prekladaèa na generovanie tıchto inštrukcí by sme iba znemonili beh aplikácie na polovici z testovanıch procesorov. 
+Na oba algoritmy ale vektorizácia nemá vplyv.
+%Nakonfigurovaním prekladaèa na generovanie tıchto inštrukcí by sme iba znemonili beh aplikácie na polovici z testovanıch procesorov. 
 Praktické zrıchlenie sme testovali na štyroch procesoroch architektúry x86, prièom sme pokryli väèšinu mikroarchitektúr v rozmedzí rokoch 2007 a 2015.
 
 V následujúcej tabu¾ke \ref{tab:instr_speed} uvidíme rıchlosti štyroch základnıch matematickıch operácií v rámci šiestich testovanıch mikroarchitektúr. 
@@ -965,7 +905,8 @@ Tabu¾ka obashuje tieto ståpce.
 	To znamená, e aritmetické sèítaèky a násobièky sú schopné, vïaka technike pipelining-u, zaèa novı vıpoèet ešte pred dokonèením aktuálnehu vıpoètu.
 \end{itemize}
 
-\footnotetext{\label{footnote:round_divisor}Odozva je nadobúda menšie hodnoty ak je delite¾ celı.}
+\footnotetext{\label{footnote:round_divisor}
+Odozva je nadobúda menšie hodnoty ak je delite¾ celı.}
 Pod¾a tabu¾ky vidno, e operácie sèítania a odèítania sú rovnako rıchle èo sa pochopite¾ne dalo oèakáva. 
 Tieto dve operácie preto budeme spoloène oznaèova symbolom $\pm$. 
 Od tejto chvíle ak spomenieme operáciu sèítania tak tım budeme súèasne myslie aj operáciu odèítania. 
@@ -1036,13 +977,6 @@ V prípade, ak by test bol v tvare $a[i] = b[i] \circ c[i]$, tak vıpoèty pre jedn
 To by procesoru umonilo poui techniku pipeliningu, prièom pomery èasov násobenia a sèítania by vyšli, vïaka väèšiemu prietoku tıchto dvoch operácií oproti deleniu, násobne väèšie.
 Jednak by takıto test nesúhlasil s tvarom vıpoètov v testovanıch algoritmoch a taktie by nekorešpondovalo teoretické zrıchlenie s meranım zrıchlením. 
 }
-%Ak $\circ \in \{+, \cdot, \div\}$, tak meranie doby vıpoètu jednotlivıch operácií v tvare $a[i] = a[i+1] \circ a[i]$ vráti úplne iné vısledky ako keby operandy boli z rozliènıch vektor,
-%Pre naše potreby sme test implementovali tak aby  pripomínal  
-%Delenie bıva a desa násobne pomalšie. 
-%To je spôsobné ve¾mi vysokou hodnotou inverzného prietoku v prípade opakovane vykonávanom delení èo nastáva napríklad ak chceme vydeli dva vektory. 
-%V prípade našich algoritmov ale dochádza len k jednému deleniu na mnoho sèítaní a násobení. 
-%Z toho dôvodu môeme inverznı prietok v prípade delenia zanedba a v kontexte implementovanıch algoritmov delenie povaova pod¾a jeho odozvy za pribline \textbf{trojnásobne} a \textbf{pänásobne} pomalšie ako násobenie. 
-
 
 \section{Teoretické zrıchlenie}
 \label{sec:theory_speedup}
@@ -1414,7 +1348,6 @@ Redukovanı algoritmus by nemal by lepší len v poète aritmetickıch operácií, ale
 %Máme všetko pripravené aby sme uviedli náš hlavnı vısledok.
 Po spoèítaní jednotlivıch matematickıch a pamäovıch operácií v èastiach \ref{sec:full_cost} a \ref{sec:red_cost} pristúpime k formulácii zrıchlenia.
 
-
 \begin{veta}
 \label{veta:full_red_ratio}
 Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$.
@@ -1429,14 +1362,14 @@ V prvom príklade predpokladajme porovnanie algoritmov na modernom procesore, pri
 \pr{ \label{pr:ratio2}
 	Nech $\beta = 2$, teda procesorové jadro má práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou a $\gamma = 3$.
 	Analogicky ako v predchádzajúcom príklade dosadením do vzahu dostaneme
-	$$\frac{30\textit{,}12}{25\textit{,}75} \approx 1\textit{,}17\textit{.}$$
-	V prípade inštrukèného paralelizmu s faktorom 2 je redukovanı algoritmus o 17\% rıchlejší ako plnı.
+	$$\frac{30}{24\textit{,}25} \approx 1\textit{,}17\textit{.}$$
+	V prípade inštrukèného paralelizmu s faktorom 2 je redukovanı algoritmus o 23\% rıchlejší ako plnı.
 }
 
 \pr{ \label{pr:ratio1}
 	Nech $\beta = 1$, teda procesorové jadro má iba jednu jednotku pre vıpoèty s pohyblivou desatinnou èiarkou a $\gamma = 3$, to jest operácia delenia je trojnásobne pomalšia ako operácia sèítania pod¾a tabuliek \ref{tab:instr_speed} a \ref{real_op_speed} operácií v èasti \ref{sec:instr_rychlost}.
 	Dosadením do vzahu z predchádzajúcej vety dostaneme
-	$$\frac{30\textit{,}12}{40} \approx 0\textit{,}75\textit{.}$$
+	$$\frac{30}{38\textit{,}5} \approx 0\textit{,}78\textit{.}$$
 	Pomer je menší ako 1 èo znamená, e bez inštrukèného paralelizmu ($\beta = 1$) je redukovanı algoritmus pomalší ako plnı.
 }
 
@@ -1482,10 +1415,10 @@ Ståpce 2 a 3 predstavujú èasy behov sériovej verzie pre povrchové splajny.
 	\label{real_speedup}
 \end{table}
 
-V tabu¾ke \ref{real_vs_theory_speedup} budeme uvaova merané rıchlosti aritmetickıch operácií z tabu¾ky \ref{real_op_speed} v èasti \ref{sec:instr_rychlost}. 
-Ståpec 2 obsahuje pomer rıchlostí delenia a sèítania $\gamma$ pod¾a tabu¾ky \ref{real_op_speed} v èasti \ref{sec:instr_rychlost}.
-Ståpec 5 predstavuje teoretické zrıchlenie redukovaného algoritmu vypoèítané pod¾a vety \ref{veta:full_red_ratio} v predchádzajúcej èasti.
-Poslednı ståpec 6 predstavuje merané zrıchlenie sériovej verzie redukovaného algoritmu pod¾a predchádzajúcej tabu¾ky, ktoré korešponduje s teoretickım zrıchlením v rámci malej odchılky.
+V tabu¾ke \ref{real_vs_theory_speedup} budeme v ståpci 2 uvaova pomery nameranıch rıchlosti delenia a sèítania operácií z tabu¾ky \ref{real_op_speed} v èasti \ref{sec:instr_rychlost}. 
+Ståpec 3 predstavuje teoretické zrıchlenie redukovaného algoritmu vypoèítané pod¾a vety \ref{veta:full_red_ratio} v predchádzajúcej èasti.
+Poslednı ståpec 4 predstavuje merané zrıchlenie sériovej verzie redukovaného algoritmu pod¾a predchádzajúcej tabu¾ky.
+Ako vidie, namerané zrıchlenie algoritmu korešponduje s teoretickım zrıchlením v rámci malej odchılky. 
 %\newpage
 \begin{table}[ht]
 	\begin{center}
@@ -1497,13 +1430,13 @@ Poslednı ståpec 6 predstavuje merané zrıchlenie sériovej verzie redukovaného alg
 			& $\gamma$& teoretické & merané \\
 			\midrule
 			FX-6300
-			& 1,89  & 1,12 & 1,13 \\
+			& 1,89  & 1,17 & 1,13 \\
 			C2D E8200
-			& 1,08  & 1,09 & 1,14 \\	
+			& 1,08  & 1,11 & 1,14 \\	
 			Ci3 2350M
-			& 3,43 & 1,21 & 1,24 \\	
-			Ci7 6700
-			& 2,98  & 1,21 & 1,2 \\
+			& 3,43 & 1,26 & 1,24 \\	
+			Ci7 6700K
+			& 2,98  & 1,24 & 1,2 \\
 			\bottomrule
 		\end{tabular}
 	\end{center}

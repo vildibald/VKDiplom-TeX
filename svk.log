@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.8.25)  13 APR 2016 18:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.8.25)  13 APR 2016 20:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1240,10 +1240,15 @@ Package pdftex.def Info: DeBoorModel.png used on input line 387.
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 568.
+(hyperref)                removing `\textasciicaron' on input line 518.
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 607--611
+Underfull \hbox (badness 10000) in paragraph at lines 552--557
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 558--562
 
  []
 
@@ -1251,51 +1256,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 607--611
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 687.
+(hyperref)                removing `\textasciicaron' on input line 638.
 
 [10] [11] [12] [13]
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 864.
+(hyperref)                removing `\textasciicaron' on input line 815.
 
 [14] <skylakeCore.png, id=223, 469.755pt x 331.99031pt>
 File: skylakeCore.png Graphic file (type png)
  <use skylakeCore.png>
-Package pdftex.def Info: skylakeCore.png used on input line 916.
+Package pdftex.def Info: skylakeCore.png used on input line 867.
 (pdftex.def)             Requested size: 281.85518pt x 199.19571pt.
 
 [15]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 935.
+(hyperref)                removing `\textasciicaron' on input line 876.
 
 [16 <./skylakeCore.png>]pdfTeX warning (ext4): destination with the same identi
 fier (name{Hfootnote.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.968 ...obúda menšie hodnoty ak je delite¾ celý.}
+l.909 ...obúda menšie hodnoty ak je delite¾ celý.}
                                                    [17] [18] [19] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 1157--1157
+Underfull \hbox (badness 10000) in paragraph at lines 1091--1091
 [][][]\T1/cmr/m/n/10 Repozitár so zdro-jo-vými kódmi k ap-li-ká-ciám moºno nájs
 ´ na ad-rese
  []
 
 [21] [22] [23] [24] [25] [26] [27] [28] [29]
-Underfull \hbox (badness 1571) in paragraph at lines 1528--1529
+Underfull \hbox (badness 1571) in paragraph at lines 1461--1462
 []\T1/cmr/m/n/12 https://github.com/vildibald/VKDiplom-master, re-po-zi-tár so 
 zdro-jo-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1529--1530
+Underfull \hbox (badness 10000) in paragraph at lines 1462--1463
 []\T1/cmr/m/n/12 https://en.wikibooks.org/wiki/Algorithm_-Im-ple-men-ta-ti-on/L
 i-near_-Al-
  []
 
 
-Overfull \hbox (45.81973pt too wide) in paragraph at lines 1530--1531
+Overfull \hbox (45.81973pt too wide) in paragraph at lines 1463--1464
 []\T1/cmr/m/n/12 http://www.intel.com/content/dam/www/public/us/en/documents/ma
 nuals/64-
  []
@@ -1303,15 +1308,15 @@ nuals/64-
 [30
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1536.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1536.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1469.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1469.
  (./svk.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1536.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1536.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1469.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1469.
 
 Package rerunfilecheck Info: File `svk.out' has not changed.
 (rerunfilecheck)             Checksum: 4E30460DE2248650298205129A0949C0;907.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1536.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1469.
  ) 
 Here is how much of TeX's memory you used:
  28259 strings out of 493117
@@ -1320,7 +1325,7 @@ Here is how much of TeX's memory you used:
  31069 multiletter control sequences out of 15000+600000
  51034 words of font info for 134 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 64i,17n,60p,10436b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,17n,60p,10436b,458s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
 ive/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{c:/texlive/2014/
 texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolS.enc}{c:/texlive/2014/texmf-dist/f
@@ -1354,10 +1359,10 @@ c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfss1728.pfb><c:/texlive
 f-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/texlive/2014/texmf-dist/fon
 ts/type1/public/cm-super/sfsx2488.pfb><c:/texlive/2014/texmf-dist/fonts/type1/p
 ublic/cm-super/sfti1200.pfb>
-Output written on svk.pdf (31 pages, 631865 bytes).
+Output written on svk.pdf (31 pages, 631491 bytes).
 PDF statistics:
- 537 PDF objects out of 1000 (max. 8388607)
- 463 compressed objects within 5 object streams
+ 535 PDF objects out of 1000 (max. 8388607)
+ 461 compressed objects within 5 object streams
  116 named destinations out of 1000 (max. 500000)
  116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
