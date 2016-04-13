@@ -1597,7 +1597,7 @@ $3\gamma^\div IJ$ delení,
 $3\gamma^\rightY IJ$ kopírovaní.
 \end{itemize}
 Cena plného algoritmu teda je
-$$21IJ+3\gamma^\div IJ+3\gamma^\rightY IJ\textit{.}$$
+$$21IJ + 3\gamma^\div IJ + 3\gamma^\rightY IJ\textit{.}$$
 \end{lema}
 
 \subsection{Cena redukovaného algoritmu}
@@ -1768,16 +1768,31 @@ Pri pouití tejto priestorovo optimalizovanej varianty vıpoètu LU dekompozície p
 \subsection{Zhrnutie}
 
 %Máme všetko pripravené aby sme uviedli náš hlavnı vısledok.
-Po spoèítaní jednotlivıch matematickıch a pamäovıch operácií v èastiach \ref{sec:full_cost} a \ref{sec:red_cost} pristúpime k formulácii zrıchlenia.
-
+Po spoèítaní cien jednotlivıch matematickıch a pamäovıch operácií v èastiach \ref{sec:full_cost} a \ref{sec:red_cost} pristúpime k formulácii zrıchlenia. 
 
 \begin{veta}
 \label{veta:full_red_ratio}
-Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$.
-Potom oèakávané zrıchlenie redukovaného algoritmu je
-$$\frac{21IJ+3\gamma^\div IJ+3\gamma^\rightY IJ}
-	{\rfrac{25}{4}IJ + \rfrac{57}{2\beta}IJ + \rfrac{5}{4}\cdot \gamma^\div IJ + \rfrac{3}{2}\gamma^\righttherefore IJ}\textit{.}$$ 
+%Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$.
+Oèakávané zrıchlenie redukovaného algoritmu je
+$$\frac{21+3\gamma^\div+3\gamma^\rightY}
+	{\rfrac{25}{4} + \rfrac{57}{2\beta} + \rfrac{5}{4}\cdot \gamma^\div + \rfrac{3}{2}\gamma^\righttherefore}$$ 
 \end{veta}
+
+\begin{dokaz}
+Uvaujme mrieku uzlov ve¾kosti $I$ a $J$. 
+V lemách \ref{lema:full_oper_count} a \ref{lema:red_oper_count} dostávame ceny 
+\begin{itemize}
+	\item
+	$21IJ + 3\gamma^\div IJ + 3\gamma^\rightY IJ$ pre plnı algoritmus,
+	\item
+	$\rfrac{25}{4}IJ + \rfrac{57}{2\beta}IJ + \rfrac{5}{4}\cdot \gamma^\div IJ + \rfrac{3}{2}\gamma^\righttherefore IJ$ pre redukovanı algoritmus.
+\end{itemize}
+Zrıchlenie vyjadríme ako podiel cien oboch algoritmov.
+$$\frac{21IJ+3\gamma^\div IJ+3\gamma^\rightY IJ}
+{\rfrac{25}{4}IJ + \rfrac{57}{2\beta}IJ + \rfrac{5}{4}\cdot \gamma^\div IJ + \rfrac{3}{2}\gamma^\righttherefore IJ}\textit{.}$$
+Ceny algoritmov sme poèítali asymptoticky, t.j. cenu v tvare $a\cdot IJ + b\cdot I + c\cdot J + d$ sme redukovali na tvar $a\cdot IJ$. 
+Po vykrátení $IJ$ z vırazu vyššie dostaneme oèakávané zrıchlenie redukovaného algoritmu.  	
+\end{dokaz}
 
 Ukáme si dva príklady zrıchlenia aby sme názorne videli vplyv inštrukèného paralelizmu na rıchlos redukovaného algoritmu.
 V prvom príklade predpokladajme porovnanie algoritmov na modernom procesore, prièom v druhom uvaujme primitívny procesor. 
