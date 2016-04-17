@@ -907,7 +907,8 @@ Po vypoèítaní všetkıch derivácií môeme funkèné hodnoty jednoznaène interpolova
 \section{Poèítanie derivácií redukovanou sústavou}
 \label{sec:red_deboor}
 V rámci svojej bakalárskej práce som popisoval novı postup pre kubické splajnové krivky triedy $C^2$, teda splajny, kde interpolovaná funkcia $f$ je typu $\mathbb{R} \to \mathbb{R}$. 
-Cie¾om tejto práce je analyzova a vylepši De Boorov algoritmus pre bikubické splajny z predchádzajúcej èasti na základe vıskumu \cite{szabominotorok} doc. Töröka a RNDr. Szaba o vzahu medzi bikvartickımi polynómami a bikubickımi splajnami a odvodenie sústav na základe tohto vısledku \cite{minoTorok}.
+Cie¾om tejto práce je postup zovšeobecni pre bikubické splajny, teda pre splajny, kde interpolovaná funkcia $f$ je typu $\mathbb{R} \times \mathbb{R} \to \mathbb{R}$.
+Podstatou je vısledok vıskumu \cite{szabominotorok} doc. Töröka a RNDr. Szaba o vzahu medzi bikvartickımi polynómami a bikubickımi splajnami a odvodenie sústav na základe tohto vısledku \cite{minoTorok}.
 
 \begin{oznac}
 Teraz popíšeme tento novı algoritmus, ktorı pracovne oznaèíme ako \pojem{redukovanı algoritmus}. 
@@ -1374,11 +1375,6 @@ V prípade, ak by test bol v tvare $a[i] = b[i] \circ c[i]$, tak vıpoèty pre jedn
 To by procesoru umonilo poui techniku pipeliningu, prièom pomery èasov násobenia a sèítania by vyšli, vïaka väèšiemu prietoku tıchto dvoch operácií oproti deleniu, násobne väèšie.
 Jednak by takıto test nesúhlasil s tvarom vıpoètov v testovanıch algoritmoch a taktie by nekorešpondovalo teoretické zrıchlenie s meranım zrıchlením. 
 }
-
-\pozn{
-V následujúcich èastiach budeme pre pomer rıchlosti delenia a sèítania namiesto údajov z dokumentácie uvaova nami namerané vısledky, ktoré presnejšie korešpondujú s meranım aj teoretickım zrıchlením redukovaného algoritmu.
-%Vïaka tomu, e povaha na nami meranıch syntetickıch vıpoètoch pripomína LU dekompozíciu vykonávanú v oboch algoritmoch, naše testy lepšie korešpondujú s meranım aj teoretickım zrıchlením redukovaného algoritmu. 
-}
 %Ak $\circ \in \{+, \cdot, \div\}$, tak meranie doby vıpoètu jednotlivıch operácií v tvare $a[i] = a[i+1] \circ a[i]$ vráti úplne iné vısledky ako keby operandy boli z rozliènıch vektor,
 %Pre naše potreby sme test implementovali tak aby  pripomínal  
 %Delenie bıva a desa násobne pomalšie. 
@@ -1615,7 +1611,7 @@ Zmeníme teda poèty operácií procedúr \textit{VyriešLU} a \textit{InicalizujLU}.
 
 V prípade redukovaného algoritmu nie je kopírovanie vısledku LU dekompozície spojité.
 Konkrétne to znamená, e potrebujeme do vektora dåky napríklad $I$ na kadú nepárnu pozíciu uloi hodnotu z vektora $\rfrac{I}{2}$, pretoe LU nám nájde iba polovicu h¾adanıch derivácií.
-Cena kopírovania bude pod¾a reálneho merania v závislosti od konkrétneho systému pribline $0\text{,}7$.
+Cena kopírovania bude pod¾a reálneho merania pribline $0.7$.
 Aby sme takéto kopírovanie vizuálne odlíšili od kopírovania v predchádzajúcej èasti, budeme túto operáciu oznaèova symbolom  $\righttherefore$.
 
 \begin{table}[h]
@@ -1720,7 +1716,6 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 \caption{Ceny operácií na spojitıch dátach redukovaného algoritmu.}
 \label{red_operations_cached}
 \end{table}
-\newpage
 %Najprv si spoèítajme procedúry pre resty.
 \begin{table}[h]
 	\begin{center}
@@ -1742,7 +1737,6 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 	\label{rest_operations_cached}	
 \end{table}
 Sèítaním operácií v predchádzajúcich dvoch tabu¾kách dostaneme následujúci vısledok.
-
 \begin{lema}
 	\label{lema:red_oper_count}
 	Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$. 
@@ -1811,8 +1805,8 @@ V prvom príklade predpokladajme porovnanie algoritmov na modernom procesore, pri
 	Nech $\beta = 2$, teda procesorové jadro má práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou a $\gamma^\div = 3$.
 	Ïalej nech $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = \rfrac{3}{5}$. 
 	Analogicky ako v predchádzajúcom príklade dosadením do vzahu dostaneme
-	$$\frac{30\textit{,}12}{25\textit{,}15} \approx 1\textit{,}2\textit{.}$$
-	V prípade inštrukèného paralelizmu s faktorom 2 je redukovanı algoritmus o 20\% rıchlejší ako plnı.
+	$$\frac{30\textit{,}12}{25\textit{,}75} \approx 1\textit{,}17\textit{.}$$
+	V prípade inštrukèného paralelizmu s faktorom 2 je redukovanı algoritmus o 17\% rıchlejší ako plnı.
 }
 
 \pr{ \label{pr:ratio1}
