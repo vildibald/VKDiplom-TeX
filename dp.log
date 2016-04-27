@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.8.25)  27 APR 2016 12:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.8.25)  27 APR 2016 16:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1391,16 +1391,27 @@ Package hyperref Warning: Composite letter `\textasciicaron+t'
                    \relax 
 l.1285 ...búda menšie hodnoty ak je delite¾ celý.}
                                                    [32] [33] [34] [35] [36]
-Underfull \hbox (badness 10000) in paragraph at lines 1532--1532
+Underfull \hbox (badness 10000) in paragraph at lines 1585--1585
 [][][]\T1/cmr/m/n/10 Repozitár so zdro-jo-vými kódmi k ap-li-ká-ciám moºno nájs
 ´ na ad-rese
  []
 
-[37] [38] [39] [40] [41]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[37]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[38]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[39] [40] [41]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1795.
+(hyperref)                removing `\textasciicaron' on input line 1848.
 
 [42] [43]
 
@@ -1410,56 +1421,56 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 ] [48
 
-] <apka.png, id=581, 748.29562pt x 558.58687pt>
+] <apka.png, id=582, 748.29562pt x 558.58687pt>
 File: apka.png Graphic file (type png)
 
 <use apka.png>
-Package pdftex.def Info: apka.png used on input line 2017.
+Package pdftex.def Info: apka.png used on input line 2070.
 (pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
- <apka_spod.png, id=582, 935.495pt x 107.40125pt>
+ <apka_spod.png, id=583, 935.495pt x 107.40125pt>
 File: apka_spod.png Graphic file (type png)
 
 <use apka_spod.png>
-Package pdftex.def Info: apka_spod.png used on input line 2027.
+Package pdftex.def Info: apka_spod.png used on input line 2080.
 (pdftex.def)             Requested size: 374.19136pt x 42.95973pt.
  [49
 
 ] [50 <./apka.png> <./apka_spod.png>]
-<apka_stred.png, id=599, 745.28438pt x 409.53pt>
+<apka_stred.png, id=600, 745.28438pt x 409.53pt>
 File: apka_stred.png Graphic file (type png)
  <use apka_stred.png>
-Package pdftex.def Info: apka_stred.png used on input line 2049.
+Package pdftex.def Info: apka_stred.png used on input line 2102.
 (pdftex.def)             Requested size: 195.25911pt x 107.29388pt.
 
-<apka_vrch.png, id=601, 575.14874pt x 24.84282pt>
+<apka_vrch.png, id=602, 575.14874pt x 24.84282pt>
 File: apka_vrch.png Graphic file (type png)
  <use apka_vrch.png>
-Package pdftex.def Info: apka_vrch.png used on input line 2055.
+Package pdftex.def Info: apka_vrch.png used on input line 2108.
 (pdftex.def)             Requested size: 373.84225pt x 16.14763pt.
 
-<apka_spl.png, id=602, 748.29562pt x 558.58687pt>
+<apka_spl.png, id=603, 748.29562pt x 558.58687pt>
 File: apka_spl.png Graphic file (type png)
  <use apka_spl.png>
-Package pdftex.def Info: apka_spl.png used on input line 2061.
+Package pdftex.def Info: apka_spl.png used on input line 2114.
 (pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
 
-<bench.png, id=603, 532.99126pt x 383.18156pt>
+<bench.png, id=604, 532.99126pt x 383.18156pt>
 File: bench.png Graphic file (type png)
  <use bench.png>
-Package pdftex.def Info: bench.png used on input line 2065.
+Package pdftex.def Info: bench.png used on input line 2118.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
 
-<bench_surface.png, id=604, 532.99126pt x 383.18156pt>
+<bench_surface.png, id=605, 532.99126pt x 383.18156pt>
 File: bench_surface.png Graphic file (type png)
  <use bench_surface.png>
-Package pdftex.def Info: bench_surface.png used on input line 2066.
+Package pdftex.def Info: bench_surface.png used on input line 2119.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
 
-<bench_surface_results.png, id=605, 532.99126pt x 383.18156pt>
+<bench_surface_results.png, id=606, 532.99126pt x 383.18156pt>
 File: bench_surface_results.png Graphic file (type png)
 
 <use bench_surface_results.png>
-Package pdftex.def Info: bench_surface_results.png used on input line 2067.
+Package pdftex.def Info: bench_surface_results.png used on input line 2120.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
  [51 <./apka_stred.png> <./apka_vrch.png>]
 
@@ -1467,25 +1478,25 @@ LaTeX Warning: Text page 52 contains only floats.
 
 [52 <./apka_spl.png> <./bench.png> <./bench_surface.png>] [53 <./bench_surface_
 results.png>] [54]
-Underfull \hbox (badness 1571) in paragraph at lines 2110--2111
+Underfull \hbox (badness 1571) in paragraph at lines 2163--2164
 []\T1/cmr/m/n/12 https://github.com/vildibald/VKDiplom-master, re-po-zi-tár so 
 zdro-jo-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2111--2112
+Underfull \hbox (badness 10000) in paragraph at lines 2164--2165
 []\T1/cmr/m/n/12 https://en.wikibooks.org/wiki/Algorithm_-Im-ple-men-ta-ti-on/L
 i-near_-Al-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2112--2113
+Underfull \hbox (badness 10000) in paragraph at lines 2165--2166
 []\T1/cmr/m/n/12 http://www.anandtech.com/show/9483/intel-skylake-review-6700k-
 
  []
 
 
-Overfull \hbox (45.81973pt too wide) in paragraph at lines 2113--2114
+Overfull \hbox (45.81973pt too wide) in paragraph at lines 2166--2167
 []\T1/cmr/m/n/12 http://www.intel.com/content/dam/www/public/us/en/documents/ma
 nuals/64-
  []
@@ -1493,11 +1504,11 @@ nuals/64-
 [55
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2119.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2119.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2172.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2172.
  (./dp.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2119.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2119.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2172.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2172.
 
 Package rerunfilecheck Info: File `dp.out' has not changed.
 (rerunfilecheck)             Checksum: B25D2E0EC67E5DF73549018E7B8BB785;1435.
@@ -1506,18 +1517,18 @@ Package rerunfilecheck Info: File `dp.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 2.90053pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2119.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2172.
  ) 
 Here is how much of TeX's memory you used:
- 28560 strings out of 493117
- 518541 string characters out of 6138984
+ 28562 strings out of 493117
+ 518578 string characters out of 6138984
  604893 words of memory out of 5000000
- 31280 multiletter control sequences out of 15000+600000
+ 31281 multiletter control sequences out of 15000+600000
  71320 words of font info for 201 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  64i,17n,60p,10435b,522s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
-ive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolS.enc}{c:/texlive/2014/tex
+{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolS.enc}{c:/texliv
+e/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texlive/2014/tex
 mf-dist/fonts/enc/dvips/mnsymbol/MnSymbolC.enc}{c:/texlive/2014/texmf-dist/font
 s/enc/dvips/cm-super/cm-super-ts1.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvi
 ps/mnsymbol/MnSymbolE.enc}{c:/texlive/2014/texmf-dist/fonts/enc/dvips/mnsymbol/
@@ -1552,10 +1563,10 @@ ublic/cm-super/sfsx1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-s
 uper/sfsx1440.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfsx2
 488.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb><c
 :/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on dp.pdf (56 pages, 1163027 bytes).
+Output written on dp.pdf (56 pages, 1154925 bytes).
 PDF statistics:
- 808 PDF objects out of 1000 (max. 8388607)
- 678 compressed objects within 7 object streams
- 192 named destinations out of 1000 (max. 500000)
+ 810 PDF objects out of 1000 (max. 8388607)
+ 680 compressed objects within 7 object streams
+ 193 named destinations out of 1000 (max. 500000)
  232 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {2.1.1}Ke\v sovanie}{26}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}In\v struk\v cn\'y paralelizmus}{28}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}R\'ychlos\v t aritmetick\'ych oper\'aci\IeC {\'\i }}{31}{subsection.2.1.3}
-\contentsline {section}{\numberline {2.2}Teoretick\'e zr\'ychlenie}{34}{section.2.2}
+\contentsline {section}{\numberline {2.2}Teoretick\'e zr\'ychlenie}{35}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Cena pln\'eho algoritmu}{37}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Cena redukovan\'eho algoritmu}{39}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Pam\"a\v tov\'e n\'aroky}{42}{subsection.2.2.3}

@@ -1359,7 +1359,7 @@ V tabu¾ke \ref{real_op_speed} sú namiesto mikroarchitektúr uvedené konkrétne mod
 		Intel Core i7 6700K
 		& 77 & 80 & 147 & 3,5 & 68 \\
 		\bottomrule
-	\end{tabular}
+9	\end{tabular}
 \end{center}
 \caption{Rıchlos aritmetickıch operácií na konkrétnych CPU. Údaje sú v milisekundách.}
 \label{real_op_speed}	
@@ -1376,13 +1376,36 @@ To by procesoru umonilo poui techniku pipeliningu, prièom pomery èasov násobe
 Jednak by takıto test nesúhlasil s tvarom vıpoètov v testovanıch algoritmoch a taktie by nekorešpondovalo teoretické zrıchlenie s meranım zrıchlením. 
 }
 
-Ešte ostáva ukáza reálny vplyv inštrukèného paralelizmu. V následujúcej tabu¾ke sú uvedené namerané násobky èasov trvania vyhodnotenia vırazu vzh¾adom na poèet operácií pre procesorovú architektúru Intel Skylake.
+Ešte ostáva ukáza reálny vplyv inštrukèného paralelizmu. V následujúcej tabu¾ke sú uvedené namerané násobky èasov trvania vyhodnotenia vırazu vzh¾adom na poèet operácií špeciálne pre procesor Intel Core i7 6700K.
+
+%\begin{table}[h]
+%	\begin{center}
+%		\begin{tabular}{rcccccccccc}	
+%			\toprule
+%			& \multicolumn{10}{c}{Poèet operácií} \\
+%			Operácia
+%			& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+%			\midrule
+%			$\pm$
+%			& 77 & 124 & 166 & 200 & 233 & 264 & 296 & 327 & 360 & 393 \\
+%			$\times$ 
+%			& 80 & 129 & 172,8 & 208 & 242 & 276 & 309 & 342 & 375 & 409 \\
+%			$\div$
+%			& 147 & 294 & 441 & 588 & 735 & 882 & 1029 & 1176 & 1323 & 1470\\
+%			\bottomrule
+%		\end{tabular}
+%	\end{center}
+%	\caption{Rıchlos vyhodnotenia matematickıch vırazov vzh¾adom na poèet aritmetickıch operácií pre procesor Intel Core i7 6700K. Údaje sú v milisekundách.}
+%	\label{real_instrpar_ratio_6700k}	
+%\end{table
+
 
 \begin{table}[h]
 	\begin{center}
-		\begin{tabular}{lccccccccc}	
+		\begin{tabular}{rccccccccc}	
 			\toprule
-			Procesor
+			& \multicolumn{9}{c}{Poèet operácií} \\
+			Operácia
 			& 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
 			\midrule
 			$\pm$
@@ -1394,14 +1417,44 @@ Ešte ostáva ukáza reálny vplyv inštrukèného paralelizmu. V následujúcej tabu¾ke
 			\bottomrule
 		\end{tabular}
 	\end{center}
-	\caption{Rıchlos aritmetickıch operácií na konkrétnych CPU. Údaje sú v milisekundách.}
-	\label{real_instrpar_ratio}	
+	\caption{Násobky doby vyhodnotenia vyhodnotenia matematickıch vırazov vzh¾adom na poèet aritmetickıch operácií pre procesor Intel Core i7 6700K.}
+	\label{real_instrpar_ratio_6700k}	
 \end{table}
 
 Pod¾a tabu¾ky \ref{real_instrpar_ratio} môeme poveda, e ak $t$ je doba vyhodnotenia vırazu s jedinou operáciou sèítania alebo násobenia tak vïaka inštrukènému paralelizmu doba vyhodnotenia vırazu s $n$ operáciami konverguje k $\rfrac{1}{2}\cdot tn$. To neplatí pre delenie, kde doba vyhodnotenia rastie lineárne s rastúcim poètom operácií. 
 
+Pre všetky procesory si struène uvedieme vısledky meraní pre vırazy obsahujúce desa operácií. 
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{lccc}
+			\toprule
+%			& \multicolumn{3}{c|}{2} & \multicolumn{3}{c|}{10} \\
+			Procesor
+			& $\pm$ & $\times$ & $\div$ \\
+			\midrule
+			FX-6300 \tiny{3C/6T}
+			& & & \\
+			C2D E8200 \tiny{2C/2T}
+			& & & \\
+			Ci5 650 \tiny{2C/4T}
+			& 3,84 & 5,31 & 10,03 \\
+			Ci3 2350M \tiny{2C/4T}
+			& 5,1 & 5,93 & 9,99 \\	
+			Ci5 4440 \tiny{4C/4T}
+			& & & \\
+			Ci7 6700K \tiny{4C/8T}
+			& 5,09 & 5,11 & 10,04 \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Násobok doby vyhodnotenia matematickıch vırazov obsahujúcich desa operácií daného typu oproti vırazom obsahujúcim iba jednu operáciu.}
+	\label{real_instrpar_ratio}
+\end{table}
+
+
 \pozn{
-Keïe kadá testovaná mikroarchitektúra má v jadre práve po dva numerické koprocesory (FPU) tak tento jav platí aj pre ne. Napríklad pre mikroarchitektúru Intel Sandy Bridge je vyhodnotenie vırazu s desiatimi operáciami sèítania 5,1 násobne pomalšie ako vyhodnotenie vırazu s jednou operáciu. Analogicky pre násobenie vychádza tento pomer na 5,93 a pre delenie pomer vychádza na 9,99.
+Keïe vıpoètové jadrá kadej testovanej mikroarchitektúry sú vybavené práve dvomi numerickımi koprocesormi (FPU) tak tento jav platí aj pre ne. Napríklad pre mikroarchitektúru Intel Sandy Bridge je vyhodnotenie vırazu s desiatimi operáciami sèítania 5,1-násobne pomalšie ako vyhodnotenie vırazu s jednou operáciu. Analogicky pre násobenie vychádza tento pomer na 5,93 a pre delenie pomer vychádza na 9,99.
 V èase písania práce sme nestihli podrobne otestova aj ostatné mikroarchitektúry.  
 }
 
