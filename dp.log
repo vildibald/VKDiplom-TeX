@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.8.25)  26 APR 2016 12:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.8.25)  27 APR 2016 12:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1218,7 +1218,6 @@ l.277 \newpage
                [1] [2] [3] (./dp.toc
 \p@rindent=\dimen301
 \p@rindent=\dimen302
-\p@rindent=\dimen303
 )
 \tf@toc=\write5
 \openout5 = `dp.toc'.
@@ -1226,10 +1225,10 @@ l.277 \newpage
  [4
 
 ]
-<blueRedSpl.png, id=141, 457.71pt x 354.57469pt>
+<blueRedSpl.png, id=126, 457.71pt x 354.57469pt>
 File: blueRedSpl.png Graphic file (type png)
  <use blueRedSpl.png>
-Package pdftex.def Info: blueRedSpl.png used on input line 293.
+Package pdftex.def Info: blueRedSpl.png used on input line 294.
 (pdftex.def)             Requested size: 137.31406pt x 106.37321pt.
  [5
 
@@ -1237,43 +1236,43 @@ Package pdftex.def Info: blueRedSpl.png used on input line 293.
 Kapitola 1.
 [7
 
-] [8] [9] <DeBoorModel.png, id=199, 341.02406pt x 253.69781pt>
+] [8] [9] <DeBoorModel.png, id=184, 341.02406pt x 253.69781pt>
 File: DeBoorModel.png Graphic file (type png)
 
 <use DeBoorModel.png>
-Package pdftex.def Info: DeBoorModel.png used on input line 504.
+Package pdftex.def Info: DeBoorModel.png used on input line 505.
 (pdftex.def)             Requested size: 238.71521pt x 177.58725pt.
  [10]
-<mexHatWKnots.png, id=207, 260.47313pt x 249.93375pt>
+<mexHatWKnots.png, id=192, 260.47313pt x 249.93375pt>
 File: mexHatWKnots.png Graphic file (type png)
  <use mexHatWKnots.png>
-Package pdftex.def Info: mexHatWKnots.png used on input line 537.
+Package pdftex.def Info: mexHatWKnots.png used on input line 538.
 (pdftex.def)             Requested size: 182.32994pt x 174.95242pt.
 
-[11 <./DeBoorModel.png>] <fseg.png, id=215, 526.96875pt x 376.40625pt>
+[11 <./DeBoorModel.png>] <fseg.png, id=200, 526.96875pt x 376.40625pt>
 File: fseg.png Graphic file (type png)
 
 <use fseg.png>
-Package pdftex.def Info: fseg.png used on input line 543.
+Package pdftex.def Info: fseg.png used on input line 544.
 (pdftex.def)             Requested size: 263.48372pt x 188.20265pt.
  [12 <./mexHatWKnots.png> <./fseg.png>]
-Overfull \hbox (0.85312pt too wide) in paragraph at lines 567--569
+Overfull \hbox (0.85312pt too wide) in paragraph at lines 568--570
 []\T1/cmr/m/n/12 Máme v²etky po-trebné hod-noty aby sme mohli de-fi-no-va´ seg-
 menty splajnu
  []
 
 
-Overfull \hbox (3.8786pt too wide) detected at line 579
+Overfull \hbox (3.8786pt too wide) detected at line 580
 [][][] []
  []
 
 
-Overfull \hbox (3.8786pt too wide) detected at line 584
+Overfull \hbox (3.8786pt too wide) detected at line 585
 [][][] []
  []
 
 
-Overfull \hbox (6.33098pt too wide) in paragraph at lines 584--593
+Overfull \hbox (6.33098pt too wide) in paragraph at lines 585--594
 \T1/cmr/m/n/12 chá-dza splaj-nový seg-ment. Kaºdý seg-ment $\OML/cmm/m/it/12 S[
 ]$ \T1/cmr/m/n/12 je bi-ku-bická fun-kcia z $\OMX/MnSymbolE/m/n/12 ^^@\OML/cmm/
 m/it/12 u[]; u[]\OMX/MnSymbolE/m/n/12 ^^E \U/MnSymbolC/m/n/12 ^^U
@@ -1281,32 +1280,32 @@ m/it/12 u[]; u[]\OMX/MnSymbolE/m/n/12 ^^E \U/MnSymbolC/m/n/12 ^^U
 
 [13]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 675.
-LaTeX Font Info:    Calculating math sizes for size <8.39789> on input line 691
+put line 676.
+LaTeX Font Info:    Calculating math sizes for size <8.39789> on input line 692
 .
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.19894> not available
-(Font)              size <5> substituted on input line 691.
+(Font)              size <5> substituted on input line 692.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.19894> not available
-(Font)              size <5> substituted on input line 691.
+(Font)              size <5> substituted on input line 692.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.19894> not available
-(Font)              size <5> substituted on input line 691.
+(Font)              size <5> substituted on input line 692.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.19894> not available
-(Font)              size <5> substituted on input line 691.
+(Font)              size <5> substituted on input line 692.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.19894> not available
-(Font)              size <5> substituted on input line 691.
+(Font)              size <5> substituted on input line 692.
 
 [14] [15]
-Overfull \hbox (4.56482pt too wide) in paragraph at lines 756--758
+Overfull \hbox (4.56482pt too wide) in paragraph at lines 757--759
 []\T1/cmr/m/sl/12 Nech $\OML/cmm/m/it/12 n$ \T1/cmr/m/sl/12 je po-£et rov-níc t
 roj-dia-go-nál-nej li-ne-ár-nej sú-stavy, v²etky
  []
@@ -1314,30 +1313,30 @@ roj-dia-go-nál-nej li-ne-ár-nej sú-stavy, v²etky
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 766.
+(hyperref)                removing `\textasciicaron' on input line 767.
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 809--813
+Underfull \hbox (badness 10000) in paragraph at lines 810--814
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 813--817
+Underfull \hbox (badness 10000) in paragraph at lines 814--818
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 817--821
+Underfull \hbox (badness 10000) in paragraph at lines 818--822
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 821--824
+Underfull \hbox (badness 10000) in paragraph at lines 822--825
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 827--831
+Underfull \hbox (badness 10000) in paragraph at lines 828--832
 
  []
 
@@ -1345,10 +1344,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 827--831
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 907.
+(hyperref)                removing `\textasciicaron' on input line 908.
 
 
-Overfull \hbox (6.7446pt too wide) in paragraph at lines 913--915
+Overfull \hbox (6.7446pt too wide) in paragraph at lines 914--916
 []\T1/cmr/m/n/12 Teraz po-pí-²eme tento nový al-go-rit-mus, ktorý pra-covne ozn
 a-
  []
@@ -1357,185 +1356,163 @@ a-
 Kapitola 2.
 [25
 
-] <jarr.png, id=368, 519.44063pt x 361.35pt>
+] <jarr.png, id=353, 519.44063pt x 361.35pt>
 File: jarr.png Graphic file (type png)
  <use jarr.png>
-Package pdftex.def Info: jarr.png used on input line 1158.
+Package pdftex.def Info: jarr.png used on input line 1159.
 (pdftex.def)             Requested size: 211.41061pt x 147.06825pt.
- [26 <./jarr.png>] [27] <cacheIntel.png, id=384, 510.40688pt x 330.48468pt>
+ [26 <./jarr.png>] [27] <cacheIntel.png, id=369, 510.40688pt x 330.48468pt>
 File: cacheIntel.png Graphic file (type png)
 
 <use cacheIntel.png>
-Package pdftex.def Info: cacheIntel.png used on input line 1180.
+Package pdftex.def Info: cacheIntel.png used on input line 1181.
 (pdftex.def)             Requested size: 306.24648pt x 198.29233pt.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1182.
+(hyperref)                removing `\textasciicaron' on input line 1183.
 
-[28 <./cacheIntel.png>] <skylakeCore.png, id=398, 469.755pt x 331.99031pt>
+[28 <./cacheIntel.png>] <skylakeCore.png, id=383, 469.755pt x 331.99031pt>
 File: skylakeCore.png Graphic file (type png)
 
 <use skylakeCore.png>
-Package pdftex.def Info: skylakeCore.png used on input line 1227.
+Package pdftex.def Info: skylakeCore.png used on input line 1228.
 (pdftex.def)             Requested size: 281.85518pt x 199.19571pt.
  [29] [30 <./skylakeCore.png>]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1251.
+(hyperref)                removing `\textasciicaron' on input line 1252.
 
 [31]pdfTeX warning (ext4): destination with the same identifier (name{Hfootnote
 .2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1284 ...búda menšie hodnoty ak je delite¾ celý.}
-                                                   [32] [33] [34] [35]
-Underfull \hbox (badness 10000) in paragraph at lines 1501--1501
+l.1285 ...búda menšie hodnoty ak je delite¾ celý.}
+                                                   [32] [33] [34] [35] [36]
+Underfull \hbox (badness 10000) in paragraph at lines 1532--1532
 [][][]\T1/cmr/m/n/10 Repozitár so zdro-jo-vými kódmi k ap-li-ká-ciám moºno nájs
 ´ na ad-rese
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[36]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[37]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[38] [39] [40]
+[37] [38] [39] [40] [41]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1764.
+(hyperref)                removing `\textasciicaron' on input line 1795.
 
-[41] [42]
+[42] [43]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[43] [44] [45]
-Kapitola 3.
+[44] [45] [46] [47
 
-Package hyperref Warning: Composite letter `\textasciicaron+l'
-(hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1948.
+] [48
 
-
-Package hyperref Warning: Composite letter `\textasciicaron+c'
-(hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1948.
-
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1970.
-
-<apka.png, id=576, 748.29562pt x 558.58687pt>
+] <apka.png, id=581, 748.29562pt x 558.58687pt>
 File: apka.png Graphic file (type png)
- <use apka.png>
-Package pdftex.def Info: apka.png used on input line 1973.
-(pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
- [46
 
-]
-<apka_spod.png, id=582, 935.495pt x 107.40125pt>
+<use apka.png>
+Package pdftex.def Info: apka.png used on input line 2017.
+(pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
+ <apka_spod.png, id=582, 935.495pt x 107.40125pt>
 File: apka_spod.png Graphic file (type png)
- <use apka_spod.png>
-Package pdftex.def Info: apka_spod.png used on input line 1983.
+
+<use apka_spod.png>
+Package pdftex.def Info: apka_spod.png used on input line 2027.
 (pdftex.def)             Requested size: 374.19136pt x 42.95973pt.
- [47 <./apka.png> <./apka_spod.png>] <apka_stred.png, id=592, 745.28438pt x 409
-.53pt>
+ [49
+
+] [50 <./apka.png> <./apka_spod.png>]
+<apka_stred.png, id=599, 745.28438pt x 409.53pt>
 File: apka_stred.png Graphic file (type png)
-
-<use apka_stred.png>
-Package pdftex.def Info: apka_stred.png used on input line 2005.
+ <use apka_stred.png>
+Package pdftex.def Info: apka_stred.png used on input line 2049.
 (pdftex.def)             Requested size: 195.25911pt x 107.29388pt.
- <apka_vrch.png, id=594, 575.14874pt x 24.84282pt>
+
+<apka_vrch.png, id=601, 575.14874pt x 24.84282pt>
 File: apka_vrch.png Graphic file (type png)
-
-<use apka_vrch.png>
-Package pdftex.def Info: apka_vrch.png used on input line 2011.
+ <use apka_vrch.png>
+Package pdftex.def Info: apka_vrch.png used on input line 2055.
 (pdftex.def)             Requested size: 373.84225pt x 16.14763pt.
- <apka_spl.png, id=595, 748.29562pt x 558.58687pt>
+
+<apka_spl.png, id=602, 748.29562pt x 558.58687pt>
 File: apka_spl.png Graphic file (type png)
-
-<use apka_spl.png>
-Package pdftex.def Info: apka_spl.png used on input line 2017.
+ <use apka_spl.png>
+Package pdftex.def Info: apka_spl.png used on input line 2061.
 (pdftex.def)             Requested size: 196.04803pt x 146.34572pt.
- <bench.png, id=596, 532.99126pt x 383.18156pt>
+
+<bench.png, id=603, 532.99126pt x 383.18156pt>
 File: bench.png Graphic file (type png)
-
-<use bench.png>
-Package pdftex.def Info: bench.png used on input line 2021.
+ <use bench.png>
+Package pdftex.def Info: bench.png used on input line 2065.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
- <bench_surface.png, id=597, 532.99126pt x 383.18156pt>
+
+<bench_surface.png, id=604, 532.99126pt x 383.18156pt>
 File: bench_surface.png Graphic file (type png)
-
-<use bench_surface.png>
-Package pdftex.def Info: bench_surface.png used on input line 2022.
+ <use bench_surface.png>
+Package pdftex.def Info: bench_surface.png used on input line 2066.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
 
-<bench_surface_results.png, id=598, 532.99126pt x 383.18156pt>
+<bench_surface_results.png, id=605, 532.99126pt x 383.18156pt>
 File: bench_surface_results.png Graphic file (type png)
 
 <use bench_surface_results.png>
-Package pdftex.def Info: bench_surface_results.png used on input line 2023.
+Package pdftex.def Info: bench_surface_results.png used on input line 2067.
 (pdftex.def)             Requested size: 191.87671pt x 137.94525pt.
- [48 <./apka_stred.png> <./apka_vrch.png>]
-[49 <./apka_spl.png> <./bench.png>] [50 <./bench_surface.png> <./bench_surface_
-results.png>] [51] [52
+ [51 <./apka_stred.png> <./apka_vrch.png>]
 
-]
-Underfull \hbox (badness 1571) in paragraph at lines 2076--2077
+LaTeX Warning: Text page 52 contains only floats.
+
+[52 <./apka_spl.png> <./bench.png> <./bench_surface.png>] [53 <./bench_surface_
+results.png>] [54]
+Underfull \hbox (badness 1571) in paragraph at lines 2110--2111
 []\T1/cmr/m/n/12 https://github.com/vildibald/VKDiplom-master, re-po-zi-tár so 
 zdro-jo-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2077--2078
+Underfull \hbox (badness 10000) in paragraph at lines 2111--2112
 []\T1/cmr/m/n/12 https://en.wikibooks.org/wiki/Algorithm_-Im-ple-men-ta-ti-on/L
 i-near_-Al-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2078--2079
+Underfull \hbox (badness 10000) in paragraph at lines 2112--2113
 []\T1/cmr/m/n/12 http://www.anandtech.com/show/9483/intel-skylake-review-6700k-
 
  []
 
 
-Overfull \hbox (45.81973pt too wide) in paragraph at lines 2079--2080
+Overfull \hbox (45.81973pt too wide) in paragraph at lines 2113--2114
 []\T1/cmr/m/n/12 http://www.intel.com/content/dam/www/public/us/en/documents/ma
 nuals/64-
  []
 
-[53
+[55
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2085.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2085.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2119.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2119.
  (./dp.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2085.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2085.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2119.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2119.
 
 Package rerunfilecheck Info: File `dp.out' has not changed.
-(rerunfilecheck)             Checksum: 98FD8F76A91FB595133569090D051E6B;1686.
+(rerunfilecheck)             Checksum: B25D2E0EC67E5DF73549018E7B8BB785;1435.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 2.90053pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2085.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2119.
  ) 
 Here is how much of TeX's memory you used:
- 28558 strings out of 493117
- 518545 string characters out of 6138984
+ 28560 strings out of 493117
+ 518541 string characters out of 6138984
  604893 words of memory out of 5000000
- 31283 multiletter control sequences out of 15000+600000
+ 31280 multiletter control sequences out of 15000+600000
  71320 words of font info for 201 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  64i,17n,60p,10435b,522s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1575,10 +1552,10 @@ ublic/cm-super/sfsx1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-s
 uper/sfsx1440.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfsx2
 488.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb><c
 :/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on dp.pdf (54 pages, 1154605 bytes).
+Output written on dp.pdf (56 pages, 1163027 bytes).
 PDF statistics:
- 805 PDF objects out of 1000 (max. 8388607)
- 677 compressed objects within 7 object streams
- 187 named destinations out of 1000 (max. 500000)
- 256 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 808 PDF objects out of 1000 (max. 8388607)
+ 678 compressed objects within 7 object streams
+ 192 named destinations out of 1000 (max. 500000)
+ 232 words of extra memory for PDF output out of 10000 (max. 10000000)
 

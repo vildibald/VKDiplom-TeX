@@ -279,6 +279,7 @@ enum, namespace, string, partial, get, set, var},
 %\listofalgorithms
 \newpage
 %==================================================================================================================================================================================
+%\part{}
 \chapter*{Úvod}
 
 Témou diplomovej práce sú priestorové splajn povrchy, prièom naším cie¾om je preskúma nové poznatky o splajnoch, na ktorıch istı èas pracuje vedúci tejto práce doc. RNDr. Csaba Török, CSc.
@@ -1375,6 +1376,35 @@ To by procesoru umonilo poui techniku pipeliningu, prièom pomery èasov násobe
 Jednak by takıto test nesúhlasil s tvarom vıpoètov v testovanıch algoritmoch a taktie by nekorešpondovalo teoretické zrıchlenie s meranım zrıchlením. 
 }
 
+Ešte ostáva ukáza reálny vplyv inštrukèného paralelizmu. V následujúcej tabu¾ke sú uvedené namerané násobky èasov trvania vyhodnotenia vırazu vzh¾adom na poèet operácií pre procesorovú architektúru Intel Skylake.
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{lccccccccc}	
+			\toprule
+			Procesor
+			& 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+			\midrule
+			$\pm$
+			& 1,61 & 2,15 & 2,59 & 3,03 & 3,43 & 3,85 & 4,25 & 4,68 & 5,11 \\
+			$\times$ 
+			& 1,61 & 2,16 & 2,6 & 3,04 & 3,45 & 3,86 & 4,27 & 4,69 & 5,11 \\
+			$\div$
+			& 2 & 3 & 4,01 & 5,01 & 6,02 & 7,02 & 8,03 & 9,03 & 10,04\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Rıchlos aritmetickıch operácií na konkrétnych CPU. Údaje sú v milisekundách.}
+	\label{real_instrpar_ratio}	
+\end{table}
+
+Pod¾a tabu¾ky \ref{real_instrpar_ratio} môeme poveda, e ak $t$ je doba vyhodnotenia vırazu s jedinou operáciou sèítania alebo násobenia tak vïaka inštrukènému paralelizmu doba vyhodnotenia vırazu s $n$ operáciami konverguje k $\rfrac{1}{2}\cdot tn$. To neplatí pre delenie, kde doba vyhodnotenia rastie lineárne s rastúcim poètom operácií. 
+
+\pozn{
+Keïe kadá testovaná mikroarchitektúra má v jadre práve po dva numerické koprocesory (FPU) tak tento jav platí aj pre ne. Napríklad pre mikroarchitektúru Intel Sandy Bridge je vyhodnotenie vırazu s desiatimi operáciami sèítania 5,1 násobne pomalšie ako vyhodnotenie vırazu s jednou operáciu. Analogicky pre násobenie vychádza tento pomer na 5,93 a pre delenie pomer vychádza na 9,99.
+V èase písania práce sme nestihli podrobne otestova aj ostatné mikroarchitektúry.  
+}
+
 \pozn{
 V následujúcich èastiach budeme pre pomer rıchlosti delenia a sèítania namiesto údajov z dokumentácie uvaova nami namerané vısledky, ktoré presnejšie korešpondujú s meranım aj teoretickım zrıchlením redukovaného algoritmu.
 %Vïaka tomu, e povaha na nami meranıch syntetickıch vıpoètoch pripomína LU dekompozíciu vykonávanú v oboch algoritmoch, naše testy lepšie korešpondujú s meranım aj teoretickım zrıchlením redukovaného algoritmu. 
@@ -1423,7 +1453,8 @@ Hodnota $\gamma^\righttherefore$ znaèí \pojem{pomer rıchlosti kopírovania a náso
 \end{oznac}
 
 \begin{pozn}
-	Pre moderné procesory architektúry x86 budeme uvaova $\beta = 2$, $\gamma^\div = 3$, $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = 1$.
+	Pre moderné procesory architektúry x86 budeme pod¾a tabu¾ky \ref{real_instrpar_ratio} uvaova $\beta = 2$. 
+	Ïalej pod¾a tabu¾ky \ref{real_op_speed} budeme súhrne uvaova $\gamma^\div = 3$, $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = 1$.
 \end{pozn}
 
 \begin{pozn}
@@ -1945,7 +1976,20 @@ Pravda, jedná sa o mierne odlišnú implementáciu oproti Intelu, no inštrukènı plá
 Táto kapitola sa venovala poèítaniu zrıchlenia redukovaného algoritmu vzh¾adom na plnı algoritmus.
 Ako sme videli, teoretické zrıchlenie je v súlade s nameranım zrıchlením v závislosti od typu procesora.
 
-\chapter{Implementácia a uívate¾ská príruèka} \label{chapt:impl}
+\chapter*{Záver}
+
+Podarilo sa nám v prípade rovnomerne rozloenıch uzlov urıchli sériovı vıpoèet derivácií splajnov v uzloch a tie zmenši pamäovú nároènos vıpoètu na polovicu. 
+Napriek tomu, e vıslednı redukovanı algoritmus obsahuje viac aritmetickıch operácií je vïaka povahe mikroarchitektúr modernıch procesosov a tie vïaka povahy samotnıch operácií rıchlejší o pribline 20\%.
+Prioritou teraz ostáva jednak zovšeobecni redukovanı algoritmus aj pre splajny s nerovnomernımi uzlami a upravi zmiešané zbytkové derivácie aby sme mohli docieli ïalšie zrıchlenie a najmä zefektívni vláknovú paralelizáciu.
+%Zlepšenie paralelizácie by v budúcnosti umonilo vıpoèty akcelerova grafickou kartou. 
+Vláknovo paralelné poèítanie uzlov redukovanım algoritmom nie je vo všeobecnosti v súèasnosti rıchlejšie ale závisí na spôsobe dosahovania vláknového paralelizmu na konkrétnej procesorovej mikroarchitektúre.
+Konkrétne pod¾a nameranıch vısledkov vyplıva skutoènos, e procesory Intelu s implementovanım SMT sú pri paralelnom poèítaní uzlov horšie ako procesory bez tejto technológie. 
+Vıhodou ale ostávajú polovièné pamäové nároky èo umoòuje rieši väèšie úlohy a tak rozdeli prácu medzi väèší poèet logickıch procesorov. 
+To by v budúcnosti umonilo vıpoèty akcelerova pouitím masívne paralelizovanıch èipoch ako sú napríklad grafické karty. 
+
+\part*{Prílohy}
+\chapter*{Implementácia a uívate¾ská príruèka} \label{chapt:impl}
+
 Jednım z naším cie¾om je vytvorenie aplikácií na vizuálne a vıkonnostné porovnávanie splajnov, ktorıch uzly sú poèítané De Boorovim a našim redukovanım algoritmom. 
 Grafickú vizualizáciu sme implementovali v Microsoft Silverlight, èo je nástroj na tvorbu webovıch aplikácií spustite¾nıch priamo vo webovom prehliadaèi. 
 Samotnı vıvoj aplikácii môe prebieha v ¾ubovo¾nom programovacom jazyku beiacom pod Common Language Runtime (CLR). 
@@ -1967,7 +2011,7 @@ Pretoe CLR znemoòuje korektne porovnáva procesorovı èas a pamäové nároky imp
 
 %\obrazok{bench.png}{0.277}{Vıkonnostnı tester.}
 
-\subsection{Vizualizácia}
+\section*{Vizualizácia}
 V tejto kapitole si ukáeme struènı návod na pouívanie a testovanie implementovanıch aplikácií. 
 Zaènime aplikáciou na grafickú vizualizáciu.
 \obrazok{apka.png}{0.262}{Aplikácia po spustení.}
@@ -2016,7 +2060,7 @@ V strednej èasti panela máme k dispozícii vysúvate¾nı zoznam vykres¾ovanıch plôc
 %prípadne jeho prvej alebo druhej zmiešanej derivácie.
 \obrazok{apka_spl.png}{0.262}{Vykreslené tri splajnové povrchy.}
 
-\subsection{Vıkonnostnı tester}
+\section*{Vıkonnostnı tester}
 Teraz si popíšme druhú implementovanú aplikáciu zameranú na ukáku èi skutoène je redukovanı algoritmus rıchlejší.  
 \obrazok{bench.png}{0.36}{Vıkonnostnı tester.\label{bench}}
 \obrazok{bench_surface.png}{0.36}{Zadanie údajov pre testovanie.\label{bench_surface}}
@@ -2051,16 +2095,6 @@ Ich vıznam si teraz vyjasníme.
  \end{itemize}
 
 
-\chapter*{Záver}
-
-Podarilo sa nám v prípade rovnomerne rozloenıch uzlov urıchli sériovı vıpoèet derivácií splajnov v uzloch a tie zmenši pamäovú nároènos vıpoètu na polovicu. 
-Napriek tomu, e vıslednı redukovanı algoritmus obsahuje viac aritmetickıch operácií je vïaka povahe mikroarchitektúr modernıch procesosov a tie vïaka povahy samotnıch operácií rıchlejší o pribline 20\%.
-Prioritou teraz ostáva jednak zovšeobecni redukovanı algoritmus aj pre splajny s nerovnomernımi uzlami a upravi zmiešané zbytkové derivácie aby sme mohli docieli ïalšie zrıchlenie a najmä zefektívni vláknovú paralelizáciu.
-%Zlepšenie paralelizácie by v budúcnosti umonilo vıpoèty akcelerova grafickou kartou. 
-Vláknovo paralelné poèítanie uzlov redukovanım algoritmom nie je vo všeobecnosti v súèasnosti rıchlejšie ale závisí na spôsobe dosahovania vláknového paralelizmu na konkrétnej procesorovej mikroarchitektúre.
-Konkrétne pod¾a nameranıch vısledkov vyplıva skutoènos, e procesory Intelu s implementovanım SMT sú pri paralelnom poèítaní uzlov horšie ako procesory bez tejto technológie. 
-Vıhodou ale ostávajú polovièné pamäové nároky èo umoòuje rieši väèšie úlohy a tak rozdeli prácu medzi väèší poèet logickıch procesorov. 
-To by v budúcnosti umonilo vıpoèty akcelerova pouitím masívne paralelizovanıch èipoch ako sú napríklad grafické karty. 
 %
 %\bibliography{dp} %berie sa z dp.bib
 
