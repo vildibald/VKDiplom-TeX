@@ -312,7 +312,7 @@ Na vıkonnostné porovnanie nášho algoritmu s doterajším postupom však implementuj
 	Definícia krivkovıch a povrchovıch splajn.
 	\item{\textbf{Trojdiagonálna LU dekompozícia}}\newline
 	Spôsob poèítania trojdiagonálnych sústav.
-	\item{\textbf{De Boorov vıpoèet derivácií}}\newline
+	\item{\textbf{De Boorov algoritmus vıpoètu derivácií}}\newline
 	V tejto èasti si vysvetlíme splajn interpoláciu pod¾a Carla de Boora. 	
 	\item{\textbf{Poèítanie derivácií redukovanou sústavou}}\newline
 	Ukáka modifikovaného postupu pre kubické splajny a jeho rozšírenie pre bikubické splajny.	
@@ -355,12 +355,12 @@ Formálne tézy diplomovej práce sú:
 
 \chapter{De Boorov model a redukovanı algoritmus}
 
-V tejto kapitole si postupne zadefinujeme pojem polynómu a tento postupne rozšírime na pojem splajnu. 
+V tejto kapitole si zadefinujeme pojem polynómu a tento postupne rozšírime na pojem splajnu. 
 Následne si popíšeme dve metódy vıpoètu derivácií splajnu a konštrukciu celej splajnovej plochy.
 
 \section{Polynómy}
 
-Pre úplnos skôr ne si povieme o splajnoch, predstavíme si pojem polynomickej funkcie ktorı je neoddelite¾nou súèasou pri definícii splajnu. 
+Pre úplnos skôr ne si povieme o splajnoch, predstavíme si pojem polynomickej funkcie ktorı je neoddelite¾nou súèasou definície splajnu. 
 \begin{df}
 	Nech $n$ je z \uinteger a pre kadé $i$ z $\{0, \dots, n\}$ je $a_i$ z \real, prièom $a_n \ne 0$. Funkciu $p: \mathbb{R} \to \mathbb{R}$ tvaru
 	$$p(x)=\sum_{i = 0}^{n}a_i x^i$$
@@ -382,15 +382,15 @@ V práci však budeme pracova najmä s funkciami dvoch premennıch. Analogicky si p
 \end{oznac}
 
 \section{Splajny}
-V našej práci pracujeme s hermitovskımi splajnami \cite{her_nat}, ktoré sú štandardne triedy $C^1$, teda splajnami ktorıch prvé derivácie v uzloch sa rovnajú. 
+V našej práci pracujeme s Hermitovımi splajnami \cite{her_nat}, ktoré sú štandardne triedy $C^1$, teda splajnami ktorıch funkèné hodnoty aj prvé derivácie v uzloch sa rovnajú. 
  
-Najbenejšie kubické splajny triedy $C^2$, teda tie pri ktorıch v uzloch máme zaruèenú rovnos aj derivácií druhého rádu, sú \pojem{naturálne} a \pojem{clamped} splajny. Pre naše potreby budeme uvaova iba druhé menované prièom ich budeme konštruova pouitím hermitovskıch bázovıch funkcíí (pozri èas \ref{sec:her_constr}).%, prièom ich budeme struène nazıva \pojem{hermitovské splajny}.  
+Najbenejšie kubické splajny triedy $C^2$, teda tie pri ktorıch v uzloch máme zaruèenú rovnos aj derivácií druhého rádu, sú \pojem{naturálne} a \pojem{clamped} splajny. Pre naše potreby budeme uvaova iba druhé menované prièom ich budeme konštruova pouitím Hermitovıch bázovıch funkcíí (pozri èas \ref{sec:her_constr}).%, prièom ich budeme struène nazıva \pojem{hermitovské splajny}.  
 
 Keïe naším cie¾om je zrıchlenı algoritmus poèítania povrchovıch splajnov, ktorı vznikol zovšeobecnením algoritmu pre krivkové splajny tak si zavedieme pojem splajnu pre krivky aj plochy.
 Iste by bolo mono elegantnejšie zadefinova splajn všeobecne, ale rozdelenie definície špeciálne pre krivkové splajny v rovine a povrchové v priestore bude èitate¾nejšie.  
 Formálna definícia krivkového splajnu v rovine \cite{splines} je nasledovná.
 \begin{df}\label{df:curve_spline}
-	Nech $I \ge 0$ je prirodzené èíslo, $(u_0, \dots,u_{I-1})$ je rastúca postupnost.
+	Nech $I \ge 0$ je prirodzené èíslo, $(u_0, \dots,u_{I-1})$ je rastúca postupnos reálnych èísel.
 	Nech pre kadé $i$ z $\{0, 1, \dots I-2\}$ funkcie $S_{i}$ sú polynomické funkcie premennej $x$, ktoré spåòajú
 	\begin{itemize}
 		\item
@@ -407,7 +407,7 @@ Formálna definícia krivkového splajnu v rovine \cite{splines} je nasledovná.
 	S_{I-1}(x) & \text{pre } x \in [u_{0}, u_{1}] \text{,}\\
 	\end{cases}
 	\end{equation}
-	nazveme \pojem{krivkovı splajn na uzloch $(u_0, \dots,u_{I-1})$}.
+	nazveme \pojem{krivkovı clamped splajn triedy $C^1$ na uzloch $(u_0, \dots,u_{I-1})$} alebo skrátene.
 \end{df}
 
 \begin{oznac}
@@ -426,24 +426,30 @@ Formálna definícia krivkového splajnu v rovine \cite{splines} je nasledovná.
 	\end{itemize}
 \end{oznac}
 
-Na to aby sme zostrojili segmenty splajnu potrebujeme ma dané uzly, funkèné hodnoty v uzloch aj derivácie v uzloch.
+Aby sme zostrojili segmenty splajnu potrebujeme ma dané uzly, funkèné hodnoty v uzloch aj derivácie v uzloch.
 Je však moné zostroji splajn aj keï okrem uzlov a funkènıch hodnôt máme známe len dve krajné derivácie $d_0$ a $d_{I-1}$. 
-Zvyšné hodnoty derivácií toti môeme s malou odchılkou vypoèíta napríklad De Boorovov interpoláciou.
+Zvyšné hodnoty derivácií toti môeme vypoèíta vyriešením špeciálnej trojdiagonálnej sústavy rovníc.
 Túto techniku, ale pre splajnové povrchy, si rozoberieme v následujúcich èastiach kapitoly. 
-Teraz rozšírime túto definíciu na povrchovı splajn v priestore.
+
+\begin{oznac}
+Nech $I \ge 0$ a  $J \ge 0$ sú prirodzené èísla, $(u_0, \dots, u_{I-1})$ a $(v_0, \dots, v_{J-1})$ sú rastúce postupnosti reálnych èísel.
+Potom pre kadé	$i$ z $\{0, 1, \dots, I-2\}$ a $j$ z $\{0, 1, \dots, J-2\}$ hovoríme, e dvojice $\langle u_i, v_j \rangle$ tvoria \pojem{rovnomernú sie uzlov v priestore} a jednotlivé tieto body nazveme \pojem{uzly siete}. 
+\end{oznac}
+
+Teraz rozšírime definíciu \ref{df:curve_spline} na povrchovı splajn v priestore.
 
 \begin{df}\label{df:surface_spline}
-Nech $I \ge 0$ a  $J \ge 0$ sú prirodzené èísla, $(u_0, \dots, u_{I-1})$ a $(v_0, \dots, v_{J-1})$ sú rastúce postupnosti.
+Nech $I \ge 0$ a  $J \ge 0$ sú prirodzené èísla, $(u_0, \dots, u_{I-1})$ a $(v_0, \dots, v_{J-1})$ sú rastúce postupnosti reálnych èísel tvoriace sie uzlov v priestore.
 Nech pre kadé $i$ z $\{0, 1, \dots, I-2\}$ a $j$ z $\{0, 1, \dots, J-2\}$ funkcie $S_{i,j}$ sú bipolynomické funkcie premennıch $x$ a $y$, ktoré spåòajú
 \begin{itemize}
 \item
 $S_{i,j}(u_{i+1}, y) = S_{i+1,j}(u_{i+1}, y)$,
 \item 
+\item
 $S_{i,j}(x, v_{j+1}) = S_{i,j+1}(x, v_{j+1})$,
+$\pd{S_{i,j}}{x}(u_{i+1}, y) = \pd{S_{i+1,j}}{x}(u_{i+1}, y)$,
 \item
-$\pd{S_{i,j}}{x}(u_{i+1}, y) = \pd{S_{i+1,j}}{x}(u_{i+1}, y)$ 
-\item
-$\pd{S_{i,j}}{y}(x, v_{j+1}) =\pd{S_{i,j+1}}{y}(x, v_{j+1})$,
+$\pd{S_{i,j}}{y}(x, v_{j+1}) =\pd{S_{i,j+1}}{y}(x, v_{j+1})$.
 %\item
 %$\pdd{S_{i,j+1}}{x}{y}(x, v_{j+1}) =\pd{S_{i,j}}{y}(x, v_{j+1})$.
 %$\pdd{S(u_i, v_i)}{x}{y} = \pdd{S(u_{i+1}, v_j)}{x}{y} = \pdd{S(u_i, v_{j+1})}{x}{y} = \pdd{S(u_{i+1}, v_{j+1})}{x}{y}$.
@@ -473,7 +479,7 @@ Funkciu $S$ z intervalu $[u_{0}, u_{I-1}] \times [v_{0}, v_{J-1}]$ do $\mathbb{R
 		\item
 		Funkcie $S_{ij}$ nazveme \pojem{segmenty splajnu}.
 		\item
-		Dvojice $\langle u_i, v_j \rangle$ nazveme \pojem{uzly}.
+		Dvojice $\langle u_i, v_j \rangle$ z nazveme \pojem{uzly}.
 		\item
 		Uzly $\langle u_0, v_0\rangle$, $\langle u_{I-1}, v_0\rangle$, $\langle u_0, v_{J-1}\rangle$ a $\langle u_{I-1}, v_{J-1}\rangle$ nazveme \pojem{rohové uzly}.
 		\item
@@ -489,32 +495,32 @@ Funkciu $S$ z intervalu $[u_{0}, u_{I-1}] \times [v_{0}, v_{J-1}]$ do $\mathbb{R
 
 Aby sme zostrojili splajnové segmenty potrebujeme ma dané všetky uzly aj funkèné hodnoty v uzloch a derivácie v uzloch.
 Analogicky ako pri krivkách, ak nemáme známe všetky derivácie, vieme napriek tomu zvyšné derivácie dopoèíta De Boorovov interpoláciou s malou odchılkou aby splajn bol spojitı a hladkı.
-Na zostrojenie splajnu pomocou De Boorovho modelu interpolácie potrebujeme ma známe
+Na zostrojenie splajnu pomocou De Boorovho modelu interpolácie potrebujeme ma známe nasledujúce vstupné údaje. (pozri aj obrázok \ref{pic:deboor_model})
 \begin{itemize}
 	\item
-	postupnosti uzlov $(u_0, \dots, u_{I-1})$ a $(v_0, \dots, v_{I-1})$,
+	Postupnosti uzlov $(u_0, \dots, u_{I-1})$ a $(v_0, \dots, v_{I-1})$,
 	\item
 	funkèné hodnoty $\{z_{0,0}, \dots, z_{I-1,0}, \dots, z_{0,J-1}, \dots, z_{I-1,J-1}\}$,
 	\item
-	smerové derivácie $\{d^x_{0,0}, \dots, d^x_{I-1,0}, d^x_{0,J-1}, \dots, d^x_{I-1,J-1}\}$, 
+	smerové derivácie $\{d^x_{0,0}, \dots, d^x_{I-1,0}, d^x_{0,J-1}, \dots, d^x_{I-1,J-1}\}$ na okrajovıch vertikálach mrieky,
 	\item
-	smerové derivácie $\{d^y_{0,0}, \dots, d^y_{0,J-1}, d^y_{I-1,0}, \dots, d^y_{I-1,J-1}\}$, 
+	smerové derivácie $\{d^y_{0,0}, \dots, d^y_{0,J-1}, d^y_{I-1,0}, \dots, d^y_{I-1,J-1}\}$ na okrajovıch horizontálach, 
 	\item
-	zmiešané derivácie $\{d^{xy}_{0,0}, d^{xy}_{I-1,0}, d^{xy}_{0,J-1}, d^{xy}_{I-1,J-1}\}$.
+	zmiešané derivácie $\{d^{xy}_{0,0}, d^{xy}_{I-1,0}, d^{xy}_{0,J-1}, d^{xy}_{I-1,J-1}\}$ v rohoch mrieky.
 \end{itemize}
-\obrazok{DeBoorModel.png}{0.7}{De Boorov model vstupnıch hodnôt pre splajnovı povrch.}
+\obrazok{DeBoorModel.png}{0.7}{De Boorov model vstupnıch hodnôt pre splajnovı povrch.\label{pic:deboor_model}}
 
-Kım v prípade splajnovıch kriviek bolo evidentné hneï od zaèiatky ich vıskumu a aplikácie, e okrem uzlov a funkènıch hodnôt $(z_0, \dots,z_{I-1})$ v uzloch je potrebné zada ešte dve podmienky, v našom prípade sú to dve hodnoty $d_0$ a $d_{I-1}$.
-V prípade interpolaènıch splajnovıch povrchoch nebolo zrejmé ktoré smerové a zmiešané derivácie je potrebné zada.
-De Boor navrhol vhodnı model, ktorı okrem hodnôt $z_{i,j}$ na mrieke ve¾kosti $I \times J$ vyaduje zadanie smerovıch derivácií na okrajoch mrieky uzlov a štyri zmiešané derivácie v rohoch.
+V prípade splajnovıch kriviek bolo evidentné hneï od zaèiatku ich vıskumu a aplikácie, e okrem uzlov a funkènıch hodnôt $(z_0, \dots,z_{I-1})$ v uzloch je potrebné zada ešte dve podmienky, v našom prípade sú to dve hodnoty $d_0$ a $d_{I-1}$.
+V prípade interpolaènıch splajnovıch povrchov nebolo zrejmé ktoré smerové a zmiešané derivácie je potrebné zada.
+De Boor navrhol vhodnı model, ktorı okrem hodnôt $z_{i,j}$ na mrieke ve¾kosti $I \times J$ vyaduje zadanie smerovıch derivácií na okrajoch mrieky uzlov a štyri zmiešané derivácie v rohoch (pozri vyššie).
 
-Prirodzene vidie, e takto definovanı krivkovı aj povrchovı splajn je triedy $C^1$. 
-Pri vhodne zvolenıch hodnotách derivácií v uzloch vieme ale zaruèi rovnos aj druhıch derivácií, èim dostaneme splajn z triedy $C^2$ èo nám zaruèí hladkos \pojem{spojenia} jednotlivıch segmentov. 
-Splajny sa taktie dajú poui na interpoláciu matematickıch funkcií. 
+Zdôrazòujeme, e takto definovanı krivkovı aj povrchovı splajn je triedy $C^1$. 
+Pri vhodne zvolenıch hodnotách derivácií v uzloch vieme ale zaruèi rovnos aj druhıch derivácií, èim dostaneme splajn z triedy $C^2$ èo nám zaruèí vyššiu hladkos \pojem{spojenia} jednotlivıch segmentov. 
+Splajny sa taktie dajú poui na aproximáciu matematickıch funkcií. 
 
 \begin{df}
 Nech $S$ je splajn na uzloch $(u_0, \dots,u_{I-1})$ a $(v_0, \dots,v_{J-1})$ a $f: [u_0, v_0]\times  u_{I-1}, v_{J-1} \to \mathbb{R}$ je spojitá funkcia.
-Hovoríme, e splajn $S$ interpoluje funkciu $f$ ak platia tieto podmienky
+Hovoríme, e splajn $S$ aproximuje funkciu $f$ ak platia tieto podmienky
 \begin{itemize}
 	\item
 	$z_{i,j} = f(u_i, v_j)$, pre kadé $i$ z $\{0, \dots, I-1\}$ a pre kadé $j$ z $\{0, \dots, J-1\}$.
@@ -527,28 +533,27 @@ Hovoríme, e splajn $S$ interpoluje funkciu $f$ ak platia tieto podmienky
 \end{itemize}
 \end{df}
 
-Na splajn interpolujúci funkciu $f$ môeme aplikova De Boorovu interpoláciu a zo získanıch derivácií u vieme zostroji jeho segmenty.
-Takto získanı splajn bude danú funkciu interpolova, teda ju \pojem{napodobní}. 
+Na interpolaènı splajn aproximujúci funkciu $f$ môeme aplikova de Boorov algoritmus a zo získanıch derivácií u vieme zostroji jeho segmenty.
+Takto získanı splajn bude danú funkciu interpolova, teda ju \pojem{napodobní} (ako na ilustraènom obrázku \ref{pic:mexhat}). 
 To je iadané napríklad v grafickom modelovaní, pretoe pre poèítaè je jednoduchšie a rıchlejšie pracova s polynómom interpolujúcim napríklad goniometrickú funkciu ako priamo s òou. 
 
+\obrazok{mexHatWKnots.png}{0.7}{Funkcia $sin(\sqrt{x^2+y^2})$ interpolovaná bikubickım splajnom.\label{pic:mexhat}}
+
 Obecne splajny minimalizujú integrál druhej derivácie funkcie (napr. zakrivenie, energie, ...).
-Poskytujú prunı nástroj na modelovanie reálnych situácií na lokálne poiadavky, prièom ich vıpoèet je rıchly a stabilnı. 
+Poskytujú prunı nástroj na modelovanie reálnych situácií na lokálne aj globálne poiadavky, prièom ich vıpoèet je rıchly a stabilnı. 
 Navyše sa dá ukáza, e interpolácia funkcie kubickım splajnom je jednoznaèná. 
 Témou tejto práce sú práve metódy vıpoètu prvıch derivácií, ktorımi je moné dosiahnu práve spomenutı cie¾.
-\obrazok{mexHatWKnots.png}{0.7}{Funkcia $sin(\sqrt{x^2+y^2})$ interpolovaná bikubickım splajnom.}
 
-Základná téma našej práce je úloha na základe vstupnıch uzlov $u_{0}$, ..., $u_{I-1}$, $v_{0}$, ..., $v_{J-1}$ a funkènıch hodnôt $z_{0,0}$, ..., $z_{I,J}$ nájs \pojem{hladkú}, po èastiach definovanú funkciu $S: [u_0, u_{I+1}] \times [v_0, v_{J+1}] \to \mathbb{R}$ so spojitımi deriváciami prvého aj druhého rádu takú, e pre kadé $i \in  {0, \dots, I-1}$ a $j \in  {0, \dots, J-1}$ platí $z_{i,j} = S(u_i, v_j)$. 
+Základná téma našej práce je úloha na základe vstupnıch uzlov $u_{0}$, ..., $u_{I-1}$, $v_{0}$, ..., $v_{J-1}$ a funkènıch hodnôt $z_{0,0}$, ..., $z_{I,J}$ nájs \pojem{hladkú}, po èastiach definovanú funkciu $S: [u_0, u_{I+1}] \times [v_0, v_{J+1}] \to \mathbb{R}$ so spojitımi deriváciami prvého aj druhého rádu (teda triedy $C^2$) takú, e pre kadé $i \in  {0, \dots, I-1}$ a $j \in  {0, \dots, J-1}$ platí $z_{i,j} = S(u_i, v_j)$. 
 %Funkèné hodnoty a hodnoty derivácií $S$ v uzloch sú èo najblišie hodnotám derivácií $f$. 
 Funkciu $S$ nazıvame splajn (konkrétne povrchovı splajn), prièom jednotlivé èasti nazveme \pojem{segmenty}. 
 
-\obrazok{fseg.png}{0.5}{\label{pic:fseg}Ukáka uzlov pre štvorsegmentovı splajn.}
-
 \subsection{Konštrukcia hermitovho splajnu}
 \label{sec:her_constr}
-Teraz si ukáeme ako môeme pod¾a zadanıch uzlov, ich funkènıch hodnôt a derivácií zostroji segmenty splajnu ako funkcie dvoch premennıch v priestore.
+Teraz si ukáeme ako môeme pod¾a funkènıch hodnôt a derivácií zadanıch v uzloch zostroji segmenty splajnu ako funkcie dvoch premennıch v priestore.
 Predpokladajme $I \ge 3$ a $J  \ge 3$ z \uinteger, rovnomerné uzly $u_0$, \dots, $u_{I-1}$ a $v_0$, \dots, $v_{J-1}$. 
-Úlohou je zostroji splajn $S$ triedy $C^2$ interpolujúci funkciu $f$.
-Polome
+Úlohou je zostroji interpolaènı splajn $S$ triedy $C^2$.
+V kadom uzle predpokladáme zadané
 \begin{itemize}
 	\item
 	funkèné hodnoty splajnu $z_{0,0}$, \dots, $z_{I-1,0}$, \dots, $z_{0,J-1}$, \dots, $z_{I-1,J-1}$, 
@@ -593,14 +598,14 @@ Vısledná funkcia $S$ teda vznikne zjednotením segmentov $S_{i,j}$.
 Na vypoèítanie kadého segmentu potrebujeme štyri uzly, a pre kadı uzol príslušne hodnoty $z_{i,j}$, $d^x_{i,j}$, $d^y_{i,j}$ a $d^{xy}_{i,j}$. 
 
 \pozn{
-Hodnoty $z_{i,j}$ musíme ma vdy vopred dané. Derivácie $d^x_{i,j}$, $d^y_{i,j}$ a $d^{xy}_{i,j}$ buï môu by dané všetky, alebo iba niektoré a z nich vieme s malou odchılkou vypoèíta hodnoty ostatnıch. 
-Jeden z tıchto spôsobov spoèíva v De Boorovej interpolácii ktorú si v ïalších dvoch èastiach objasníme. 
-Potom predstavíme modifikovanı spôsob interpolácie špeciálne pre splajny s rovnomerne rastúcimi uzlami.
+Hodnoty $z_{i,j}$ musíme ma vdy vopred dané. Derivácie $d^x_{i,j}$, $d^y_{i,j}$ a $d^{xy}_{i,j}$ buï môu by dané všetky, alebo iba niektoré a z nich vieme vypoèíta hodnoty ostatnıch. 
+Jeden z tıchto spôsobov spoèíva v de Boorovej interpolácii ktorú si v ïalších dvoch èastiach objasníme. 
+Potom predstavíme modifikovanı spôsob tejto interpolácie špeciálne pre splajny s rovnomerne rastúcimi uzlami.
 }
 
 \section{Trojdiagonálna LU dekompozícia}
 \label{sec:tridiagonal}
-Základ De Boorovej interpolácie tkvie v opakovanom poèítaní systémov trojdiagonálnych lineárnych rovníc. 
+Základ De Boorovej interpolácie tkvie v opakovanom poèítaní trojdiagonálnych systémov lineárnych rovníc. 
 
 \begin{df}
 	Nech $n \ge 3$ je z \uinteger. Sústavu rovníc tvaru
@@ -710,7 +715,7 @@ Nech $n$ je poèet rovníc trojdiagonálnej lineárnej sústavy.
 Algoritmus \ref{alg:SolveGeneralLU} nájde riešenie v lineárnom èase, prièom vyaduje $5n$ pamäte.
 \end{lema}
 
-V prípade poèítania derivácií je sústava rovníc v špeciálnom tvare pod¾a \ref{eq:deboorM} pre plnı alebo \ref{eq:redM} pre redukovanı algoritmus v následujúcich èastiach.
+V prípade poèítania derivácií je sústava rovníc v špeciálnom tvare pod¾a (\ref{eq:deboorM}) pre plnı alebo (\ref{eq:redM}) pre redukovanı algoritmus v následujúcich èastiach.
 V oboch prípadoch všetky èísla na hornej aj spodnej diagonále majú hodnotu $1$. 
 Na hlavnej diagonále sú to hodnoty $4$ pri plnom algoritme a v prípade redukovaného postupu sú to hodnoty $-14$. 
 Poslednı prvok diagonály tie môe obsahova hodnotu $-15$ ak poèet rovníc je párny. 
@@ -759,12 +764,12 @@ Upravenı algoritmus, ktorı rieši LU dekompozíciu špeciálne pre plnı a redukovanı
 \end{lema}
 
 Tento modifikovanı algoritmus má menej ne polovièné pamäové nároky ne v prípade všeobecnıch trojdiagonálnych sústav, èo nám v praxi umoòuje rieši väèšie úlohy. 
-Navyše pri reálnej implementácií nemusíme vektory $r$ a $p$ inicializova pri kadom volaní procedúry \pojem{VyriešLU} ale namiesto toho môeme poui prednaèítané vyrovnávacie vektory, tzv. \pojem{buffery}.
-To nám ušetrí mnoho strojovıch cyklov, ktoré procesor strávi neustálym alokovaním a zmazaním potrebnej operaènej pamäte. 
+Navyše pri reálnej implementácií nemusíme vektory $r$ a $p$ inicializova pri kadom volaní procedúry \pojem{VyriešLU}, ale namiesto toho môeme poui prednaèítané vyrovnávacie vektory, tzv. \pojem{buffery}.
+To nám ušetrí mnoho strojovıch cyklov\footnote{Strojovı cyklus je poèet tikov procesora potrebnıch na vykonanie mikrooperácie.}, ktoré procesor strávi neustálym alokovaním a zmazaním potrebnej operaènej pamäte. 
 
-Máme u potrebnı základ aby sme mohli prejs k cie¾u práce a tım je práve De Boorov vıpoèet derivácií splajnu a z neho odvodenı efektívnejší algoritmus.
+Máme u potrebnı základ, aby sme mohli prejs k cie¾u práce a tım je práve de Boorov vıpoèet derivácií splajnu a z neho odvodenı efektívnejší algoritmus.
 
-\section{De Boorov vıpoèet derivácií}
+\section{De Boorov algoritmus vıpoètu derivácií}
 \label{sec:full_deboor}
 
 Skôr ne zaèneme s popisom De Boorvho modelu vıpoètu derivácií v uzloch si polome dve oznaèenia s ktorımi budeme pracova.
@@ -797,33 +802,35 @@ Algoritmus nájdenı Carlom de Boorom \cite{deboor} umoòuje s malou odchılkou vyp
 	$d^{xy}_{i,j}$ pre $i \in \{0, I-1\}$, $j \in \{0, J-1\}$.
 \end{itemize}
 
+\begin{pr}
+	Na príklade uzlov z obrázka \ref{pic:fseg} potrebujeme pozna hodnoty následovne:
+	\begin{itemize}
+		\item
+		$z_{0,2}$, $z_{1,2}$, $z_{2,2}$,\newline
+		$z_{0,1}$, $z_{1,1}$, $z_{2,1}$,\newline
+		$z_{0,0}$, $z_{1,0}$, $z_{2,0}$,\newline  
+		\item
+		$d^x_{0,2}$, \phantom{$d^x_{1,2}$}, $d^x_{2,2}$,\newline
+		$d^x_{0,1}$, \phantom{$d^x_{1,1}$}, $d^x_{2,1}$,\newline
+		$d^x_{0,0}$, \phantom{$d^x_{1,0}$}, $d^x_{2,0}$,\newline 
+		\item
+		$d^y_{0,2}$, $d^y_{1,2}$, $d^y_{2,2}$,\newline
+		\phantom{$d^y_{0,1}$}, \phantom{$d^y_{1,1}$}, \phantom{$d^y_{2,1}$},\newline
+		$d^y_{0,0}$, $d^y_{1,0}$, $d^y_{2,0}$,\newline
+		\item
+		$d^{xy}_{0,2}$, \phantom{$d^{xy}_{1,2}$}, $d^{xy}_{2,2}$,\newline
+		\phantom{$d^{xy}_{0,1}$}, \phantom{$d^{xy}_{1,1}$}, \phantom{$d^{xy}_{2,1}$},\newline
+		$d^{xy}_{0,0}$, \phantom{$d^{xy}_{1,0}$}, $d^{xy}_{2,0}$,\newline  
+	\end{itemize}
+\end{pr}
+
+\obrazok{fseg.png}{0.5}{\label{pic:fseg}Ukáka uzlov pre štvorsegmentovı splajn.}
+
 \pozn{
 	De Boorova interpolácia vo všeobecnosti nepredpokladá len rovnomerne rastúce postupnosti uzlov $(u_0, \dots,u_I)$ a $(v_0, \dots,v_J)$. 
 	Náš postup v ïalšej èasti èlánku ale funguje len s takımito postupnosami. 
 	Preto v tejto èasti budeme uvaova De Boorov postup špeciálne pre rovnomerne rastúce postupnosti uzlov.
 }
-
-\begin{pr}
-Na príklade uzlov z obrázka \ref{pic:fseg} potrebujeme pozna hodnoty následovne:
-\begin{itemize}
-	\item
-	$z_{0,2}$, $z_{1,2}$, $z_{2,2}$,\newline
-	$z_{0,1}$, $z_{1,1}$, $z_{2,1}$,\newline
-	$z_{0,0}$, $z_{1,0}$, $z_{2,0}$,\newline  
-	\item
-	$d^x_{0,2}$, \phantom{$d^x_{1,2}$}, $d^x_{2,2}$,\newline
-	$d^x_{0,1}$, \phantom{$d^x_{1,1}$}, $d^x_{2,1}$,\newline
-	$d^x_{0,0}$, \phantom{$d^x_{1,0}$}, $d^x_{2,0}$,\newline 
-	\item
-	$d^y_{0,2}$, $d^y_{1,2}$, $d^y_{2,2}$,\newline
-	\phantom{$d^y_{0,1}$}, \phantom{$d^y_{1,1}$}, \phantom{$d^y_{2,1}$},\newline
-	$d^y_{0,0}$, $d^y_{1,0}$, $d^y_{2,0}$,\newline
-	\item
-	$d^{xy}_{0,2}$, \phantom{$d^{xy}_{1,2}$}, $d^{xy}_{2,2}$,\newline
-	\phantom{$d^{xy}_{0,1}$}, \phantom{$d^{xy}_{1,1}$}, \phantom{$d^{xy}_{2,1}$},\newline
-	$d^{xy}_{0,0}$, \phantom{$d^{xy}_{1,0}$}, $d^{xy}_{2,0}$,\newline  
-\end{itemize}
-\end{pr}
 
 Zvyšné derivácie $d^x$, $d^y$ a $d^{xy}$ vieme jednoznaène vypoèíta pomocou $2(I) + J + 5$ lineárnych sústav s celkovo $3IJ + I + J + 2$ rovnicami.
 Nišie uvádzame modelové rovnice, pomocou ktorıch sú zostrojené tieto sústavy lineárnych rovníc.
@@ -1114,7 +1121,7 @@ Potom splajn $S$ s vypoèítanımi segmentami pod¾a èasti \ref{sec:her_constr} s vy
 
 \subparagraph{Paralelizácia}
 \label{par:thread_par}
-Všimnime si, e v prípade oboch algoritmoch derivácie pod¾a jednotlivıch premennıch poèítame v vdy jednom smere.
+Všimnime si, e v prípade oboch algoritmov derivácie pod¾a jednotlivıch premennıch poèítame v vdy jednom smere.
 Uvaujme napríklad vıpoèet smerovıch derivácií po osi $x$.
 Jedna LU dekompozícia vypoèíta derivácie práve pre jeden riadok matice uzlov, prièom tieto vıpoèty sú vzájomne nezávislé.
 To umoòuje $x$-ové derivácie na jednotlivıch riadkoch matice poèíta paralelne.
@@ -1282,7 +1289,8 @@ Tabu¾ka obashuje tieto ståpce.
 	To znamená, e aritmetické sèítaèky a násobièky sú schopné, vïaka technike pipelining-u, zaèa novı vıpoèet ešte pred dokonèením aktuálnehu vıpoètu.
 \end{itemize}
 
-\footnotetext{\label{footnote:round_divisor}Odozva je nadobúda menšie hodnoty ak je delite¾ celı.}
+\footnotetext{\label{footnote:round_divisor}Odozva zvyèajne nadobúda menšie hodnoty ak je delite¾ celı.}
+\footnotetext{\label{footnote:xmm}V uvedenom dokumente pre jednotlivé architektúry uvaujeme aritmetické operácie s plávajúcou èiarkou na xmm registroch.}
 Pod¾a tabu¾ky vidno, e operácie sèítania a odèítania sú rovnako rıchle èo sa pochopite¾ne dalo oèakáva. 
 Tieto dve operácie preto budeme spoloène oznaèova symbolom $\pm$. 
 Od tejto chvíle ak spomenieme operáciu sèítania tak tım budeme súèasne myslie aj operáciu odèítania. 
@@ -1313,14 +1321,28 @@ Ako vidie zïaleka najpomalšie je práve delenie.
 	 	\bottomrule
  	\end{tabular}
 \end{center}
-\caption{Tabu¾ka aritmetickıch operácií na rôznych mikroarchitektúrach pod¾a \cite{instrTables}. Údaje predstavujú poèet strojovıch cyklov.}
+\caption{Tabu¾ka poètu strojovıch cyklov pre aritmetické operácie na rôznych mikroarchitektúrach pod¾a \cite{instrTables}\footref{footnote:xmm}.}
 \label{tab:instr_speed}
 \end{table}
 %\pozn{
 %	 Všetky procesory majú identickú rıchlos sèítania a odèítania, preto budeme tieto dve operácie spoloène oznaèova symbolom $+$. Od tejto chvíle ak spomenieme operáciu sèítania tak tım budeme súèasne myslie aj operáciu odèítania. 
 %}
-
 Pre zaujímavos si v tabu¾ke \ref{real_op_speed} nišie ukáme praktické vısledky z testovacej aplikácie. 
+Je nutné podotknú, e v reálnych implementáciach ¾ubovo¾ného vıpoètového algoritmu sú pomery rıchlosti operácií závislé od povahy a tvaru samotnıch vıpoètov. %, ako sú ve¾kos dátovıch štruktúr, ïalej záv
+My sme doby trvania vyhodnotenia vırazov obsahujúcich operandy typu $\circ \in \{+, \cdot, \div\}$ merali na jednom vektore, prièom testy boli v tvare $a[i] = a[i] \circ a[i-1]$, teda vıpoèet $i$-teho prvku závisel od vısledku vıpoètu predchádzajúceho $(i-1)$-teho prvku.
+Tımto sme sa snaili povahu testu èo najviac napodobni tvaru vıpoètov v interpolaènıch algoritmoch.
+
+\pozn{
+	V prípade, ak by test bol v tvare $a[i] = b[i] \circ c[i]$, tak vıpoèty pre jednotlivé $i$ by boli na sebe nezávislé. 
+	To by procesoru umonilo poui techniky pipeliningu a vektorizácie, kedy by vıpoèet $i$-ho prvku vektora $a$ mohol zaèa skôr ne by skonèil vıpoèet $(i-1)$-teho prvku. 
+	Takto by pomery èasov násobenia a sèítania vyšli, vïaka väèšiemu prietoku tıchto dvoch operácií oproti deleniu, násobne väèšie.
+	Jednak by takıto test nesúhlasil s tvarom vıpoètov v testovanıch algoritmoch a taktie by nekorešpondovalo teoretické zrıchlenie s meranım zrıchlením. 
+	Hodnoty inverzného prietoku z predchádzajúcej tabu¾ky \ref{tab:instr_speed} udávajú schopnos procesora zreazova vıpoèty pod¾a vykonávanej operácie (èo je práve pipelining). 
+	Vo vıpoètoch typu $a[i] = a[i] \circ a[i-1]$ sa pipelining nedá poui, lebo v tomto prípade procesor nemôe zaèa vıpoèet $i$-ho prvku ak ešte nevypoèítal hodnotu $(i-1)$-teho prvku.
+	Teda hodnoty inverzného prietoku môeme v kontexte ïalšej tabu¾ky a oboch uvaovanıch algoritmoch zanedba.
+}
+\newline
+
 Operácie sme merali  o na 512 prvkovom poli, prièom aby sme dostali \uv{rozumne} dlhé èasy vıpoèty boli opakované 500000 krát.
 Operácie boli v tvare $a[i] = a[i] \circ a[i-1]$, kde $\circ \in \{+, \cdot, \div\}$. 
 Ïalej budeme mera aj pamäovú operáciu kopírovania, prièom rozlišujeme medzi kopírovaním spojitıch ($\rightY$) a nespojitıch ($\righttherefore$) dát.
@@ -1366,15 +1388,6 @@ V tabu¾ke \ref{real_op_speed} sú namiesto mikroarchitektúr uvedené konkrétne mod
 \end{table}
 
 V praxi vidno, e sèítavanie a násobenie môeme povaova za podobne rıchle operácie. 
-Je nutné podotknú, e pomery rıchlosti operácií sú závislé od povahy testovania. %, ako sú ve¾kos dátovıch štruktúr, ïalej záv
-My sme doby trvania aritmetickıch operandov $\circ \in \{+, \cdot, \div\}$ merali na jednom vektore, prièom testy boli v tvare $a[i] = a[i] \circ a[i-1]$, teda vıpoèet $i$-teho prvku závisel od vısledku vıpoètu predchádzajúceho $(i-1)$-teho prvku.
-Tımto sme sa snaili povahu testu èo najviac napodobni tvaru vıpoètov v interpolaènıch algoritmoch.
-
-\pozn{
-V prípade, ak by test bol v tvare $a[i] = b[i] \circ c[i]$, tak vıpoèty pre jednotlivé $i$ by boli na sebe nezávislé. 
-To by procesoru umonilo poui techniku pipeliningu, prièom pomery èasov násobenia a sèítania by vyšli, vïaka väèšiemu prietoku tıchto dvoch operácií oproti deleniu, násobne väèšie.
-Jednak by takıto test nesúhlasil s tvarom vıpoètov v testovanıch algoritmoch a taktie by nekorešpondovalo teoretické zrıchlenie s meranım zrıchlením. 
-}
 
 Ešte ostáva ukáza reálny vplyv inštrukèného paralelizmu. V následujúcej tabu¾ke sú uvedené namerané násobky èasov trvania vyhodnotenia vırazu vzh¾adom na poèet operácií špeciálne pre procesor Intel Core i7 6700K.
 
@@ -1434,15 +1447,15 @@ Pre všetky procesory si struène uvedieme vısledky meraní pre vırazy obsahujúce d
 			& $\pm$ & $\times$ & $\div$ \\
 			\midrule
 			FX-6300 \tiny{3C/6T}
-			& & & \\
+			& 5,12 & 5,13 & 10,03 \\
 			C2D E8200 \tiny{2C/2T}
-			& & & \\
+			& 5,8 & 7 & 10,14 \\
 			Ci5 650 \tiny{2C/4T}
 			& 3,84 & 5,31 & 10,03 \\
 			Ci3 2350M \tiny{2C/4T}
 			& 5,1 & 5,93 & 9,99 \\	
 			Ci5 4440 \tiny{4C/4T}
-			& & & \\
+			& 6,43 & 6,17 & 10 \\
 			Ci7 6700K \tiny{4C/8T}
 			& 5,09 & 5,11 & 10,04 \\
 			\bottomrule
@@ -1675,7 +1688,7 @@ Sèítaním všetkıch cien operácií v tabu¾ke dostaneme následujúci vısledok.
 
 \begin{lema}
 \label{lema:full_oper_count}
-Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$. 
+Nech $I$ a $J$ oznaèujú poèty uzlov na rovnomernej sieti. 
 Potom sumárna cena operácií plného algoritmu je
 \begin{itemize} 
 \item
@@ -1710,7 +1723,7 @@ Aby sme takéto kopírovanie vizuálne odlíšili od kopírovania v predchádzajúcej èa
 		& $\pm$ & $\times$ & $\div$ &  $\righttherefore$ \\
 		\midrule
 		\textit{InicalizujLU}
-		& $\rfrac{3}{\beta}K$ & $\rfrac{2}{\beta}K$ & $0$ & $0$\\
+		& $\frac{3}{\beta}K$ & $\frac{2}{\beta}K$ & $0$ & $0$\\
 		\textit{VyriešLU}
 		& $3K$ & $2K$ & $\gamma^\div K$ & $\gamma^\righttherefore K$\\
 		\bottomrule
@@ -1719,6 +1732,7 @@ Aby sme takéto kopírovanie vizuálne odlíšili od kopírovania v predchádzajúcej èa
 \caption{Ceny operácií LU dekompozície pre redukovanı algoritmus vzh¾adom na poèet neznámych $K$.}
 \label{red_lu_operations}	
 \end{table}
+
 V prípade inicializovania pravej strany pre LU dekompozíciu v procedúre \textit{InicalizujLU} dochádza k viacerım sèítaniam a/alebo násobeniam v rámci jedného vırazu.
 Tu sa následne prejaví superskalárnos vıpoètovıch jednotiek procesorového jadra pod¾a èasti \ref{sec:instrukcny_paralelizmus}.
 Moderné procesory architektúry x86 obsahujú práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou èo znamená faktor inštrukèného paralelizmu $\beta = 2$.
@@ -1729,6 +1743,7 @@ To implikuje zaujímavı dôsledok, kedy algoritmus s väèším poètom matematickıch o
 %Aby sa nám to v následujúcej èasti nemılilo tak poèty uvedieme v samostatnıch tabu¾kách kde v prvej budú uvedené len poèty operácií na spojitıch dátach a následne na nespojitıch dátach. 
 V prípade zmiešanıch derivácií pouívame odlišné pravé strany rovníc pre LU dekompozíciu.
 Osobitne si v tabu¾ke \ref{cross_lu_operations_cached} spoèítajme ceny aj pre tieto procedúry.
+
 \begin{table}[h]
 \begin{center}
 	\begin{tabular}{lcccc}		
@@ -1737,7 +1752,7 @@ Osobitne si v tabu¾ke \ref{cross_lu_operations_cached} spoèítajme ceny aj pre ti
 		& $\pm$ & $\times$ & $\div$ & $\righttherefore$\\
 		\midrule
 		\textit{InicalizujZmiešLU}
-		& $\rfrac{33}{2}K$ & $\rfrac{17}{2}K$ & $0$ & $0$\\
+		& $\frac{33}{2}K$ & $\frac{17}{2}K$ & $0$ & $0$\\
 		\textit{VyriešZmiešLU}
 		& $3K$ & $2K$ & $\gamma^\div K$ & $\gamma^\righttherefore K$\\
 		\bottomrule
@@ -1746,6 +1761,7 @@ Osobitne si v tabu¾ke \ref{cross_lu_operations_cached} spoèítajme ceny aj pre ti
 \caption{Ceny operácií LU dekompozície pre zmiešané zostatkové derivácie.}
 \label{cross_lu_operations_cached}	
 \end{table}
+
 Následne analogicky ako v predchádzajúcej sekcii polome procedúry predstavujúce implementáciu redukovaného algoritmu pod¾a èasti \ref{sec:red_deboor}::
 \begin{itemize}
 	\item
@@ -1780,8 +1796,10 @@ Následne analogicky ako v predchádzajúcej sekcii polome procedúry predstavujúce
 	\item
 	Procedúra \textit{VypoèítajRedukovanı} vypoèíta na základe vstupnıch hodnôt pre de Boorovu interpoláciu \ref{eq:deboor_input} postupnım vykonaním predchádzajúcich siedmich procedúr.    
 \end{itemize}
+
 Opä pre zjednodušenie budeme poèty v tvare $a\cdot IJ + b\cdot I + c\cdot J + d$ zanedbáva na $a\cdot IJ$.
 Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na osi $x$ tak pre redukovanı algoritmus dostaneme  poèty v tabu¾kách \ref{red_operations_cached} a \ref{rest_operations_cached}.
+
 \begin{table}[h]
 \begin{center}
 	%\begin{tabularx}{\textwidth}{l|cccc}	
@@ -1791,20 +1809,20 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 		& $\pm$ & $\times$ & $\div$ & $\righttherefore$ \\
 		\midrule
 		\textit{VypoèítajDx}
-		& $\rfrac{3}{2}IJ+\rfrac{3}{2\beta}IJ$ & $1IJ+\rfrac{1}{\beta}IJ$ & $\rfrac{1}{2}\gamma^\div IJ$ & $\rfrac{1}{2}\gamma^\righttherefore IJ$\\
+		& $\frac{3}{2}IJ+\frac{3}{2\beta}IJ$ & $1IJ+\frac{1}{\beta}IJ$ & $\frac{1}{2}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore IJ$\\
 		\textit{VypoèítajDy}
-		& $\rfrac{3}{2}IJ+\rfrac{3}{2\beta}IJ$ & $1IJ+\rfrac{1}{\beta}IJ$ & $\rfrac{1}{2}\gamma^\div IJ$ & $\rfrac{1}{2}\gamma^\righttherefore IJ$\\
+		& $\frac{3}{2}IJ+\frac{3}{2\beta}IJ$ & $1IJ+\frac{1}{\beta}IJ$ & $\frac{1}{2}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore IJ$\\
 		\textit{VypoèítajDxy}
 		& $8I+8J$ & $6I+6J$ & $2I+2J$ & $\gamma^\rightY I+\gamma^\rightY J$\\
 		\textit{VypoèítajDyx}
-		& $\rfrac{3}{4}IJ+\rfrac{33}{4\beta}IJ$ & $\rfrac{1}{2}IJ+\rfrac{17}{4\beta}IJ$ & $\rfrac{1}{4}\gamma^\div IJ$ & $\rfrac{1}{2}\gamma^\righttherefore $\\
+		& $\frac{3}{4}IJ+\frac{33}{4\beta}IJ$ & $\frac{1}{2}IJ+\frac{17}{4\beta}IJ$ & $\frac{1}{4}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore $\\
 		\bottomrule
 	\end{tabular}
 \end{center}	
 \caption{Ceny operácií pre derivácie poèítané trojdiagonálnou sústavou.}
 \label{red_operations_cached}
 \end{table}
-\newpage
+%\newpage
 %Najprv si spoèítajme procedúry pre resty.
 \begin{table}[h]
 	\begin{center}
@@ -1814,35 +1832,36 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 			& $\pm$ & $\times$ & $\div$ & $\righttherefore$ \\
 			\midrule
 			\textit{VypoèítajDxResty}
-			& $\rfrac{3}{2\beta}IJ$ & $\rfrac{1}{\beta}IJ$ & $0$ & $0$\\
+			& $\frac{3}{2\beta}IJ$ & $\frac{1}{\beta}IJ$ & $0$ & $0$\\
 			\textit{VypoèítajDyResty}
-			& $\rfrac{3}{2\beta}IJ$ & $\rfrac{1}{\beta}IJ$ & $0$ & $0$\\
+			& $\frac{3}{2\beta}IJ$ & $\frac{1}{\beta}IJ$ & $0$ & $0$\\
 			\textit{VypoèítajZmiešResty}
-			& $\rfrac{17}{4\beta}IJ$ & $\rfrac{7}{4\beta}IJ$ & $0$ & $0$\\
+			& $\frac{17}{4\beta}IJ$ & $\frac{7}{4\beta}IJ$ & $0$ & $0$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 	\caption{Ceny operácií pre zmiešané zostatkové derivácie.}
 	\label{rest_operations_cached}	
 \end{table}
+
 Sèítaním operácií v predchádzajúcich dvoch tabu¾kách dostaneme následujúci vısledok.
 
 \begin{lema}
 	\label{lema:red_oper_count}
-	Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$. 
+	Nech $I$ a $J$ oznaèujú poèty uzlov na rovnomernej sieti. 
 	Potom sumárna cena redukovaného algoritmu je
 	\begin{itemize} 
 		\item
-		$\rfrac{15}{4}IJ + \rfrac{37}{2\beta}IJ$ sèítaní,
+		$\frac{15}{4}IJ + \frac{37}{2\beta}IJ$ sèítaní,
 		\item
-		$\rfrac{5}{2}IJ + \rfrac{10}{\beta}IJ$ násobení,
+		$\frac{5}{2}IJ + \frac{10}{\beta}IJ$ násobení,
 		\item
-		$\rfrac{5}{4}\gamma^\div IJ$ delení,
+		$\frac{5}{4}\gamma^\div IJ$ delení,
 		\item
-		$\rfrac{3}{2}\gamma^\righttherefore IJ$ kopírovaní.
+		$\frac{3}{2}\gamma^\righttherefore IJ$ kopírovaní.
 	\end{itemize}
 	Cena redukovaného algoritmu teda je
-	$$\rfrac{25}{4}IJ + \rfrac{57}{2\beta}IJ + \rfrac{5}{4}\cdot \gamma^\div IJ + \rfrac{3}{2}\gamma^\righttherefore IJ\textit{.}$$
+	$$\frac{25}{4}IJ + \frac{57}{2\beta}IJ + \frac{5}{4}\cdot \gamma^\div IJ + \frac{3}{2}\gamma^\righttherefore IJ\textit{.}$$
 \end{lema}
 
 \subsection{Pamäové nároky}
@@ -1865,31 +1884,30 @@ Po spoèítaní cien jednotlivıch matematickıch a pamäovıch operácií v èastiach \r
 
 \begin{veta}
 \label{veta:full_red_ratio}
-%Nech $I$ a $J$ oznaèujú poèty uzlov na osiach $x$ a $y$.
-Oèakávané zrıchlenie redukovaného algoritmu je
+Uvaujme rovnomernú obdånikovú sie uzlov. 
+Oèakávané zrıchlenie sériového redukovaného algoritmu je
 $$\frac{21+3\gamma^\div+3\gamma^\rightY}
-	{\rfrac{25}{4} + \rfrac{57}{2\beta} + \rfrac{5}{4}\cdot \gamma^\div + \rfrac{3}{2}\gamma^\righttherefore}$$ 
+	{\frac{25}{4} + \frac{57}{2\beta} + \frac{5}{4}\cdot \gamma^\div + \frac{3}{2}\gamma^\righttherefore}$$ 
 \end{veta}
 
 \begin{dokaz}
-Uvaujme mrieku uzlov ve¾kosti $I$ a $J$. 
+Uvaujme rovnomernú sie uzlov ve¾kosti $I$ a $J$. 
 V lemách \ref{lema:full_oper_count} a \ref{lema:red_oper_count} dostávame ceny 
 \begin{itemize}
 	\item
 	$21IJ + 3\gamma^\div IJ + 3\gamma^\rightY IJ$ pre plnı algoritmus,
 	\item
-	$\rfrac{25}{4}IJ + \rfrac{57}{2\beta}IJ + \rfrac{5}{4}\cdot \gamma^\div IJ + \rfrac{3}{2}\gamma^\righttherefore IJ$ pre redukovanı algoritmus.
+	$\frac{25}{4}IJ + \frac{57}{2\beta}IJ + \frac{5}{4}\cdot \gamma^\div IJ + \frac{3}{2}\gamma^\righttherefore IJ$ pre redukovanı algoritmus.
 \end{itemize}
 Zrıchlenie vyjadríme ako podiel cien oboch algoritmov.
 $$\frac{21IJ+3\gamma^\div IJ+3\gamma^\rightY IJ}
-{\rfrac{25}{4}IJ + \rfrac{57}{2\beta}IJ + \rfrac{5}{4}\cdot \gamma^\div IJ + \rfrac{3}{2}\gamma^\righttherefore IJ}\textit{.}$$
+{\frac{25}{4}IJ + \frac{57}{2\beta}IJ + \frac{5}{4}\cdot \gamma^\div IJ + \frac{3}{2}\gamma^\righttherefore IJ}\textit{.}$$
 Ceny algoritmov sme poèítali asymptoticky, t.j. cenu v tvare $a\cdot IJ + b\cdot I + c\cdot J + d$ sme redukovali na tvar $a\cdot IJ$. 
 Po vykrátení $IJ$ z vırazu vyššie dostaneme oèakávané zrıchlenie redukovaného algoritmu.  	
 \end{dokaz}
 
 Ukáme si dva príklady zrıchlenia aby sme názorne videli vplyv inštrukèného paralelizmu na rıchlos redukovaného algoritmu.
 V prvom príklade predpokladajme porovnanie algoritmov na modernom procesore, prièom v druhom uvaujme primitívny procesor. 
-
 
 \pr{ \label{pr:ratio2}
 	Nech $\beta = 2$, teda procesorové jadro má práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou a $\gamma^\div = 3$.
@@ -2031,19 +2049,27 @@ Ako sme videli, teoretické zrıchlenie je v súlade s nameranım zrıchlením v závis
 
 \chapter*{Záver}
 
-Podarilo sa nám v prípade rovnomerne rozloenıch uzlov urıchli sériovı vıpoèet derivácií splajnov v uzloch a tie zmenši pamäovú nároènos vıpoètu na polovicu. 
-Napriek tomu, e vıslednı redukovanı algoritmus obsahuje viac aritmetickıch operácií je vïaka povahe mikroarchitektúr modernıch procesosov a tie vïaka povahy samotnıch operácií rıchlejší o pribline 20\%.
-Prioritou teraz ostáva jednak zovšeobecni redukovanı algoritmus aj pre splajny s nerovnomernımi uzlami a upravi zmiešané zbytkové derivácie aby sme mohli docieli ïalšie zrıchlenie a najmä zefektívni vláknovú paralelizáciu.
+Podarilo sa nám v prípade rovnomerne rozloenıch uzlov urıchli sériovı vıpoèet derivácií splajnovıch povrchoch v uzloch a tie zmenši pamäovú nároènos vıpoètu na polovicu. 
+%Redukovanı algoritmus s menším poètom drahıch operácií delenia, ktorı celkovo obsahuje viac aritmetickıch operácií, vïaka povahe mikroarchitektúr modernıch procesosov je rıchlejší o pribline 20\%.
+Novı postup, ktorı sme pracovne nazvali \pojem{redukovanı algoritmus} je napriek tomu, e obsahuje celkovo viac aritmetickıch operácií, rıchlejší ako zauívanı de Boorov postup vıpoètu derivácií v uzloch splajnu ktorı pracovne nazıvame \pojem{plnı algoritmus}.
+
+Zrıchlenie vyplıva z dvoch zaujímavıch faktov. 
+Prvı fakt spoèíva v tom, e redukovanı postup obsahuje menej ako poloviènı poèet operácií delenia. 
+Delenie je vzh¾adom na povahu vıpoètov v závislosti od konkrétnej procesorovej mikroarchitektúry dvakrát a štyrikrát pomalšie ako sèítanie, prièom násobenie je oproti sèítaniu pribline rovnako rıchle.
+Druhı fakt spoèíva v takzvanom inštrukènom paralelizme. Procesorové jadrá zvyèajne obsahujú práve dve autonómne numerické koprocesory pre vıpoèty s plávajúcou desatinnou èiarkou, ktoré sú schopné matematické vırazy tvorené viac ako jednou operáciu sèítania alebo násobenia poèíta spoloène. Keïe redukovanı algoritmus narozdiel obsahuje dlhé vırazy s viacero operátormi $\plus$, $\minus$, $\cdot$ tak vïaka inštrukènému paralelizmu je cena vyhodnotenia vırazov polovièná vzh¾adom na poèet tıchto operátorov. 
+Práve tieto dva fakty spôsobujú dosiahnuté zrıchlenie na modernıch procesoroch.   
+
+Prioritou teraz ostáva jednak zovšeobecni redukovanı algoritmus aj pre splajny s nerovnomernımi uzlami a vylepši zmiešané zbytkové derivácie aby sme mohli docieli ïalšie zrıchlenie a najmä zefektívni vláknovú paralelizáciu.
 %Zlepšenie paralelizácie by v budúcnosti umonilo vıpoèty akcelerova grafickou kartou. 
-Vláknovo paralelné poèítanie uzlov redukovanım algoritmom nie je vo všeobecnosti v súèasnosti rıchlejšie ale závisí na spôsobe dosahovania vláknového paralelizmu na konkrétnej procesorovej mikroarchitektúre.
-Konkrétne pod¾a nameranıch vısledkov vyplıva skutoènos, e procesory Intelu s implementovanım SMT sú pri paralelnom poèítaní uzlov horšie ako procesory bez tejto technológie. 
-Vıhodou ale ostávajú polovièné pamäové nároky èo umoòuje rieši väèšie úlohy a tak rozdeli prácu medzi väèší poèet logickıch procesorov. 
+%Vláknovo paralelné poèítanie uzlov redukovanım algoritmom nie je vo všeobecnosti v súèasnosti rıchlejšie ale závisí na spôsobe dosahovania vláknového paralelizmu na konkrétnej procesorovej mikroarchitektúre.
+%Konkrétne pod¾a nameranıch vısledkov vyplıva skutoènos, e procesory Intelu s implementovanım SMT sú pri paralelnom poèítaní uzlov horšie ako procesory bez tejto technológie. 
+Ïalšou vıhodou nového postupu sú polovièné pamäové nároky èo umoòuje rieši väèšie úlohy a tak rozdeli prácu medzi väèší poèet logickıch procesorov. 
 To by v budúcnosti umonilo vıpoèty akcelerova pouitím masívne paralelizovanıch èipoch ako sú napríklad grafické karty. 
 
-\part*{Prílohy}
+\part*{Príloha}
 \chapter*{Implementácia a uívate¾ská príruèka} \label{chapt:impl}
 
-Jednım z naším cie¾om je vytvorenie aplikácií na vizuálne a vıkonnostné porovnávanie splajnov, ktorıch uzly sú poèítané De Boorovim a našim redukovanım algoritmom. 
+Jednım z našich cie¾ov je vytvorenie aplikácií na vizuálne a vıkonnostné porovnávanie splajnov, ktorıch uzly sú poèítané De Boorovim a našim redukovanım algoritmom. 
 Grafickú vizualizáciu sme implementovali v Microsoft Silverlight, èo je nástroj na tvorbu webovıch aplikácií spustite¾nıch priamo vo webovom prehliadaèi. 
 Samotnı vıvoj aplikácii môe prebieha v ¾ubovo¾nom programovacom jazyku beiacom pod Common Language Runtime (CLR). 
 V našom prípade sme siahli po jazyku C\#.
@@ -2067,7 +2093,8 @@ Pretoe CLR znemoòuje korektne porovnáva procesorovı èas a pamäové nároky imp
 \section*{Vizualizácia}
 V tejto kapitole si ukáeme struènı návod na pouívanie a testovanie implementovanıch aplikácií. 
 Zaènime aplikáciou na grafickú vizualizáciu.
-\obrazok{apka.png}{0.262}{Aplikácia po spustení.}
+\newpage
+\obrazok{apka_spl.png}{0.262}{Aplikácia s tromi vykreslenımi splajnovımi povrchmi.}
 
 Okno aplikácie sa skladá z troch hlavnıch èastí, ktoré si trocha netradiène prejdeme zdola nahor.
 %\begin{figure}%[!htb]
@@ -2111,7 +2138,7 @@ Tieto nastavenia je vhodné upravi najmä pri starších poèítaèoch na dosiahnutie 
 V strednej èasti panela máme k dispozícii vysúvate¾nı zoznam vykres¾ovanıch plôch, ktorım ich môeme zvırazòova. 
 %V pravej èasti nájdeme tri tlaèidlá, ktoré vycentrujú zobrazovanie splajnu, 
 %prípadne jeho prvej alebo druhej zmiešanej derivácie.
-\obrazok{apka_spl.png}{0.262}{Vykreslené tri splajnové povrchy.}
+%\obrazok{apka_spl.png}{0.262}{Vykreslené tri splajnové povrchy.}
 
 \section*{Vıkonnostnı tester}
 Teraz si popíšme druhú implementovanú aplikáciu zameranú na ukáku èi skutoène je redukovanı algoritmus rıchlejší.  
@@ -2122,7 +2149,9 @@ Na obrázku \ref{bench} môeme vidie úvodné okno aplikácie, ktoré obsahuje šes 
 Ich vıznam si teraz vyjasníme.
  \begin{itemize}
  	\item[1.]
- 	\textit{Multiplication  vs division benchmark} spustí nieko¾ko variant testovania pomerov rıchlosti operácií sèítania, násobenia a delenia.
+ 	\textit{Multiplication  vs division benchmark} spustí nieko¾ko variant testovania pomerov rıchlosti operácií sèítania, násobenia a delenia. 
+ 	Ïalej pomerá rıchlos kopírovania spojitıch ($\rightY$) a nespojitıch ($\righttherefore$). 
+ 	Nakoniec zistí vplyv inštrukèného paralelizmu na tri vyššie uvedené aritmetické operácie, kde vısledné údaje sú pomery doby vyhodnotenia vırazov s desiatimi operátormi a doby vyhodnotenia vırazu s práve jednım operátorom. 
  	\item[2.] 
  	\textit{Spline curve benchmark} pomerá èasy vıpoètov derivácií pre krivkovı splajn interpolujúci preddefinovanú funkciu plnım a redukovanım algoritmom. 
  	Pred spustením aplikácie vyaduje postupné zadanie dvoj údajov. 
@@ -2131,7 +2160,7 @@ Ich vıznam si teraz vyjasníme.
  	Èím je zadané èíslo väèšie, tım je meranie menej náchylné na odchılky. Odporúèa sa zada dvojcifernú hodnotu a potvrdi klávesou \textbf{Enter}. 
  	Druhé zadané èíslo znamená poèet uzlov splajnu. 
  	Odporúèa sa zada rádovo $10^5$ a $10^6$ uzlov.
- 	Menší poèet dokáe väèšina modernıch poèítaèov vypoèíta príliš rıchlo aby ten èas dokázala aplikácia rozumne zmera.  
+ 	Menší poèet dokáe väèšina modernıch poèítaèov vypoèíta príliš rıchlo na to, aby ten èas dokázala aplikácia rozumne zmera.  
  	\item[3.]
  	\textit{Spline surface benchmark} analogicky ako predchádzajúci test testuje pomer èasov vıpoètu plného a redukovaného algoritmu pre plochy. 
  	Druhı zadanı údaj tentoraz znamená poèet uzlov pre jeden rozmer.
@@ -2143,6 +2172,7 @@ Ich vıznam si teraz vyjasníme.
  	\textit{Disable/enable optimized LU} prepne medzi naivnou a optimalizovanou variantou algoritmu pre poèítanie LU dekompozície v testoch 2 a 3. 
  	Test 4 toto nastavenie neovplyvòuje z dôvodu znaènıch pamäovıch nárokov naivnej verzie LU dekompozície
  	(program na väèšine strojov zahltí celú operaènú pamä).
+ 	Taktie pre ve¾ké poèty uzlov v testoch 2 a 3 môe dôjs k pádu aplikácie práve z dôvodu zahltenia pamäte naivnou verziu LU dekompozície.
  	\item[Q.]
  	\textit{End program} ako názov napovedá, pri stlaèení tlaèidla \textbf{Q} dôjde k vypnutiu aplikácie.
  \end{itemize}
