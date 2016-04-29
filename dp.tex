@@ -1024,11 +1024,24 @@ d^{xy}_{i,j} = \frac{3}{4h_v}(d^x_{i,j+1} - zd^x_{i,j-1}) - \frac{1}{4}(d^{xy}_{
 	Zaveïme dve oznaèenia.
 	\begin{itemize}
 	\item
-	Rovnice \ref{eq:redr1}, \ref{eq:redr2} budeme súhrne oznaèova pojmom \pojem{resty}.
+	Rovnice (\ref{eq:redr1}), (\ref{eq:redr2}) budeme súhrne oznaèova pojmom \pojem{resty}.
 	\item
-	Rovnice \ref{eq:redr4a}, \ref{eq:redr4b}, \ref{eq:redr4c} budeme súhrne oznaèova pojmom \pojem{zmiešané resty}.
+	Rovnice (\ref{eq:redr4a}), (\ref{eq:redr4b}) a (\ref{eq:redr4c}) budeme súhrne oznaèova pojmom \pojem{zmiešané resty}.
 	\end{itemize}
 \end{oznac}
+
+Pre lepšie pochopenie redukovaného algoritmu uvádzame grafické ilustrácie krokov pre vıpoèet restov, tzn. derivácií pomocou explicitnıch rovníc (\ref{eq:redr1}), (\ref{eq:redr2}), (\ref{eq:redr4a}), (\ref{eq:redr4b}) a (\ref{eq:redr4c}) znázornenıch na nasledujúcich obrázkoch. 
+Farebné kruhy na obrázkoch predstavujú uzly siete, prièom ich zafarbenie urèuje ktoré derivácie sú u známe. 
+Uzly obsahujúce èervenú majú u známe smerové derivácie pod¾a premennej $x$, uzly obsahujúce modrú majú u známe smerové derivácie pod¾a premennej $y$ a uzly obsahujúce zelenú majú u známe zmiešané derivácie pod¾a premennıch $x$ a $y$.
+Šípky indikujú ktoré derivácie budú v danom kroku vypoèítané pod¾a derivácií získanıch trojdiagonálnou sústavou.  
+
+\obrazok{dxrests.png}{0.275}{Aplikovanie restov pre nepárne horizontály pod¾a rovnice (\ref{eq:redr1}).\label{obr:dxrests}}
+
+\obrazok{dyrests.png}{0.275}{Aplikovanie restov pre nepárne vertikály pod¾a rovnice (\ref{eq:redr2}).\label{obr:dyrests}}
+
+\obrazok{dxyrests1.png}{0.275}{Aplikovanie restov pre nepárne horizontály a vertikály pod¾a rovnice (\ref{eq:redr4a}).\label{obr:dxyrests1}}
+
+\obrazok{dxyrests23.png}{0.275}{Aplikovanie ostávajúcich restov pod¾a rovníc (\ref{eq:redr4b}) a (\ref{eq:redr4c}).\label{obr:dxyrests23}}
 
 Modelové sústavy rovníc \ref{eq:red1} a \ref{eq:red2} majú takıto maticovı tvar
 \begin{equation} \label{eq:redM}
@@ -1522,7 +1535,7 @@ Hodnota $\gamma^\righttherefore$ znaèí \pojem{pomer rıchlosti kopírovania a náso
 
 \begin{pozn}
 	Pre moderné procesory architektúry x86 budeme pod¾a tabu¾ky \ref{real_instrpar_ratio} vdy uvaova $\beta = 2$. 
-	Ïalej pod¾a tabu¾ky \ref{real_op_speed} budeme súhrne uvaova $\gamma^\times = 1$ $\gamma^\div = 3$, $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = 1$. Pri presnıch meraní zrıchlenia na konkrétnych procesoroch budeme samozrejme uvaova presné hodnoty pomerov pod¾a nameranıch hodnôt v predchádzajúcej tabu¾ke.
+	Ïalej pod¾a tabu¾ky \ref{real_op_speed} budeme súhrne uvaova $\gamma^\times = \rfrac{5}{4}$ $\gamma^\div = 3$, $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = \rfrac{3}{5}$. Pri presnıch meraní zrıchlenia na konkrétnych procesoroch budeme samozrejme uvaova presné hodnoty pomerov pod¾a nameranıch hodnôt v predchádzajúcej tabu¾ke.
 \end{pozn}
 
 \begin{pozn}
@@ -1595,6 +1608,7 @@ Najprv polome procedúry predstavujúce LU dekompozíciu spoloèné pre oba postupy.
 	Procedúra \textit{VyriešLU} vypoèíta sústavu rovníc na základe hodnôt pravej strany poskytnutımi \textit{InicalizujLU}.    
 \end{itemize}
 Kadı algoritmus inicializuje pravé strany inak, take pre oba si ceny uvedieme osobitne.
+
 \subsection{Cena plného algoritmu}
 \label{sec:full_cost}
 Ceny základnıch aritmetickıch a pamäovıch operácií pre vyššie uvedené procedúry môeme zhrnú do tabu¾ky, prièom uvaujeme poèty v našej ukákovej implementácii\footnote{Repozitár so zdrojovımi kódmi k aplikáciám mono nájs na adrese https://github.com/vildibald/VKDiplom-master}.
@@ -1912,19 +1926,19 @@ Ukáme si dva príklady zrıchlenia aby sme názorne videli vplyv inštrukèného para
 V prvom príklade predpokladajme porovnanie algoritmov na modernom procesore, prièom v druhom uvaujme primitívny procesor. 
 
 \pr{ \label{pr:ratio2}
-	Nech $\beta = 2$, teda procesorové jadro má práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou, $\gamma^\times = 1$ a $\gamma^\div = 3$.
+	Nech $\beta = 2$, teda procesorové jadro má práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou, $\gamma^\times = \rfrac{5}{4}$ a $\gamma^\div = 3$ pod¾a tabuliek \ref{tab:instr_speed} a \ref{real_op_speed} v èasti \ref{sec:instr_rychlost}..
 	Ïalej nech $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = \rfrac{3}{5}$. 
 	Dosadením do vzahu dostaneme
-	$$\frac{30\textit{,}12}{25\textit{,}15} \approx 1\textit{,}2\textit{.}$$
+	$$\frac{32\text{,}37}{27\text{,}03} \approx 1\textit{,}2\textit{.}$$
 	V prípade inštrukèného paralelizmu s faktorom 2 je redukovanı algoritmus o 20\% rıchlejší ako plnı.
 }
 
 \pr{ \label{pr:ratio1}
-	Nech $\beta = 1$, teda procesorové jadro má iba jednu jednotku pre vıpoèty s pohyblivou desatinnou èiarkou, $\gamma^\times = 1$ a $\gamma^\div = 3$, to jest operácia delenia je trojnásobne pomalšia ako operácia sèítania pod¾a tabuliek \ref{tab:instr_speed} a \ref{real_op_speed} operácií v èasti \ref{sec:instr_rychlost}. 
+	Nech $\beta = 1$, teda neuvaujeme vplyv inštrukèného paralelizmu, $\gamma^\times = \rfrac{5}{4}$ a $\gamma^\div = 3$ 
 	Ïalej nech $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = 1$. 
 	Analogicky ako v predchádzajúcom príklade dosadením do vzahu z predchádzajúcej vety dostaneme
-	$$\frac{30\textit{,}12}{40} \approx 0\textit{,}75\textit{.}$$
-	Pomer je menší ako 1 èo znamená, e bez inštrukèného paralelizmu ($\beta = 1$) je redukovanı algoritmus pomalší ako plnı.
+	$$\frac{32\text{,}37}{42\text{,}53} \approx 0\text{,}71\text{.}$$
+	Pomer je menší ako 1 èo znamená, e bez inštrukèného paralelizmu ($\beta = 1$) by redukovanı algoritmus bol pomalší ako plnı.
 }
 
 Pod¾a príkladov vidíme, e rıchlos redukovaného algoritmu je závislá na schopnosti hardvérovej architektúry procesora paralelizova vyhodnotenia aritmetickıch vırazov s viacerımi operandami.
@@ -1995,17 +2009,17 @@ Poslednı ståpec 6 predstavuje merané zrıchlenie sériovej verzie redukovaného alg
 			& $\gamma^\times$ & $\gamma^\div$ & $\gamma^\rightY$ & $\gamma^\righttherefore$& teoretické & merané \\
 			\midrule
 			FX-6300 \tiny{3C/6T}
-			& & 1,89 & 0,04 & 0,82 & 1,12 & 1,13 \\
+			& 0,96 & 1,89 & 0,04 & 0,82 & 1,11 & 1,13 \\
 			C2D E8200 \tiny{2C/2T}
-			& & 1,08  & 0,01 & 0,15 & 1,09 & 1,14 \\
+			& 1,08 & 1,08  & 0,01 & 0,15 & 1,10 & 1,14 \\
 			Ci5 650 \tiny{2C/4T}
-			& & 2,04  & 0,04 & 0,77 & 1,13 & 1,05 \\			
+			& 1,28 & 2,04  & 0,04 & 0,77 & 1,13 & 1,05 \\			
 			Ci3 2350M \tiny{2C/4T}
-			& & 3,43 & 0,04 & 0,67 & 1,21 & 1,24 \\	
+			& 1,39 & 3,43 & 0,04 & 0,67 & 1,21 & 1,24 \\	
 			Ci5 4440 \tiny{4C/4T}
-			& & 3,27 & 0,03 & 0,48 & 1,22 & 1,26 \\
+			& 1,52 & 3,27 & 0,03 & 0,48 & 1,22 & 1,26 \\
 			Ci7 6700K \tiny{4C/8T}
-			& & 2,98 & 0,02 & 0,4 & 1,21 & 1,2 \\
+			& 0,97 & 2,98 & 0,02 & 0,4 & 1,21 & 1,2 \\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -2022,7 +2036,7 @@ Merané zrıchlenie korešponduje s teoretickım zrıchlením v rámci malej odchılky.
 %Pamäové operácie sú teda na AMD FX procesore vırazne drahšie ako na Intel Core. 
 %Redukovanı algoritmus má menšie priestorové nároky èo znamená menej %pouitıch pamäovıch operácií. 
 %Teda na procesore AMD FX má síce zníenie poètu delení menší vplyv na efektivitu redukovaného algoritmu, ale to mohlo by \uv{vyváené} práve zníením poètu, na tomto CPU pomalıch, pamäovıch operácií.
-Môeme si všimnú malé škálovanie vıkonu paralelizovaného algoritmu najmä v prípade procesorov Intel obsahujúcich SMT kde je redukovanı algoritmus dokonca o nieèo pomalší ako plnı. 
+V tabu¾ke \ref{real_speedup} si môeme všimnú malé škálovanie vıkonu paralelizovaného algoritmu najmä v prípade procesorov Intel obsahujúcich SMT, teda modelov oznaèenıch skratkou Core i5 650, Core i3 2350M a Core i7 6700K, kde je redukovanı algoritmus dokonca o nieèo pomalší ako plnı. 
 Túto pomalos sme nedokázali zatia¾ jednoznaène vysvetli, no máme dve moné hypotézy:
 \begin{itemize}
 \item 

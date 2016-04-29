@@ -1,0 +1,4 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Tradi\v cn\'y Lipsum}{9}
+\contentsline {section}{\numberline {1.1}Dolor sit amet}{9}
+\contentsline {section}{\numberline {1.2}Sit transit gloria mundi}{10}
