@@ -1,6 +1,6 @@
 % !TEX encoding = System
 
-%%\documentclass[thesismargins, thesislinespacing, twoside, draft, upjsfrontpage]{rnthesis}
+%\documentclass[thesismargins, thesislinespacing, twoside, draft, upjsfrontpage]{rnthesis}
 \documentclass{rnthesis}
 \usepackage[slovak]{babel}
 \usepackage[T1]{fontenc}
@@ -70,6 +70,7 @@
 
 
 \hyphenation{funk-cií}
+\hyphenation{Jed-ná}
 
 \RequirePackage{ifpdf}
 
@@ -257,7 +258,7 @@ enum, namespace, string, partial, get, set, var},
 	The term "best connection" in this case means smooth, easily calculable mathematical surface with minimal curvature.
 	Use of splines in graphics varies from large variety of CAD applications, statistics or in data analysing.
 	Splines exist in many forms, whether in the form of curves in the plane, a variety of three-dimensional bodies, etc..
-	This work aims to desig, analyze and implement a new algorithm for counting and generating splines bicubic clamped interpolation in three-dimensional space.
+	This work aims to analyze recently derived algorithm for bicubic clamped interpolation in three-dimensional space, design it's effective implementation and find out reasons of faster calculations of this new approach.
 }
 
 \abstrakt{
@@ -266,7 +267,7 @@ enum, namespace, string, partial, get, set, var},
 	Termín „najlepšie spojenie“ v našom prípade znamená hladká, matematicky ¾ahko vyjadrite¾ná plocha s èo najmenším zakrivením.
 	Vyuitie splajnov v grafike je ve¾mi široké od rôznych CAD aplikácií, v štatistike, alebo v analıze dát.
 	Splajny existujú v mnohıch formách, èi u vo forme krivky v rovine, rôznych trojrozmernıch telies, atï..
-	Táto práca si dáva za cie¾ navrhnú, analyzova a implementova novı algoritmus pre bikubickú interpoláciu v trojrozmernom priestore.
+	Táto práca si dáva za cie¾ analyzova nedávno odvodenı algoritmus pre bikubickú interpoláciu v trojrozmernom priestore, navrhnú jeho efektívnu implementáciu a objasni príèiny zrıchlenia nového postupu. 
 }
 
 \bibliographystyle{alpha}
@@ -296,8 +297,7 @@ Akéko¾vek zrıchlenie toti znamená monos v reálnom èase modelova zloitejšie 
 %\obrazok{blureRedSpl.jpg}{0.4} % nejde spravit \footref{footnote:airplane_spline} v popise obrazka
 
 %\footnotetext{\label{footnote:airplane_spline}Odozva je nadobúda menšie hodnoty ak je delite¾ celı.}
-Technológia v ktorej tieto poznatky implementujeme je Microsoft Silverlight. 
-Jedná sa o ve¾mi schopnı nástroj na tvorbu webovıch aplikácii s plnou podporou hardvérovej akcelerácie uívate¾ského prostredia a monosou tvorby rıchlej trojrozmernej grafiky. 
+Technológia v ktorej tieto poznatky implementujeme je Microsoft Silverlight. Jedná sa o schopnı nástroj na tvorbu webovıch aplikácii s plnou podporou hardvérovej akcelerácie uívate¾ského prostredia a monosou tvorby rıchlej trojrozmernej grafiky. 
 Vıhodou tohto frameworku je, kede beí na platforme Microsoft .NET, monos jednoduchej portácie na desktopovú prípadne mobilnú aplikáciu. 
 Na vıkonnostné porovnanie nášho algoritmu s doterajším postupom však implementujeme samostatnú natívnu aplikáciu nad \cpp.
 
@@ -1381,13 +1381,13 @@ V tabu¾ke \ref{real_op_speed} sú namiesto mikroarchitektúr uvedené konkrétne mod
 		Intel Core i7 6700K
 		& 77 & 80 & 147 & 3,5 & 68 \\
 		\bottomrule
-9	\end{tabular}
+	\end{tabular}
 \end{center}
 \caption{Rıchlos aritmetickıch operácií na konkrétnych CPU. Údaje sú v milisekundách.}
 \label{real_op_speed}	
 \end{table}
 
-V praxi vidno, e sèítavanie a násobenie môeme povaova za podobne rıchle operácie. 
+Z porovnania druhého a tretieho ståpca tabu¾ky \ref{tab:instr_speed} a druhého a tretieho ståpca tabu¾ky \ref{real_op_speed} môeme konštatova, e sèítavanie a násobenie môeme povaova za podobne rıchle operácie. 
 
 Ešte ostáva ukáza reálny vplyv inštrukèného paralelizmu. V následujúcej tabu¾ke sú uvedené namerané násobky èasov trvania vyhodnotenia vırazu vzh¾adom na poèet operácií špeciálne pre procesor Intel Core i7 6700K.
 
@@ -1509,8 +1509,10 @@ Pod¾a èasti \ref{sec:instrukcny_paralelizmus} o inštrukènom paralelizme polome 
 Hodnota $\beta$ znaèí \pojem{faktor inštrukèného paralelizmu} operácií s plávajúcou desatinnou èiarkou.
 Inımi slovami hodnota $\beta$ znaèí poèet jednotiek jadra procesora schopnıch poèíta desatinné èísla.
 \item
-Hodnota $\gamma^\div$ znaèí \pojem{pomer odozvy delenia a sèítania} pri operáciách s plávajúcou desatinnou èiarkou.
-Inımi slovami hodnota $\gamma^\div$ znaèí ko¾kokrát je delenie pomalšie oproti sèítaniu.
+Hodnota $\gamma^\times$ znaèí \pojem{pomer odozvy násobenia a sèítania} pri operáciách s plávajúcou desatinnou èiarkou.
+Inımi slovami hodnota $\gamma^\times$ znaèí ko¾kokrát je násobenie pomalšie oproti sèítaniu.
+\item
+Hodnota $\gamma^\div$ analogicky znaèí \pojem{pomer odozvy delenia a sèítania} pri operáciách s plávajúcou desatinnou èiarkou.
 \item
 Hodnota $\gamma^\rightY$ znaèí \pojem{pomer rıchlosti kopírovania a násobenia} pri operáciách s plávajúcou desatinnou èiarkou a spojitıch dátach.
 \item
@@ -1519,8 +1521,8 @@ Hodnota $\gamma^\righttherefore$ znaèí \pojem{pomer rıchlosti kopírovania a náso
 \end{oznac}
 
 \begin{pozn}
-	Pre moderné procesory architektúry x86 budeme pod¾a tabu¾ky \ref{real_instrpar_ratio} uvaova $\beta = 2$. 
-	Ïalej pod¾a tabu¾ky \ref{real_op_speed} budeme súhrne uvaova $\gamma^\div = 3$, $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = 1$.
+	Pre moderné procesory architektúry x86 budeme pod¾a tabu¾ky \ref{real_instrpar_ratio} vdy uvaova $\beta = 2$. 
+	Ïalej pod¾a tabu¾ky \ref{real_op_speed} budeme súhrne uvaova $\gamma^\times = 1$ $\gamma^\div = 3$, $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = 1$. Pri presnıch meraní zrıchlenia na konkrétnych procesoroch budeme samozrejme uvaova presné hodnoty pomerov pod¾a nameranıch hodnôt v predchádzajúcej tabu¾ke.
 \end{pozn}
 
 \begin{pozn}
@@ -1538,7 +1540,7 @@ Teraz si definujme funkciu $c$ ktorá vráti cenu aritmetickıch operácií pre nejak
 		\item 
 		$c: \mathbb{N}^5 \to \mathbb{N}^5$ 
 		vzahom 
-		$$c(\langle p^\pm, p^\times, p^\div, p^\rightY, p^\righttherefore \rangle) = \left\langle \ceil*{\frac{p^\pm}{\beta}}, \ceil*{\frac{p^\times}{\beta}}, \ceil*{\gamma^\div p^\div},  \ceil*{\gamma^\rightY p^\rightY},  \ceil*{\gamma^\righttherefore p^\righttherefore} \right\rangle\text{,}$$
+		$$c(\langle p^\pm, p^\times, p^\div, p^\rightY, p^\righttherefore \rangle) = \left\langle \ceil*{\frac{1}{\beta}p^\pm}, \ceil*{\frac{1}{\beta}p^\times \gamma^\times}, \ceil*{\gamma^\div p^\div},  \ceil*{\gamma^\rightY p^\rightY},  \ceil*{\gamma^\righttherefore p^\righttherefore} \right\rangle\text{,}$$
 		ktorú nazveme \pojem{cena operácií}.
 		\item 
 		Nech $V$ je matematickı vıraz a $o(V) = \langle p^\pm, p^\times, p^\div, p^\rightY, p^\righttherefore \rangle$. 
@@ -1612,9 +1614,9 @@ V tabu¾kách budeme pre sèítanie, násobenie a delenie uvádza ich ceny pod¾a defi
 		& $\pm$ & $\times$ & $\div$ & $\rightY$ \\
 		\midrule
 		\textit{InicalizujLU}
-		& $K$ & $K$ & $0$ & $0$\\
+		& $K$ & $\gamma^\times K$ & $0$ & $0$\\
 		\textit{VyriešLU}
-		& $3K$ & $2K$ & $\gamma^\div K$ & $\gamma^\rightY K$\\
+		& $3K$ & $2\gamma^\times K$ & $\gamma^\div K$ & $\gamma^\rightY K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1668,13 +1670,13 @@ Pre plnı algoritmus teda dostaneme tieto poèty
 			& $\pm$ & $\times$ & $\div$ & $\rightY$ \\
 			\midrule
 			\textit{VypoèítajDx}
-			& $4IJ$ & $3IJ$ & $\gamma^\div IJ$ & $\gamma^\rightY IJ$\\
+			& $4IJ$ & $3\gamma^\times IJ$ & $\gamma^\div IJ$ & $\gamma^\rightY IJ$\\
 			\textit{VypoèítajDxy}
-			& $8I$ & $6I$ & $2\gamma^\div I$ & $\gamma^\rightY I$\\
+			& $8I$ & $6\gamma^\times I$ & $2\gamma^\div I$ & $\gamma^\rightY I$\\
 			\textit{VypoèítajDy}
-			& $4IJ$ & $3IJ$ & $\gamma^\div IJ$ & $\gamma^\rightY IJ$\\
+			& $4IJ$ & $3\gamma^\times IJ$ & $\gamma^\div IJ$ & $\gamma^\rightY IJ$\\
 			\textit{VypoèítajDyx}
-			& $4IJ$ & $3IJ$ & $\gamma^\div IJ$ & $\gamma^\rightY IJ$\\
+			& $4IJ$ & $3\gamma^\times IJ$ & $\gamma^\div IJ$ & $\gamma^\rightY IJ$\\
 %			\textbf{\textit{SUMA}}
 %			& $12IJ$ & $9IJ$ & $9IJ$ & $3IJ$\\
 			\bottomrule
@@ -1694,14 +1696,14 @@ Potom sumárna cena operácií plného algoritmu je
 \item
 $12IJ$ sèítaní,
 \item
-$9IJ$ násobení,
+$9\gamma^\times IJ$ násobení,
 \item
 $3\gamma^\div IJ$ delení,
 \item
 $3\gamma^\rightY IJ$ kopírovaní.
 \end{itemize}
 Cena plného algoritmu teda je
-$$21IJ + 3\gamma^\div IJ + 3\gamma^\rightY IJ\textit{.}$$
+$$3\cdot \left(4 + 3\gamma^\times + \gamma^\div + \gamma^\rightY\right)\cdot IJ\textit{.}$$
 \end{lema}
 
 \subsection{Cena redukovaného algoritmu}
@@ -1723,9 +1725,9 @@ Aby sme takéto kopírovanie vizuálne odlíšili od kopírovania v predchádzajúcej èa
 		& $\pm$ & $\times$ & $\div$ &  $\righttherefore$ \\
 		\midrule
 		\textit{InicalizujLU}
-		& $\frac{3}{\beta}K$ & $\frac{2}{\beta}K$ & $0$ & $0$\\
+		& $\frac{3}{\beta}\gamma^\times K$ & $\frac{2}{\beta}K$ & $0$ & $0$\\
 		\textit{VyriešLU}
-		& $3K$ & $2K$ & $\gamma^\div K$ & $\gamma^\righttherefore K$\\
+		& $3K$ & $2\gamma^\times K$ & $\gamma^\div K$ & $\gamma^\righttherefore K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1752,9 +1754,9 @@ Osobitne si v tabu¾ke \ref{cross_lu_operations_cached} spoèítajme ceny aj pre ti
 		& $\pm$ & $\times$ & $\div$ & $\righttherefore$\\
 		\midrule
 		\textit{InicalizujZmiešLU}
-		& $\frac{33}{2}K$ & $\frac{17}{2}K$ & $0$ & $0$\\
+		& $\frac{33}{2}K$ & $\frac{17}{2}\gamma^\times K$ & $0$ & $0$\\
 		\textit{VyriešZmiešLU}
-		& $3K$ & $2K$ & $\gamma^\div K$ & $\gamma^\righttherefore K$\\
+		& $3K$ & $2\gamma^\times K$ & $\gamma^\div K$ & $\gamma^\righttherefore K$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -1809,13 +1811,13 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 		& $\pm$ & $\times$ & $\div$ & $\righttherefore$ \\
 		\midrule
 		\textit{VypoèítajDx}
-		& $\frac{3}{2}IJ+\frac{3}{2\beta}IJ$ & $1IJ+\frac{1}{\beta}IJ$ & $\frac{1}{2}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore IJ$\\
+		& $\frac{3}{2}IJ+\frac{3}{2\beta}IJ$ & $\gamma^\times IJ+\frac{1}{\beta}\gamma^\times IJ$ & $\frac{1}{2}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore IJ$\\
 		\textit{VypoèítajDy}
-		& $\frac{3}{2}IJ+\frac{3}{2\beta}IJ$ & $1IJ+\frac{1}{\beta}IJ$ & $\frac{1}{2}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore IJ$\\
+		& $\frac{3}{2}IJ+\frac{3}{2\beta}IJ$ & $\gamma^\times IJ+\frac{1}{\beta}\gamma^\times IJ$ & $\frac{1}{2}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore IJ$\\
 		\textit{VypoèítajDxy}
-		& $8I+8J$ & $6I+6J$ & $2I+2J$ & $\gamma^\rightY I+\gamma^\rightY J$\\
+		& $8I+8J$ & $6\gamma^\times I+6\gamma^\times J$ & $2I+2J$ & $\gamma^\rightY I+\gamma^\rightY J$\\
 		\textit{VypoèítajDyx}
-		& $\frac{3}{4}IJ+\frac{33}{4\beta}IJ$ & $\frac{1}{2}IJ+\frac{17}{4\beta}IJ$ & $\frac{1}{4}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore $\\
+		& $\frac{3}{4}IJ+\frac{33}{4\beta}IJ$ & $\frac{1}{2}\gamma^\times IJ+\frac{17}{4\beta}\gamma^\times IJ$ & $\frac{1}{4}\gamma^\div IJ$ & $\frac{1}{2}\gamma^\righttherefore $\\
 		\bottomrule
 	\end{tabular}
 \end{center}	
@@ -1832,11 +1834,11 @@ Ak hodnota $I$ znaèí poèet uzlov na osi $x$ a hodnota $J$ znaèí poèet uzlov na o
 			& $\pm$ & $\times$ & $\div$ & $\righttherefore$ \\
 			\midrule
 			\textit{VypoèítajDxResty}
-			& $\frac{3}{2\beta}IJ$ & $\frac{1}{\beta}IJ$ & $0$ & $0$\\
+			& $\frac{3}{2\beta}IJ$ & $\frac{1}{\beta}\gamma^\times IJ$ & $0$ & $0$\\
 			\textit{VypoèítajDyResty}
-			& $\frac{3}{2\beta}IJ$ & $\frac{1}{\beta}IJ$ & $0$ & $0$\\
+			& $\frac{3}{2\beta}IJ$ & $\frac{1}{\beta}\gamma^\times IJ$ & $0$ & $0$\\
 			\textit{VypoèítajZmiešResty}
-			& $\frac{17}{4\beta}IJ$ & $\frac{7}{4\beta}IJ$ & $0$ & $0$\\
+			& $\frac{17}{4\beta}IJ$ & $\frac{7}{4\beta}\gamma^\times IJ$ & $0$ & $0$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -1854,14 +1856,14 @@ Sèítaním operácií v predchádzajúcich dvoch tabu¾kách dostaneme následujúci vısle
 		\item
 		$\frac{15}{4}IJ + \frac{37}{2\beta}IJ$ sèítaní,
 		\item
-		$\frac{5}{2}IJ + \frac{10}{\beta}IJ$ násobení,
+		$\frac{5}{2}\gamma^\times IJ + \frac{10}{\beta}\gamma^\times IJ$ násobení,
 		\item
 		$\frac{5}{4}\gamma^\div IJ$ delení,
 		\item
 		$\frac{3}{2}\gamma^\righttherefore IJ$ kopírovaní.
 	\end{itemize}
 	Cena redukovaného algoritmu teda je
-	$$\frac{25}{4}IJ + \frac{57}{2\beta}IJ + \frac{5}{4}\cdot \gamma^\div IJ + \frac{3}{2}\gamma^\righttherefore IJ\textit{.}$$
+	$$\frac{1}{2}\left(\frac{5}{2}\left(3 + \gamma^\div\right) + \frac{1}{\beta}\left(37 + 20\gamma^\times\right) + 5\gamma^\times + 3\gamma^\righttherefore\right)\cdot IJ\textit{.}$$
 \end{lema}
 
 \subsection{Pamäové nároky}
@@ -1884,10 +1886,10 @@ Po spoèítaní cien jednotlivıch matematickıch a pamäovıch operácií v èastiach \r
 
 \begin{veta}
 \label{veta:full_red_ratio}
-Uvaujme rovnomernú obdånikovú sie uzlov. 
-Oèakávané zrıchlenie sériového redukovaného algoritmu je
-$$\frac{21+3\gamma^\div+3\gamma^\rightY}
-	{\frac{25}{4} + \frac{57}{2\beta} + \frac{5}{4}\cdot \gamma^\div + \frac{3}{2}\gamma^\righttherefore}$$ 
+Uvaujme rovnomernú obdånikovú sie uzlov ve¾kosti $I$ a $J$.
+Ak $I, J \to\infty$, potom oèakávané zrıchlenie sériového redukovaného algoritmu je
+$$\frac{3\cdot \left(4 + 3\gamma^\times + \gamma^\div + \gamma^\rightY\right)}
+	{\frac{1}{2}\left(\frac{5}{2}\left(3 + \gamma^\div\right) + \frac{1}{\beta}\left(37 + 20\gamma^\times\right) + 5\gamma^\times + 3\gamma^\righttherefore\right)}$$ 
 \end{veta}
 
 \begin{dokaz}
@@ -1900,8 +1902,8 @@ V lemách \ref{lema:full_oper_count} a \ref{lema:red_oper_count} dostávame ceny
 	$\frac{25}{4}IJ + \frac{57}{2\beta}IJ + \frac{5}{4}\cdot \gamma^\div IJ + \frac{3}{2}\gamma^\righttherefore IJ$ pre redukovanı algoritmus.
 \end{itemize}
 Zrıchlenie vyjadríme ako podiel cien oboch algoritmov.
-$$\frac{21IJ+3\gamma^\div IJ+3\gamma^\rightY IJ}
-{\frac{25}{4}IJ + \frac{57}{2\beta}IJ + \frac{5}{4}\cdot \gamma^\div IJ + \frac{3}{2}\gamma^\righttherefore IJ}\textit{.}$$
+$$\frac{3\cdot \left(4 + 3\gamma^\times + \gamma^\div + \gamma^\rightY\right)\cdot IJ}
+{\frac{1}{2}\left(\frac{5}{2}\left(3 + \gamma^\div\right) + \frac{1}{\beta}\left(37 + 20\gamma^\times\right) + 5\gamma^\times + 3\gamma^\righttherefore\right)\cdot IJ}\textit{.}$$
 Ceny algoritmov sme poèítali asymptoticky, t.j. cenu v tvare $a\cdot IJ + b\cdot I + c\cdot J + d$ sme redukovali na tvar $a\cdot IJ$. 
 Po vykrátení $IJ$ z vırazu vyššie dostaneme oèakávané zrıchlenie redukovaného algoritmu.  	
 \end{dokaz}
@@ -1910,17 +1912,17 @@ Ukáme si dva príklady zrıchlenia aby sme názorne videli vplyv inštrukèného para
 V prvom príklade predpokladajme porovnanie algoritmov na modernom procesore, prièom v druhom uvaujme primitívny procesor. 
 
 \pr{ \label{pr:ratio2}
-	Nech $\beta = 2$, teda procesorové jadro má práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou a $\gamma^\div = 3$.
+	Nech $\beta = 2$, teda procesorové jadro má práve dve jednotky pre vıpoèty s pohyblivou desatinnou èiarkou, $\gamma^\times = 1$ a $\gamma^\div = 3$.
 	Ïalej nech $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = \rfrac{3}{5}$. 
-	Analogicky ako v predchádzajúcom príklade dosadením do vzahu dostaneme
+	Dosadením do vzahu dostaneme
 	$$\frac{30\textit{,}12}{25\textit{,}15} \approx 1\textit{,}2\textit{.}$$
 	V prípade inštrukèného paralelizmu s faktorom 2 je redukovanı algoritmus o 20\% rıchlejší ako plnı.
 }
 
 \pr{ \label{pr:ratio1}
-	Nech $\beta = 1$, teda procesorové jadro má iba jednu jednotku pre vıpoèty s pohyblivou desatinnou èiarkou a $\gamma^\div = 3$, to jest operácia delenia je trojnásobne pomalšia ako operácia sèítania pod¾a tabuliek \ref{tab:instr_speed} a \ref{real_op_speed} operácií v èasti \ref{sec:instr_rychlost}. 
+	Nech $\beta = 1$, teda procesorové jadro má iba jednu jednotku pre vıpoèty s pohyblivou desatinnou èiarkou, $\gamma^\times = 1$ a $\gamma^\div = 3$, to jest operácia delenia je trojnásobne pomalšia ako operácia sèítania pod¾a tabuliek \ref{tab:instr_speed} a \ref{real_op_speed} operácií v èasti \ref{sec:instr_rychlost}. 
 	Ïalej nech $\gamma^\rightY = \rfrac{1}{25}$ a $\gamma^\righttherefore = 1$. 
-	Dosadením do vzahu z predchádzajúcej vety dostaneme
+	Analogicky ako v predchádzajúcom príklade dosadením do vzahu z predchádzajúcej vety dostaneme
 	$$\frac{30\textit{,}12}{40} \approx 0\textit{,}75\textit{.}$$
 	Pomer je menší ako 1 èo znamená, e bez inštrukèného paralelizmu ($\beta = 1$) je redukovanı algoritmus pomalší ako plnı.
 }
@@ -1985,25 +1987,25 @@ Poslednı ståpec 6 predstavuje merané zrıchlenie sériovej verzie redukovaného alg
 %\newpage
 \begin{table}[h]
 	\begin{center}
-		\begin{tabular}{lccccc}
+		\begin{tabular}{lcccccc}
 			\toprule
-			& \multicolumn{3}{c}{Pomery operácií}
+			& \multicolumn{4}{c}{Pomery operácií}
 			& \multicolumn{2}{c}{Zrıchlenie}  \\
 			Procesor
-			& $\gamma^\div$ & $\gamma^\rightY$ & $\gamma^\righttherefore$& teoretické & merané \\
+			& $\gamma^\times$ & $\gamma^\div$ & $\gamma^\rightY$ & $\gamma^\righttherefore$& teoretické & merané \\
 			\midrule
 			FX-6300 \tiny{3C/6T}
-			& 1,89 & 0,04 & 0,82 & 1,12 & 1,13 \\
+			& & 1,89 & 0,04 & 0,82 & 1,12 & 1,13 \\
 			C2D E8200 \tiny{2C/2T}
-			& 1,08  & 0,01 & 0,15 & 1,09 & 1,14 \\
+			& & 1,08  & 0,01 & 0,15 & 1,09 & 1,14 \\
 			Ci5 650 \tiny{2C/4T}
-			& 2,04  & 0,04 & 0,77 & 1,13 & 1,05 \\			
+			& & 2,04  & 0,04 & 0,77 & 1,13 & 1,05 \\			
 			Ci3 2350M \tiny{2C/4T}
-			& 3,43 & 0,04 & 0,67 & 1,21 & 1,24 \\	
+			& & 3,43 & 0,04 & 0,67 & 1,21 & 1,24 \\	
 			Ci5 4440 \tiny{4C/4T}
-			& 3,27 & 0,03 & 0,48 & 1,22 & 1,26 \\
+			& & 3,27 & 0,03 & 0,48 & 1,22 & 1,26 \\
 			Ci7 6700K \tiny{4C/8T}
-			& 2,98 & 0,02 & 0,4 & 1,21 & 1,2 \\
+			& & 2,98 & 0,02 & 0,4 & 1,21 & 1,2 \\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -2056,7 +2058,7 @@ Novı postup, ktorı sme pracovne nazvali \pojem{redukovanı algoritmus} je napriek
 Zrıchlenie vyplıva z dvoch zaujímavıch faktov. 
 Prvı fakt spoèíva v tom, e redukovanı postup obsahuje menej ako poloviènı poèet operácií delenia. 
 Delenie je vzh¾adom na povahu vıpoètov v závislosti od konkrétnej procesorovej mikroarchitektúry dvakrát a štyrikrát pomalšie ako sèítanie, prièom násobenie je oproti sèítaniu pribline rovnako rıchle.
-Druhı fakt spoèíva v takzvanom inštrukènom paralelizme. Procesorové jadrá zvyèajne obsahujú práve dve autonómne numerické koprocesory pre vıpoèty s plávajúcou desatinnou èiarkou, ktoré sú schopné matematické vırazy tvorené viac ako jednou operáciu sèítania alebo násobenia poèíta spoloène. Keïe redukovanı algoritmus narozdiel obsahuje dlhé vırazy s viacero operátormi $\plus$, $\minus$, $\cdot$ tak vïaka inštrukènému paralelizmu je cena vyhodnotenia vırazov polovièná vzh¾adom na poèet tıchto operátorov. 
+Druhı fakt spoèíva v takzvanom inštrukènom paralelizme. Procesorové jadrá zvyèajne obsahujú práve dve autonómne numerické koprocesory pre vıpoèty s plávajúcou desatinnou èiarkou, ktoré sú schopné matematické vırazy tvorené viac ako jednou operáciu sèítania alebo násobenia poèíta spoloène. Keïe redukovanı algoritmus obsahuje na rozdiel od plného algoritmu dlhšie vırazy s viacero operátormi $\plus$, $\minus$, $\cdot$ tak vïaka inštrukènému paralelizmu je cena vyhodnotenia vırazov polovièná vzh¾adom na poèet tıchto operátorov. 
 Práve tieto dva fakty spôsobujú dosiahnuté zrıchlenie na modernıch procesoroch.   
 
 Prioritou teraz ostáva jednak zovšeobecni redukovanı algoritmus aj pre splajny s nerovnomernımi uzlami a vylepši zmiešané zbytkové derivácie aby sme mohli docieli ïalšie zrıchlenie a najmä zefektívni vláknovú paralelizáciu.
@@ -2143,36 +2145,37 @@ V strednej èasti panela máme k dispozícii vysúvate¾nı zoznam vykres¾ovanıch plôc
 \section*{Vıkonnostnı tester}
 Teraz si popíšme druhú implementovanú aplikáciu zameranú na ukáku èi skutoène je redukovanı algoritmus rıchlejší.  
 \obrazok{bench.png}{0.36}{Vıkonnostnı tester.\label{bench}}
-\obrazok{bench_surface.png}{0.36}{Zadanie údajov pre testovanie.\label{bench_surface}}
+\obrazok{bench_surface.png}{0.36}{Zadanie údajov pre testovanie rıchlostí plného a redukovaného algoritmu.\label{bench_surface}}
 \obrazok{bench_surface_results.png}{0.36}{Vısledky testu.\label{bench_surface_results}}
-Na obrázku \ref{bench} môeme vidie úvodné okno aplikácie, ktoré obsahuje šes poloiek. 
-Ich vıznam si teraz vyjasníme.
+Na obrázku \ref{bench} môeme vidie úvodné okno aplikácie, ktoré obsahuje šes poloiek, ktoré spúšajú rôzne vıkonnostné porovnania.
+Pre spustenie nejakého testu staèí zada príslušné èíslo testu a potvrdi klávesou \textbf{Enter}. 
+Vıznam jednotlivıch poloiek si teraz vyjasníme.
  \begin{itemize}
  	\item[1.]
- 	\textit{Multiplication  vs division benchmark} spustí nieko¾ko variant testovania pomerov rıchlosti operácií sèítania, násobenia a delenia. 
- 	Ïalej pomerá rıchlos kopírovania spojitıch ($\rightY$) a nespojitıch ($\righttherefore$). 
- 	Nakoniec zistí vplyv inštrukèného paralelizmu na tri vyššie uvedené aritmetické operácie, kde vısledné údaje sú pomery doby vyhodnotenia vırazov s desiatimi operátormi a doby vyhodnotenia vırazu s práve jednım operátorom. 
+ 	\textit{Instructions benchmark} spustí celkovo tri testy. V teste \textit{Memory copy loop} pomerá rıchlos kopírovania  spojitıch (\textit{Continuous} - $\rightY$) a nespojitıch (\textit{Uncontinuous} - $\righttherefore$) dát. 
+ 	V teste \textit{Dependend dynamic loop} dostaneme rıchlosti delenia (\textit{Division}), násobenia (\textit{Multiplication}) a sèítania (\textit{Addition}). 
+ 	Nakoniec v teste \textit{Instructions parallelism} sa pomerajú rıchlosti vyhodnotenia matematickıch vırazov s jednım aritmetickım operátorom a s desiatimi operátormi.   
  	\item[2.] 
  	\textit{Spline curve benchmark} pomerá èasy vıpoètov derivácií pre krivkovı splajn interpolujúci preddefinovanú funkciu plnım a redukovanım algoritmom. 
- 	Pred spustením aplikácie vyaduje postupné zadanie dvoj údajov. 
+ 	Test vyaduje postupné zadanie dvoj údajov analogicky ako na obrázku \ref{bench_surface}. 
  	Prvı udáva poèet opakovaní testu pre kadı algoritmus. 
- 	Vıslednı pomer vznikne vydelením aritmetickıch priemerov nameranıch èasov pre kadı algoritmus. 
- 	Èím je zadané èíslo väèšie, tım je meranie menej náchylné na odchılky. Odporúèa sa zada dvojcifernú hodnotu a potvrdi klávesou \textbf{Enter}. 
+ 	Vıslednı pomer vznikne vydelením aritmetickıch priemerov nameranıch èasov pre kadı algoritmus (pozri obrázok \ref{bench_surface_results}). 
+ 	Èím je zadané èíslo väèšie, tım je meranie menej náchylné na odchılky. Odporúèa sa zada dvojcifernú hodnotu ($10$ by malo by dostatoènıch) a potvrdi klávesou \textbf{Enter}. 
  	Druhé zadané èíslo znamená poèet uzlov splajnu. 
  	Odporúèa sa zada rádovo $10^5$ a $10^6$ uzlov.
  	Menší poèet dokáe väèšina modernıch poèítaèov vypoèíta príliš rıchlo na to, aby ten èas dokázala aplikácia rozumne zmera.  
  	\item[3.]
  	\textit{Spline surface benchmark} analogicky ako predchádzajúci test testuje pomer èasov vıpoètu plného a redukovaného algoritmu pre plochy. 
  	Druhı zadanı údaj tentoraz znamená poèet uzlov pre jeden rozmer.
- 	Celkovı poèet uzlov je teda štvorec zadanej hodnoty. 
+ 	Celkovı poèet uzlov je teda štvorec zadanej hodnoty.
  	Pre väèšinu poèítaèov sa odporúèa zada rádovo $10^2$ a $10^3$ uzlov.
  	\item[4.]
 	\textit{Spline surface benchmark (in parallel)} paralelná verzia testu pre plochy vyuívajúca na vıpoèet jednej matice uzlov všetky dostupné logické procesory.
- 	\item[B.]
- 	\textit{Disable/enable optimized LU} prepne medzi naivnou a optimalizovanou variantou algoritmu pre poèítanie LU dekompozície v testoch 2 a 3. 
- 	Test 4 toto nastavenie neovplyvòuje z dôvodu znaènıch pamäovıch nárokov naivnej verzie LU dekompozície
- 	(program na väèšine strojov zahltí celú operaènú pamä).
- 	Taktie pre ve¾ké poèty uzlov v testoch 2 a 3 môe dôjs k pádu aplikácie práve z dôvodu zahltenia pamäte naivnou verziu LU dekompozície.
+% 	\item[B.]
+% 	\textit{Disable/enable optimized LU} prepne medzi naivnou a optimalizovanou variantou algoritmu pre poèítanie LU dekompozície v testoch 2 a 3. 
+% 	Test 4 toto nastavenie neovplyvòuje z dôvodu znaènıch pamäovıch nárokov naivnej verzie LU dekompozície
+% 	(program na väèšine strojov zahltí celú operaènú pamä).
+% 	Taktie pre ve¾ké poèty uzlov v testoch 2 a 3 môe dôjs k pádu aplikácie práve z dôvodu zahltenia pamäte naivnou verziu LU dekompozície.
  	\item[Q.]
  	\textit{End program} ako názov napovedá, pri stlaèení tlaèidla \textbf{Q} dôjde k vypnutiu aplikácie.
  \end{itemize}
