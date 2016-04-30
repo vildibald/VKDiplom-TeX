@@ -1227,7 +1227,7 @@ Pre CPU je kešovanie takıchto polí podstatne jednoduchšie ako v prípade matice r
 Vzah ve¾kosti dátovıch štruktúr a doby prístupu k dátam názorne ukazuje obrázok \ref{img:cacheSpeed} nišie.
 Ako vidie do pri dosiahnutí ve¾kosti $32$ KiB, dáta sú namiesto ve¾mi rıchlej vyrovnávacej pamäte L1 kešované do trojnásobne pomalšej vyrovnávacej pamäte L2 atï..
 \newpage
-\obrazok{cacheIntel.png}{0.5}{Graf rıchlosti prístupu k dátam rôznych ve¾kostí na modernıch CPU\cite{cacheIntel}.\label{img:cacheSpeed}}
+\obrazok{cacheIntel.png}{0.8}{Závislos rıchlosti prístupu k dátam vzh¾adom na ve¾kos dátovej štruktúry.\cite{cacheIntel}.\label{img:cacheSpeed}}
 
 %Teda v prípade matice typu \uv{pole polí} sa kadı ståpec ktorı je reprezentovanı jednım po¾om hravo vojde do ve¾mi rıchlej L1 cache a aplikovaním vıpoèotv práv
 
@@ -1377,7 +1377,7 @@ My sme doby trvania vyhodnotenia vırazov obsahujúcich operandy typu $\circ \in \
 Tımto sme sa snaili povahu testu èo najviac napodobni tvaru vıpoètov v interpolaènıch algoritmoch.
 
 \pozn{
-	V prípade, ak by test bol v tvare $a[i] = b[i] \circ c[i]$, tak vıpoèty pre jednotlivé $i$ by boli na sebe nezávislé. 
+	V prípade, ak by vırazy v teste boli tvaru $a[i] = b[i] \circ c[i]$, tak vıpoèty pre jednotlivé $i$ by boli na sebe nezávislé. 
 	To by procesoru umonilo poui techniky pipeliningu a vektorizácie, kedy by vıpoèet $i$-ho prvku vektora $a$ mohol zaèa skôr ne by skonèil vıpoèet $(i-1)$-teho prvku. 
 	Takto by pomery èasov násobenia a sèítania vyšli, vïaka väèšiemu prietoku tıchto dvoch operácií oproti deleniu, násobne väèšie.
 	Jednak by takıto test nesúhlasil s tvarom vıpoètov v testovanıch algoritmoch a taktie by nekorešpondovalo teoretické zrıchlenie s meranım zrıchlením. 
@@ -1491,7 +1491,7 @@ Pre všetky procesory si struène uvedieme vısledky meraní pre vırazy obsahujúce d
 			& $\pm$ & $\times$ & $\div$ \\
 			\midrule
 			FX-6300 \tiny{3C/6T}
-			& 5,12 & 5,13 & 10,03 \\
+			& 7,35 & 7,48 & 10,15 \\
 			C2D E8200 \tiny{2C/2T}
 			& 5,8 & 7 & 10,14 \\
 			Ci5 650 \tiny{2C/4T}

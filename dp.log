@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2016.2.5)  30 APR 2016 20:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.8.25)  30 APR 2016 20:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1397,7 +1397,7 @@ Package pdftex.def Info: jarr.png used on input line 1207.
 File: cacheIntel.png Graphic file (type png)
  <use cacheIntel.png>
 Package pdftex.def Info: cacheIntel.png used on input line 1230.
-(pdftex.def)             Requested size: 255.2028pt x 165.24193pt.
+(pdftex.def)             Requested size: 408.32605pt x 264.38809pt.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
@@ -1410,16 +1410,14 @@ Overfull \hbox (1.07996pt too wide) in paragraph at lines 1247--1250
 ovplyv-ne-nia, v²etku ^^R´aºkú^^P
  []
 
-[35 <./cacheIntel.png>] <skylakeCore.png, id=439, 469.755pt x 331.99031pt>
+[35 <./cacheIntel.png>] [36]
+<skylakeCore.png, id=447, 469.755pt x 331.99031pt>
 File: skylakeCore.png Graphic file (type png)
-
-<use skylakeCore.png>
+ <use skylakeCore.png>
 Package pdftex.def Info: skylakeCore.png used on input line 1279.
 (pdftex.def)             Requested size: 281.85518pt x 199.19571pt.
- [36]
-Underfull \vbox (badness 3417) has occurred while \output is active []
 
- [37 <./skylakeCore.png>]
+[37 <./skylakeCore.png>]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
@@ -1436,12 +1434,16 @@ cate ignored
 <to be read again> 
                    \relax 
 l.1337 ...s plávajúcou èiarkou na xmm registroch.}
-                                                   [39]
+                                                  
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 1380--1389
 
  []
 
-[40] [41] [42] [43] [44] [45] [46] [47]
+[39] [40] [41] [42] [43] [44] [45] [46] [47]
 Overfull \hbox (2.59682pt too wide) in paragraph at lines 1817--1819
 []\T1/cmr/m/n/12 Procedúra \T1/cmr/m/it/12 Vy-po-£í-taj-DxResty \T1/cmr/m/n/12 
 vy-po-£íta zvy²né par-ciálne de-ri-vá-cie $\OML/cmm/m/it/12 d[]$ \T1/cmr/m/n/12
@@ -1535,7 +1537,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2246.
  ) 
 Here is how much of TeX's memory you used:
  28587 strings out of 493117
- 518848 string characters out of 6138985
+ 518848 string characters out of 6138984
  600001 words of memory out of 5000000
  31293 multiletter control sequences out of 15000+600000
  70795 words of font info for 198 fonts, out of 8000000 for 9000
@@ -1576,7 +1578,7 @@ ts/type1/public/cm-super/sfsx1200.pfb><c:/texlive/2014/texmf-dist/fonts/type1/p
 ublic/cm-super/sfsx1440.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-s
 uper/sfsx2488.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1
 000.pfb><c:/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on dp.pdf (63 pages, 1360152 bytes).
+Output written on dp.pdf (63 pages, 1346820 bytes).
 PDF statistics:
  866 PDF objects out of 1000 (max. 8388607)
  724 compressed objects within 8 object streams
